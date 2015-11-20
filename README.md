@@ -5,7 +5,7 @@ It grabs all requests - yours, from 3rd party (such as AFNetworking or else), UI
 
 Very useful and handy for network related issues and bugs
 
-Implemented in Swift 2.1 - ported also for Objective-C
+Implemented in Swift 2.1 - bridged also for Objective-C
 
 #### Installation
 
