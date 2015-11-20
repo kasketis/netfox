@@ -1,4 +1,4 @@
-# netfox
+![](https://raw.githubusercontent.com/kasketis/netfox/master/assets/netfox_logo.png)
 
 A lightweight, one line setup, swift library that provides a quick look on all executed network requests performed by your app
 It grabs all requests - yours, from 3rd party (such as AFNetworking or else), UIWebViews, and more
@@ -23,9 +23,11 @@ Objective-C
 
 Just simple as that!
 
-#### Usage
+#### Usage 
 
-Just shake your device and check what's going right or wrong! Shake again and go back in your app! ![](https://copy.com/3YVZR7LxuSHwqH1q/shake.png)
+Just shake your device and check what's going right or wrong! 
+Shake again and go back in your app! 
+![](https://raw.githubusercontent.com/kasketis/netfox/master/assets/shake.png)
 
 #### Sharing
 
