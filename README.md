@@ -26,7 +26,7 @@ Just simple as that!
 #### Usage 
 
 Just shake your device and check what's going right or wrong! 
-Shake again and go back in your app! 
+Shake again and go back to your app! 
 ![](https://raw.githubusercontent.com/kasketis/netfox/master/assets/shake.png)
 
 #### Sharing
