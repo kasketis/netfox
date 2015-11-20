@@ -36,7 +36,6 @@ Shake again and go back to your app!
 - Search: You can easily search among requests via
 	- Request url: github.com, .gr, or whatever you want
 	- Request method: GET, POST, etc
-	- Response status: 200 (these are the green guys), 400/404/500 (the red bad guys)
 	- Response type: Like json, xml, html, image and more 
 - Sharing: You can share your log via email with backend devs or someone who can help.
 	- Simple log option includes only request/response headers and small request/response bodies (when these apply)
