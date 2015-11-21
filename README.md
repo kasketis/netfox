@@ -11,7 +11,7 @@ Feel free to contribute :)
 
 #### Installation
 
-Copy the “nfx” folder in your project and add the following line in didFinishLaunchingWithOptions: method of your AppDelegate
+Copy the “nfx” folder in your project (make sure that “Create groups” option is selected) and add the following line in didFinishLaunchingWithOptions: method of your AppDelegate
 
 Swift
 <pre>
