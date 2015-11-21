@@ -38,7 +38,7 @@ Shake again and go back to your app!
 	- Request method: GET, POST, etc
 	- Response type: Like json, xml, html, image and more 
 - Sharing: You can share your log via email with backend devs or someone who can help.
-	- Simple log option includes only request/response headers and small request/response bodies (when these apply)
+	- Simple log option includes only request/response headers and small request/response bodies (when applicable)
 	- Full log option includes request/response headers and request/response bodies (as attachments)
 - More to come.. ;)
 
@@ -48,5 +48,5 @@ Due to the large size of request/response bodies, the library provides disk stor
 
 #### Licence
 
-All source code is licensed under MIT License
+All source code is licensed under [MIT License](https://github.com/kasketis/netfox/blob/master/LICENSE). Which means you could do virtually anything with the code. I will appreciate it very much if you keep an attribution where appropriate.
 
