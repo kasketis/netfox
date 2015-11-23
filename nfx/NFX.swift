@@ -35,7 +35,8 @@ public class NFX: NSObject
     {
         self.started = true
         NSURLProtocol.registerClass(NFXProtocol)
-        print("netfox - [https://github.com/kasketis/netfox]: Started!")
+        print("netfox 1.0 - [https://github.com/kasketis/netfox]: Started!")
+        clearOldData()
     }
     
     func motionDetected()
@@ -83,4 +84,23 @@ public class NFX: NSObject
             self.presented = false
         })
     }
+    
+    func clearOldData()
+    {
+        do {
+            let documentsPath = NSSearchPathForDirectoriesInDomains(NSSearchPathDirectory.DocumentDirectory, NSSearchPathDomainMask.AllDomainsMask, true).first!
+            let filePathsArray = try NSFileManager.defaultManager().subpathsOfDirectoryAtPath(documentsPath)
+            print(filePathsArray)
+            
+            for filePath in filePathsArray {
+                if filePath.hasPrefix("nfx") {
+                    try NSFileManager.defaultManager().removeItemAtPath((documentsPath as NSString).stringByAppendingPathComponent(filePath))
+                }
+            }
+            
+        } catch {}
+        
+    }
+    
+    
 }

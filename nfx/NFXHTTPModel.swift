@@ -103,7 +103,7 @@ class NFXHTTPModel : NSObject
     
     func getRequestBodyFilename() -> String
     {
-        return String("request_body_").stringByAppendingString("\(self.requestTime!)_\(getRandomHash() as String)")
+        return String("nfx_request_body_").stringByAppendingString("\(self.requestTime!)_\(getRandomHash() as String)")
     }
     
     func getResponseBodyFilepath() -> String
@@ -114,7 +114,7 @@ class NFXHTTPModel : NSObject
     
     func getResponseBodyFilename() -> String
     {
-        return String("response_body_").stringByAppendingString("\(self.requestTime!)_\(getRandomHash() as String)")
+        return String("nfx_response_body_").stringByAppendingString("\(self.requestTime!)_\(getRandomHash() as String)")
     }
     
     func getDocumentsPath() -> String
