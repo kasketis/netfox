@@ -8,6 +8,8 @@
 import Foundation
 import UIKit
 
+var nfxVersion = "1.0"
+
 @objc
 public class NFX: NSObject
 {
@@ -35,7 +37,7 @@ public class NFX: NSObject
     {
         self.started = true
         NSURLProtocol.registerClass(NFXProtocol)
-        print("netfox 1.0 - [https://github.com/kasketis/netfox]: Started!")
+        print("netfox \(nfxVersion) - [https://github.com/kasketis/netfox]: Started!")
         clearOldData()
     }
     
@@ -70,7 +72,7 @@ public class NFX: NSObject
             })
         } else {
             // Fallback on earlier versions
-            print("netfox needs iOS >= 8.0!")
+            print("netfox \(nfxVersion) needs iOS >= 8.0!")
 
         }
 
@@ -90,8 +92,6 @@ public class NFX: NSObject
         do {
             let documentsPath = NSSearchPathForDirectoriesInDomains(NSSearchPathDirectory.DocumentDirectory, NSSearchPathDomainMask.AllDomainsMask, true).first!
             let filePathsArray = try NSFileManager.defaultManager().subpathsOfDirectoryAtPath(documentsPath)
-            print(filePathsArray)
-            
             for filePath in filePathsArray {
                 if filePath.hasPrefix("nfx") {
                     try NSFileManager.defaultManager().removeItemAtPath((documentsPath as NSString).stringByAppendingPathComponent(filePath))
@@ -99,8 +99,6 @@ public class NFX: NSObject
             }
             
         } catch {}
-        
     }
-    
     
 }
