@@ -9,6 +9,9 @@ Implemented in Swift 2.1 - bridged also for Objective-C
 
 Feel free to contribute :)
 
+#### Overview
+![](https://raw.githubusercontent.com/kasketis/netfox/master/assets/overview.gif)
+
 #### Installation
 
 Copy the “nfx” folder in your project (make sure that “Create groups” option is selected) and add the following line in didFinishLaunchingWithOptions: method of your AppDelegate
