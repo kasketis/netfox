@@ -219,7 +219,8 @@ class NFXDetailsController : UIViewController, MFMailComposeViewControllerDelega
         var tempString: String
         tempString = String()
         
-        tempString += "[                                     Headers                                      ]\n\n"
+//        tempString += "[                                     Headers                                      ]\n\n"
+        tempString += "-- Headers --\n\n"
 
         if object.requestHeaders?.count > 0 {
             for (key, val) in (object.requestHeaders)! {
@@ -229,7 +230,8 @@ class NFXDetailsController : UIViewController, MFMailComposeViewControllerDelega
             tempString += "Request headers are empty\n\n"
         }
 
-        tempString += "\n[                                       Body                                         ]\n\n"
+//        tempString += "\n[                                       Body                                         ]\n\n"
+        tempString += "\n-- Body --\n\n"
 
         if (object.requestBodyLength == 0) {
             tempString += "Request body is empty\n"
@@ -247,7 +249,8 @@ class NFXDetailsController : UIViewController, MFMailComposeViewControllerDelega
         var tempString: String
         tempString = String()
         
-        tempString += "[                                     Headers                                      ]\n\n"
+//        tempString += "[                                     Headers                                      ]\n\n"
+        tempString += "-- Headers --\n\n"
 
         if object.responseHeaders?.count > 0 {
             for (key, val) in object.responseHeaders! {
@@ -258,7 +261,8 @@ class NFXDetailsController : UIViewController, MFMailComposeViewControllerDelega
         }
 
 
-        tempString += "\n[                                       Body                                         ]\n\n"
+//        tempString += "\n[                                       Body                                         ]\n\n"
+        tempString += "\n-- Body --\n\n"
 
         if (object.responseBodyLength == 0) {
             tempString += "Response body is empty\n"
@@ -274,17 +278,30 @@ class NFXDetailsController : UIViewController, MFMailComposeViewControllerDelega
     
     func formatString(string: String) -> NSAttributedString
     {
-        let regex = try! NSRegularExpression(pattern: "\\[.+?\\]", options: NSRegularExpressionOptions.CaseInsensitive)
-        
         let l = string.characters.count
+
+        let regex1 = try! NSRegularExpression(pattern: "\\--.+?\\--", options: NSRegularExpressionOptions.CaseInsensitive)
         
-        let matches = regex.matchesInString(string, options: NSMatchingOptions.WithoutAnchoringBounds, range: NSMakeRange(0, l)) as Array<NSTextCheckingResult>
+        
+        let matches1 = regex1.matchesInString(string, options: NSMatchingOptions.WithoutAnchoringBounds, range: NSMakeRange(0, l)) as Array<NSTextCheckingResult>
         
         var tempMutableString = NSMutableAttributedString()
         
         tempMutableString = NSMutableAttributedString(string: string)
+        
+        for match in matches1 {
+            tempMutableString.addAttribute(NSFontAttributeName, value: UIFont.init(name: "HelveticaNeue-Bold", size: 13)!, range: match.range)
+            tempMutableString.addAttribute(NSForegroundColorAttributeName, value: UIColor.init(netHex: 0xec5e28), range: match.range)
+        }
+        
+        
+        let regex2 = try! NSRegularExpression(pattern: "\\[.+?\\]", options: NSRegularExpressionOptions.CaseInsensitive)
+        
+        
+        let matches2 = regex2.matchesInString(string, options: NSMatchingOptions.WithoutAnchoringBounds, range: NSMakeRange(0, l)) as Array<NSTextCheckingResult>
+        
 
-        for match in matches {
+        for match in matches2 {
             tempMutableString.addAttribute(NSForegroundColorAttributeName, value: UIColor.init(netHex: 0x231f20), range: match.range)
         }
 
