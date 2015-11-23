@@ -34,12 +34,12 @@ Note: Please wrap the above line with
 . . .
 #endif
 </pre>
-in order to prevent the library execution in your production app
+to prevent library’s execution on your production app
 
 #### Usage 
 
 Just shake your device and check what's going right or wrong! 
-Shake again and go back to your app! 
+Shake again and go back to your app! fact
 ![](https://raw.githubusercontent.com/kasketis/netfox/master/assets/shake.png)
 
 #### Features
