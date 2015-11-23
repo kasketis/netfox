@@ -57,7 +57,8 @@ Shake again and go back to your app! fact
 
 #### Other
 
-Due to the large size of request/response bodies, the library provides disk storage for low memory overhead
+- Alamofire users check [this](https://github.com/kasketis/netfox/blob/master/Alamofire.md)
+- Due to the large size of request/response bodies, the library provides disk storage for low memory overhead
 
 #### Licence
 
