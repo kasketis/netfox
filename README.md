@@ -28,6 +28,14 @@ Objective-C
 
 Just simple as that!
 
+Note: Please wrap the above line with
+<pre>
+#if DEBUG
+. . .
+#endif
+</pre>
+in order to prevent the library execution in your production app
+
 #### Usage 
 
 Just shake your device and check what's going right or wrong! 
