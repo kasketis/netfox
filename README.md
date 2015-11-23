@@ -44,6 +44,22 @@ Just shake your device and check what's going right or wrong!
 Shake again and go back to your app! fact
 ![](https://raw.githubusercontent.com/kasketis/netfox/master/assets/shake.png)
 
+#### Custom gestures
+
+By default the library registers for shake motion. If you want to open the logs with an other way than shake add the following line after the installation one
+<pre>
+NFX.sharedInstance().setGesture(.custom)
+</pre>
+Then you can use
+<pre>
+NFX.sharedInstance().show()
+</pre>
+when you want to show the logs and
+<pre>
+NFX.sharedInstance().hide()
+</pre>
+when you want to hide them.
+
 #### Features
 
 - Search: You can easily search among requests via

@@ -8,7 +8,7 @@
 import Foundation
 import UIKit
 
-let nfxVersion = "0.1"
+let nfxVersion = "0.1.1"
 
 @objc
 public class NFX: NSObject
@@ -30,9 +30,23 @@ public class NFX: NSObject
         return NFX.swiftSharedInstance
     }
     
+    @objc public enum ENFXGesture: Int
+    {
+        case shake
+        case custom
+        
+        func name() -> String {
+            switch self {
+            case .shake: return "shake"
+            case .custom: return "custom"
+            }
+        }
+    }
+    
     var started: Bool = false
     var presented: Bool = false
-    
+    var selectedGesture: ENFXGesture = .shake
+
     @objc public func start()
     {
         self.started = true
@@ -45,15 +59,42 @@ public class NFX: NSObject
     {
         if self.started {
             if self.presented {
-                hide()
+                hideNFX()
             } else {
-                show()
+                showNFX()
             }
         }
     }
     
-    func show()
+    @objc public func setGesture(gesture: ENFXGesture)
     {
+        self.selectedGesture = gesture
+    }
+    
+    @objc public func show()
+    {
+        if (self.started) && (self.selectedGesture == .custom) {
+            showNFX()
+        } else {
+            print("netfox \(nfxVersion) - [ERROR]: Please call start(.custom) first")
+        }
+    }
+    
+    @objc public func hide()
+    {
+        if (self.started) && (self.selectedGesture == .custom) {
+            hideNFX()
+        } else {
+            print("netfox \(nfxVersion) - [ERROR]: Please call start(.custom) first")
+        }
+    }
+    
+    private func showNFX()
+    {
+        if self.presented {
+            return
+        }
+        
         var navigationController: UINavigationController?
 
         if #available(iOS 8.0, *) {
@@ -72,22 +113,27 @@ public class NFX: NSObject
             })
         } else {
             // Fallback on earlier versions
-            print("netfox \(nfxVersion) needs iOS >= 8.0!")
+            print("netfox \(nfxVersion) - [ERROR]: needs iOS >= 8.0!")
+
 
         }
 
 
     }
     
-    func hide()
+    private func hideNFX()
     {
+        if !self.presented {
+            return
+        }
+        
         let appDelegate = UIApplication.sharedApplication().delegate
         appDelegate!.window?!.rootViewController?.dismissViewControllerAnimated(true, completion: { () -> Void in
             self.presented = false
         })
     }
     
-    func clearOldData()
+    private func clearOldData()
     {
         do {
             let documentsPath = NSSearchPathForDirectoriesInDomains(NSSearchPathDirectory.DocumentDirectory, NSSearchPathDomainMask.AllDomainsMask, true).first!

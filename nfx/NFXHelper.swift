@@ -9,9 +9,14 @@ import UIKit
 
 extension UIWindow
 {
-    override public func motionEnded(motion: UIEventSubtype, withEvent event: UIEvent?) {
-        if (event!.type == .Motion && event!.subtype == .MotionShake) {
-            NFX.sharedInstance().motionDetected()
+    override public func motionEnded(motion: UIEventSubtype, withEvent event: UIEvent?)
+    {
+        if NFX.sharedInstance().selectedGesture == .shake {
+            if (event!.type == .Motion && event!.subtype == .MotionShake) {
+                NFX.sharedInstance().motionDetected()
+            }
+        } else {
+            super.motionEnded(motion, withEvent: event)
         }
     }
 }
