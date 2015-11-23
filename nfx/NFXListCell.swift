@@ -98,16 +98,12 @@ class StockCell: UITableViewCell
     
     func configForObject(obj : NFXHTTPModel)
     {
-        if (obj.requestURL != nil) {
-            setURL(obj.requestURL!)
-        }
-        
-        
-        setStatus(obj.responseStatus!)
-        setTimeInterval(obj.timeInterval!)
-        setRequestTime(obj.requestTime!)
-        setType(obj.responseType!)
-        setMethod(obj.requestMethod!)
+        setURL(obj.requestURL ?? "-")
+        setStatus(obj.responseStatus ?? 999)
+        setTimeInterval(obj.timeInterval ?? "-")
+        setRequestTime(obj.requestTime ?? "-")
+        setType(obj.responseType ?? "-")
+        setMethod(obj.requestMethod ?? "-")
     }
     
     func setURL(url : String)
