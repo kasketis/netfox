@@ -9,7 +9,8 @@ import Foundation
 
 import UIKit
 
-class StockCell: UITableViewCell {
+class StockCell: UITableViewCell
+{
     
     let padding: CGFloat = 5
     var URLLabel: UILabel!
