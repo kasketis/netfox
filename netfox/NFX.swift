@@ -8,7 +8,7 @@
 import Foundation
 import UIKit
 
-let nfxVersion = "0.1.5"
+let nfxVersion = "0.1.6"
 
 @objc
 public class NFX: NSObject
@@ -46,7 +46,8 @@ public class NFX: NSObject
     var started: Bool = false
     var presented: Bool = false
     var selectedGesture: ENFXGesture = .shake
-
+    var ignoredURLs = [String]()
+    
     @objc public func start()
     {
         self.started = true
@@ -87,6 +88,11 @@ public class NFX: NSObject
         } else {
             print("netfox \(nfxVersion) - [ERROR]: Please call start() and setGesture(.custom) first")
         }
+    }
+    
+    @objc public func ignoreURL(url: String)
+    {
+        self.ignoredURLs.append(url)
     }
     
     private func showNFX()

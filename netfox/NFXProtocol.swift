@@ -23,6 +23,13 @@ public class NFXProtocol: NSURLProtocol
         if NSURLProtocol.propertyForKey("NFXInternal", inRequest: request) != nil {
             return false
         }
+        
+        for url in NFX.sharedInstance().ignoredURLs {
+            if request.URL!.absoluteString.hasPrefix(url) {
+                return false
+            }
+        }
+        
         return true
     }
     
