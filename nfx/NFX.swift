@@ -8,7 +8,7 @@
 import Foundation
 import UIKit
 
-let nfxVersion = "0.1.1"
+let nfxVersion = "0.1.2"
 
 @objc
 public class NFX: NSObject
@@ -107,8 +107,7 @@ public class NFX: NSObject
             navigationController!.navigationBar.barTintColor = UIColor.init(netHex: 0xccc5b9)
             navigationController!.navigationBar.titleTextAttributes = [NSForegroundColorAttributeName : UIColor.init(netHex: 0xec5e28)]
             
-            let appDelegate = UIApplication.sharedApplication().delegate
-            appDelegate!.window?!.rootViewController?.presentViewController(navigationController!, animated: true, completion: { () -> Void in
+            UIApplication.sharedApplication().keyWindow?.rootViewController?.presentViewController(navigationController!, animated: true, completion: { () -> Void in
                 self.presented = true
             })
         } else {
@@ -127,8 +126,7 @@ public class NFX: NSObject
             return
         }
         
-        let appDelegate = UIApplication.sharedApplication().delegate
-        appDelegate!.window?!.rootViewController?.dismissViewControllerAnimated(true, completion: { () -> Void in
+        UIApplication.sharedApplication().keyWindow?.rootViewController?.dismissViewControllerAnimated(true, completion: { () -> Void in
             self.presented = false
         })
     }
