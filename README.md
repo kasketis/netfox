@@ -50,7 +50,7 @@ Shake again and go back to your app! fact
 
 #### Custom gestures
 
-By default the library registers for shake motion. If you want to open the logs with an other way than shake add the following line after the installation one
+By default the library registers for shake motion. If you want to open the logs with a different gesture, add the following line after the installation one
 <pre>
 NFX.sharedInstance().setGesture(.custom)
 </pre>
