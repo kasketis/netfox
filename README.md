@@ -67,6 +67,14 @@ NFX.sharedInstance().hide()
 </pre>
 when you want to hide them.
 
+#### Prevent logging for specific URLs
+
+Use the following method to prevent requests for specified URL from being logged. You can ignore as many URLs as you want
+<pre>
+NFX.sharedInstance().ignoreURL("the_url")
+</pre>
+Tip: You can use the url of the host (for example "https://www.github.com") to ignore all paths of it 
+
 #### Features
 
 - Search: You can easily search among requests via
