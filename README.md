@@ -14,7 +14,14 @@ Feel free to contribute :)
 
 #### Installation
 
-Copy the “nfx” folder in your project (make sure that “Create groups” option is selected) and add the following line in didFinishLaunchingWithOptions: method of your AppDelegate
+Insert this line in your Podfile
+<pre>
+pod ‘netfox’
+</pre>
+
+or if you want to do it manually just copy the “netfox” folder in your project (make sure that “Create groups” option is selected)
+
+Then add the following line in didFinishLaunchingWithOptions: method of your AppDelegate
 
 Swift
 <pre>
