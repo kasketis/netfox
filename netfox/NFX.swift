@@ -8,7 +8,7 @@
 import Foundation
 import UIKit
 
-let nfxVersion = "0.1.2"
+let nfxVersion = "0.1.3"
 
 @objc
 public class NFX: NSObject
@@ -97,25 +97,18 @@ public class NFX: NSObject
         
         var navigationController: UINavigationController?
 
-        if #available(iOS 8.0, *) {
-            var listController: NFXListController
-            listController = NFXListController()
-
-            navigationController = UINavigationController(rootViewController: listController)
-            navigationController!.navigationBar.translucent = false
-            navigationController!.navigationBar.tintColor = UIColor.init(netHex: 0xec5e28)
-            navigationController!.navigationBar.barTintColor = UIColor.init(netHex: 0xccc5b9)
-            navigationController!.navigationBar.titleTextAttributes = [NSForegroundColorAttributeName : UIColor.init(netHex: 0xec5e28)]
-            
-            UIApplication.sharedApplication().keyWindow?.rootViewController?.presentViewController(navigationController!, animated: true, completion: { () -> Void in
-                self.presented = true
-            })
-        } else {
-            // Fallback on earlier versions
-            print("netfox \(nfxVersion) - [ERROR]: needs iOS >= 8.0!")
-
-
-        }
+        var listController: NFXListController
+        listController = NFXListController()
+        
+        navigationController = UINavigationController(rootViewController: listController)
+        navigationController!.navigationBar.translucent = false
+        navigationController!.navigationBar.tintColor = UIColor.init(netHex: 0xec5e28)
+        navigationController!.navigationBar.barTintColor = UIColor.init(netHex: 0xccc5b9)
+        navigationController!.navigationBar.titleTextAttributes = [NSForegroundColorAttributeName : UIColor.init(netHex: 0xec5e28)]
+        
+        UIApplication.sharedApplication().keyWindow?.rootViewController?.presentViewController(navigationController!, animated: true, completion: { () -> Void in
+            self.presented = true
+        })
 
 
     }

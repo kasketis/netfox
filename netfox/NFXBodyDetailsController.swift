@@ -31,47 +31,9 @@ class NFXBodyDetailsController : UIViewController
         self.bodyView.textColor = UIColor.init(netHex: 0x707070)
         self.bodyView.editable = false
         
-        
-        // Added by Vicente Crespo Penadés
-        // vicente.crespo.penades@gmail.com - 23 Nov 2015
-        let responseBody = prettyStringIfPossibleWithResponse( tempObject.getResponseBody() as String)
-        
-        
-        self.bodyView.text = responseBody
+        self.bodyView.text = tempObject.getResponseBody() as String
         
         self.view.addSubview(self.bodyView)
         
     }
-    
-    
-    //
-    // MARK: Utils
-    //
-    
-    private func prettyStringIfPossibleWithResponse(response: String?) -> String? {
-        
-        guard let responseBody = response
-            else { return nil }
-        
-        do {
-            if let responseBodyData = responseBody.dataUsingEncoding(NSUTF8StringEncoding) {
-                
-                let responseObj = try NSJSONSerialization.JSONObjectWithData(responseBodyData,
-                    options: .AllowFragments)
-                
-                let dataResponse = try NSJSONSerialization.dataWithJSONObject(responseObj,
-                    options: .PrettyPrinted)
-                
-                let responseBodyPretty = String(data: dataResponse,
-                    encoding: NSUTF8StringEncoding)
-                
-                return responseBodyPretty
-            }
-        } catch {
-            return response
-        }
-        
-        return response
-    }
-    
 }
