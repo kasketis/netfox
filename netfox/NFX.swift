@@ -8,7 +8,7 @@
 import Foundation
 import UIKit
 
-let nfxVersion = "0.1.4"
+let nfxVersion = "0.1.5"
 
 @objc
 public class NFX: NSObject
@@ -76,7 +76,7 @@ public class NFX: NSObject
         if (self.started) && (self.selectedGesture == .custom) {
             showNFX()
         } else {
-            print("netfox \(nfxVersion) - [ERROR]: Please call start(.custom) first")
+            print("netfox \(nfxVersion) - [ERROR]: Please call start() and setGesture(.custom) first")
         }
     }
     
@@ -85,7 +85,7 @@ public class NFX: NSObject
         if (self.started) && (self.selectedGesture == .custom) {
             hideNFX()
         } else {
-            print("netfox \(nfxVersion) - [ERROR]: Please call start(.custom) first")
+            print("netfox \(nfxVersion) - [ERROR]: Please call start() and setGesture(.custom) first")
         }
     }
     
