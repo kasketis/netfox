@@ -38,6 +38,10 @@ to prevent library’s execution on your production app.
 
 You can add the DEBUG symbol with the -DDEBUG entry. Set it in the “Swift Compiler - Custom Flags” section -> “Other Swift Flags” line in project’s “Build Settings”
 
+#### Pod
+
+On the way.. :)
+
 #### Usage 
 
 Just shake your device and check what's going right or wrong! 
