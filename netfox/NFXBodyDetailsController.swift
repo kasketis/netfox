@@ -8,7 +8,7 @@
 import Foundation
 import UIKit
 
-class NFXBodyDetailsController : UIViewController
+class NFXBodyDetailsController: UIViewController
 {
     var bodyView: UITextView = UITextView()
     var iIndex: Int = 0

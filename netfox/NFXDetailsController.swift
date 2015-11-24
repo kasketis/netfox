@@ -9,7 +9,7 @@ import Foundation
 import UIKit
 import MessageUI
 
-class NFXDetailsController : UIViewController, MFMailComposeViewControllerDelegate, UIActionSheetDelegate
+class NFXDetailsController: UIViewController, MFMailComposeViewControllerDelegate, UIActionSheetDelegate
 {
     var iIndex: Int = 0
 

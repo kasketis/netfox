@@ -7,7 +7,7 @@
 
 import Foundation
 
-class NFXHTTPModel : NSObject
+class NFXHTTPModel: NSObject
 {
     enum PrettyPrintableContentType: String {
         case JSON = "application/json"

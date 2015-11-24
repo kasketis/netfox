@@ -37,7 +37,7 @@ class NFXListController: UIViewController, UITableViewDelegate, UITableViewDataS
         self.tableView.dataSource = self
         self.view.addSubview(self.tableView)
         
-        self.tableView.registerClass(StockCell.self, forCellReuseIdentifier: NSStringFromClass(StockCell))
+        self.tableView.registerClass(NFXListCell.self, forCellReuseIdentifier: NSStringFromClass(NFXListCell))
         
         searchController = UISearchController(searchResultsController: nil)
         searchController.searchResultsUpdater = self
@@ -87,7 +87,7 @@ class NFXListController: UIViewController, UITableViewDelegate, UITableViewDataS
     
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell
     {
-        let cell = self.tableView.dequeueReusableCellWithIdentifier( NSStringFromClass(StockCell), forIndexPath: indexPath) as! StockCell
+        let cell = self.tableView.dequeueReusableCellWithIdentifier( NSStringFromClass(NFXListCell), forIndexPath: indexPath) as! NFXListCell
         
         if (self.searchController.active) {
             let obj = self.filteredTableData[indexPath.row]

@@ -9,7 +9,7 @@ import Foundation
 
 import UIKit
 
-class StockCell: UITableViewCell
+class NFXListCell: UITableViewCell
 {
     
     let padding: CGFloat = 5
