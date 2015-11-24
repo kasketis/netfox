@@ -16,10 +16,10 @@ Feel free to contribute :)
 
 Insert this line in your Podfile
 <pre>
-pod ‘netfox’
+pod 'netfox'
 </pre>
 
-or if you want to do it manually just copy the “netfox” folder in your project (make sure that “Create groups” option is selected)
+or if you want to do it manually just copy the "netfox" folder in your project (make sure that "Create groups" option is selected)
 
 Then add the following line in didFinishLaunchingWithOptions: method of your AppDelegate
 
@@ -43,7 +43,7 @@ Note: Please wrap the above line with
 </pre>
 to prevent library’s execution on your production app.
 
-You can add the DEBUG symbol with the -DDEBUG entry. Set it in the “Swift Compiler - Custom Flags” section -> “Other Swift Flags” line in project’s “Build Settings”
+You can add the DEBUG symbol with the -DDEBUG entry. Set it in the "Swift Compiler - Custom Flags" section -> "Other Swift Flags" line in project’s "Build Settings"
 
 #### Usage 
 
