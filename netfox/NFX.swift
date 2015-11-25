@@ -112,11 +112,16 @@ public class NFX: NSObject
         navigationController!.navigationBar.barTintColor = UIColor.init(netHex: 0xccc5b9)
         navigationController!.navigationBar.titleTextAttributes = [NSForegroundColorAttributeName : UIColor.init(netHex: 0xec5e28)]
         
-        UIApplication.sharedApplication().keyWindow?.rootViewController?.presentViewController(navigationController!, animated: true, completion: { () -> Void in
+        presentingViewController?.presentViewController(navigationController!, animated: true, completion: { () -> Void in
             self.presented = true
         })
 
 
+    }
+    
+    private var presentingViewController: UIViewController? {
+        let rootViewController = UIApplication.sharedApplication().keyWindow?.rootViewController
+        return rootViewController?.presentedViewController ?? rootViewController
     }
     
     private func hideNFX()
@@ -125,7 +130,7 @@ public class NFX: NSObject
             return
         }
         
-        UIApplication.sharedApplication().keyWindow?.rootViewController?.dismissViewControllerAnimated(true, completion: { () -> Void in
+        presentingViewController?.dismissViewControllerAnimated(true, completion: { () -> Void in
             self.presented = false
         })
     }
