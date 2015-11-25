@@ -89,7 +89,7 @@ Tip: You can use the url of the host (for example "https://www.github.com") to i
 #### Other
 
 - Alamofire users check [this](https://github.com/kasketis/netfox/blob/master/Workarounds.md#alamofire-workaround)
-- If you can't log request bodies check [this](https://github.com/kasketis/netfox/blob/master/Workarounds.md#no-http-body-for-requests)
+- If you can't log request body check [this](https://github.com/kasketis/netfox/blob/master/Workarounds.md#no-http-body-for-requests)
 - Due to the large size of request/response bodies, the library provides disk storage for low memory overhead
 
 #### Licence
