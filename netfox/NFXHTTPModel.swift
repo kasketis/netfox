@@ -34,6 +34,7 @@ class NFXHTTPModel: NSObject
     var requestTimeout: String?
     var requestHeaders: Dictionary<String, String>?
     var requestBodyLength: Int?
+    var requestType: String?
     
     var responseStatus: Int?
     var responseType: String?
@@ -55,6 +56,7 @@ class NFXHTTPModel: NSObject
         self.requestCachePolicy = request.getNFXCachePolicy()
         self.requestTimeout = request.getNFXTimeout()
         self.requestHeaders = request.getNFXHeaders()
+        self.requestType = requestHeaders?["Content-Type"]
         saveRequestBodyData(request.getNFXBody())
     }
     
@@ -108,7 +110,7 @@ class NFXHTTPModel: NSObject
         guard let data = readRawData(getRequestBodyFilepath()) else {
             return ""
         }
-        return prettyOutput(data)
+        return prettyOutput(data, contentType: requestType)
     }
     
     func getResponseBody() -> NSString
