@@ -16,18 +16,22 @@ public class NFXProtocol: NSURLProtocol
     
     override public class func canInitWithRequest(request: NSURLRequest) -> Bool
     {
-        if (!(request.URL!.absoluteString.hasPrefix("http")) && !(request.URL!.absoluteString.hasPrefix("https"))) {
-            return false
-        }
-        
-        if NSURLProtocol.propertyForKey("NFXInternal", inRequest: request) != nil {
-            return false
-        }
-        
-        for url in NFX.sharedInstance().ignoredURLs {
-            if request.URL!.absoluteString.hasPrefix(url) {
+        if let url = request.URL {
+            if (!(url.absoluteString.hasPrefix("http")) && !(url.absoluteString.hasPrefix("https"))) {
                 return false
             }
+
+            for ignoredURL in NFX.sharedInstance().ignoredURLs {
+                if url.absoluteString.hasPrefix(ignoredURL) {
+                    return false
+                }
+            }
+        } else {
+            return false
+        }
+
+        if NSURLProtocol.propertyForKey("NFXInternal", inRequest: request) != nil {
+            return false
         }
         
         return true
