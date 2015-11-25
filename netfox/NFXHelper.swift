@@ -87,11 +87,7 @@ extension NSURLRequest
     
     func getNFXBody() -> NSData
     {
-        if (HTTPBody != nil) {
-            return HTTPBody!
-        } else {
-            return NSData()
-        }
+        return HTTPBody ?? NSURLProtocol.propertyForKey("NFXBodyData", inRequest: self) as? NSData ?? NSData()
     }
 }
 
