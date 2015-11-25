@@ -249,7 +249,6 @@ class NFXDetailsController : UIViewController, MFMailComposeViewControllerDelega
         var tempString: String
         tempString = String()
         
-//        tempString += "[                                     Headers                                      ]\n\n"
         tempString += "-- Headers --\n\n"
 
         if object.responseHeaders?.count > 0 {
@@ -260,8 +259,6 @@ class NFXDetailsController : UIViewController, MFMailComposeViewControllerDelega
             tempString += "Response headers are empty\n\n"
         }
 
-
-//        tempString += "\n[                                       Body                                         ]\n\n"
         tempString += "\n-- Body --\n\n"
 
         if (object.responseBodyLength == 0) {
@@ -269,7 +266,15 @@ class NFXDetailsController : UIViewController, MFMailComposeViewControllerDelega
         } else if (object.responseBodyLength > 1024) {
             tempString += "Too long to show. If you want to see it, please tap the following button\n"
         } else {
-            tempString += "\(object.getResponseBody())\n"
+            
+            // Added by Vicente Crespo Penadés
+            // vicente.crespo.penades@gmail.com - 25 Nov 2015
+            let responseBody = object.getResponseBody() as String
+            if let responseBodyPretty = responseBody.prettyJSONStringIfPossible(){
+                tempString += "\(responseBodyPretty)\n"
+            } else {
+                tempString += "Couldn't format or empty response"
+            }
         }
         
         return formatString(tempString)

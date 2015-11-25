@@ -9,13 +9,13 @@ import Foundation
 
 var requestCount = 0
 
-class NFXProtocol : NSURLProtocol
+public class NFXProtocol : NSURLProtocol
 {
     
     var connection: NSURLConnection?
     var model: NFXHTTPModel?
     
-    override class func canInitWithRequest(request: NSURLRequest) -> Bool
+    override public class func canInitWithRequest(request: NSURLRequest) -> Bool
     {
         if (!(request.URL!.absoluteString.hasPrefix("http")) && !(request.URL!.absoluteString.hasPrefix("https"))) {
             return false
@@ -27,7 +27,7 @@ class NFXProtocol : NSURLProtocol
         return true
     }
     
-    override func startLoading()
+    override public func startLoading()
     {
         self.model = NFXHTTPModel()
                 
@@ -61,12 +61,12 @@ class NFXProtocol : NSURLProtocol
         }).resume()
     }
     
-    override func stopLoading()
+    override public func stopLoading()
     {
         
     }
     
-    override class func canonicalRequestForRequest(request: NSURLRequest) -> NSURLRequest
+    override public class func canonicalRequestForRequest(request: NSURLRequest) -> NSURLRequest
     {
         return request
     }

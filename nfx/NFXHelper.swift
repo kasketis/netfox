@@ -9,9 +9,14 @@ import UIKit
 
 extension UIWindow
 {
-    override public func motionEnded(motion: UIEventSubtype, withEvent event: UIEvent?) {
-        if (event!.type == .Motion && event!.subtype == .MotionShake) {
-            NFX.sharedInstance().motionDetected()
+    override public func motionEnded(motion: UIEventSubtype, withEvent event: UIEvent?)
+    {
+        if NFX.sharedInstance().selectedGesture == .shake {
+            if (event!.type == .Motion && event!.subtype == .MotionShake) {
+                NFX.sharedInstance().motionDetected()
+            }
+        } else {
+            super.motionEnded(motion, withEvent: event)
         }
     }
 }
@@ -101,4 +106,37 @@ extension NSURLResponse
     {
         return (self as? NSHTTPURLResponse)?.allHeaderFields ?? Dictionary()
     }
+}
+
+
+
+//
+// MARK: Utils
+//
+
+// Added by Vicente Crespo Penadés
+// vicente.crespo.penades@gmail.com - 25 Nov 2015
+extension String {
+    
+    func prettyJSONStringIfPossible() -> String? {
+        
+        do {
+            if let responseBodyData = self.dataUsingEncoding(NSUTF8StringEncoding) {
+                
+                let responseObj = try NSJSONSerialization.JSONObjectWithData(responseBodyData,
+                    options: .AllowFragments)
+                
+                let dataResponse = try NSJSONSerialization.dataWithJSONObject(responseObj,
+                    options: .PrettyPrinted)
+                
+                let responseBodyPretty = String(data: dataResponse,
+                    encoding: NSUTF8StringEncoding)
+                
+                return responseBodyPretty
+            }
+        } catch { }
+        
+        return self
+    }
+    
 }
