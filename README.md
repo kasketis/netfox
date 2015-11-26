@@ -98,6 +98,8 @@ Tip: You can use the url of the host (for example "https://www.github.com") to i
 	- Simple log option includes only request/response headers and small request/response bodies (when applicable)
 	- Full log option includes request/response headers and request/response bodies (as attachments)
 - Filtering: Select what types of responses (JSON/XML/HTML/Image/Other) you want to see
+- Enable/disable logging within the app
+- Clear data within the app
 - More to come.. ;)
 
 #### Other
