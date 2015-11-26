@@ -51,6 +51,14 @@ Just shake your device and check what's going right or wrong!
 Shake again and go back to your app! fact
 ![](https://raw.githubusercontent.com/kasketis/netfox/master/assets/shake.png)
 
+#### Stop
+
+Call
+<pre>
+NFX.sharedInstance()stop()
+</pre>
+to stop netfox and clear all saved data
+
 #### Custom gestures
 
 By default the library registers for shake motion. If you want to open the logs with a different gesture, add the following line after the installation one
@@ -84,6 +92,7 @@ Tip: You can use the url of the host (for example "https://www.github.com") to i
 - Sharing: You can share your log via email with backend devs or someone who can help.
 	- Simple log option includes only request/response headers and small request/response bodies (when applicable)
 	- Full log option includes request/response headers and request/response bodies (as attachments)
+- Filtering: Select what types of responses (JSON/XML/HTML/Image/Other) you want to see
 - More to come.. ;)
 
 #### Other
