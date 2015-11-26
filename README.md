@@ -10,7 +10,7 @@ Implemented in Swift 2.1 - bridged also for Objective-C
 Feel free to contribute :)
 
 #### Overview
-![](https://raw.githubusercontent.com/kasketis/netfox/master/assets/overview.gif)
+![](https://raw.githubusercontent.com/kasketis/netfox/master/assets/overview0_2.gif)
 
 #### Installation
 
@@ -55,7 +55,7 @@ Shake again and go back to your app! fact
 
 Call
 <pre>
-NFX.sharedInstance()stop()
+NFX.sharedInstance().stop()
 </pre>
 to stop netfox and clear all saved data
 
