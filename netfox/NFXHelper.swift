@@ -105,6 +105,19 @@ extension UIColor
     }
 }
 
+extension UIFont
+{
+    class func NFXFont(size: CGFloat) -> UIFont
+    {
+        return UIFont(name: "HelveticaNeue", size: size)!
+    }
+    
+    class func NFXFontBold(size: CGFloat) -> UIFont
+    {
+        return UIFont(name: "HelveticaNeue-Bold", size: size)!
+    }
+}
+
 extension NSURLRequest
 {
     func getNFXURL() -> String

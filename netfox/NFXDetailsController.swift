@@ -73,7 +73,7 @@ class NFXDetailsController: NFXGenericController, MFMailComposeViewControllerDel
         tempButton.setTitle(title, forState: .Normal)
         tempButton.setTitleColor(UIColor.init(netHex: 0x6d6d6d), forState: .Normal)
         tempButton.setTitleColor(UIColor.init(netHex: 0xf3f3f4), forState: .Selected)
-        tempButton.titleLabel?.font = UIFont(name: "HelveticaNeue", size: CGFloat(14))
+        tempButton.titleLabel?.font = UIFont.NFXFont(14)
         tempButton.addTarget(self, action: selector, forControlEvents: .TouchUpInside)
         return tempButton
     }
@@ -90,7 +90,7 @@ class NFXDetailsController: NFXGenericController, MFMailComposeViewControllerDel
         var textLabel: UILabel
         textLabel = UILabel()
         textLabel.frame = CGRectMake(20, 20, CGRectGetWidth(scrollView.frame) - 40, CGRectGetHeight(scrollView.frame) - 20);
-        textLabel.font = UIFont(name: "HelveticaNeue", size: CGFloat(11))
+        textLabel.font = UIFont.NFXFont(11)
         textLabel.textColor = UIColor.NFXGray44Color()
         textLabel.numberOfLines = 0
         textLabel.attributedText = content
@@ -294,7 +294,7 @@ class NFXDetailsController: NFXGenericController, MFMailComposeViewControllerDel
         tempMutableString = NSMutableAttributedString(string: string)
         
         for match in matches1 {
-            tempMutableString.addAttribute(NSFontAttributeName, value: UIFont.init(name: "HelveticaNeue-Bold", size: 13)!, range: match.range)
+            tempMutableString.addAttribute(NSFontAttributeName, value: UIFont.NFXFontBold(13), range: match.range)
             tempMutableString.addAttribute(NSForegroundColorAttributeName, value: UIColor.NFXOrangeColor(), range: match.range)
         }
         
