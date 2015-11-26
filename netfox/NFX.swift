@@ -52,8 +52,20 @@ public class NFX: NSObject
     {
         self.started = true
         NSURLProtocol.registerClass(NFXProtocol)
-        print("netfox \(nfxVersion) - [https://github.com/kasketis/netfox]: Started!")
+        showMessage("Started!")
         clearOldData()
+    }
+    
+    @objc public func stop()
+    {
+        clearOldData()
+        showMessage("Stopped!")
+        NSURLProtocol.unregisterClass(NFXProtocol)
+        self.started = false
+    }
+    
+    private func showMessage(msg: String) {
+        print("netfox \(nfxVersion) - [https://github.com/kasketis/netfox]: \(msg)")
     }
     
     func motionDetected()
@@ -137,6 +149,7 @@ public class NFX: NSObject
     
     private func clearOldData()
     {
+        NFXHTTPModelManager.sharedInstance.clear()
         do {
             let documentsPath = NSSearchPathForDirectoriesInDomains(NSSearchPathDirectory.DocumentDirectory, NSSearchPathDomainMask.AllDomainsMask, true).first!
             let filePathsArray = try NSFileManager.defaultManager().subpathsOfDirectoryAtPath(documentsPath)
