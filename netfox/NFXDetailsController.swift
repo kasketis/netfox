@@ -9,7 +9,7 @@ import Foundation
 import UIKit
 import MessageUI
 
-class NFXDetailsController: UIViewController, MFMailComposeViewControllerDelegate, UIActionSheetDelegate
+class NFXDetailsController: NFXGenericController, MFMailComposeViewControllerDelegate, UIActionSheetDelegate
 {
     var iIndex: Int = 0
 
@@ -20,9 +20,6 @@ class NFXDetailsController: UIViewController, MFMailComposeViewControllerDelegat
     var infoView: UIScrollView = UIScrollView()
     var requestView: UIScrollView = UIScrollView()
     var responseView: UIScrollView = UIScrollView()
-    
-    let headerButtonNormalColor = 0x9b958d
-    let headerButtonSelectedColor = 0x9b958d
     
     enum EDetailsView
     {
@@ -35,12 +32,8 @@ class NFXDetailsController: UIViewController, MFMailComposeViewControllerDelegat
     {
         super.viewDidLoad()
         
-        self.edgesForExtendedLayout = .None
-        
         self.title = "Details"
         
-        self.view.backgroundColor = UIColor.init(netHex: 0xf2f2f2)
-
         self.navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .Action, target: self, action: Selector("actionButtonPressed"))
         
         self.infoButton = createHeaderButton("Info", x: 0, selector: Selector("infoButtonPressed"))
@@ -53,7 +46,7 @@ class NFXDetailsController: UIViewController, MFMailComposeViewControllerDelegat
         self.view.addSubview(self.responseButton)
 
         
-        let tempObject = NFXHTTPModelManager.sharedInstance.models[self.iIndex]
+        let tempObject = NFXHTTPModelManager.sharedInstance.getModels()[self.iIndex]
 
 
         self.infoView = createDetailsView(getInfoStringFromObject(tempObject), forView: .eDetailsViewInfo)
@@ -76,7 +69,7 @@ class NFXDetailsController: UIViewController, MFMailComposeViewControllerDelegat
         tempButton = UIButton()
         tempButton.frame = CGRectMake(x, 0, CGRectGetWidth(self.view.frame) / 3, 44)
         tempButton.autoresizingMask = [.FlexibleLeftMargin, .FlexibleRightMargin, .FlexibleWidth]
-        tempButton.backgroundColor = UIColor.init(netHex: headerButtonNormalColor)
+        tempButton.backgroundColor = UIColor.NFXDarkStarkWhiteColor()
         tempButton.setTitle(title, forState: .Normal)
         tempButton.setTitleColor(UIColor.init(netHex: 0x6d6d6d), forState: .Normal)
         tempButton.setTitleColor(UIColor.init(netHex: 0xf3f3f4), forState: .Selected)
@@ -98,17 +91,17 @@ class NFXDetailsController: UIViewController, MFMailComposeViewControllerDelegat
         textLabel = UILabel()
         textLabel.frame = CGRectMake(20, 20, CGRectGetWidth(scrollView.frame) - 40, CGRectGetHeight(scrollView.frame) - 20);
         textLabel.font = UIFont(name: "HelveticaNeue", size: CGFloat(11))
-        textLabel.textColor = UIColor.init(netHex: 0x707070)
+        textLabel.textColor = UIColor.NFXGray44Color()
         textLabel.numberOfLines = 0
         textLabel.attributedText = content
         textLabel.sizeToFit()
         scrollView.addSubview(textLabel)
         
-        let tempObject = NFXHTTPModelManager.sharedInstance.models[self.iIndex]
+        let tempObject = NFXHTTPModelManager.sharedInstance.getModels()[self.iIndex]
 
         var moreButton: UIButton
         moreButton = UIButton.init(frame: CGRectMake(20, CGRectGetMaxY(textLabel.frame) + 10, CGRectGetWidth(scrollView.frame) - 40, 40))
-        moreButton.backgroundColor = UIColor.init(netHex: 0x707070)
+        moreButton.backgroundColor = UIColor.NFXGray44Color()
         
         if ((forView == EDetailsView.eDetailsViewRequest) && (tempObject.requestBodyLength > 1024)) {
             moreButton.setTitle("Show request body", forState: .Normal)
@@ -174,23 +167,16 @@ class NFXDetailsController: UIViewController, MFMailComposeViewControllerDelegat
         self.requestView.hidden = true
         self.responseView.hidden = true
         
-        self.infoButton.backgroundColor = UIColor.init(netHex: headerButtonNormalColor)
-        self.requestButton.backgroundColor = UIColor.init(netHex: headerButtonNormalColor)
-        self.responseButton.backgroundColor = UIColor.init(netHex: headerButtonNormalColor)
-
         if button == self.infoButton {
             self.infoButton.selected = true
-            self.infoButton.backgroundColor = UIColor.init(netHex: headerButtonSelectedColor)
             self.infoView.hidden = false
             
         } else if button == requestButton {
             self.requestButton.selected = true
-            self.requestButton.backgroundColor = UIColor.init(netHex: headerButtonSelectedColor)
             self.requestView.hidden = false
             
         } else if button == responseButton {
             self.responseButton.selected = true
-            self.responseButton.backgroundColor = UIColor.init(netHex: headerButtonSelectedColor)
             self.responseView.hidden = false
 
         }
@@ -219,7 +205,6 @@ class NFXDetailsController: UIViewController, MFMailComposeViewControllerDelegat
         var tempString: String
         tempString = String()
         
-//        tempString += "[                                     Headers                                      ]\n\n"
         tempString += "-- Headers --\n\n"
 
         if object.requestHeaders?.count > 0 {
@@ -230,7 +215,7 @@ class NFXDetailsController: UIViewController, MFMailComposeViewControllerDelegat
             tempString += "Request headers are empty\n\n"
         }
 
-//        tempString += "\n[                                       Body                                         ]\n\n"
+        
         tempString += "\n-- Body --\n\n"
 
         if (object.requestBodyLength == 0) {
@@ -249,7 +234,6 @@ class NFXDetailsController: UIViewController, MFMailComposeViewControllerDelegat
         var tempString: String
         tempString = String()
         
-//        tempString += "[                                     Headers                                      ]\n\n"
         tempString += "-- Headers --\n\n"
 
         if object.responseHeaders?.count > 0 {
@@ -261,7 +245,6 @@ class NFXDetailsController: UIViewController, MFMailComposeViewControllerDelegat
         }
 
 
-//        tempString += "\n[                                       Body                                         ]\n\n"
         tempString += "\n-- Body --\n\n"
 
         if (object.responseBodyLength == 0) {
@@ -291,7 +274,7 @@ class NFXDetailsController: UIViewController, MFMailComposeViewControllerDelegat
         
         for match in matches1 {
             tempMutableString.addAttribute(NSFontAttributeName, value: UIFont.init(name: "HelveticaNeue-Bold", size: 13)!, range: match.range)
-            tempMutableString.addAttribute(NSForegroundColorAttributeName, value: UIColor.init(netHex: 0xec5e28), range: match.range)
+            tempMutableString.addAttribute(NSForegroundColorAttributeName, value: UIColor.NFXOrangeColor(), range: match.range)
         }
         
         
@@ -302,7 +285,7 @@ class NFXDetailsController: UIViewController, MFMailComposeViewControllerDelegat
         
 
         for match in matches2 {
-            tempMutableString.addAttribute(NSForegroundColorAttributeName, value: UIColor.init(netHex: 0x231f20), range: match.range)
+            tempMutableString.addAttribute(NSForegroundColorAttributeName, value: UIColor.NFXBlackColor(), range: match.range)
         }
 
         
@@ -313,7 +296,7 @@ class NFXDetailsController: UIViewController, MFMailComposeViewControllerDelegat
     {
         if (MFMailComposeViewController.canSendMail()) {
             
-            let tempObject = NFXHTTPModelManager.sharedInstance.models[self.iIndex]
+            let tempObject = NFXHTTPModelManager.sharedInstance.getModels()[self.iIndex]
             
             let mailComposer = MFMailComposeViewController()
             mailComposer.mailComposeDelegate = self

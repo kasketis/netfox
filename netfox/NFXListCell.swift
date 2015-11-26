@@ -45,19 +45,19 @@ class NFXListCell: UITableViewCell
         contentView.addSubview(self.timeIntervalLabel)
         
         self.URLLabel = UILabel(frame: CGRectZero)
-        self.URLLabel.textColor = UIColor.init(netHex: 0x231f20)
+        self.URLLabel.textColor = UIColor.NFXBlackColor()
         self.URLLabel.font = UIFont(name: "HelveticaNeue", size: CGFloat(11))
         self.URLLabel.numberOfLines = 2
         contentView.addSubview(self.URLLabel)
 
         self.methodLabel = UILabel(frame: CGRectZero)
         self.methodLabel.textAlignment = .Left
-        self.methodLabel.textColor = UIColor.init(netHex: 0x707070)
+        self.methodLabel.textColor = UIColor.NFXGray44Color()
         self.methodLabel.font = UIFont(name: "HelveticaNeue", size: CGFloat(11))
         contentView.addSubview(self.methodLabel)
         
         self.typeLabel = UILabel(frame: CGRectZero)
-        self.typeLabel.textColor = UIColor.init(netHex: 0x707070)
+        self.typeLabel.textColor = UIColor.NFXGray44Color()
         self.typeLabel.font = UIFont(name: "HelveticaNeue", size: CGFloat(11))
         contentView.addSubview(self.typeLabel)
         
@@ -66,7 +66,7 @@ class NFXListCell: UITableViewCell
         contentView.addSubview(self.leftSeparator)
         
         self.rightSeparator = UIView(frame: CGRectZero)
-        self.rightSeparator.backgroundColor = UIColor.init(netHex: 0x9b9b9b)
+        self.rightSeparator.backgroundColor = UIColor.NFXLightGrayColor()
         contentView.addSubview(self.rightSeparator)
     }
     
@@ -114,12 +114,12 @@ class NFXListCell: UITableViewCell
     func setStatus(status: Int)
     {
         if status < 400 {
-            self.statusView.backgroundColor = UIColor.init(netHex: 0x38bb93) //green
-            self.timeIntervalLabel.textColor = UIColor.init(netHex: 0x2d7c6e)
+            self.statusView.backgroundColor = UIColor.NFXGreenColor() //green
+            self.timeIntervalLabel.textColor = UIColor.NFXDarkGreenColor()
 
         } else {
-            self.statusView.backgroundColor = UIColor.init(netHex: 0xd34a33) //red
-            self.timeIntervalLabel.textColor = UIColor.init(netHex: 0x643026)
+            self.statusView.backgroundColor = UIColor.NFXRedColor() //red
+            self.timeIntervalLabel.textColor = UIColor.NFXDarkRedColor()
 
         }
     }

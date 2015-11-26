@@ -21,7 +21,7 @@ public class NFXProtocol: NSURLProtocol
                 return false
             }
 
-            for ignoredURL in NFX.sharedInstance().ignoredURLs {
+            for ignoredURL in NFX.sharedInstance().getIgnoredURLs() {
                 if url.absoluteString.hasPrefix(ignoredURL) {
                     return false
                 }
