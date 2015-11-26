@@ -9,8 +9,6 @@ import Foundation
 
 class NFXHTTPModel: NSObject
 {
-
-    
     var requestURL: String?
     var requestMethod: String?
     var requestCachePolicy: String?

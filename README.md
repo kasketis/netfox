@@ -7,6 +7,8 @@ Very useful and handy for network related issues and bugs
 
 Implemented in Swift 2.1 - bridged also for Objective-C
 
+Current version: 1.2
+
 Feel free to contribute :)
 
 #### Overview
@@ -57,7 +59,10 @@ Call
 <pre>
 NFX.sharedInstance().stop()
 </pre>
-to stop netfox and clear all saved data
+to stop netfox and clear all saved data. 
+If you stop netfox it's view will not be displayed until you call start method again. 
+
+If you want to just enable/disable logging functionality please use the switch button in the settings view
 
 #### Custom gestures
 

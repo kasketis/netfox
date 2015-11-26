@@ -8,7 +8,7 @@
 import Foundation
 import UIKit
 
-let nfxVersion = "1.1.2"
+let nfxVersion = "1.2"
 
 @objc
 public class NFX: NSObject
@@ -45,6 +45,7 @@ public class NFX: NSObject
     
     private var started: Bool = false
     private var presented: Bool = false
+    private var enabled: Bool = false
     private var selectedGesture: ENFXGesture = .shake
     private var ignoredURLs = [String]()
     private var filters = [Bool]()
@@ -52,21 +53,48 @@ public class NFX: NSObject
     @objc public func start()
     {
         self.started = true
-        NSURLProtocol.registerClass(NFXProtocol)
-        showMessage("Started!")
+        enable()
         clearOldData()
+        showMessage("Started!")
     }
     
     @objc public func stop()
     {
+        disable()
         clearOldData()
-        showMessage("Stopped!")
-        NSURLProtocol.unregisterClass(NFXProtocol)
         self.started = false
+        showMessage("Stopped!")
     }
     
     private func showMessage(msg: String) {
         print("netfox \(nfxVersion) - [https://github.com/kasketis/netfox]: \(msg)")
+    }
+    
+    internal func isEnabled() -> Bool
+    {
+        return self.enabled
+    }
+    
+    internal func enable()
+    {
+        self.enabled = true
+        register()
+    }
+    
+    internal func disable()
+    {
+        self.enabled = false
+        unregister()
+    }
+    
+    private func register()
+    {
+        NSURLProtocol.registerClass(NFXProtocol)
+    }
+    
+    private func unregister()
+    {
+        NSURLProtocol.unregisterClass(NFXProtocol)
     }
     
     func motionDetected()
@@ -145,7 +173,7 @@ public class NFX: NSObject
         })
     }
     
-    private func clearOldData()
+    internal func clearOldData()
     {
         NFXHTTPModelManager.sharedInstance.clear()
         do {

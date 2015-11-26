@@ -127,6 +127,7 @@ class NFXDetailsController: NFXGenericController, MFMailComposeViewControllerDel
         var actionSheet: UIActionSheet
         actionSheet = UIActionSheet()
         actionSheet.delegate = self
+        actionSheet.title = "Share"
         actionSheet.addButtonWithTitle("Cancel")
         actionSheet.addButtonWithTitle("Simple log")
         actionSheet.addButtonWithTitle("Full log")
