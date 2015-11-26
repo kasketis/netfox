@@ -11,6 +11,8 @@ import UIKit
 class NFXSettingsController: NFXGenericController, UITableViewDelegate, UITableViewDataSource
 {
     // MARK: Properties
+
+    var nfxURL = "https://github.com/kasketis/netfox"
     
     var tableView: UITableView = UITableView()
     
@@ -34,7 +36,7 @@ class NFXSettingsController: NFXGenericController, UITableViewDelegate, UITableV
         
         var filtersInfoLabel: UILabel
         filtersInfoLabel = UILabel(frame: CGRectMake(10, 20, CGRectGetWidth(self.view.frame) - 2*10, 30))
-        filtersInfoLabel.font = UIFont(name: "HelveticaNeue", size: CGFloat(12))
+        filtersInfoLabel.font = UIFont.NFXFont(12)
         filtersInfoLabel.textColor = UIColor.NFXGray44Color()
         filtersInfoLabel.textAlignment = .Center
         filtersInfoLabel.text = "Select the types of responses that you want to see"
@@ -51,12 +53,38 @@ class NFXSettingsController: NFXGenericController, UITableViewDelegate, UITableV
         
         self.tableView.registerClass(UITableViewCell.self, forCellReuseIdentifier: NSStringFromClass(UITableViewCell))
         
+        var nfxVersionLabel: UILabel
+        nfxVersionLabel = UILabel(frame: CGRectMake(10, CGRectGetHeight(self.view.frame) - 60, CGRectGetWidth(self.view.frame) - 2*10, 30))
+        nfxVersionLabel.autoresizingMask = [.FlexibleTopMargin]
+        nfxVersionLabel.font = UIFont.NFXFont(14)
+        nfxVersionLabel.textColor = UIColor.NFXOrangeColor()
+        nfxVersionLabel.textAlignment = .Center
+        nfxVersionLabel.text = "netfox - \(nfxVersion)"
+        self.view.addSubview(nfxVersionLabel)
+        
+        var nfxURLButton: UIButton
+        nfxURLButton = UIButton(frame: CGRectMake(10, CGRectGetHeight(self.view.frame) - 40, CGRectGetWidth(self.view.frame) - 2*10, 30))
+        nfxURLButton.autoresizingMask = [.FlexibleTopMargin]
+        nfxURLButton.titleLabel?.font = UIFont.NFXFont(12)
+        nfxURLButton.setTitleColor(UIColor.NFXGray44Color(), forState: .Normal)
+        nfxURLButton.titleLabel?.textAlignment = .Center
+        nfxURLButton.setTitle(nfxURL, forState: .Normal)
+        nfxURLButton.addTarget(self, action: Selector("nfxURLButtonPressed"), forControlEvents: .TouchUpInside)
+        self.view.addSubview(nfxURLButton)
+        
+        
     }
+    
     override func viewWillDisappear(animated: Bool) {
         
         super.viewWillDisappear(animated)
         
         NFX.sharedInstance().cacheFilters(self.filters)
+    }
+    
+    func nfxURLButtonPressed()
+    {
+        UIApplication.sharedApplication().openURL(NSURL(string: nfxURL)!)
     }
     
     // MARK: UITableViewDataSource
@@ -72,7 +100,7 @@ class NFXSettingsController: NFXGenericController, UITableViewDelegate, UITableV
         
         let shortType = tableData[indexPath.row]
         cell.textLabel?.text = shortType.rawValue
-        cell.textLabel?.font = UIFont(name: "HelveticaNeue", size: CGFloat(14))
+        cell.textLabel?.font = UIFont.NFXFont(14)
         cell.tintColor = UIColor.NFXOrangeColor()
         configureCell(cell, indexPath: indexPath)
         
