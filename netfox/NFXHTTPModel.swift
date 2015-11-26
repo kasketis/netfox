@@ -7,8 +7,25 @@
 
 import Foundation
 
-class NFXHTTPModel : NSObject
+class NFXHTTPModel: NSObject
 {
+    enum PrettyPrintableContentType: String {
+        case JSON = "application/json"
+        
+        func prettyPrint(rawData: NSData) -> String? {
+            switch self {
+            case .JSON:
+                do {
+                    let rawJsonData = try NSJSONSerialization.JSONObjectWithData(rawData, options: [.AllowFragments])
+                    let prettyPrintedString = try NSJSONSerialization.dataWithJSONObject(rawJsonData, options: [.PrettyPrinted])
+                    return NSString(data: prettyPrintedString, encoding: NSUTF8StringEncoding) as? String
+                } catch {
+                    return nil
+                }
+            }
+        }
+    }
+    
     var requestURL: String?
     var requestMethod: String?
     var requestCachePolicy: String?
@@ -17,6 +34,7 @@ class NFXHTTPModel : NSObject
     var requestTimeout: String?
     var requestHeaders: Dictionary<String, String>?
     var requestBodyLength: Int?
+    var requestType: String?
     
     var responseStatus: Int?
     var responseType: String?
@@ -38,6 +56,7 @@ class NFXHTTPModel : NSObject
         self.requestCachePolicy = request.getNFXCachePolicy()
         self.requestTimeout = request.getNFXTimeout()
         self.requestHeaders = request.getNFXHeaders()
+        self.requestType = requestHeaders?["Content-Type"]
         saveRequestBodyData(request.getNFXBody())
     }
     
@@ -75,17 +94,33 @@ class NFXHTTPModel : NSObject
         }
     }
     
-    
+    private func prettyOutput(rawData: NSData, contentType: String? = nil) -> NSString {
+        
+        if let contentType = contentType,
+            let prettyPrintable = PrettyPrintableContentType(rawValue: contentType),
+            let output = prettyPrintable.prettyPrint(rawData) {
+                return output
+        }
+        
+        return NSString(data: rawData, encoding: NSUTF8StringEncoding) ?? ""
+    }
+
     func getRequestBody() -> NSString
     {
-        return readData(getRequestBodyFilepath())
+        guard let data = readRawData(getRequestBodyFilepath()) else {
+            return ""
+        }
+        return prettyOutput(data, contentType: requestType)
     }
     
     func getResponseBody() -> NSString
     {
-        return readData(getResponseBodyFilepath())
+        guard let data = readRawData(getResponseBodyFilepath()) else {
+            return ""
+        }
+        
+        return prettyOutput(data, contentType: responseType)
     }
-    
     
     func getRandomHash() -> NSString
     {
@@ -129,13 +164,8 @@ class NFXHTTPModel : NSObject
         } catch {}
     }
     
-    func readData(fromFile: String) -> NSString
-    {
-        do {
-            return try NSString(contentsOfFile: fromFile, encoding: NSUTF8StringEncoding)
-        } catch {
-            return ""
-        }
+    func readRawData(fromFile: String) -> NSData? {
+        return NSData(contentsOfFile: fromFile)
     }
     
     func getTimeFromDate(date: NSDate) -> String

@@ -14,7 +14,14 @@ Feel free to contribute :)
 
 #### Installation
 
-Copy the “nfx” folder in your project (make sure that “Create groups” option is selected) and add the following line in didFinishLaunchingWithOptions: method of your AppDelegate
+Insert this line in your Podfile
+<pre>
+pod 'netfox'
+</pre>
+
+or if you want to do it manually just copy the "netfox" folder in your project (make sure that "Create groups" option is selected)
+
+Then add the following line in didFinishLaunchingWithOptions: method of your AppDelegate
 
 Swift
 <pre>
@@ -36,11 +43,7 @@ Note: Please wrap the above line with
 </pre>
 to prevent library’s execution on your production app.
 
-You can add the DEBUG symbol with the -DDEBUG entry. Set it in the “Swift Compiler - Custom Flags” section -> “Other Swift Flags” line in project’s “Build Settings”
-
-#### Pod
-
-On the way.. :)
+You can add the DEBUG symbol with the -DDEBUG entry. Set it in the "Swift Compiler - Custom Flags" section -> "Other Swift Flags" line in project’s "Build Settings"
 
 #### Usage 
 
@@ -64,6 +67,14 @@ NFX.sharedInstance().hide()
 </pre>
 when you want to hide them.
 
+#### Prevent logging for specific URLs
+
+Use the following method to prevent requests for specified URL from being logged. You can ignore as many URLs as you want
+<pre>
+NFX.sharedInstance().ignoreURL("the_url")
+</pre>
+Tip: You can use the url of the host (for example "https://www.github.com") to ignore all paths of it 
+
 #### Features
 
 - Search: You can easily search among requests via
@@ -77,7 +88,8 @@ when you want to hide them.
 
 #### Other
 
-- Alamofire users check [this](https://github.com/kasketis/netfox/blob/master/Alamofire.md)
+- Alamofire users check [this](https://github.com/kasketis/netfox/blob/master/Workarounds.md#alamofire-workaround)
+- If you can't log request body check [this](https://github.com/kasketis/netfox/blob/master/Workarounds.md#no-http-body-for-requests)
 - Due to the large size of request/response bodies, the library provides disk storage for low memory overhead
 
 #### Licence

@@ -8,7 +8,7 @@
 import Foundation
 import UIKit
 
-let nfxVersion = "0.1.2"
+let nfxVersion = "0.1.8"
 
 @objc
 public class NFX: NSObject
@@ -46,13 +46,26 @@ public class NFX: NSObject
     var started: Bool = false
     var presented: Bool = false
     var selectedGesture: ENFXGesture = .shake
-
+    var ignoredURLs = [String]()
+    
     @objc public func start()
     {
         self.started = true
         NSURLProtocol.registerClass(NFXProtocol)
-        print("netfox \(nfxVersion) - [https://github.com/kasketis/netfox]: Started!")
+        showMessage("Started!")
         clearOldData()
+    }
+    
+    @objc public func stop()
+    {
+        clearOldData()
+        showMessage("Stopped!")
+        NSURLProtocol.unregisterClass(NFXProtocol)
+        self.started = false
+    }
+    
+    private func showMessage(msg: String) {
+        print("netfox \(nfxVersion) - [https://github.com/kasketis/netfox]: \(msg)")
     }
     
     func motionDetected()
@@ -76,7 +89,7 @@ public class NFX: NSObject
         if (self.started) && (self.selectedGesture == .custom) {
             showNFX()
         } else {
-            print("netfox \(nfxVersion) - [ERROR]: Please call start(.custom) first")
+            print("netfox \(nfxVersion) - [ERROR]: Please call start() and setGesture(.custom) first")
         }
     }
     
@@ -85,8 +98,13 @@ public class NFX: NSObject
         if (self.started) && (self.selectedGesture == .custom) {
             hideNFX()
         } else {
-            print("netfox \(nfxVersion) - [ERROR]: Please call start(.custom) first")
+            print("netfox \(nfxVersion) - [ERROR]: Please call start() and setGesture(.custom) first")
         }
+    }
+    
+    @objc public func ignoreURL(url: String)
+    {
+        self.ignoredURLs.append(url)
     }
     
     private func showNFX()
@@ -97,27 +115,22 @@ public class NFX: NSObject
         
         var navigationController: UINavigationController?
 
-        if #available(iOS 8.0, *) {
-            var listController: NFXListController
-            listController = NFXListController()
-
-            navigationController = UINavigationController(rootViewController: listController)
-            navigationController!.navigationBar.translucent = false
-            navigationController!.navigationBar.tintColor = UIColor.init(netHex: 0xec5e28)
-            navigationController!.navigationBar.barTintColor = UIColor.init(netHex: 0xccc5b9)
-            navigationController!.navigationBar.titleTextAttributes = [NSForegroundColorAttributeName : UIColor.init(netHex: 0xec5e28)]
-            
-            UIApplication.sharedApplication().keyWindow?.rootViewController?.presentViewController(navigationController!, animated: true, completion: { () -> Void in
-                self.presented = true
-            })
-        } else {
-            // Fallback on earlier versions
-            print("netfox \(nfxVersion) - [ERROR]: needs iOS >= 8.0!")
-
-
-        }
-
-
+        var listController: NFXListController
+        listController = NFXListController()
+        
+        navigationController = UINavigationController(rootViewController: listController)
+        navigationController!.navigationBar.translucent = false
+        navigationController!.navigationBar.tintColor = UIColor.init(netHex: 0xec5e28)
+        navigationController!.navigationBar.barTintColor = UIColor.init(netHex: 0xccc5b9)
+        navigationController!.navigationBar.titleTextAttributes = [NSForegroundColorAttributeName : UIColor.init(netHex: 0xec5e28)]
+        
+        self.presented = true
+        presentingViewController?.presentViewController(navigationController!, animated: true, completion: nil)
+    }
+    
+    private var presentingViewController: UIViewController? {
+        let rootViewController = UIApplication.sharedApplication().keyWindow?.rootViewController
+        return rootViewController?.presentedViewController ?? rootViewController
     }
     
     private func hideNFX()
@@ -126,13 +139,14 @@ public class NFX: NSObject
             return
         }
         
-        UIApplication.sharedApplication().keyWindow?.rootViewController?.dismissViewControllerAnimated(true, completion: { () -> Void in
+        presentingViewController?.dismissViewControllerAnimated(true, completion: { () -> Void in
             self.presented = false
         })
     }
     
     private func clearOldData()
     {
+        NFXHTTPModelManager.sharedInstance.clear()
         do {
             let documentsPath = NSSearchPathForDirectoriesInDomains(NSSearchPathDirectory.DocumentDirectory, NSSearchPathDomainMask.AllDomainsMask, true).first!
             let filePathsArray = try NSFileManager.defaultManager().subpathsOfDirectoryAtPath(documentsPath)
