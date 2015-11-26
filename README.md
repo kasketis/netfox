@@ -62,7 +62,7 @@ NFX.sharedInstance().stop()
 to stop netfox and clear all saved data. 
 If you stop netfox it's view will not be displayed until you call start method again. 
 
-If you want to just enable/disable logging functionality please use the switch button in the settings view
+If you want to just enable/disable logging functionality or clear the data please use the buttons provided in the settings view
 
 #### Custom gestures
 
