@@ -55,8 +55,6 @@ class NFXSettingsController: NFXGenericController, UITableViewDelegate, UITableV
     override func viewWillDisappear(animated: Bool) {
         
         super.viewWillDisappear(animated)
-
-        print(self.filters)
         
         NFX.sharedInstance().cacheFilters(self.filters)
     }

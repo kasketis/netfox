@@ -43,7 +43,6 @@ final class NFXHTTPModelManager: NSObject
         }
 
         let searchPredicate = NSCompoundPredicate(orPredicateWithSubpredicates: predicates)
-        print(self.models)
         
         let array = (self.models as NSArray).filteredArrayUsingPredicate(searchPredicate)
         
