@@ -53,7 +53,6 @@ class NFXHTTPModel: NSObject
         self.responseTime = getTimeFromDate(self.responseDate!)
         self.responseStatus = response.getNFXStatus()
         self.responseHeaders = response.getNFXHeaders()
-        saveResponseBodyData(data)
         
         if let contentType = response.getNFXHeaders()["Content-Type"] as? String {
             self.responseType = contentType.componentsSeparatedByString(";")[0]
@@ -61,6 +60,9 @@ class NFXHTTPModel: NSObject
         }
         
         self.timeInterval = NSString(format: "%.2fs", Double(self.responseDate!.timeIntervalSinceDate(self.requestDate!))) as String
+        
+        saveResponseBodyData(data)
+
     }
     
     
@@ -75,11 +77,22 @@ class NFXHTTPModel: NSObject
     
     func saveResponseBodyData(data: NSData)
     {
-        let tempBodyString = NSString.init(data: data, encoding: NSUTF8StringEncoding)
-        self.responseBodyLength = tempBodyString?.length
-        if (tempBodyString != nil) {
-            saveData(tempBodyString!, toFile: getResponseBodyFilepath())
+        var bodyString: NSString?
+        
+        if self.shortType == HTTPModelShortType.IMAGE.rawValue {
+            bodyString = data.base64EncodedStringWithOptions(.EncodingEndLineWithLineFeed)
+
+        } else {
+            if let tempBodyString = NSString.init(data: data, encoding: NSUTF8StringEncoding) {
+                bodyString = tempBodyString
+            }
         }
+        
+        if (bodyString != nil) {
+            self.responseBodyLength = bodyString!.length
+            saveData(bodyString!, toFile: getResponseBodyFilepath())
+        }
+        
     }
     
     private func prettyOutput(rawData: NSData, contentType: String? = nil) -> NSString
@@ -185,10 +198,10 @@ class NFXHTTPModel: NSObject
         }
         
         if contentType.hasPrefix("image/") {
-            return .Image
+            return .IMAGE
         }
         
-        return .Other
+        return .OTHER
     }
     
     func prettyPrint(rawData: NSData, type: HTTPModelShortType) -> String?

@@ -13,10 +13,10 @@ enum HTTPModelShortType: String
     case JSON = "JSON"
     case XML = "XML"
     case HTML = "HTML"
-    case Image = "Image"
-    case Other = "Other"
+    case IMAGE = "Image"
+    case OTHER = "Other"
     
-    static let allValues = [JSON, XML, HTML, Image, Other]
+    static let allValues = [JSON, XML, HTML, IMAGE, OTHER]
 }
 
 extension UIWindow

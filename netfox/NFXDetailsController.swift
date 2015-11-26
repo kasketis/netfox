@@ -23,9 +23,9 @@ class NFXDetailsController: NFXGenericController, MFMailComposeViewControllerDel
     
     enum EDetailsView
     {
-        case eDetailsViewInfo
-        case eDetailsViewRequest
-        case eDetailsViewResponse
+        case INFO
+        case REQUEST
+        case RESPONSE
     }
     
     override func viewDidLoad()
@@ -49,13 +49,13 @@ class NFXDetailsController: NFXGenericController, MFMailComposeViewControllerDel
         let tempObject = NFXHTTPModelManager.sharedInstance.getModels()[self.iIndex]
 
 
-        self.infoView = createDetailsView(getInfoStringFromObject(tempObject), forView: .eDetailsViewInfo)
+        self.infoView = createDetailsView(getInfoStringFromObject(tempObject), forView: .INFO)
         self.view.addSubview(self.infoView)
         
-        self.requestView = createDetailsView(getRequestStringFromObject(tempObject), forView: .eDetailsViewRequest)
+        self.requestView = createDetailsView(getRequestStringFromObject(tempObject), forView: .REQUEST)
         self.view.addSubview(self.requestView)
 
-        self.responseView = createDetailsView(getResponseStringFromObject(tempObject), forView: .eDetailsViewResponse)
+        self.responseView = createDetailsView(getResponseStringFromObject(tempObject), forView: .RESPONSE)
         self.view.addSubview(self.responseView)
         
         infoButtonPressed()
@@ -103,13 +103,13 @@ class NFXDetailsController: NFXGenericController, MFMailComposeViewControllerDel
         moreButton = UIButton.init(frame: CGRectMake(20, CGRectGetMaxY(textLabel.frame) + 10, CGRectGetWidth(scrollView.frame) - 40, 40))
         moreButton.backgroundColor = UIColor.NFXGray44Color()
         
-        if ((forView == EDetailsView.eDetailsViewRequest) && (tempObject.requestBodyLength > 1024)) {
+        if ((forView == EDetailsView.REQUEST) && (tempObject.requestBodyLength > 1024)) {
             moreButton.setTitle("Show request body", forState: .Normal)
             moreButton.addTarget(self, action: Selector("requestBodyButtonPressed"), forControlEvents: .TouchUpInside)
             scrollView.addSubview(moreButton)
             scrollView.contentSize = CGSizeMake(textLabel.frame.width, CGRectGetMaxY(moreButton.frame))
 
-        } else if ((forView == EDetailsView.eDetailsViewResponse) && (tempObject.responseBodyLength > 1024)) {
+        } else if ((forView == EDetailsView.RESPONSE) && (tempObject.responseBodyLength > 1024)) {
             moreButton.setTitle("Show response body", forState: .Normal)
             moreButton.addTarget(self, action: Selector("responseBodyButtonPressed"), forControlEvents: .TouchUpInside)
             scrollView.addSubview(moreButton)
@@ -134,6 +134,7 @@ class NFXDetailsController: NFXGenericController, MFMailComposeViewControllerDel
         actionSheet.showInView(self.view)
     }
     
+    
     func infoButtonPressed()
     {
         buttonPressed(self.infoButton)
@@ -147,24 +148,6 @@ class NFXDetailsController: NFXGenericController, MFMailComposeViewControllerDel
     func responseButtonPressed()
     {
         buttonPressed(self.responseButton)
-    }
-    
-    func bodyButtonPressed() -> NFXBodyDetailsController {
-        var bodyDetailsController : NFXBodyDetailsController
-        bodyDetailsController = NFXBodyDetailsController()
-        bodyDetailsController.iIndex = self.iIndex
-        self.navigationController?.pushViewController(bodyDetailsController, animated: true)
-        return bodyDetailsController
-    }
-    
-    func responseBodyButtonPressed()
-    {
-        bodyButtonPressed().bodyType = NFXBodyType.RESPONSE
-    }
-    
-    func requestBodyButtonPressed()
-    {
-        bodyButtonPressed().bodyType = NFXBodyType.REQUEST
     }
     
     func buttonPressed(button: UIButton)
@@ -188,9 +171,37 @@ class NFXDetailsController: NFXGenericController, MFMailComposeViewControllerDel
         } else if button == responseButton {
             self.responseButton.selected = true
             self.responseView.hidden = false
-
+            
         }
     }
+    
+    
+    func responseBodyButtonPressed()
+    {
+        bodyButtonPressed().bodyType = NFXBodyType.RESPONSE
+    }
+    
+    func requestBodyButtonPressed()
+    {
+        bodyButtonPressed().bodyType = NFXBodyType.REQUEST
+    }
+    
+    func bodyButtonPressed() -> NFXGenericBodyDetailsController {
+        
+        let tempObject = NFXHTTPModelManager.sharedInstance.getModels()[self.iIndex]
+        
+        var bodyDetailsController: NFXGenericBodyDetailsController
+        
+        if tempObject.shortType == HTTPModelShortType.IMAGE.rawValue {
+            bodyDetailsController = NFXImageBodyDetailsController()
+        } else {
+            bodyDetailsController = NFXRawBodyDetailsController()
+        }
+        bodyDetailsController.iIndex = self.iIndex
+        self.navigationController?.pushViewController(bodyDetailsController, animated: true)
+        return bodyDetailsController
+    }
+    
     
     func getInfoStringFromObject(object: NFXHTTPModel) -> NSAttributedString
     {
