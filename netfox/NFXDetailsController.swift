@@ -149,12 +149,22 @@ class NFXDetailsController: NFXGenericController, MFMailComposeViewControllerDel
         buttonPressed(self.responseButton)
     }
     
-    func responseBodyButtonPressed()
-    {
+    func bodyButtonPressed() -> NFXBodyDetailsController {
         var bodyDetailsController : NFXBodyDetailsController
         bodyDetailsController = NFXBodyDetailsController()
         bodyDetailsController.iIndex = self.iIndex
         self.navigationController?.pushViewController(bodyDetailsController, animated: true)
+        return bodyDetailsController
+    }
+    
+    func responseBodyButtonPressed()
+    {
+        bodyButtonPressed().bodyType = NFXBodyType.RESPONSE
+    }
+    
+    func requestBodyButtonPressed()
+    {
+        bodyButtonPressed().bodyType = NFXBodyType.REQUEST
     }
     
     func buttonPressed(button: UIButton)
