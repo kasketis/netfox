@@ -112,11 +112,8 @@ public class NFX: NSObject
         navigationController!.navigationBar.barTintColor = UIColor.init(netHex: 0xccc5b9)
         navigationController!.navigationBar.titleTextAttributes = [NSForegroundColorAttributeName : UIColor.init(netHex: 0xec5e28)]
         
-        presentingViewController?.presentViewController(navigationController!, animated: true, completion: { () -> Void in
-            self.presented = true
-        })
-
-
+        self.presented = true
+        presentingViewController?.presentViewController(navigationController!, animated: true, completion: nil)
     }
     
     private var presentingViewController: UIViewController? {
