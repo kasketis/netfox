@@ -10,6 +10,7 @@ class NFXManager: Alamofire.Manager
     static let sharedManager: NFXManager = {
         let configuration = NSURLSessionConfiguration.defaultSessionConfiguration()
         configuration.protocolClasses?.insert(NFXProtocol.self, atIndex: 0)
+        configuration.HTTPAdditionalHeaders = Manager.defaultHTTPHeaders
         let manager = NFXManager(configuration: configuration)
         return manager
     }()
