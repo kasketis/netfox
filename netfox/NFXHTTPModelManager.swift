@@ -18,4 +18,9 @@ final class NFXHTTPModelManager: NSObject
     {
         self.models.insert(obj, atIndex: 0)
     }
+    
+    func clear()
+    {
+        self.models.removeAll()
+    }
 }
