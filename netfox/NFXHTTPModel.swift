@@ -9,22 +9,7 @@ import Foundation
 
 class NFXHTTPModel: NSObject
 {
-    enum PrettyPrintableContentType: String {
-        case JSON = "application/json"
-        
-        func prettyPrint(rawData: NSData) -> String? {
-            switch self {
-            case .JSON:
-                do {
-                    let rawJsonData = try NSJSONSerialization.JSONObjectWithData(rawData, options: [.AllowFragments])
-                    let prettyPrintedString = try NSJSONSerialization.dataWithJSONObject(rawJsonData, options: [.PrettyPrinted])
-                    return NSString(data: prettyPrintedString, encoding: NSUTF8StringEncoding) as? String
-                } catch {
-                    return nil
-                }
-            }
-        }
-    }
+
     
     var requestURL: String?
     var requestMethod: String?
@@ -46,6 +31,8 @@ class NFXHTTPModel: NSObject
     var timeInterval: String?
     
     var randomHash: NSString?
+    
+    var shortType: NSString?
     
     func saveRequest(request: NSURLRequest)
     {
@@ -70,6 +57,7 @@ class NFXHTTPModel: NSObject
         
         if let contentType = response.getNFXHeaders()["Content-Type"] as? String {
             self.responseType = contentType.componentsSeparatedByString(";")[0]
+            self.shortType = getShortTypeFrom(self.responseType!).rawValue
         }
         
         self.timeInterval = NSString(format: "%.2fs", Double(self.responseDate!.timeIntervalSinceDate(self.requestDate!))) as String
@@ -94,14 +82,14 @@ class NFXHTTPModel: NSObject
         }
     }
     
-    private func prettyOutput(rawData: NSData, contentType: String? = nil) -> NSString {
-        
-        if let contentType = contentType,
-            let prettyPrintable = PrettyPrintableContentType(rawValue: contentType),
-            let output = prettyPrintable.prettyPrint(rawData) {
+    private func prettyOutput(rawData: NSData, contentType: String? = nil) -> NSString
+    {
+        if let contentType = contentType {
+            let shortType = getShortTypeFrom(contentType)
+            if let output = prettyPrint(rawData, type: shortType) {
                 return output
+            }
         }
-        
         return NSString(data: rawData, encoding: NSUTF8StringEncoding) ?? ""
     }
 
@@ -164,7 +152,8 @@ class NFXHTTPModel: NSObject
         } catch {}
     }
     
-    func readRawData(fromFile: String) -> NSData? {
+    func readRawData(fromFile: String) -> NSData?
+    {
         return NSData(contentsOfFile: fromFile)
     }
     
@@ -178,6 +167,45 @@ class NFXHTTPModel: NSObject
             return "\(hour):0\(minutes)"
         } else {
             return "\(hour):\(minutes)"
+        }
+    }
+    
+    func getShortTypeFrom(contentType: String) -> HTTPModelShortType
+    {
+        if contentType == "application/json" {
+            return .JSON
+        }
+        
+        if contentType == "application/xml" {
+            return .XML
+        }
+        
+        if contentType == "text/html" {
+            return .HTML
+        }
+        
+        if contentType.hasPrefix("image/") {
+            return .Image
+        }
+        
+        return .Other
+    }
+    
+    func prettyPrint(rawData: NSData, type: HTTPModelShortType) -> String?
+    {
+        switch type {
+        case .JSON:
+            do {
+                let rawJsonData = try NSJSONSerialization.JSONObjectWithData(rawData, options: [.AllowFragments])
+                let prettyPrintedString = try NSJSONSerialization.dataWithJSONObject(rawJsonData, options: [.PrettyPrinted])
+                return NSString(data: prettyPrintedString, encoding: NSUTF8StringEncoding) as? String
+            } catch {
+                return nil
+            }
+        
+        default:
+            return nil
+            
         }
     }
 }

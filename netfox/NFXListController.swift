@@ -39,22 +39,52 @@ class NFXListController: UIViewController, UITableViewDelegate, UITableViewDataS
         
         self.tableView.registerClass(NFXListCell.self, forCellReuseIdentifier: NSStringFromClass(NFXListCell))
         
-        searchController = UISearchController(searchResultsController: nil)
-        searchController.searchResultsUpdater = self
-        searchController.searchBar.sizeToFit()
-        searchController.delegate = self
-        searchController.hidesNavigationBarDuringPresentation = false
-        searchController.dimsBackgroundDuringPresentation = false
+        let searchView = UIView()
+        searchView.frame = CGRectMake(0, 0, 280, 0)
+        searchView.backgroundColor = UIColor.clearColor()
         
-        self.navigationItem.titleView = searchController.searchBar
+        self.searchController = UISearchController(searchResultsController: nil)
+        self.searchController.searchResultsUpdater = self
+        self.searchController.delegate = self
+        self.searchController.hidesNavigationBarDuringPresentation = false
+        self.searchController.dimsBackgroundDuringPresentation = false
+        searchView.addSubview(self.searchController.searchBar)
+        self.searchController.searchBar.sizeToFit()
+        self.searchController.searchBar.backgroundColor = UIColor.clearColor()
+        self.searchController.searchBar.searchBarStyle = .Minimal
+        searchView.frame = self.searchController.searchBar.frame
+        self.searchController.view.backgroundColor = UIColor.clearColor()
+        
+        self.navigationItem.titleView = searchView
+
+        let settingsBarButton = UIButton()
+        settingsBarButton.frame = CGRectMake(0, 0, 30, 30)
+        settingsBarButton.setTitle(NSString(string: "≕") as String, forState: .Normal)
+        settingsBarButton.titleLabel?.textAlignment = .Right
+        settingsBarButton.titleLabel?.font = UIFont(name: "Helvetica", size: 32)
+        settingsBarButton.setTitleColor(UIColor.NFXOrangeColor(), forState: .Normal)
+        settingsBarButton.sizeToFit()
+        settingsBarButton.addTarget(self, action: Selector("settingsButtonPressed"), forControlEvents: .TouchUpInside)
+            
+        self.navigationItem.rightBarButtonItem = UIBarButtonItem(customView: settingsBarButton)
         
         NSNotificationCenter.defaultCenter().addObserver(
             self,
             selector: "reloadTableData",
             name: "NFXReloadTableData",
             object: nil)
-        
-        
+    }
+    
+    override func viewWillAppear(animated: Bool) {
+        super.viewWillAppear(animated)
+        reloadTableData()
+    }
+    
+    func settingsButtonPressed()
+    {
+        var settingsController: NFXSettingsController
+        settingsController = NFXSettingsController()
+        self.navigationController?.pushViewController(settingsController, animated: true)
     }
     
     // MARK: UISearchResultsUpdating
@@ -69,7 +99,7 @@ class NFXListController: UIViewController, UITableViewDelegate, UITableViewDataS
         
         let searchPredicate = NSCompoundPredicate(orPredicateWithSubpredicates: predicates)
         
-        let array = (NFXHTTPModelManager.sharedInstance.models as NSArray).filteredArrayUsingPredicate(searchPredicate)
+        let array = (NFXHTTPModelManager.sharedInstance.getModels() as NSArray).filteredArrayUsingPredicate(searchPredicate)
         self.filteredTableData = array as! [NFXHTTPModel]
         reloadTableData()
     }
@@ -81,7 +111,7 @@ class NFXListController: UIViewController, UITableViewDelegate, UITableViewDataS
         if (self.searchController.active) {
             return self.filteredTableData.count
         } else {
-            return NFXHTTPModelManager.sharedInstance.models.count
+            return NFXHTTPModelManager.sharedInstance.getModels().count
         }
     }
     
@@ -93,7 +123,7 @@ class NFXListController: UIViewController, UITableViewDelegate, UITableViewDataS
             let obj = self.filteredTableData[indexPath.row]
             cell.configForObject(obj)
         } else {
-            let obj = NFXHTTPModelManager.sharedInstance.models[indexPath.row]
+            let obj = NFXHTTPModelManager.sharedInstance.getModels()[indexPath.row]
             cell.configForObject(obj)
         }
         

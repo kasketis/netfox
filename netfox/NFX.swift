@@ -8,7 +8,7 @@
 import Foundation
 import UIKit
 
-let nfxVersion = "0.1.8"
+let nfxVersion = "0.2"
 
 @objc
 public class NFX: NSObject
@@ -43,11 +43,12 @@ public class NFX: NSObject
         }
     }
     
-    var started: Bool = false
-    var presented: Bool = false
-    var selectedGesture: ENFXGesture = .shake
-    var ignoredURLs = [String]()
-    
+    private var started: Bool = false
+    private var presented: Bool = false
+    private var selectedGesture: ENFXGesture = .shake
+    private var ignoredURLs = [String]()
+    private var filters = [Bool]()
+
     @objc public func start()
     {
         self.started = true
@@ -120,9 +121,9 @@ public class NFX: NSObject
         
         navigationController = UINavigationController(rootViewController: listController)
         navigationController!.navigationBar.translucent = false
-        navigationController!.navigationBar.tintColor = UIColor.init(netHex: 0xec5e28)
-        navigationController!.navigationBar.barTintColor = UIColor.init(netHex: 0xccc5b9)
-        navigationController!.navigationBar.titleTextAttributes = [NSForegroundColorAttributeName : UIColor.init(netHex: 0xec5e28)]
+        navigationController!.navigationBar.tintColor = UIColor.NFXOrangeColor()
+        navigationController!.navigationBar.barTintColor = UIColor.NFXStarkWhiteColor()
+        navigationController!.navigationBar.titleTextAttributes = [NSForegroundColorAttributeName : UIColor.NFXOrangeColor()]
         
         self.presented = true
         presentingViewController?.presentViewController(navigationController!, animated: true, completion: nil)
@@ -159,4 +160,26 @@ public class NFX: NSObject
         } catch {}
     }
     
+    func getIgnoredURLs() -> [String]
+    {
+        return self.ignoredURLs
+    }
+    
+    func getSelectedGesture() -> ENFXGesture
+    {
+        return self.selectedGesture
+    }
+    
+    func cacheFilters(selectedFilters: [Bool])
+    {
+        self.filters = selectedFilters
+    }
+    
+    func getCachedFilters() -> [Bool]
+    {
+        if self.filters.count == 0 {
+            self.filters = [Bool](count: HTTPModelShortType.allValues.count, repeatedValue: true)
+        }
+        return self.filters
+    }
 }

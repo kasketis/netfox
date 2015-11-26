@@ -7,11 +7,23 @@
 
 import UIKit
 
+
+enum HTTPModelShortType: String
+{
+    case JSON = "JSON"
+    case XML = "XML"
+    case HTML = "HTML"
+    case Image = "Image"
+    case Other = "Other"
+    
+    static let allValues = [JSON, XML, HTML, Image, Other]
+}
+
 extension UIWindow
 {
     override public func motionEnded(motion: UIEventSubtype, withEvent event: UIEvent?)
     {
-        if NFX.sharedInstance().selectedGesture == .shake {
+        if NFX.sharedInstance().getSelectedGesture() == .shake {
             if (event!.type == .Motion && event!.subtype == .MotionShake) {
                 NFX.sharedInstance().motionDetected()
             }
@@ -35,6 +47,61 @@ extension UIColor
     convenience init(netHex: Int)
     {
         self.init(red:(netHex >> 16) & 0xff, green:(netHex >> 8) & 0xff, blue:netHex & 0xff)
+    }
+    
+    class func NFXOrangeColor() -> UIColor
+    {
+        return UIColor.init(netHex: 0xec5e28)
+    }
+    
+    class func NFXGreenColor() -> UIColor
+    {
+        return UIColor.init(netHex: 0x38bb93)
+    }
+    
+    class func NFXDarkGreenColor() -> UIColor
+    {
+        return UIColor.init(netHex: 0x2d7c6e)
+    }
+    
+    class func NFXRedColor() -> UIColor
+    {
+        return UIColor.init(netHex: 0xd34a33)
+    }
+    
+    class func NFXDarkRedColor() -> UIColor
+    {
+        return UIColor.init(netHex: 0x643026)
+    }
+    
+    class func NFXStarkWhiteColor() -> UIColor
+    {
+        return UIColor.init(netHex: 0xccc5b9)
+    }
+    
+    class func NFXDarkStarkWhiteColor() -> UIColor
+    {
+        return UIColor.init(netHex: 0x9b958d)
+    }
+    
+    class func NFXLightGrayColor() -> UIColor
+    {
+        return UIColor.init(netHex: 0x9b9b9b)
+    }
+    
+    class func NFXGray44Color() -> UIColor
+    {
+        return UIColor.init(netHex: 0x707070)
+    }
+    
+    class func NFXGray95Color() -> UIColor
+    {
+        return UIColor.init(netHex: 0xf2f2f2)
+    }
+    
+    class func NFXBlackColor() -> UIColor
+    {
+        return UIColor.init(netHex: 0x231f20)
     }
 }
 

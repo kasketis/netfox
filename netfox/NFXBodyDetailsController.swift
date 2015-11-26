@@ -8,7 +8,7 @@
 import Foundation
 import UIKit
 
-class NFXBodyDetailsController: UIViewController
+class NFXBodyDetailsController: NFXGenericController
 {
     var bodyView: UITextView = UITextView()
     var iIndex: Int = 0
@@ -17,18 +17,14 @@ class NFXBodyDetailsController: UIViewController
     {
         super.viewDidLoad()
         
-        self.edgesForExtendedLayout = .None
-        
         self.title = "Body details"
-        
-        self.view.backgroundColor = UIColor.init(netHex: 0xf2f2f2)
-        
-        let tempObject = NFXHTTPModelManager.sharedInstance.models[self.iIndex]
+                
+        let tempObject = NFXHTTPModelManager.sharedInstance.getModels()[self.iIndex]
         
         self.bodyView.frame = CGRectMake(0, 0, CGRectGetWidth(self.view.frame), CGRectGetHeight(self.view.frame))
         self.bodyView.autoresizingMask = [.FlexibleWidth, .FlexibleHeight]
         self.bodyView.backgroundColor = UIColor.clearColor()
-        self.bodyView.textColor = UIColor.init(netHex: 0x707070)
+        self.bodyView.textColor = UIColor.NFXGray44Color()
         self.bodyView.editable = false
         
         self.bodyView.text = tempObject.getResponseBody() as String
