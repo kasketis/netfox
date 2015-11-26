@@ -8,7 +8,7 @@ A lightweight, one line setup, network debugging library that provides a quick l
 DESC
 
   s.homepage         = "https://github.com/kasketis/netfox"
-  s.screenshots      = "https://raw.githubusercontent.com/kasketis/netfox/master/assets/overview.gif"
+  s.screenshots      = "https://raw.githubusercontent.com/kasketis/netfox/master/assets/overview0_2.gif"
   s.license          = 'MIT'
   s.author           = "Christos Kasketis"
   s.source           = { :git => "https://github.com/kasketis/netfox.git", :tag => '0.2' }
@@ -16,5 +16,5 @@ DESC
   s.platform     = :ios, '8.0'
   s.requires_arc = true
 
-  s.source_files = 'netfox'
+  s.source_files = "netfox"
 end
