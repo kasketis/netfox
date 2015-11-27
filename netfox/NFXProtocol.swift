@@ -62,11 +62,15 @@ public class NFXProtocol: NSURLProtocol
             }
             
             if (data != nil) {
-                self.client!.URLProtocol(self, didReceiveResponse: response!, cacheStoragePolicy: .NotAllowed)
                 self.client!.URLProtocol(self, didLoadData: data!)
-                self.client!.URLProtocolDidFinishLoading(self)
-
             }
+            
+            if (response != nil) {
+                self.client!.URLProtocol(self, didReceiveResponse: response!, cacheStoragePolicy: .NotAllowed)
+            }
+            
+            self.client!.URLProtocolDidFinishLoading(self)
+
             
         }).resume()
     }
