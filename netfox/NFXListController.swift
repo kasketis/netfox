@@ -59,16 +59,6 @@ class NFXListController: UIViewController, UITableViewDelegate, UITableViewDataS
         
         self.navigationItem.titleView = searchView
 
-        let settingsBarButton = UIButton()
-        settingsBarButton.frame = CGRectMake(0, 0, 30, 30)
-        settingsBarButton.setTitle(NSString(string: "≕") as String, forState: .Normal)
-        settingsBarButton.titleLabel?.textAlignment = .Right
-        settingsBarButton.titleLabel?.font = UIFont.NFXFont(32)
-        settingsBarButton.setTitleColor(UIColor.NFXOrangeColor(), forState: .Normal)
-        settingsBarButton.sizeToFit()
-        settingsBarButton.addTarget(self, action: Selector("settingsButtonPressed"), forControlEvents: .TouchUpInside)
-            
-        
         NSNotificationCenter.defaultCenter().addObserver(
             self,
             selector: "reloadTableData",
