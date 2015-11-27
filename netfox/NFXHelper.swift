@@ -189,14 +189,23 @@ extension UIImage
     
     class func NFXSettings() -> UIImage
     {
-        let basse64Image = "iVBORw0KGgoAAAANSUhEUgAAABkAAAAZCAYAAADE6YVjAAAB9klEQVRIibVWy3HjMAxlCSpBFwvv 6A7iDqKzR0BYwnYQdxCX4A7sDqwO4g6kO5FhCdoDRa8+lOJ8FjM6AcTD90HGPChOcFBBFz8nODz6 9mFxjFqrojTGGK2KUpku33bm95utMuwchG5+v9lGG8d0m9oow0abzwBax3RTprO3eWaMMd4iV0E3 cijovEUe9HmmTOfwDu0iUASIBip0VEarjKsy2mkPnOBw1wsaFTqm/IxTrYpSGW2M3hhjXIVdqnTT ErkKu3uwNs9U0MT+zR8ITjGi74oKHVVwWjQItUW7GMVnAIlqJMUx6uR0hR5cVdAp4/oheJ2BMKwy rqsA3iJXRjsHppsyXWLtQ6/o4oTeE0BtnLpUhE1qk4M+vXgBKGEv6JzQ+z1jFXRaFeXSbA+XcKar sHOMOqXz+81Wq6JUQWemSzaL9jf0gfDo+b9kIvSsgu5ec8d0W+nJORnlWk/isEzZOlJCKhtlOnvG U8wgctUcODFdc4fLe+IYdYgSdeqeKMMule9fJj3vDLnoK9Jz3frGK9PlV7hroYd9quMa93P+suqU Yadc198VOzMe3gFv88wxvYUDhloFzQfTn5GjMEVN38PWMb15m2er92QI1FPM6UuXUXBSQbMKMAJK UP1wNBdv/Ao9PSSOUcep+/HfyiLID/67/gLwVb93+jhgUQAAAABJRU5ErkJggg=="
-                
-        if let imageData = NSData(base64EncodedString: basse64Image, options: NSDataBase64DecodingOptions.IgnoreUnknownCharacters) {
-            return UIImage(data: imageData)!
+        return UIImage(data: NFXAssets.getImage(NFXImage.SETTINGS), scale: 1.7)!
+    }
+}
 
-        } else {
-            return UIImage()
-        }
-        
+extension UIScreen {
+    
+    enum SizeType: CGFloat {
+        case Unknown = 0.0
+        case iPhone4 = 960.0
+        case iPhone5 = 1136.0
+        case iPhone6 = 1334.0
+        case iPhone6Plus = 1920.0
+    }
+    
+    var sizeType: SizeType {
+        let height = nativeBounds.height
+        guard let sizeType = SizeType(rawValue: height) else { return .Unknown }
+        return sizeType
     }
 }
