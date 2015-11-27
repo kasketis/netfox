@@ -202,22 +202,23 @@ class NFXSettingsController: NFXGenericController, UITableViewDelegate, UITableV
     }
     
     func tableView(tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat
-    {
+    {        
+        let iPhone4s = (UIScreen.mainScreen().bounds.height == 480)
         switch section {
         case 0:
-            if UIScreen.mainScreen().sizeType == .iPhone4 {
+            if iPhone4s {
                 return 20
             } else {
                 return 40
             }
         case 1:
-            if UIScreen.mainScreen().sizeType == .iPhone4 {
+            if iPhone4s {
                 return 50
             } else {
                 return 60
             }
         case 2:
-            if UIScreen.mainScreen().sizeType == .iPhone4 {
+            if iPhone4s {
                 return 25
             } else {
                 return 50

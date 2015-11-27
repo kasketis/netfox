@@ -64,6 +64,8 @@ class NFXListCell: UITableViewCell
         
         self.circleView = UIView(frame: CGRectZero)
         self.circleView.backgroundColor = UIColor.NFXGray44Color()
+        self.circleView.layer.cornerRadius = 4
+        self.circleView.alpha = 0.2
         contentView.addSubview(self.circleView)
         
         self.leftSeparator = UIView(frame: CGRectZero)
@@ -97,8 +99,6 @@ class NFXListCell: UITableViewCell
         self.typeLabel.frame = CGRectMake(CGRectGetMaxX(methodLabel.frame) + padding, CGRectGetMaxY(URLLabel.frame), 180, frame.height - CGRectGetMaxY(URLLabel.frame) - padding)
 
         self.circleView.frame = CGRectMake(CGRectGetMaxX(self.URLLabel.frame) + 5, 17, 8, 8)
-        self.circleView.layer.cornerRadius = 4
-        self.circleView.alpha = 0.2
         
         self.leftSeparator.frame = CGRectMake(0, frame.height - 1, CGRectGetWidth(self.statusView.frame), 1)
         self.rightSeparator.frame = CGRectMake(CGRectGetMaxX(self.leftSeparator.frame), frame.height - 1, frame.width - CGRectGetMaxX(self.leftSeparator.frame), 1)
