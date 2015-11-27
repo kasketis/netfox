@@ -43,6 +43,8 @@ class NFXListController: UIViewController, UITableViewDelegate, UITableViewDataS
 
         let searchView = UIView()
         searchView.frame = CGRectMake(0, 0, CGRectGetWidth(self.view.frame) - 60, 0)
+        searchView.autoresizingMask = [.FlexibleWidth]
+        searchView.autoresizesSubviews = true
         searchView.backgroundColor = UIColor.clearColor()
         
         self.searchController = UISearchController(searchResultsController: nil)
@@ -51,6 +53,7 @@ class NFXListController: UIViewController, UITableViewDelegate, UITableViewDataS
         self.searchController.hidesNavigationBarDuringPresentation = false
         self.searchController.dimsBackgroundDuringPresentation = false
         searchView.addSubview(self.searchController.searchBar)
+        self.searchController.searchBar.autoresizingMask = [.FlexibleWidth]
         self.searchController.searchBar.sizeToFit()
         self.searchController.searchBar.backgroundColor = UIColor.clearColor()
         self.searchController.searchBar.searchBarStyle = .Minimal
