@@ -21,6 +21,7 @@ class NFXListCell: UITableViewCell
     var methodLabel: UILabel!
     var leftSeparator: UIView!
     var rightSeparator: UIView!
+    var circleView: UIView!
 
     
     override init(style: UITableViewCellStyle, reuseIdentifier: String?)
@@ -31,7 +32,7 @@ class NFXListCell: UITableViewCell
         
 
         self.statusView = UIView(frame: CGRectZero)
-        contentView.addSubview(statusView)
+        contentView.addSubview(self.statusView)
         
         self.requestTimeLabel = UILabel(frame: CGRectZero)
         self.requestTimeLabel.textAlignment = .Center
@@ -61,6 +62,10 @@ class NFXListCell: UITableViewCell
         self.typeLabel.font = UIFont.NFXFont(11)
         contentView.addSubview(self.typeLabel)
         
+        self.circleView = UIView(frame: CGRectZero)
+        self.circleView.backgroundColor = UIColor.NFXGray44Color()
+        contentView.addSubview(self.circleView)
+        
         self.leftSeparator = UIView(frame: CGRectZero)
         self.leftSeparator.backgroundColor = UIColor.whiteColor()
         contentView.addSubview(self.leftSeparator)
@@ -80,23 +85,37 @@ class NFXListCell: UITableViewCell
         
         self.statusView.frame = CGRectMake(0, 0, 50, frame.height - 1)
 
-        self.requestTimeLabel.frame = CGRectMake(0, 15, CGRectGetWidth(statusView.frame), 14)
+        self.requestTimeLabel.frame = CGRectMake(0, 13, CGRectGetWidth(statusView.frame), 14)
         
         self.timeIntervalLabel.frame = CGRectMake(0, CGRectGetMaxY(requestTimeLabel.frame) + 5, CGRectGetWidth(statusView.frame), 14)
         
-        self.URLLabel.frame = CGRectMake(CGRectGetMaxX(statusView.frame) + padding, 0, frame.width - CGRectGetMinX(URLLabel.frame) - padding, 40)
+        self.URLLabel.frame = CGRectMake(CGRectGetMaxX(statusView.frame) + padding, 0, frame.width - CGRectGetMinX(URLLabel.frame) - 25 - padding, 40)
         self.URLLabel.autoresizingMask = .FlexibleWidth
         
         self.methodLabel.frame = CGRectMake(CGRectGetMaxX(statusView.frame) + padding, CGRectGetMaxY(URLLabel.frame), 40, frame.height - CGRectGetMaxY(URLLabel.frame) - padding)
 
         self.typeLabel.frame = CGRectMake(CGRectGetMaxX(methodLabel.frame) + padding, CGRectGetMaxY(URLLabel.frame), 180, frame.height - CGRectGetMaxY(URLLabel.frame) - padding)
 
+        self.circleView.frame = CGRectMake(CGRectGetMaxX(self.URLLabel.frame) + 5, 17, 8, 8)
+        self.circleView.layer.cornerRadius = 4
+        self.circleView.alpha = 0.2
+        
         self.leftSeparator.frame = CGRectMake(0, frame.height - 1, CGRectGetWidth(self.statusView.frame), 1)
         self.rightSeparator.frame = CGRectMake(CGRectGetMaxX(self.leftSeparator.frame), frame.height - 1, frame.width - CGRectGetMaxX(self.leftSeparator.frame), 1)
-
+        
     }
     
-    func configForObject(obj : NFXHTTPModel)
+    func isNew()
+    {
+        self.circleView.hidden = false
+    }
+    
+    func isOld()
+    {
+        self.circleView.hidden = true
+    }
+    
+    func configForObject(obj: NFXHTTPModel, new: Bool)
     {
         setURL(obj.requestURL ?? "-")
         setStatus(obj.responseStatus ?? 999)
@@ -104,6 +123,11 @@ class NFXListCell: UITableViewCell
         setRequestTime(obj.requestTime ?? "-")
         setType(obj.responseType ?? "-")
         setMethod(obj.requestMethod ?? "-")
+        if new {
+            isNew()
+        } else {
+            isOld()
+        }
     }
     
     func setURL(url : String)

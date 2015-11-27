@@ -113,12 +113,14 @@ class NFXListController: UIViewController, UITableViewDelegate, UITableViewDataS
     {
         let cell = self.tableView.dequeueReusableCellWithIdentifier( NSStringFromClass(NFXListCell), forIndexPath: indexPath) as! NFXListCell
         
+        
         if (self.searchController.active) {
             let obj = self.filteredTableData[indexPath.row]
-            cell.configForObject(obj)
+            let realIndex = NFXHTTPModelManager.sharedInstance.getModels().indexOf(obj)
+            cell.configForObject(obj, new: realIndex < NFX.sharedInstance().numberOfNewModels())
         } else {
             let obj = NFXHTTPModelManager.sharedInstance.getModels()[indexPath.row]
-            cell.configForObject(obj)
+            cell.configForObject(obj, new: indexPath.row < NFX.sharedInstance().numberOfNewModels())
         }
         
         return cell

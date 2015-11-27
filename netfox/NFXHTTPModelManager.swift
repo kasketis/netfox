@@ -16,6 +16,7 @@ final class NFXHTTPModelManager: NSObject
     
     func add(obj: NFXHTTPModel)
     {
+        NFX.sharedInstance().newModelAdded()
         self.models.insert(obj, atIndex: 0)
     }
     

@@ -8,7 +8,7 @@
 import Foundation
 import UIKit
 
-let nfxVersion = "1.2.2"
+let nfxVersion = "1.3"
 
 @objc
 public class NFX: NSObject
@@ -49,6 +49,7 @@ public class NFX: NSObject
     private var selectedGesture: ENFXGesture = .shake
     private var ignoredURLs = [String]()
     private var filters = [Bool]()
+    private var newModels: Int = 0
 
     @objc public func start()
     {
@@ -168,13 +169,26 @@ public class NFX: NSObject
             return
         }
         
+        self.newModels = 0
+        
         presentingViewController?.dismissViewControllerAnimated(true, completion: { () -> Void in
             self.presented = false
         })
     }
     
+    internal func newModelAdded()
+    {
+        self.newModels++
+    }
+    
+    internal func numberOfNewModels() -> Int
+    {
+        return self.newModels
+    }
+    
     internal func clearOldData()
     {
+        self.newModels = 0
         NFXHTTPModelManager.sharedInstance.clear()
         do {
             let documentsPath = NSSearchPathForDirectoriesInDomains(NSSearchPathDirectory.DocumentDirectory, NSSearchPathDomainMask.AllDomainsMask, true).first!
