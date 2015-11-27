@@ -39,8 +39,10 @@ class NFXListController: UIViewController, UITableViewDelegate, UITableViewDataS
         
         self.tableView.registerClass(NFXListCell.self, forCellReuseIdentifier: NSStringFromClass(NFXListCell))
         
+        self.navigationItem.rightBarButtonItem = UIBarButtonItem(image: UIImage.NFXSettings(), style: .Plain, target: self, action: Selector("settingsButtonPressed"))
+
         let searchView = UIView()
-        searchView.frame = CGRectMake(0, 0, 280, 0)
+        searchView.frame = CGRectMake(0, 0, CGRectGetWidth(self.view.frame) - 60, 0)
         searchView.backgroundColor = UIColor.clearColor()
         
         self.searchController = UISearchController(searchResultsController: nil)
@@ -66,7 +68,6 @@ class NFXListController: UIViewController, UITableViewDelegate, UITableViewDataS
         settingsBarButton.sizeToFit()
         settingsBarButton.addTarget(self, action: Selector("settingsButtonPressed"), forControlEvents: .TouchUpInside)
             
-        self.navigationItem.rightBarButtonItem = UIBarButtonItem(customView: settingsBarButton)
         
         NSNotificationCenter.defaultCenter().addObserver(
             self,
