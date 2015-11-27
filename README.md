@@ -7,12 +7,12 @@ Very useful and handy for network related issues and bugs
 
 Implemented in Swift 2.1 - bridged also for Objective-C
 
-Current version: 1.3.1
+Current version: 1.3.2
 
 Feel free to contribute :)
 
 #### Overview
-![](https://raw.githubusercontent.com/kasketis/netfox/master/assets/overview0_2.gif)
+![](https://raw.githubusercontent.com/kasketis/netfox/master/assets/overview1_3.gif)
 
 #### Installation
 
