@@ -192,3 +192,15 @@ extension UIImage
         return UIImage(data: NFXAssets.getImage(NFXImage.SETTINGS), scale: 1.7)!
     }
 }
+
+extension NSDate
+{
+    func isGreaterThanDate(dateToCompare: NSDate) -> Bool
+    {
+        if self.compare(dateToCompare) == NSComparisonResult.OrderedDescending {
+            return true
+        } else {
+            return false
+        }        
+    }
+}

@@ -77,7 +77,8 @@ class NFXListCell: UITableViewCell
         contentView.addSubview(self.rightSeparator)
     }
     
-    required init(coder aDecoder: NSCoder) {
+    required init(coder aDecoder: NSCoder)
+    {
         fatalError("init(coder:) has not been implemented")
     }
     
@@ -107,15 +108,17 @@ class NFXListCell: UITableViewCell
     
     func isNew()
     {
+        print("new")
         self.circleView.hidden = false
     }
     
     func isOld()
     {
+        print("old")
         self.circleView.hidden = true
     }
     
-    func configForObject(obj: NFXHTTPModel, new: Bool)
+    func configForObject(obj: NFXHTTPModel)
     {
         setURL(obj.requestURL ?? "-")
         setStatus(obj.responseStatus ?? 999)
@@ -123,14 +126,10 @@ class NFXListCell: UITableViewCell
         setRequestTime(obj.requestTime ?? "-")
         setType(obj.responseType ?? "-")
         setMethod(obj.requestMethod ?? "-")
-        if new {
-            isNew()
-        } else {
-            isOld()
-        }
+        isNewBasedOnDate(obj.responseDate ?? NSDate())
     }
     
-    func setURL(url : String)
+    func setURL(url: String)
     {
         self.URLLabel.text = url
     }
@@ -148,23 +147,32 @@ class NFXListCell: UITableViewCell
         }
     }
     
-    func setRequestTime(requestTime : String)
+    func setRequestTime(requestTime: String)
     {
         self.requestTimeLabel.text = requestTime
     }
     
-    func setTimeInterval(timeInterval : String)
+    func setTimeInterval(timeInterval: String)
     {
         self.timeIntervalLabel.text = timeInterval
     }
     
-    func setType(type : String)
+    func setType(type: String)
     {
         self.typeLabel.text = type
     }
     
-    func setMethod(method : String)
+    func setMethod(method: String)
     {
         self.methodLabel.text = method
+    }
+    
+    func isNewBasedOnDate(responseDate: NSDate)
+    {
+        if responseDate.isGreaterThanDate(NFX.sharedInstance().getLastVisitDate()) {
+            self.isNew()
+        } else {
+            self.isOld()
+        }
     }
 }

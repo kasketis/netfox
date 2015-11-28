@@ -116,11 +116,10 @@ class NFXListController: UIViewController, UITableViewDelegate, UITableViewDataS
         
         if (self.searchController.active) {
             let obj = self.filteredTableData[indexPath.row]
-            let realIndex = NFXHTTPModelManager.sharedInstance.getModels().indexOf(obj)
-            cell.configForObject(obj, new: realIndex < NFX.sharedInstance().numberOfNewModels())
+            cell.configForObject(obj)
         } else {
             let obj = NFXHTTPModelManager.sharedInstance.getModels()[indexPath.row]
-            cell.configForObject(obj, new: indexPath.row < NFX.sharedInstance().numberOfNewModels())
+            cell.configForObject(obj)
         }
         
         return cell
