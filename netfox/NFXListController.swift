@@ -113,7 +113,6 @@ class NFXListController: UIViewController, UITableViewDelegate, UITableViewDataS
     {
         let cell = self.tableView.dequeueReusableCellWithIdentifier( NSStringFromClass(NFXListCell), forIndexPath: indexPath) as! NFXListCell
         
-        
         if (self.searchController.active) {
             let obj = self.filteredTableData[indexPath.row]
             cell.configForObject(obj)
@@ -147,7 +146,13 @@ class NFXListController: UIViewController, UITableViewDelegate, UITableViewDataS
     {
         var detailsController : NFXDetailsController
         detailsController = NFXDetailsController()
-        detailsController.iIndex = indexPath.row
+        var model: NFXHTTPModel
+        if (self.searchController.active) {
+            model = self.filteredTableData[indexPath.row]
+        } else {
+            model = NFXHTTPModelManager.sharedInstance.getModels()[indexPath.row]
+        }
+        detailsController.selectedModel(model)
         self.navigationController?.pushViewController(detailsController, animated: true)
         
     }

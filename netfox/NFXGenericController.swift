@@ -10,6 +10,8 @@ import UIKit
 
 class NFXGenericController: UIViewController
 {
+    var selectedModel: NFXHTTPModel = NFXHTTPModel()
+
     override func viewDidLoad()
     {
         super.viewDidLoad()
@@ -18,5 +20,10 @@ class NFXGenericController: UIViewController
         
         self.view.backgroundColor = UIColor.NFXGray95Color()
         
+    }
+    
+    func selectedModel(model: NFXHTTPModel)
+    {
+        self.selectedModel = model
     }
 }

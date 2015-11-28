@@ -18,16 +18,13 @@ class NFXImageBodyDetailsController: NFXGenericBodyDetailsController
         
         self.title = "Image preview"
         
-        let tempObject = NFXHTTPModelManager.sharedInstance.getModels()[self.iIndex]
-        
         self.imageView.frame = CGRectMake(10, 10, CGRectGetWidth(self.view.frame) - 2*10, CGRectGetHeight(self.view.frame) - 2*10)
         self.imageView.autoresizingMask = [.FlexibleWidth, .FlexibleHeight]
         self.imageView.contentMode = .ScaleAspectFit
-        let data = NSData.init(base64EncodedString: tempObject.getResponseBody() as String, options: NSDataBase64DecodingOptions.IgnoreUnknownCharacters)
+        let data = NSData.init(base64EncodedString: self.selectedModel.getResponseBody() as String, options: NSDataBase64DecodingOptions.IgnoreUnknownCharacters)
 
         self.imageView.image = UIImage(data: data!)
 
-        
         self.view.addSubview(self.imageView)
         
     }

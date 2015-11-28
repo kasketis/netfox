@@ -11,8 +11,6 @@ import MessageUI
 
 class NFXDetailsController: NFXGenericController, MFMailComposeViewControllerDelegate, UIActionSheetDelegate
 {
-    var iIndex: Int = 0
-
     var infoButton: UIButton = UIButton()
     var requestButton: UIButton = UIButton()
     var responseButton: UIButton = UIButton()
@@ -45,17 +43,13 @@ class NFXDetailsController: NFXGenericController, MFMailComposeViewControllerDel
         self.responseButton = createHeaderButton("Response", x: CGRectGetMaxX(self.requestButton.frame), selector: Selector("responseButtonPressed"))
         self.view.addSubview(self.responseButton)
 
-        
-        let tempObject = NFXHTTPModelManager.sharedInstance.getModels()[self.iIndex]
-
-
-        self.infoView = createDetailsView(getInfoStringFromObject(tempObject), forView: .INFO)
+        self.infoView = createDetailsView(getInfoStringFromObject(self.selectedModel), forView: .INFO)
         self.view.addSubview(self.infoView)
         
-        self.requestView = createDetailsView(getRequestStringFromObject(tempObject), forView: .REQUEST)
+        self.requestView = createDetailsView(getRequestStringFromObject(self.selectedModel), forView: .REQUEST)
         self.view.addSubview(self.requestView)
 
-        self.responseView = createDetailsView(getResponseStringFromObject(tempObject), forView: .RESPONSE)
+        self.responseView = createDetailsView(getResponseStringFromObject(self.selectedModel), forView: .RESPONSE)
         self.view.addSubview(self.responseView)
         
         infoButtonPressed()
@@ -97,19 +91,17 @@ class NFXDetailsController: NFXGenericController, MFMailComposeViewControllerDel
         textLabel.sizeToFit()
         scrollView.addSubview(textLabel)
         
-        let tempObject = NFXHTTPModelManager.sharedInstance.getModels()[self.iIndex]
-
         var moreButton: UIButton
         moreButton = UIButton.init(frame: CGRectMake(20, CGRectGetMaxY(textLabel.frame) + 10, CGRectGetWidth(scrollView.frame) - 40, 40))
         moreButton.backgroundColor = UIColor.NFXGray44Color()
         
-        if ((forView == EDetailsView.REQUEST) && (tempObject.requestBodyLength > 1024)) {
+        if ((forView == EDetailsView.REQUEST) && (self.selectedModel.requestBodyLength > 1024)) {
             moreButton.setTitle("Show request body", forState: .Normal)
             moreButton.addTarget(self, action: Selector("requestBodyButtonPressed"), forControlEvents: .TouchUpInside)
             scrollView.addSubview(moreButton)
             scrollView.contentSize = CGSizeMake(textLabel.frame.width, CGRectGetMaxY(moreButton.frame))
 
-        } else if ((forView == EDetailsView.RESPONSE) && (tempObject.responseBodyLength > 1024)) {
+        } else if ((forView == EDetailsView.RESPONSE) && (self.selectedModel.responseBodyLength > 1024)) {
             moreButton.setTitle("Show response body", forState: .Normal)
             moreButton.addTarget(self, action: Selector("responseBodyButtonPressed"), forControlEvents: .TouchUpInside)
             scrollView.addSubview(moreButton)
@@ -189,16 +181,14 @@ class NFXDetailsController: NFXGenericController, MFMailComposeViewControllerDel
     
     func bodyButtonPressed() -> NFXGenericBodyDetailsController {
         
-        let tempObject = NFXHTTPModelManager.sharedInstance.getModels()[self.iIndex]
-        
         var bodyDetailsController: NFXGenericBodyDetailsController
         
-        if tempObject.shortType == HTTPModelShortType.IMAGE.rawValue {
+        if self.selectedModel.shortType == HTTPModelShortType.IMAGE.rawValue {
             bodyDetailsController = NFXImageBodyDetailsController()
         } else {
             bodyDetailsController = NFXRawBodyDetailsController()
         }
-        bodyDetailsController.iIndex = self.iIndex
+        bodyDetailsController.selectedModel(self.selectedModel)
         self.navigationController?.pushViewController(bodyDetailsController, animated: true)
         return bodyDetailsController
     }
@@ -206,7 +196,6 @@ class NFXDetailsController: NFXGenericController, MFMailComposeViewControllerDel
     
     func getInfoStringFromObject(object: NFXHTTPModel) -> NSAttributedString
     {
-
         var tempString: String
         tempString = String()
         
@@ -318,8 +307,6 @@ class NFXDetailsController: NFXGenericController, MFMailComposeViewControllerDel
     {
         if (MFMailComposeViewController.canSendMail()) {
             
-            let tempObject = NFXHTTPModelManager.sharedInstance.getModels()[self.iIndex]
-            
             let mailComposer = MFMailComposeViewController()
             mailComposer.mailComposeDelegate = self
             
@@ -328,26 +315,26 @@ class NFXDetailsController: NFXGenericController, MFMailComposeViewControllerDel
             
             
             tempString += "** INFO **\n"
-            tempString += "\(getInfoStringFromObject(tempObject).string)\n\n"
+            tempString += "\(getInfoStringFromObject(self.selectedModel).string)\n\n"
             
             tempString += "** REQUEST **\n"
-            tempString += "\(getRequestStringFromObject(tempObject).string)\n\n"
+            tempString += "\(getRequestStringFromObject(self.selectedModel).string)\n\n"
             
             tempString += "** RESPONSE **\n"
-            tempString += "\(getResponseStringFromObject(tempObject).string)\n\n"
+            tempString += "\(getResponseStringFromObject(self.selectedModel).string)\n\n"
             
             tempString += "logged via netfox - [https://github.com/kasketis/netfox]\n"
             
-            mailComposer.setSubject("netfox log - \(tempObject.requestURL!)")
+            mailComposer.setSubject("netfox log - \(self.selectedModel.requestURL!)")
             mailComposer.setMessageBody(tempString, isHTML: false)
             
             if bodies {
-                let requestFilePath = tempObject.getRequestBodyFilepath()
+                let requestFilePath = self.selectedModel.getRequestBodyFilepath()
                 if let requestFileData = NSData(contentsOfFile: requestFilePath as String) {
                     mailComposer.addAttachmentData(requestFileData, mimeType: "text/plain", fileName: "request-body")
                 }
                 
-                let responseFilePath = tempObject.getResponseBodyFilepath()
+                let responseFilePath = self.selectedModel.getResponseBodyFilepath()
                 if let responseFileData = NSData(contentsOfFile: responseFilePath as String) {
                     mailComposer.addAttachmentData(responseFileData, mimeType: "text/plain", fileName: "response-body")
                 }

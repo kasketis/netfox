@@ -17,8 +17,6 @@ class NFXRawBodyDetailsController: NFXGenericBodyDetailsController
         super.viewDidLoad()
         
         self.title = "Body details"
-                
-        let tempObject = NFXHTTPModelManager.sharedInstance.getModels()[self.iIndex]
         
         self.bodyView.frame = CGRectMake(0, 0, CGRectGetWidth(self.view.frame), CGRectGetHeight(self.view.frame))
         self.bodyView.autoresizingMask = [.FlexibleWidth, .FlexibleHeight]
@@ -28,9 +26,9 @@ class NFXRawBodyDetailsController: NFXGenericBodyDetailsController
         
         switch bodyType {
             case .REQUEST:
-                self.bodyView.text = tempObject.getRequestBody() as String
+                self.bodyView.text = self.selectedModel.getRequestBody() as String
         default:
-                self.bodyView.text = tempObject.getResponseBody() as String
+                self.bodyView.text = self.selectedModel.getResponseBody() as String
         }
         
         self.view.addSubview(self.bodyView)

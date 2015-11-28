@@ -16,10 +16,8 @@ enum NFXBodyType: Int
 
 class NFXGenericBodyDetailsController: NFXGenericController
 {
-    
     var bodyType: NFXBodyType = NFXBodyType.RESPONSE
-    var iIndex: Int = 0
-
+    
     override func viewDidLoad()
     {
         super.viewDidLoad()

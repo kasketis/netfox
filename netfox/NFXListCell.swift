@@ -108,13 +108,11 @@ class NFXListCell: UITableViewCell
     
     func isNew()
     {
-        print("new")
         self.circleView.hidden = false
     }
     
     func isOld()
     {
-        print("old")
         self.circleView.hidden = true
     }
     
