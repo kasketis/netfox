@@ -8,7 +8,7 @@
 import Foundation
 import UIKit
 
-let nfxVersion = "1.3.4"
+let nfxVersion = "1.4"
 
 @objc
 public class NFX: NSObject
@@ -54,6 +54,7 @@ public class NFX: NSObject
     @objc public func start()
     {
         self.started = true
+        register()
         enable()
         clearOldData()
         showMessage("Started!")
@@ -61,6 +62,7 @@ public class NFX: NSObject
     
     @objc public func stop()
     {
+        unregister()
         disable()
         clearOldData()
         self.started = false
@@ -79,13 +81,11 @@ public class NFX: NSObject
     internal func enable()
     {
         self.enabled = true
-        register()
     }
     
     internal func disable()
     {
         self.enabled = false
-        unregister()
     }
     
     private func register()

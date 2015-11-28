@@ -10,12 +10,15 @@ import Foundation
 @objc
 public class NFXProtocol: NSURLProtocol
 {
-    
     var connection: NSURLConnection?
     var model: NFXHTTPModel?
     
     override public class func canInitWithRequest(request: NSURLRequest) -> Bool
     {
+        if !NFX.sharedInstance().isEnabled() {
+            return false
+        }
+        
         if let url = request.URL {
             if (!(url.absoluteString.hasPrefix("http")) && !(url.absoluteString.hasPrefix("https"))) {
                 return false
