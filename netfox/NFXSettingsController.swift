@@ -8,7 +8,7 @@
 import Foundation
 import UIKit
 
-class NFXSettingsController: NFXGenericController, UITableViewDelegate, UITableViewDataSource, UIActionSheetDelegate
+class NFXSettingsController: NFXGenericController, UITableViewDelegate, UITableViewDataSource
 {
     // MARK: Properties
 
@@ -250,23 +250,22 @@ class NFXSettingsController: NFXGenericController, UITableViewDelegate, UITableV
     
     func clearDataButtonPressed()
     {
-        var actionSheet: UIActionSheet
-        actionSheet = UIActionSheet()
-        actionSheet.delegate = self
-        actionSheet.title = "Clear data?"
-        actionSheet.addButtonWithTitle("Cancel")
-        actionSheet.addButtonWithTitle("Yes")
-        actionSheet.addButtonWithTitle("No")
-        actionSheet.cancelButtonIndex = 0
-        actionSheet.showInView(self.view)
-    }
-    
-    func actionSheet(actionSheet: UIActionSheet, clickedButtonAtIndex buttonIndex: Int)
-    {
-        if buttonIndex == 1 {
-           NFX.sharedInstance().clearOldData()
+        let actionSheetController: UIAlertController = UIAlertController(title: "Clear data?", message: "", preferredStyle: .ActionSheet)
+        
+        let cancelAction: UIAlertAction = UIAlertAction(title: "Cancel", style: .Cancel) { action -> Void in
         }
+        actionSheetController.addAction(cancelAction)
+
+        let yesAction: UIAlertAction = UIAlertAction(title: "Yes", style: .Default) { action -> Void in
+            NFX.sharedInstance().clearOldData()
+        }
+        actionSheetController.addAction(yesAction)
+
+        let noAction: UIAlertAction = UIAlertAction(title: "No", style: .Default) { action -> Void in
+        }
+        actionSheetController.addAction(noAction)
+
+        self.presentViewController(actionSheetController, animated: true, completion: nil)
     }
-    
     
 }

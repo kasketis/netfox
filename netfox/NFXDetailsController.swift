@@ -9,7 +9,7 @@ import Foundation
 import UIKit
 import MessageUI
 
-class NFXDetailsController: NFXGenericController, MFMailComposeViewControllerDelegate, UIActionSheetDelegate
+class NFXDetailsController: NFXGenericController, MFMailComposeViewControllerDelegate
 {
     var infoButton: UIButton = UIButton()
     var requestButton: UIButton = UIButton()
@@ -116,15 +116,23 @@ class NFXDetailsController: NFXGenericController, MFMailComposeViewControllerDel
     
     func actionButtonPressed()
     {
-        var actionSheet: UIActionSheet
-        actionSheet = UIActionSheet()
-        actionSheet.delegate = self
-        actionSheet.title = "Share"
-        actionSheet.addButtonWithTitle("Cancel")
-        actionSheet.addButtonWithTitle("Simple log")
-        actionSheet.addButtonWithTitle("Full log")
-        actionSheet.cancelButtonIndex = 0
-        actionSheet.showInView(self.view)
+        let actionSheetController: UIAlertController = UIAlertController(title: "Share", message: "", preferredStyle: .ActionSheet)
+        
+        let cancelAction: UIAlertAction = UIAlertAction(title: "Cancel", style: .Cancel) { action -> Void in
+        }
+        actionSheetController.addAction(cancelAction)
+        
+        let simpleLog: UIAlertAction = UIAlertAction(title: "Simple log", style: .Default) { action -> Void in
+            self.sendMailWithBodies(false)
+        }
+        actionSheetController.addAction(simpleLog)
+        
+        let fullLogAction: UIAlertAction = UIAlertAction(title: "Full log", style: .Default) { action -> Void in
+            self.sendMailWithBodies(true)
+        }
+        actionSheetController.addAction(fullLogAction)
+        
+        self.presentViewController(actionSheetController, animated: true, completion: nil)
     }
     
     
@@ -347,16 +355,6 @@ class NFXDetailsController: NFXGenericController, MFMailComposeViewControllerDel
     func mailComposeController(controller: MFMailComposeViewController, didFinishWithResult result: MFMailComposeResult, error: NSError?)
     {
         self.dismissViewControllerAnimated(true, completion: nil)
-    }
-    
-    func actionSheet(actionSheet: UIActionSheet, clickedButtonAtIndex buttonIndex: Int)
-    {
-        if buttonIndex == 1 {
-            self.sendMailWithBodies(false)
-            
-        } else if buttonIndex == 2 {
-            self.sendMailWithBodies(true)
-        }
     }
     
 }
