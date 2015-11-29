@@ -11,19 +11,41 @@ Current version: 1.4.1
 
 Feel free to contribute :)
 
-#### Overview
+### Overview
 ![](https://raw.githubusercontent.com/kasketis/netfox/master/assets/overview1_3.gif)
 
-#### Installation
+## Installation
 
-Insert this line in your Podfile
+### CocoaPods
+
+[CocoaPods](http://cocoapods.org) is a dependency manager for Cocoa projects. You can install it with the following command:
+
 <pre>
+$ gem install cocoapods
+</pre>
+
+To integrate netfox into your Xcode project using CocoaPods, specify it in your `Podfile`:
+
+<pre>
+use_frameworks!
 pod 'netfox'
 </pre>
 
-or if you want to do it manually just copy the "netfox" folder in your project (make sure that "Create groups" option is selected)
+Then, run the following command:
 
-Then add the following line in didFinishLaunchingWithOptions: method of your AppDelegate
+<pre>
+$ pod install
+</pre>
+
+### Manually
+
+If you prefer not to use dependency managers, you can integrate netfox into your project manually.
+
+You can do it by copying the "netfox" folder in your project (make sure that "Create groups" option is selected)
+
+## Start
+
+To start netfox add the following line in didFinishLaunchingWithOptions: method of your AppDelegate
 
 Swift
 <pre>
@@ -47,13 +69,13 @@ to prevent library’s execution on your production app.
 
 You can add the DEBUG symbol with the -DDEBUG entry. Set it in the "Swift Compiler - Custom Flags" section -> "Other Swift Flags" line in project’s "Build Settings"
 
-#### Usage 
+## Usage 
 
 Just shake your device and check what's going right or wrong! 
 Shake again and go back to your app! fact
 ![](https://raw.githubusercontent.com/kasketis/netfox/master/assets/shake.png)
 
-#### Stop
+## Stop
 
 Call
 <pre>
@@ -64,7 +86,7 @@ If you stop netfox its view will not be displayed until you call start method ag
 
 If you want to just enable/disable logging functionality or clear the data please use the buttons provided in the settings view
 
-#### Custom gestures
+## Custom gestures
 
 By default the library registers for shake motion. If you want to open the logs with a different gesture, add the following line after the installation one
 <pre>
@@ -80,7 +102,7 @@ NFX.sharedInstance().hide()
 </pre>
 when you want to hide them.
 
-#### Prevent logging for specific URLs
+## Prevent logging for specific URLs
 
 Use the following method to prevent requests for specified URL from being logged. You can ignore as many URLs as you want
 <pre>
@@ -88,7 +110,7 @@ NFX.sharedInstance().ignoreURL("the_url")
 </pre>
 Tip: You can use the url of the host (for example "https://www.github.com") to ignore all paths of it 
 
-#### Features
+## Features
 
 - Search: You can easily search among requests via
 	- Request url: github.com, .gr, or whatever you want
@@ -102,13 +124,13 @@ Tip: You can use the url of the host (for example "https://www.github.com") to i
 - Clear data within the app
 - More to come.. ;)
 
-#### Other
+## Other
 
 - Alamofire users check [this](https://github.com/kasketis/netfox/blob/master/Workarounds.md#alamofire-workaround)
 - If you can't log request body check [this](https://github.com/kasketis/netfox/blob/master/Workarounds.md#no-http-body-for-requests)
 - Due to the large size of request/response bodies, the library provides disk storage for low memory overhead
 
-#### Licence
+## Licence
 
 All source code is licensed under [MIT License](https://github.com/kasketis/netfox/blob/master/LICENSE). Which means you could do virtually anything with the code. I will appreciate it very much if you keep an attribution where appropriate.
 
