@@ -34,6 +34,8 @@ class NFXSettingsController: NFXGenericController, UITableViewDelegate, UITableV
         self.extendedLayoutIncludesOpaqueBars = false
         self.automaticallyAdjustsScrollViewInsets = false
         
+        self.navigationItem.rightBarButtonItem = UIBarButtonItem(image: UIImage.NFXStatistics(), style: .Plain, target: self, action: Selector("statisticsButtonPressed"))
+
         self.tableView.frame = CGRectMake(0, 0, CGRectGetWidth(self.view.frame), CGRectGetHeight(self.view.frame) - 60)
         self.tableView.autoresizingMask = [.FlexibleWidth, .FlexibleHeight]
         self.tableView.translatesAutoresizingMaskIntoConstraints = true
@@ -79,6 +81,13 @@ class NFXSettingsController: NFXGenericController, UITableViewDelegate, UITableV
     func nfxURLButtonPressed()
     {
         UIApplication.sharedApplication().openURL(NSURL(string: nfxURL)!)
+    }
+    
+    func statisticsButtonPressed()
+    {
+        var statisticsController: NFXStatisticsController
+        statisticsController = NFXStatisticsController()
+        self.navigationController?.pushViewController(statisticsController, animated: true)
     }
     
     // MARK: UITableViewDataSource

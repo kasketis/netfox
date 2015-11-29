@@ -9,7 +9,7 @@ import Foundation
 import UIKit
 
 @available(iOS 8.0, *)
-class NFXListController: UIViewController, UITableViewDelegate, UITableViewDataSource, UISearchResultsUpdating, UISearchControllerDelegate
+class NFXListController: NFXGenericController, UITableViewDelegate, UITableViewDataSource, UISearchResultsUpdating, UISearchControllerDelegate
 {
     // MARK: Properties
     
@@ -64,14 +64,15 @@ class NFXListController: UIViewController, UITableViewDelegate, UITableViewDataS
 
         NSNotificationCenter.defaultCenter().addObserver(
             self,
-            selector: "reloadTableData",
-            name: "NFXReloadTableData",
+            selector: "reloadData",
+            name: "NFXReloadData",
             object: nil)
     }
     
-    override func viewWillAppear(animated: Bool) {
+    override func viewWillAppear(animated: Bool)
+    {
         super.viewWillAppear(animated)
-        reloadTableData()
+        reloadData()
     }
     
     func settingsButtonPressed()
@@ -95,7 +96,7 @@ class NFXListController: UIViewController, UITableViewDelegate, UITableViewDataS
         
         let array = (NFXHTTPModelManager.sharedInstance.getModels() as NSArray).filteredArrayUsingPredicate(searchPredicate)
         self.filteredTableData = array as! [NFXHTTPModel]
-        reloadTableData()
+        reloadData()
     }
     
     // MARK: UITableViewDataSource
@@ -129,7 +130,7 @@ class NFXListController: UIViewController, UITableViewDelegate, UITableViewDataS
         return UIView.init(frame: CGRectZero)
     }
     
-    func reloadTableData()
+    override func reloadData()
     {
         dispatch_async(dispatch_get_main_queue()) { () -> Void in
             self.tableView.reloadData()

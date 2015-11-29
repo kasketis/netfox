@@ -95,7 +95,7 @@ public class NFXProtocol: NSURLProtocol
             NFXHTTPModelManager.sharedInstance.add(self.model!)
         }
         
-        NSNotificationCenter.defaultCenter().postNotificationName("NFXReloadTableData", object: nil)
+        NSNotificationCenter.defaultCenter().postNotificationName("NFXReloadData", object: nil)
     }
     
 }

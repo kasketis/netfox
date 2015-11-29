@@ -186,10 +186,14 @@ extension NSURLResponse
 
 extension UIImage
 {
-    
     class func NFXSettings() -> UIImage
     {
         return UIImage(data: NFXAssets.getImage(NFXImage.SETTINGS), scale: 1.7)!
+    }
+    
+    class func NFXStatistics() -> UIImage
+    {
+        return UIImage(data: NFXAssets.getImage(NFXImage.STATISTICS), scale: 1.7)!
     }
 }
 

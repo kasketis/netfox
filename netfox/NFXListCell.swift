@@ -120,7 +120,7 @@ class NFXListCell: UITableViewCell
     {
         setURL(obj.requestURL ?? "-")
         setStatus(obj.responseStatus ?? 999)
-        setTimeInterval(obj.timeInterval ?? "-")
+        setTimeInterval(obj.timeInterval ?? 999)
         setRequestTime(obj.requestTime ?? "-")
         setType(obj.responseType ?? "-")
         setMethod(obj.requestMethod ?? "-")
@@ -154,9 +154,13 @@ class NFXListCell: UITableViewCell
         self.requestTimeLabel.text = requestTime
     }
     
-    func setTimeInterval(timeInterval: String)
+    func setTimeInterval(timeInterval: Float)
     {
-        self.timeIntervalLabel.text = timeInterval
+        if timeInterval == 999 {
+            self.timeIntervalLabel.text = "-"
+        } else {
+            self.timeIntervalLabel.text = NSString(format: "%.2f", timeInterval) as String
+        }
     }
     
     func setType(type: String)

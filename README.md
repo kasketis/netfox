@@ -74,7 +74,7 @@ You can add the DEBUG symbol with the -DDEBUG entry. Set it in the "Swift Compil
 ## Usage 
 
 Just shake your device and check what's going right or wrong! 
-Shake again and go back to your app! fact
+Shake again and go back to your app!
 ![](https://raw.githubusercontent.com/kasketis/netfox/master/assets/shake.png)
 
 ## Stop
@@ -124,6 +124,7 @@ Tip: You can use the url of the host (for example "https://www.github.com") to i
 - Filtering: Select what types of responses (JSON/XML/HTML/Image/Other) you want to see
 - Enable/disable logging within the app
 - Clear data within the app
+- Statistics: See cool things like average response time, total response size and more for your selected types of responses
 - More to come.. ;)
 
 ## Other

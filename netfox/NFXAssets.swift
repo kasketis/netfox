@@ -10,6 +10,7 @@ import UIKit
 
 enum NFXImage {
     case SETTINGS
+    case STATISTICS
 }
 
 class NFXAssets
@@ -21,6 +22,9 @@ class NFXAssets
         switch image {
         case .SETTINGS:
             base64Image = getSettingsImageBase64()
+            break
+        case .STATISTICS:
+            base64Image = getStatisticsImageBase64()
             break
         }
         
@@ -43,8 +47,19 @@ class NFXAssets
 
         default: return ""
         }
-        
-        
+    }
+    
+    class func getStatisticsImageBase64() -> String
+    {
+        switch UIScreen.mainScreen().scale {
+        case 2.0: //44x44
+            return "iVBORw0KGgoAAAANSUhEUgAAACwAAAAsCAMAAAApWqozAAAAflBMVEUAAADsXijsXijsXijsXijtXSfsXijsXSjsXijsXijsXSbsXijtXSjsXijsXifsXijsXiftXifsXifsXCfsXifsXifsXifsXifsXSftXSfsWyjsXijsXifsXifsXijtXifsXiftXybsXSfsXijtXSftXifsWibsXijuYCfsXijgd1NoAAAAKXRSTlMANNuwVBbuh/CUA9UG+t/QvCz0D+jYy3RKOQrlxqmOgGUgv7VvVwxbHXzMYTYAAAEjSURBVDjL7ZRJcoMwEEVlEgkhMU8GzOgp+fe/YChXxQSqK27vvPBbQfdbSD1IkMSxYONb6/Nta+n4B4XWZFjgCQTCZMciCWfZEUyctzzTDH3GlgfgSMmTCuXWlREQUXILbIcz0UijiZC/AiC4/FXNgOBMXdCckI4jEPvLYLdId1Q1pgOi+dZZhDRZjlASpfO7MsXZv32OCNxbdh9gT9U5BoLqN1orlNI0HnRNNiUHvCUsj8htiJOkO/gdlauMi3sRiXabTSc0ULFnI2kvLzaiLyjn1SeLKsdzb92OoA7DmooLClMURnDxAI/ruphxua4+HDTP9qAyazMFj+VK4zhGMmwXqplXdV7URsF96Mr7tjywe6jr8ndV6P+Ru0KuNrHoVukfuacsKwHjtUEAAAAASUVORK5CYII="
+            
+        case 3.0: //66x66
+            return "iVBORw0KGgoAAAANSUhEUgAAAEIAAABCCAMAAADUivDaAAAAjVBMVEUAAADsXijsXijsXijsXijsXSjsXSjsXifsXijsXijuXiXyYSjsXSfsXifsXifsXSfsXifsXifsXifsXSfuXijsXifsXSfsXijsXCbuXSfvXyXsXijsXifsXifsXSfuXibvXCXsXijsXSjtXSftXSfrXSjtXifsXSjrXSjsXifsXijsXSjsXSbsXSjsXihMOSZlAAAALnRSTlMAweB2/TmILZknCgZV7s2x5trIcBP4vJpAFw7z07hnJB3vknxlTErrqaifn1s1SxB9KwAAAaFJREFUWMPtl+lugkAURgVGRPalWq21dt973v/xekdtNBZnLOMP03g0IcDN4SMzc4GehQvfv+i5MYDBv1AMYWir8c2UUFpKejhzHMW458B4qfBcFN5ZcVYcUZE0wcJNkYyAqZOiQfDMiisvK+L9Id4RcrMiB4q9Pd1D82xUxAhqj+F2BrMqF4NBcVWgKZI2QwCMp5ZBXZSg5Mfod9+Nx8CrbV4EI8gn6cQXUbj7RKiAJ/PUWt1E8XOSerpd/gTI49Gs+PKBdL2TAtnn5uQbEMXGCR7cKaC63US6BsJkPZY5jBrzGnlAc799mVgfu146J3dQDizLrFwadirSDEgHw0a7rCt1jvC4WzKtWdPYF3viK1W3FIUKYTY5pF/Ew0VrVY7w4dRybhBSt671mL2kJ9g7z4qz4iBFFThQwYm8/Z7Gx4SFEEI3Q4QQOWbQhC4ZFIIicslwI//uOS5Rqq9HpK8Ul10z9Ffzoq9zdMoghpVCHJKjUwbZxvN5LJsOOaJVhg06R/THDEobth0Kwg4ZOudIfjL8zpEc6qgzMbQ4srrt8DdPC35OUBA7tAAAAABJRU5ErkJggg=="
+            
+        default: return ""
+        }
     }
     
 }

@@ -220,7 +220,7 @@ class NFXDetailsController: NFXGenericController, MFMailComposeViewControllerDel
         tempString += "[Timeout] \n\(object.requestTimeout!)\n\n"
         tempString += "[Cache policy] \n\(object.requestCachePolicy!)\n\n"
         
-        return formatString(tempString)
+        return formatNFXString(tempString)
     }
     
     func getRequestStringFromObject(object: NFXHTTPModel) -> NSAttributedString
@@ -249,7 +249,7 @@ class NFXDetailsController: NFXGenericController, MFMailComposeViewControllerDel
             tempString += "\(object.getRequestBody())\n"
         }
         
-        return formatString(tempString)
+        return formatNFXString(tempString)
     }
     
     func getResponseStringFromObject(object: NFXHTTPModel) -> NSAttributedString
@@ -282,41 +282,7 @@ class NFXDetailsController: NFXGenericController, MFMailComposeViewControllerDel
             tempString += "\(object.getResponseBody())\n"
         }
         
-        return formatString(tempString)
-    }
-    
-    
-    func formatString(string: String) -> NSAttributedString
-    {
-        let l = string.characters.count
-
-        let regex1 = try! NSRegularExpression(pattern: "\\--.+?\\--", options: NSRegularExpressionOptions.CaseInsensitive)
-        
-        
-        let matches1 = regex1.matchesInString(string, options: NSMatchingOptions.WithoutAnchoringBounds, range: NSMakeRange(0, l)) as Array<NSTextCheckingResult>
-        
-        var tempMutableString = NSMutableAttributedString()
-        
-        tempMutableString = NSMutableAttributedString(string: string)
-        
-        for match in matches1 {
-            tempMutableString.addAttribute(NSFontAttributeName, value: UIFont.NFXFontBold(13), range: match.range)
-            tempMutableString.addAttribute(NSForegroundColorAttributeName, value: UIColor.NFXOrangeColor(), range: match.range)
-        }
-        
-        
-        let regex2 = try! NSRegularExpression(pattern: "\\[.+?\\]", options: NSRegularExpressionOptions.CaseInsensitive)
-        
-        
-        let matches2 = regex2.matchesInString(string, options: NSMatchingOptions.WithoutAnchoringBounds, range: NSMakeRange(0, l)) as Array<NSTextCheckingResult>
-        
-
-        for match in matches2 {
-            tempMutableString.addAttribute(NSForegroundColorAttributeName, value: UIColor.NFXBlackColor(), range: match.range)
-        }
-
-        
-        return tempMutableString
+        return formatNFXString(tempString)
     }
     
     func sendMailWithBodies(bodies: Bool)
