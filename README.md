@@ -124,7 +124,7 @@ Tip: You can use the url of the host (for example "https://www.github.com") to i
 - Filtering: Select what types of responses (JSON/XML/HTML/Image/Other) you want to see
 - Enable/disable logging within the app
 - Clear data within the app
-- Statistics: See cool things like average response time, total response size and more for your selected types of responses
+- Statistics: Check cool things like average response time, total response size and more for your selected types of responses
 - More to come.. ;)
 
 ## Other
