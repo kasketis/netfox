@@ -115,11 +115,15 @@ class NFXListController: NFXGenericController, UITableViewDelegate, UITableViewD
         let cell = self.tableView.dequeueReusableCellWithIdentifier(NSStringFromClass(NFXListCell), forIndexPath: indexPath) as! NFXListCell
         
         if (self.searchController.active) {
-            let obj = self.filteredTableData[indexPath.row]
-            cell.configForObject(obj)
+            if self.filteredTableData.count > 0 {
+                let obj = self.filteredTableData[indexPath.row]
+                cell.configForObject(obj)
+            }
         } else {
-            let obj = NFXHTTPModelManager.sharedInstance.getModels()[indexPath.row]
-            cell.configForObject(obj)
+            if NFXHTTPModelManager.sharedInstance.getModels().count > 0 {
+                let obj = NFXHTTPModelManager.sharedInstance.getModels()[indexPath.row]
+                cell.configForObject(obj)
+            }
         }
         
         return cell
