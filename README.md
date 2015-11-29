@@ -1,8 +1,9 @@
 ![](https://raw.githubusercontent.com/kasketis/netfox/master/assets/netfox_logo.png)
 
-[![License](https://img.shields.io/badge/license-MIT-orange.svg?style=flat-square)](https://opensource.org/licenses/MIT)
+[![Version](https://img.shields.io/badge/version-1.5-green.svg?style=flat-square)]()
 [![Platform](https://img.shields.io/cocoapods/p/netfox.svg?style=flat-square)](http://cocoadocs.org/docsets/netfox)
-[![Pod Version](http://img.shields.io/cocoapods/v/netfox.svg?style=flat-square)](http://cocoadocs.org/docsets/netfox/)
+[![License](https://img.shields.io/badge/license-MIT-orange.svg?style=flat-square)](https://opensource.org/licenses/MIT)
+<!-- [![Pod Version](http://img.shields.io/cocoapods/v/netfox.svg?style=flat-square)](http://cocoadocs.org/docsets/netfox/) -->
 
 A lightweight, one line setup, network debugging library that provides a quick look on all executed network requests performed by your app.
 It grabs all requests - of course yours, requests from 3rd party libraries (such as AFNetworking or else), UIWebViews, and more
