@@ -30,7 +30,9 @@ class NFXHTTPModel: NSObject
     
     var randomHash: NSString?
     
-    var shortType: NSString?
+    var shortType: NSString = HTTPModelShortType.OTHER.rawValue
+    
+    var noResponse: Bool = true
     
     func saveRequest(request: NSURLRequest)
     {
@@ -47,6 +49,8 @@ class NFXHTTPModel: NSObject
     
     func saveResponse(response: NSURLResponse, data: NSData)
     {
+        self.noResponse = false
+        
         self.responseDate = NSDate()
         self.responseTime = getTimeFromDate(self.responseDate!)
         self.responseStatus = response.getNFXStatus()

@@ -111,7 +111,7 @@ class NFXListController: UIViewController, UITableViewDelegate, UITableViewDataS
     
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell
     {
-        let cell = self.tableView.dequeueReusableCellWithIdentifier( NSStringFromClass(NFXListCell), forIndexPath: indexPath) as! NFXListCell
+        let cell = self.tableView.dequeueReusableCellWithIdentifier(NSStringFromClass(NFXListCell), forIndexPath: indexPath) as! NFXListCell
         
         if (self.searchController.active) {
             let obj = self.filteredTableData[indexPath.row]

@@ -134,7 +134,11 @@ class NFXListCell: UITableViewCell
     
     func setStatus(status: Int)
     {
-        if status < 400 {
+        if status == 999 {
+            self.statusView.backgroundColor = UIColor.NFXGray44Color() //gray
+            self.timeIntervalLabel.textColor = UIColor.whiteColor()
+
+        } else if status < 400 {
             self.statusView.backgroundColor = UIColor.NFXGreenColor() //green
             self.timeIntervalLabel.textColor = UIColor.NFXDarkGreenColor()
 

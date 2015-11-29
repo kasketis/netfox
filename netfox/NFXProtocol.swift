@@ -55,6 +55,7 @@ public class NFXProtocol: NSURLProtocol
         session.dataTaskWithRequest(req, completionHandler: {data, response, error in
             
             if error != nil {
+                self.loaded()
                 self.client?.URLProtocol(self, didFailWithError: error!)
                 
             } else {

@@ -209,10 +209,14 @@ class NFXDetailsController: NFXGenericController, MFMailComposeViewControllerDel
         
         tempString += "[URL] \n\(object.requestURL!)\n\n"
         tempString += "[Method] \n\(object.requestMethod!)\n\n"
-        tempString += "[Status] \n\(object.responseStatus!)\n\n"
+        if !(object.noResponse) {
+            tempString += "[Status] \n\(object.responseStatus!)\n\n"
+        }
         tempString += "[Request date] \n\(object.requestDate!)\n\n"
-        tempString += "[Response date] \n\(object.responseDate!)\n\n"
-        tempString += "[Time interval] \n\(object.timeInterval!)\n\n"
+        if !(object.noResponse) {
+            tempString += "[Response date] \n\(object.responseDate!)\n\n"
+            tempString += "[Time interval] \n\(object.timeInterval!)\n\n"
+        }
         tempString += "[Timeout] \n\(object.requestTimeout!)\n\n"
         tempString += "[Cache policy] \n\(object.requestCachePolicy!)\n\n"
         
@@ -250,6 +254,10 @@ class NFXDetailsController: NFXGenericController, MFMailComposeViewControllerDel
     
     func getResponseStringFromObject(object: NFXHTTPModel) -> NSAttributedString
     {
+        if (object.noResponse) {
+            return NSMutableAttributedString(string: "No response")
+        }
+        
         var tempString: String
         tempString = String()
         
