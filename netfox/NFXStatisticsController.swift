@@ -152,7 +152,6 @@ class NFXStatisticsController: NFXGenericController
     
     override func reloadData()
     {
-        print("reload statistics")
         clearStatistics()
         generateStatics()
         dispatch_async(dispatch_get_main_queue()) { () -> Void in
