@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		617FEBED1C0CCB86007FC29A /* NFXStatisticsController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 617FEBEC1C0CCB86007FC29A /* NFXStatisticsController.swift */; };
 		B3BC02281C09CEF700C17F3A /* NFX.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3BC021A1C09CEF700C17F3A /* NFX.swift */; };
 		B3BC02291C09CEF700C17F3A /* NFXAssets.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3BC021B1C09CEF700C17F3A /* NFXAssets.swift */; };
 		B3BC022A1C09CEF700C17F3A /* NFXDetailsController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3BC021C1C09CEF700C17F3A /* NFXDetailsController.swift */; };
@@ -24,6 +25,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		617FEBEC1C0CCB86007FC29A /* NFXStatisticsController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = NFXStatisticsController.swift; path = netfox/NFXStatisticsController.swift; sourceTree = "<group>"; };
 		B3BC020F1C09CDA000C17F3A /* netfox.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = netfox.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		B3BC021A1C09CEF700C17F3A /* NFX.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = NFX.swift; path = netfox/NFX.swift; sourceTree = "<group>"; };
 		B3BC021B1C09CEF700C17F3A /* NFXAssets.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = NFXAssets.swift; path = netfox/NFXAssets.swift; sourceTree = "<group>"; };
@@ -55,6 +57,7 @@
 		B3BC02051C09CDA000C17F3A = {
 			isa = PBXGroup;
 			children = (
+				617FEBEC1C0CCB86007FC29A /* NFXStatisticsController.swift */,
 				B3BC021A1C09CEF700C17F3A /* NFX.swift */,
 				B3BC021B1C09CEF700C17F3A /* NFXAssets.swift */,
 				B3BC021C1C09CEF700C17F3A /* NFXDetailsController.swift */,
@@ -159,6 +162,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				B3BC02281C09CEF700C17F3A /* NFX.swift in Sources */,
+				617FEBED1C0CCB86007FC29A /* NFXStatisticsController.swift in Sources */,
 				B3BC02291C09CEF700C17F3A /* NFXAssets.swift in Sources */,
 				B3BC022A1C09CEF700C17F3A /* NFXDetailsController.swift in Sources */,
 				B3BC022B1C09CEF700C17F3A /* NFXGenericBodyDetailsController.swift in Sources */,
