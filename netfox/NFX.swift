@@ -8,7 +8,7 @@
 import Foundation
 import UIKit
 
-let nfxVersion = "1.5.2"
+let nfxVersion = "1.5.3"
 
 @objc
 public class NFX: NSObject
@@ -163,7 +163,8 @@ public class NFX: NSObject
         presentingViewController?.presentViewController(navigationController!, animated: true, completion: nil)
     }
     
-    private var presentingViewController: UIViewController? {
+    private var presentingViewController: UIViewController?
+    {
         let rootViewController = UIApplication.sharedApplication().keyWindow?.rootViewController
         return rootViewController?.presentedViewController ?? rootViewController
     }
@@ -173,6 +174,8 @@ public class NFX: NSObject
         if !self.presented {
             return
         }
+        
+        NSNotificationCenter.defaultCenter().postNotificationName("NFXDeactivateSearch", object: nil)
         
         presentingViewController?.dismissViewControllerAnimated(true, completion: { () -> Void in
             self.presented = false

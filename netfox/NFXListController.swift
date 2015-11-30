@@ -67,6 +67,12 @@ class NFXListController: NFXGenericController, UITableViewDelegate, UITableViewD
             selector: "reloadData",
             name: "NFXReloadData",
             object: nil)
+        
+        NSNotificationCenter.defaultCenter().addObserver(
+            self,
+            selector: "deactivateSearchController",
+            name: "NFXDeactivateSearch",
+            object: nil)
     }
     
     override func viewWillAppear(animated: Bool)
@@ -166,6 +172,10 @@ class NFXListController: NFXGenericController, UITableViewDelegate, UITableViewD
     {
         return 58
     }
-
     
+    func deactivateSearchController()
+    {
+        self.searchController.active = false
+    }
+
 }
