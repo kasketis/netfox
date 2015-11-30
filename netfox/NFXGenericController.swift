@@ -31,7 +31,7 @@ class NFXGenericController: UIViewController
     {
         let l = string.characters.count
         
-        let regex1 = try! NSRegularExpression(pattern: "\\--.+?\\--", options: NSRegularExpressionOptions.CaseInsensitive)
+        let regex1 = try! NSRegularExpression(pattern: "(\\-- Body \\--)|(\\-- Headers \\--)", options: NSRegularExpressionOptions.CaseInsensitive)
         
         
         let matches1 = regex1.matchesInString(string, options: NSMatchingOptions.WithoutAnchoringBounds, range: NSMakeRange(0, l)) as Array<NSTextCheckingResult>
