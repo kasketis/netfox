@@ -191,7 +191,7 @@ class NFXHTTPModel: NSObject
             return .JSON
         }
         
-        if contentType == "application/xml" {
+        if (contentType == "application/xml") || (contentType == "text/xml")  {
             return .XML
         }
         
