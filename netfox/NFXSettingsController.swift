@@ -47,11 +47,9 @@ class NFXSettingsController: NFXGenericController, UITableViewDelegate, UITableV
         self.tableView.tableFooterView?.hidden = true
         self.view.addSubview(self.tableView)
         
-        self.tableView.registerClass(UITableViewCell.self, forCellReuseIdentifier: NSStringFromClass(UITableViewCell))
-        
         var nfxVersionLabel: UILabel
         nfxVersionLabel = UILabel(frame: CGRectMake(10, CGRectGetHeight(self.view.frame) - 60, CGRectGetWidth(self.view.frame) - 2*10, 30))
-        nfxVersionLabel.autoresizingMask = [.FlexibleTopMargin]
+        nfxVersionLabel.autoresizingMask = [.FlexibleTopMargin, .FlexibleWidth]
         nfxVersionLabel.font = UIFont.NFXFont(14)
         nfxVersionLabel.textColor = UIColor.NFXOrangeColor()
         nfxVersionLabel.textAlignment = .Center
@@ -60,7 +58,7 @@ class NFXSettingsController: NFXGenericController, UITableViewDelegate, UITableV
         
         var nfxURLButton: UIButton
         nfxURLButton = UIButton(frame: CGRectMake(10, CGRectGetHeight(self.view.frame) - 40, CGRectGetWidth(self.view.frame) - 2*10, 30))
-        nfxURLButton.autoresizingMask = [.FlexibleTopMargin]
+        nfxURLButton.autoresizingMask = [.FlexibleTopMargin, .FlexibleWidth]
         nfxURLButton.titleLabel?.font = UIFont.NFXFont(12)
         nfxURLButton.setTitleColor(UIColor.NFXGray44Color(), forState: .Normal)
         nfxURLButton.titleLabel?.textAlignment = .Center
@@ -104,7 +102,7 @@ class NFXSettingsController: NFXGenericController, UITableViewDelegate, UITableV
     
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell
     {
-        let cell = tableView.dequeueReusableCellWithIdentifier(NSStringFromClass(UITableViewCell), forIndexPath: indexPath)
+        let cell = UITableViewCell()
         cell.textLabel?.font = UIFont.NFXFont(14)
         cell.tintColor = UIColor.NFXOrangeColor()
 
