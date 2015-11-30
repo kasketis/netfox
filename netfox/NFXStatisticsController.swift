@@ -36,22 +36,23 @@ class NFXStatisticsController: NFXGenericController
         
         generateStatics()
         
-        scrollView = UIScrollView()
-        scrollView.frame = CGRectMake(0, 0, CGRectGetWidth(self.view.frame), CGRectGetHeight(self.view.frame))
-        scrollView.autoresizingMask = [.FlexibleWidth, .FlexibleHeight]
-        scrollView.autoresizesSubviews = true
-        scrollView.backgroundColor = UIColor.clearColor()
+        self.scrollView = UIScrollView()
+        self.scrollView.frame = CGRectMake(0, 0, CGRectGetWidth(self.view.frame), CGRectGetHeight(self.view.frame))
+        self.scrollView.autoresizingMask = [.FlexibleWidth, .FlexibleHeight]
+        self.scrollView.autoresizesSubviews = true
+        self.scrollView.backgroundColor = UIColor.clearColor()
+        self.view.addSubview(self.scrollView)
+
+        self.textLabel = UILabel()
+        self.textLabel.frame = CGRectMake(20, 20, CGRectGetWidth(scrollView.frame) - 40, CGRectGetHeight(scrollView.frame) - 20);
+        self.textLabel.font = UIFont.NFXFont(11)
+        self.textLabel.textColor = UIColor.NFXGray44Color()
+        self.textLabel.numberOfLines = 0
+        self.textLabel.attributedText = getReportString()
+        self.textLabel.sizeToFit()
+        self.scrollView.addSubview(self.textLabel)
         
-        textLabel = UILabel()
-        textLabel.frame = CGRectMake(20, 20, CGRectGetWidth(scrollView.frame) - 40, CGRectGetHeight(scrollView.frame) - 20);
-        textLabel.font = UIFont.NFXFont(11)
-        textLabel.textColor = UIColor.NFXGray44Color()
-        textLabel.numberOfLines = 0
-        textLabel.attributedText = getReportString()
-        textLabel.sizeToFit()
-        scrollView.addSubview(textLabel)
-        
-        self.view.addSubview(scrollView)
+        self.scrollView.contentSize = CGSizeMake(CGRectGetWidth(scrollView.frame), CGRectGetMaxY(self.textLabel.frame))
         
         NSNotificationCenter.defaultCenter().addObserver(
             self,
