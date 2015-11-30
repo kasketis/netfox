@@ -105,6 +105,11 @@ class NFXListController: NFXGenericController, UITableViewDelegate, UITableViewD
         reloadData()
     }
     
+    func deactivateSearchController()
+    {
+        self.searchController.active = false
+    }
+    
     // MARK: UITableViewDataSource
     
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int
@@ -171,11 +176,6 @@ class NFXListController: NFXGenericController, UITableViewDelegate, UITableViewD
     func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat
     {
         return 58
-    }
-    
-    func deactivateSearchController()
-    {
-        self.searchController.active = false
     }
 
 }
