@@ -15,7 +15,7 @@ Implemented in Swift 2.1 - bridged also for Objective-C
 Feel free to contribute :)
 
 ### Overview
-![](https://raw.githubusercontent.com/kasketis/netfox/master/assets/overview1_3.gif)
+![](https://raw.githubusercontent.com/kasketis/netfox/master/assets/overview1_5_3.gif)
 
 ## Installation
 
