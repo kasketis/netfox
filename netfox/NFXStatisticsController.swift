@@ -45,7 +45,7 @@ class NFXStatisticsController: NFXGenericController
 
         self.textLabel = UILabel()
         self.textLabel.frame = CGRectMake(20, 20, CGRectGetWidth(scrollView.frame) - 40, CGRectGetHeight(scrollView.frame) - 20);
-        self.textLabel.font = UIFont.NFXFont(11)
+        self.textLabel.font = UIFont.NFXFont(13)
         self.textLabel.textColor = UIColor.NFXGray44Color()
         self.textLabel.numberOfLines = 0
         self.textLabel.attributedText = getReportString()

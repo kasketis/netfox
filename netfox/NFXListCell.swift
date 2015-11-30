@@ -37,29 +37,29 @@ class NFXListCell: UITableViewCell
         self.requestTimeLabel = UILabel(frame: CGRectZero)
         self.requestTimeLabel.textAlignment = .Center
         self.requestTimeLabel.textColor = UIColor.whiteColor()
-        self.requestTimeLabel.font = UIFont.NFXFontBold(12)
+        self.requestTimeLabel.font = UIFont.NFXFontBold(13)
         contentView.addSubview(self.requestTimeLabel)
         
         self.timeIntervalLabel = UILabel(frame: CGRectZero)
         self.timeIntervalLabel.textAlignment = .Center
-        self.timeIntervalLabel.font = UIFont.NFXFont(11)
+        self.timeIntervalLabel.font = UIFont.NFXFont(12)
         contentView.addSubview(self.timeIntervalLabel)
         
         self.URLLabel = UILabel(frame: CGRectZero)
         self.URLLabel.textColor = UIColor.NFXBlackColor()
-        self.URLLabel.font = UIFont.NFXFont(11)
+        self.URLLabel.font = UIFont.NFXFont(12)
         self.URLLabel.numberOfLines = 2
         contentView.addSubview(self.URLLabel)
 
         self.methodLabel = UILabel(frame: CGRectZero)
         self.methodLabel.textAlignment = .Left
         self.methodLabel.textColor = UIColor.NFXGray44Color()
-        self.methodLabel.font = UIFont.NFXFont(11)
+        self.methodLabel.font = UIFont.NFXFont(12)
         contentView.addSubview(self.methodLabel)
         
         self.typeLabel = UILabel(frame: CGRectZero)
         self.typeLabel.textColor = UIColor.NFXGray44Color()
-        self.typeLabel.font = UIFont.NFXFont(11)
+        self.typeLabel.font = UIFont.NFXFont(12)
         contentView.addSubview(self.typeLabel)
         
         self.circleView = UIView(frame: CGRectZero)
@@ -95,9 +95,9 @@ class NFXListCell: UITableViewCell
         self.URLLabel.frame = CGRectMake(CGRectGetMaxX(statusView.frame) + padding, 0, frame.width - CGRectGetMinX(URLLabel.frame) - 25 - padding, 40)
         self.URLLabel.autoresizingMask = .FlexibleWidth
         
-        self.methodLabel.frame = CGRectMake(CGRectGetMaxX(statusView.frame) + padding, CGRectGetMaxY(URLLabel.frame), 40, frame.height - CGRectGetMaxY(URLLabel.frame) - padding)
+        self.methodLabel.frame = CGRectMake(CGRectGetMaxX(statusView.frame) + padding, CGRectGetMaxY(URLLabel.frame) - 2, 40, frame.height - CGRectGetMaxY(URLLabel.frame) - 2)
 
-        self.typeLabel.frame = CGRectMake(CGRectGetMaxX(methodLabel.frame) + padding, CGRectGetMaxY(URLLabel.frame), 180, frame.height - CGRectGetMaxY(URLLabel.frame) - padding)
+        self.typeLabel.frame = CGRectMake(CGRectGetMaxX(methodLabel.frame) + padding, CGRectGetMaxY(URLLabel.frame) - 2, 180, frame.height - CGRectGetMaxY(URLLabel.frame) - 2)
 
         self.circleView.frame = CGRectMake(CGRectGetMaxX(self.URLLabel.frame) + 5, 17, 8, 8)
         

@@ -23,6 +23,7 @@ class NFXRawBodyDetailsController: NFXGenericBodyDetailsController
         self.bodyView.backgroundColor = UIColor.clearColor()
         self.bodyView.textColor = UIColor.NFXGray44Color()
         self.bodyView.editable = false
+        self.bodyView.font = UIFont.NFXFont(13)
         
         switch bodyType {
             case .REQUEST:

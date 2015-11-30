@@ -127,6 +127,8 @@ class NFXSettingsController: NFXGenericController, UITableViewDelegate, UITableV
             cell.textLabel?.textAlignment = .Center
             cell.textLabel?.text = "Clear data"
             cell.textLabel?.textColor = UIColor.NFXRedColor()
+            cell.textLabel?.font = UIFont.NFXFont(16)
+
             return cell
 
             
