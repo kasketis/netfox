@@ -189,7 +189,7 @@ class NFXSettingsController: NFXGenericController, UITableViewDelegate, UITableV
             break
             
         case 2:
-            clearDataButtonPressed()
+            clearDataButtonPressedOnTableIndex(indexPath)
             break
             
         default: break
@@ -257,10 +257,12 @@ class NFXSettingsController: NFXGenericController, UITableViewDelegate, UITableV
         }
     }
     
-    func clearDataButtonPressed()
+    func clearDataButtonPressedOnTableIndex(index: NSIndexPath)
     {
         let actionSheetController: UIAlertController = UIAlertController(title: "Clear data?", message: "", preferredStyle: .ActionSheet)
-        
+        actionSheetController.popoverPresentationController?.sourceView = tableView
+        actionSheetController.popoverPresentationController?.sourceRect = tableView.rectForRowAtIndexPath(index)
+
         let cancelAction: UIAlertAction = UIAlertAction(title: "Cancel", style: .Cancel) { action -> Void in
         }
         actionSheetController.addAction(cancelAction)
