@@ -175,7 +175,7 @@ extension NSURLResponse
 {
     func getNFXStatus() -> Int
     {
-        return (self as? NSHTTPURLResponse)?.statusCode ?? -1
+        return (self as? NSHTTPURLResponse)?.statusCode ?? 999
     }
     
     func getNFXHeaders() -> Dictionary<NSObject, AnyObject>
