@@ -15,33 +15,17 @@ public class NFXProtocol: NSURLProtocol
     
     override public class func canInitWithRequest(request: NSURLRequest) -> Bool
     {
-        if !canServeRequest(request) {
-            return false
-        }
-        
-        if NSURLProtocol.propertyForKey("NFXInternal", inRequest: request) != nil {
-            return false
-        }
-        
-        return true
+        return canServeRequest(request)
     }
     
-    override public class func canInitWithTask(task: NSURLSessionTask) -> Bool {
-    
+    override public class func canInitWithTask(task: NSURLSessionTask) -> Bool
+    {
         guard let request = task.currentRequest else { return false }
-        
-        if !canServeRequest(request) {
-            return false
-        }
-        
-        if NSURLProtocol.propertyForKey("NFXInternal", inRequest: task.currentRequest!) != nil {
-            return false
-        }
-        
-        return true
+        return canServeRequest(request)
     }
     
-    private class func canServeRequest(request: NSURLRequest) -> Bool {
+    private class func canServeRequest(request: NSURLRequest) -> Bool
+    {
         if !NFX.sharedInstance().isEnabled() {
             return false
         }
@@ -56,7 +40,12 @@ public class NFXProtocol: NSURLProtocol
                     return false
                 }
             }
+            
         } else {
+            return false
+        }
+        
+        if NSURLProtocol.propertyForKey("NFXInternal", inRequest: request) != nil {
             return false
         }
         
