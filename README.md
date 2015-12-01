@@ -151,8 +151,7 @@ Tip: You can use the url of the host (for example "https://www.github.com") to i
 
 ## Other
 
-- Alamofire users check [this](https://github.com/kasketis/netfox/blob/master/Workarounds.md#alamofire-workaround)
-- If you can't log request body check [this](https://github.com/kasketis/netfox/blob/master/Workarounds.md#no-http-body-for-requests)
+- If you experience any problems with request logging please check [this](https://github.com/kasketis/netfox/blob/master/Workarounds.md). If you don't get your answer please open an [issue](https://github.com/kasketis/netfox/issues)
 - Due to the large size of request/response bodies, the library provides disk storage for low memory overhead
 
 ## Licence
