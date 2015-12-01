@@ -34,7 +34,7 @@ class NFXSettingsController: NFXGenericController, UITableViewDelegate, UITableV
         self.extendedLayoutIncludesOpaqueBars = false
         self.automaticallyAdjustsScrollViewInsets = false
         
-        self.navigationItem.rightBarButtonItem = UIBarButtonItem(image: UIImage.NFXStatistics(), style: .Plain, target: self, action: Selector("statisticsButtonPressed"))
+        self.navigationItem.rightBarButtonItems = [UIBarButtonItem(image: UIImage.NFXStatistics(), style: .Plain, target: self, action: Selector("statisticsButtonPressed")), UIBarButtonItem(image: UIImage.NFXInfo(), style: .Plain, target: self, action: Selector("infoButtonPressed"))]
 
         self.tableView.frame = CGRectMake(0, 0, CGRectGetWidth(self.view.frame), CGRectGetHeight(self.view.frame) - 60)
         self.tableView.autoresizingMask = [.FlexibleWidth, .FlexibleHeight]
@@ -69,8 +69,8 @@ class NFXSettingsController: NFXGenericController, UITableViewDelegate, UITableV
         
     }
     
-    override func viewWillDisappear(animated: Bool) {
-        
+    override func viewWillDisappear(animated: Bool)
+    {
         super.viewWillDisappear(animated)
         
         NFX.sharedInstance().cacheFilters(self.filters)
@@ -79,6 +79,13 @@ class NFXSettingsController: NFXGenericController, UITableViewDelegate, UITableV
     func nfxURLButtonPressed()
     {
         UIApplication.sharedApplication().openURL(NSURL(string: nfxURL)!)
+    }
+    
+    func infoButtonPressed()
+    {
+        var infoController: NFXInfoController
+        infoController = NFXInfoController()
+        self.navigationController?.pushViewController(infoController, animated: true)
     }
     
     func statisticsButtonPressed()
