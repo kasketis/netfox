@@ -8,7 +8,7 @@
 import Foundation
 import UIKit
 
-let nfxVersion = "1.5.5"
+let nfxVersion = "1.6"
 
 @objc
 public class NFX: NSObject
