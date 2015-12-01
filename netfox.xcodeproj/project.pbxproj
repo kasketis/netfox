@@ -7,40 +7,42 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		617FEBED1C0CCB86007FC29A /* NFXStatisticsController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 617FEBEC1C0CCB86007FC29A /* NFXStatisticsController.swift */; };
-		B3BC02281C09CEF700C17F3A /* NFX.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3BC021A1C09CEF700C17F3A /* NFX.swift */; };
-		B3BC02291C09CEF700C17F3A /* NFXAssets.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3BC021B1C09CEF700C17F3A /* NFXAssets.swift */; };
-		B3BC022A1C09CEF700C17F3A /* NFXDetailsController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3BC021C1C09CEF700C17F3A /* NFXDetailsController.swift */; };
-		B3BC022B1C09CEF700C17F3A /* NFXGenericBodyDetailsController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3BC021D1C09CEF700C17F3A /* NFXGenericBodyDetailsController.swift */; };
-		B3BC022C1C09CEF700C17F3A /* NFXGenericController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3BC021E1C09CEF700C17F3A /* NFXGenericController.swift */; };
-		B3BC022D1C09CEF700C17F3A /* NFXHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3BC021F1C09CEF700C17F3A /* NFXHelper.swift */; };
-		B3BC022E1C09CEF700C17F3A /* NFXHTTPModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3BC02201C09CEF700C17F3A /* NFXHTTPModel.swift */; };
-		B3BC022F1C09CEF700C17F3A /* NFXHTTPModelManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3BC02211C09CEF700C17F3A /* NFXHTTPModelManager.swift */; };
-		B3BC02301C09CEF700C17F3A /* NFXImageBodyDetailsController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3BC02221C09CEF700C17F3A /* NFXImageBodyDetailsController.swift */; };
-		B3BC02311C09CEF700C17F3A /* NFXListCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3BC02231C09CEF700C17F3A /* NFXListCell.swift */; };
-		B3BC02321C09CEF700C17F3A /* NFXListController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3BC02241C09CEF700C17F3A /* NFXListController.swift */; };
-		B3BC02331C09CEF700C17F3A /* NFXProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3BC02251C09CEF700C17F3A /* NFXProtocol.swift */; };
-		B3BC02341C09CEF700C17F3A /* NFXRawBodyDetailsController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3BC02261C09CEF700C17F3A /* NFXRawBodyDetailsController.swift */; };
-		B3BC02351C09CEF700C17F3A /* NFXSettingsController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3BC02271C09CEF700C17F3A /* NFXSettingsController.swift */; };
+		CEFE42C51C0DDBD8001A56E0 /* NFX.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEFE42B51C0DDBD8001A56E0 /* NFX.swift */; };
+		CEFE42C61C0DDBD8001A56E0 /* NFXAssets.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEFE42B61C0DDBD8001A56E0 /* NFXAssets.swift */; };
+		CEFE42C71C0DDBD8001A56E0 /* NFXDetailsController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEFE42B71C0DDBD8001A56E0 /* NFXDetailsController.swift */; };
+		CEFE42C81C0DDBD8001A56E0 /* NFXGenericBodyDetailsController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEFE42B81C0DDBD8001A56E0 /* NFXGenericBodyDetailsController.swift */; };
+		CEFE42C91C0DDBD8001A56E0 /* NFXGenericController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEFE42B91C0DDBD8001A56E0 /* NFXGenericController.swift */; };
+		CEFE42CA1C0DDBD8001A56E0 /* NFXHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEFE42BA1C0DDBD8001A56E0 /* NFXHelper.swift */; };
+		CEFE42CB1C0DDBD8001A56E0 /* NFXHTTPModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEFE42BB1C0DDBD8001A56E0 /* NFXHTTPModel.swift */; };
+		CEFE42CC1C0DDBD8001A56E0 /* NFXHTTPModelManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEFE42BC1C0DDBD8001A56E0 /* NFXHTTPModelManager.swift */; };
+		CEFE42CD1C0DDBD8001A56E0 /* NFXImageBodyDetailsController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEFE42BD1C0DDBD8001A56E0 /* NFXImageBodyDetailsController.swift */; };
+		CEFE42CE1C0DDBD8001A56E0 /* NFXInfoController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEFE42BE1C0DDBD8001A56E0 /* NFXInfoController.swift */; };
+		CEFE42CF1C0DDBD8001A56E0 /* NFXListCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEFE42BF1C0DDBD8001A56E0 /* NFXListCell.swift */; };
+		CEFE42D01C0DDBD8001A56E0 /* NFXListController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEFE42C01C0DDBD8001A56E0 /* NFXListController.swift */; };
+		CEFE42D11C0DDBD8001A56E0 /* NFXProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEFE42C11C0DDBD8001A56E0 /* NFXProtocol.swift */; };
+		CEFE42D21C0DDBD8001A56E0 /* NFXRawBodyDetailsController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEFE42C21C0DDBD8001A56E0 /* NFXRawBodyDetailsController.swift */; };
+		CEFE42D31C0DDBD8001A56E0 /* NFXSettingsController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEFE42C31C0DDBD8001A56E0 /* NFXSettingsController.swift */; };
+		CEFE42D41C0DDBD8001A56E0 /* NFXStatisticsController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEFE42C41C0DDBD8001A56E0 /* NFXStatisticsController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		617FEBEC1C0CCB86007FC29A /* NFXStatisticsController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = NFXStatisticsController.swift; path = netfox/NFXStatisticsController.swift; sourceTree = "<group>"; };
 		B3BC020F1C09CDA000C17F3A /* netfox.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = netfox.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		B3BC021A1C09CEF700C17F3A /* NFX.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = NFX.swift; path = netfox/NFX.swift; sourceTree = "<group>"; };
-		B3BC021B1C09CEF700C17F3A /* NFXAssets.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = NFXAssets.swift; path = netfox/NFXAssets.swift; sourceTree = "<group>"; };
-		B3BC021C1C09CEF700C17F3A /* NFXDetailsController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = NFXDetailsController.swift; path = netfox/NFXDetailsController.swift; sourceTree = "<group>"; };
-		B3BC021D1C09CEF700C17F3A /* NFXGenericBodyDetailsController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = NFXGenericBodyDetailsController.swift; path = netfox/NFXGenericBodyDetailsController.swift; sourceTree = "<group>"; };
-		B3BC021E1C09CEF700C17F3A /* NFXGenericController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = NFXGenericController.swift; path = netfox/NFXGenericController.swift; sourceTree = "<group>"; };
-		B3BC021F1C09CEF700C17F3A /* NFXHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = NFXHelper.swift; path = netfox/NFXHelper.swift; sourceTree = "<group>"; };
-		B3BC02201C09CEF700C17F3A /* NFXHTTPModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = NFXHTTPModel.swift; path = netfox/NFXHTTPModel.swift; sourceTree = "<group>"; };
-		B3BC02211C09CEF700C17F3A /* NFXHTTPModelManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = NFXHTTPModelManager.swift; path = netfox/NFXHTTPModelManager.swift; sourceTree = "<group>"; };
-		B3BC02221C09CEF700C17F3A /* NFXImageBodyDetailsController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = NFXImageBodyDetailsController.swift; path = netfox/NFXImageBodyDetailsController.swift; sourceTree = "<group>"; };
-		B3BC02231C09CEF700C17F3A /* NFXListCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = NFXListCell.swift; path = netfox/NFXListCell.swift; sourceTree = "<group>"; };
-		B3BC02241C09CEF700C17F3A /* NFXListController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = NFXListController.swift; path = netfox/NFXListController.swift; sourceTree = "<group>"; };
-		B3BC02251C09CEF700C17F3A /* NFXProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = NFXProtocol.swift; path = netfox/NFXProtocol.swift; sourceTree = "<group>"; };
-		B3BC02261C09CEF700C17F3A /* NFXRawBodyDetailsController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = NFXRawBodyDetailsController.swift; path = netfox/NFXRawBodyDetailsController.swift; sourceTree = "<group>"; };
-		B3BC02271C09CEF700C17F3A /* NFXSettingsController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = NFXSettingsController.swift; path = netfox/NFXSettingsController.swift; sourceTree = "<group>"; };
+		CEFE42B51C0DDBD8001A56E0 /* NFX.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NFX.swift; sourceTree = "<group>"; };
+		CEFE42B61C0DDBD8001A56E0 /* NFXAssets.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NFXAssets.swift; sourceTree = "<group>"; };
+		CEFE42B71C0DDBD8001A56E0 /* NFXDetailsController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NFXDetailsController.swift; sourceTree = "<group>"; };
+		CEFE42B81C0DDBD8001A56E0 /* NFXGenericBodyDetailsController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NFXGenericBodyDetailsController.swift; sourceTree = "<group>"; };
+		CEFE42B91C0DDBD8001A56E0 /* NFXGenericController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NFXGenericController.swift; sourceTree = "<group>"; };
+		CEFE42BA1C0DDBD8001A56E0 /* NFXHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NFXHelper.swift; sourceTree = "<group>"; };
+		CEFE42BB1C0DDBD8001A56E0 /* NFXHTTPModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NFXHTTPModel.swift; sourceTree = "<group>"; };
+		CEFE42BC1C0DDBD8001A56E0 /* NFXHTTPModelManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NFXHTTPModelManager.swift; sourceTree = "<group>"; };
+		CEFE42BD1C0DDBD8001A56E0 /* NFXImageBodyDetailsController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NFXImageBodyDetailsController.swift; sourceTree = "<group>"; };
+		CEFE42BE1C0DDBD8001A56E0 /* NFXInfoController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NFXInfoController.swift; sourceTree = "<group>"; };
+		CEFE42BF1C0DDBD8001A56E0 /* NFXListCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NFXListCell.swift; sourceTree = "<group>"; };
+		CEFE42C01C0DDBD8001A56E0 /* NFXListController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NFXListController.swift; sourceTree = "<group>"; };
+		CEFE42C11C0DDBD8001A56E0 /* NFXProtocol.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NFXProtocol.swift; sourceTree = "<group>"; };
+		CEFE42C21C0DDBD8001A56E0 /* NFXRawBodyDetailsController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NFXRawBodyDetailsController.swift; sourceTree = "<group>"; };
+		CEFE42C31C0DDBD8001A56E0 /* NFXSettingsController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NFXSettingsController.swift; sourceTree = "<group>"; };
+		CEFE42C41C0DDBD8001A56E0 /* NFXStatisticsController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NFXStatisticsController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -57,21 +59,7 @@
 		B3BC02051C09CDA000C17F3A = {
 			isa = PBXGroup;
 			children = (
-				617FEBEC1C0CCB86007FC29A /* NFXStatisticsController.swift */,
-				B3BC021A1C09CEF700C17F3A /* NFX.swift */,
-				B3BC021B1C09CEF700C17F3A /* NFXAssets.swift */,
-				B3BC021C1C09CEF700C17F3A /* NFXDetailsController.swift */,
-				B3BC021D1C09CEF700C17F3A /* NFXGenericBodyDetailsController.swift */,
-				B3BC021E1C09CEF700C17F3A /* NFXGenericController.swift */,
-				B3BC021F1C09CEF700C17F3A /* NFXHelper.swift */,
-				B3BC02201C09CEF700C17F3A /* NFXHTTPModel.swift */,
-				B3BC02211C09CEF700C17F3A /* NFXHTTPModelManager.swift */,
-				B3BC02221C09CEF700C17F3A /* NFXImageBodyDetailsController.swift */,
-				B3BC02231C09CEF700C17F3A /* NFXListCell.swift */,
-				B3BC02241C09CEF700C17F3A /* NFXListController.swift */,
-				B3BC02251C09CEF700C17F3A /* NFXProtocol.swift */,
-				B3BC02261C09CEF700C17F3A /* NFXRawBodyDetailsController.swift */,
-				B3BC02271C09CEF700C17F3A /* NFXSettingsController.swift */,
+				CEFE42B41C0DDBD8001A56E0 /* netfox */,
 				B3BC02101C09CDA000C17F3A /* Products */,
 			);
 			sourceTree = "<group>";
@@ -82,6 +70,29 @@
 				B3BC020F1C09CDA000C17F3A /* netfox.framework */,
 			);
 			name = Products;
+			sourceTree = "<group>";
+		};
+		CEFE42B41C0DDBD8001A56E0 /* netfox */ = {
+			isa = PBXGroup;
+			children = (
+				CEFE42B51C0DDBD8001A56E0 /* NFX.swift */,
+				CEFE42B61C0DDBD8001A56E0 /* NFXAssets.swift */,
+				CEFE42B71C0DDBD8001A56E0 /* NFXDetailsController.swift */,
+				CEFE42B81C0DDBD8001A56E0 /* NFXGenericBodyDetailsController.swift */,
+				CEFE42B91C0DDBD8001A56E0 /* NFXGenericController.swift */,
+				CEFE42BA1C0DDBD8001A56E0 /* NFXHelper.swift */,
+				CEFE42BB1C0DDBD8001A56E0 /* NFXHTTPModel.swift */,
+				CEFE42BC1C0DDBD8001A56E0 /* NFXHTTPModelManager.swift */,
+				CEFE42BD1C0DDBD8001A56E0 /* NFXImageBodyDetailsController.swift */,
+				CEFE42BE1C0DDBD8001A56E0 /* NFXInfoController.swift */,
+				CEFE42BF1C0DDBD8001A56E0 /* NFXListCell.swift */,
+				CEFE42C01C0DDBD8001A56E0 /* NFXListController.swift */,
+				CEFE42C11C0DDBD8001A56E0 /* NFXProtocol.swift */,
+				CEFE42C21C0DDBD8001A56E0 /* NFXRawBodyDetailsController.swift */,
+				CEFE42C31C0DDBD8001A56E0 /* NFXSettingsController.swift */,
+				CEFE42C41C0DDBD8001A56E0 /* NFXStatisticsController.swift */,
+			);
+			path = netfox;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -161,21 +172,22 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				B3BC02281C09CEF700C17F3A /* NFX.swift in Sources */,
-				617FEBED1C0CCB86007FC29A /* NFXStatisticsController.swift in Sources */,
-				B3BC02291C09CEF700C17F3A /* NFXAssets.swift in Sources */,
-				B3BC022A1C09CEF700C17F3A /* NFXDetailsController.swift in Sources */,
-				B3BC022B1C09CEF700C17F3A /* NFXGenericBodyDetailsController.swift in Sources */,
-				B3BC022C1C09CEF700C17F3A /* NFXGenericController.swift in Sources */,
-				B3BC022D1C09CEF700C17F3A /* NFXHelper.swift in Sources */,
-				B3BC022E1C09CEF700C17F3A /* NFXHTTPModel.swift in Sources */,
-				B3BC022F1C09CEF700C17F3A /* NFXHTTPModelManager.swift in Sources */,
-				B3BC02301C09CEF700C17F3A /* NFXImageBodyDetailsController.swift in Sources */,
-				B3BC02311C09CEF700C17F3A /* NFXListCell.swift in Sources */,
-				B3BC02321C09CEF700C17F3A /* NFXListController.swift in Sources */,
-				B3BC02331C09CEF700C17F3A /* NFXProtocol.swift in Sources */,
-				B3BC02341C09CEF700C17F3A /* NFXRawBodyDetailsController.swift in Sources */,
-				B3BC02351C09CEF700C17F3A /* NFXSettingsController.swift in Sources */,
+				CEFE42CD1C0DDBD8001A56E0 /* NFXImageBodyDetailsController.swift in Sources */,
+				CEFE42CA1C0DDBD8001A56E0 /* NFXHelper.swift in Sources */,
+				CEFE42C51C0DDBD8001A56E0 /* NFX.swift in Sources */,
+				CEFE42D41C0DDBD8001A56E0 /* NFXStatisticsController.swift in Sources */,
+				CEFE42C81C0DDBD8001A56E0 /* NFXGenericBodyDetailsController.swift in Sources */,
+				CEFE42C91C0DDBD8001A56E0 /* NFXGenericController.swift in Sources */,
+				CEFE42D11C0DDBD8001A56E0 /* NFXProtocol.swift in Sources */,
+				CEFE42CC1C0DDBD8001A56E0 /* NFXHTTPModelManager.swift in Sources */,
+				CEFE42D31C0DDBD8001A56E0 /* NFXSettingsController.swift in Sources */,
+				CEFE42C61C0DDBD8001A56E0 /* NFXAssets.swift in Sources */,
+				CEFE42C71C0DDBD8001A56E0 /* NFXDetailsController.swift in Sources */,
+				CEFE42CE1C0DDBD8001A56E0 /* NFXInfoController.swift in Sources */,
+				CEFE42CF1C0DDBD8001A56E0 /* NFXListCell.swift in Sources */,
+				CEFE42D01C0DDBD8001A56E0 /* NFXListController.swift in Sources */,
+				CEFE42D21C0DDBD8001A56E0 /* NFXRawBodyDetailsController.swift in Sources */,
+				CEFE42CB1C0DDBD8001A56E0 /* NFXHTTPModel.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
