@@ -147,6 +147,7 @@ Tip: You can use the url of the host (for example "https://www.github.com") to i
 - Enable/disable logging within the app
 - Clear data within the app
 - Statistics: Check cool things like average response time, total response size and more for your selected types of responses
+- Info: Check your IP address, your app version and build number and other things within the app
 - More to come.. ;)
 
 ## Other
