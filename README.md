@@ -71,12 +71,12 @@ You can do it by copying the "netfox" folder in your project (make sure that "Cr
 
 To start netfox add the following line in didFinishLaunchingWithOptions: method of your AppDelegate
 
-Swift
+#### Swift
 <pre>
 NFX.sharedInstance().start()
 </pre>
 
-Objective-C
+#### Obj-C
 <pre>
 [[NFX sharedInstance] start];
 </pre>
