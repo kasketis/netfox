@@ -211,7 +211,7 @@ class NFXHTTPModel: NSObject
         switch type {
         case .JSON:
             do {
-                let rawJsonData = try NSJSONSerialization.JSONObjectWithData(rawData, options: [.AllowFragments])
+                let rawJsonData = try NSJSONSerialization.JSONObjectWithData(rawData, options: [])
                 let prettyPrintedString = try NSJSONSerialization.dataWithJSONObject(rawJsonData, options: [.PrettyPrinted])
                 return NSString(data: prettyPrintedString, encoding: NSUTF8StringEncoding) as? String
             } catch {
