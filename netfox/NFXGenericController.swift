@@ -8,11 +8,11 @@
 import Foundation
 import UIKit
 
-class NFXGenericController: UIViewController
+public class NFXGenericController: UIViewController
 {
     var selectedModel: NFXHTTPModel = NFXHTTPModel()
 
-    override func viewDidLoad()
+    override public func viewDidLoad()
     {
         super.viewDidLoad()
         

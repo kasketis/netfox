@@ -9,7 +9,8 @@ import Foundation
 import UIKit
 
 @available(iOS 8.0, *)
-class NFXListController: NFXGenericController, UITableViewDelegate, UITableViewDataSource, UISearchResultsUpdating, UISearchControllerDelegate
+@objc
+public class NFXListController: NFXGenericController, UITableViewDelegate, UITableViewDataSource, UISearchResultsUpdating, UISearchControllerDelegate
 {
     // MARK: Properties
     
@@ -22,7 +23,7 @@ class NFXListController: NFXGenericController, UITableViewDelegate, UITableViewD
     
     // MARK: View Life Cycle
     
-    override func viewDidLoad()
+    override public func viewDidLoad()
     {
         super.viewDidLoad()
         
@@ -75,7 +76,7 @@ class NFXListController: NFXGenericController, UITableViewDelegate, UITableViewD
             object: nil)
     }
     
-    override func viewWillAppear(animated: Bool)
+    override public func viewWillAppear(animated: Bool)
     {
         super.viewWillAppear(animated)
         reloadData()
@@ -90,7 +91,7 @@ class NFXListController: NFXGenericController, UITableViewDelegate, UITableViewD
     
     // MARK: UISearchResultsUpdating
     
-    func updateSearchResultsForSearchController(searchController: UISearchController)
+    public func updateSearchResultsForSearchController(searchController: UISearchController)
     {
         let predicateURL = NSPredicate(format: "requestURL contains[cd] '\(searchController.searchBar.text!)'")
         let predicateMethod = NSPredicate(format: "requestMethod contains[cd] '\(searchController.searchBar.text!)'")
@@ -112,7 +113,7 @@ class NFXListController: NFXGenericController, UITableViewDelegate, UITableViewD
     
     // MARK: UITableViewDataSource
     
-    func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int
+    public func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int
     {
         if (self.searchController.active) {
             return self.filteredTableData.count
@@ -121,7 +122,7 @@ class NFXListController: NFXGenericController, UITableViewDelegate, UITableViewD
         }
     }
     
-    func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell
+    public func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell
     {
         let cell = self.tableView.dequeueReusableCellWithIdentifier(NSStringFromClass(NFXListCell), forIndexPath: indexPath) as! NFXListCell
         
@@ -140,7 +141,7 @@ class NFXListController: NFXGenericController, UITableViewDelegate, UITableViewD
         return cell
     }
     
-    func tableView(tableView: UITableView, viewForFooterInSection section: Int) -> UIView?
+    public func tableView(tableView: UITableView, viewForFooterInSection section: Int) -> UIView?
     {
         return UIView.init(frame: CGRectZero)
     }
@@ -153,12 +154,12 @@ class NFXListController: NFXGenericController, UITableViewDelegate, UITableViewD
         }
     }
     
-    func numberOfSectionsInTableView(tableView: UITableView) -> Int
+    public func numberOfSectionsInTableView(tableView: UITableView) -> Int
     {
         return 1
     }
     
-    func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath)
+    public func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath)
     {
         var detailsController : NFXDetailsController
         detailsController = NFXDetailsController()
@@ -173,7 +174,7 @@ class NFXListController: NFXGenericController, UITableViewDelegate, UITableViewD
         
     }
     
-    func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat
+    public func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat
     {
         return 58
     }
