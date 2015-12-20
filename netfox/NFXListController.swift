@@ -19,6 +19,8 @@ class NFXListController: NFXGenericController, UITableViewDelegate, UITableViewD
     var filteredTableData = [NFXHTTPModel]()
     
     var searchController: UISearchController!
+
+    var hideButtonTappedCallback :(() -> Void)?
     
     // MARK: View Life Cycle
     
@@ -86,6 +88,30 @@ class NFXListController: NFXGenericController, UITableViewDelegate, UITableViewD
         var settingsController: NFXSettingsController
         settingsController = NFXSettingsController()
         self.navigationController?.pushViewController(settingsController, animated: true)
+    }
+
+    func setHideButton(callback :() -> Void)
+    {
+        self.hideButtonTappedCallback = callback
+
+        let hideButtonHeight :CGFloat = 44
+        let hideButton = UIButton(type: UIButtonType.Custom)
+        hideButton.frame = CGRectMake(0, CGRectGetHeight(self.view.frame) - 64 - hideButtonHeight, CGRectGetWidth(self.view.frame), hideButtonHeight)
+        hideButton.setTitle("close", forState: UIControlState.Normal)
+        hideButton.setTitleColor(UIColor.NFXStarkWhiteColor(), forState: UIControlState.Normal)
+        hideButton.backgroundColor = UIColor.NFXDarkStarkWhiteColor()
+        hideButton.addTarget(self, action: "hideButtonTapped", forControlEvents: UIControlEvents.TouchUpInside)
+        self.view.addSubview(hideButton)
+
+        let tableViewFrame = self.tableView.frame
+        self.tableView.frame = CGRectMake(tableViewFrame.origin.x, tableViewFrame.origin.y, tableViewFrame.size.width, tableViewFrame.size.height - hideButtonHeight)
+    }
+
+    @objc private func hideButtonTapped()
+    {
+        if let callback = self.hideButtonTappedCallback {
+            callback()
+        }
     }
     
     // MARK: UISearchResultsUpdating
