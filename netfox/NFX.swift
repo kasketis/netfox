@@ -142,6 +142,8 @@ public class NFX: NSObject
         return self.lastVisitDate
     }
     
+    // WARN: iOS
+    
     private func showNFX()
     {
         if self.presented {

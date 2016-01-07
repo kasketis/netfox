@@ -2,11 +2,11 @@
 //  NFXHelper.swift
 //  netfox
 //
-//  Copyright © 2015 kasketis. All rights reserved.
+//  Created by Tom Baranes on 07/01/16.
+//  Copyright © 2016 kasketis. All rights reserved.
 //
 
-import UIKit
-
+import Foundation
 
 enum HTTPModelShortType: String
 {
@@ -19,21 +19,7 @@ enum HTTPModelShortType: String
     static let allValues = [JSON, XML, HTML, IMAGE, OTHER]
 }
 
-extension UIWindow
-{
-    override public func motionEnded(motion: UIEventSubtype, withEvent event: UIEvent?)
-    {
-        if NFX.sharedInstance().getSelectedGesture() == .shake {
-            if (event!.type == .Motion && event!.subtype == .MotionShake) {
-                NFX.sharedInstance().motionDetected()
-            }
-        } else {
-            super.motionEnded(motion, withEvent: event)
-        }
-    }
-}
-
-extension UIColor
+extension NFXColor
 {
     convenience init(red: Int, green: Int, blue: Int)
     {
@@ -49,72 +35,72 @@ extension UIColor
         self.init(red:(netHex >> 16) & 0xff, green:(netHex >> 8) & 0xff, blue:netHex & 0xff)
     }
     
-    class func NFXOrangeColor() -> UIColor
+    class func NFXOrangeColor() -> NFXColor
     {
-        return UIColor.init(netHex: 0xec5e28)
+        return NFXColor.init(netHex: 0xec5e28)
     }
     
-    class func NFXGreenColor() -> UIColor
+    class func NFXGreenColor() -> NFXColor
     {
-        return UIColor.init(netHex: 0x38bb93)
+        return NFXColor.init(netHex: 0x38bb93)
     }
     
-    class func NFXDarkGreenColor() -> UIColor
+    class func NFXDarkGreenColor() -> NFXColor
     {
-        return UIColor.init(netHex: 0x2d7c6e)
+        return NFXColor.init(netHex: 0x2d7c6e)
     }
     
-    class func NFXRedColor() -> UIColor
+    class func NFXRedColor() -> NFXColor
     {
-        return UIColor.init(netHex: 0xd34a33)
+        return NFXColor.init(netHex: 0xd34a33)
     }
     
-    class func NFXDarkRedColor() -> UIColor
+    class func NFXDarkRedColor() -> NFXColor
     {
-        return UIColor.init(netHex: 0x643026)
+        return NFXColor.init(netHex: 0x643026)
     }
     
-    class func NFXStarkWhiteColor() -> UIColor
+    class func NFXStarkWhiteColor() -> NFXColor
     {
-        return UIColor.init(netHex: 0xccc5b9)
+        return NFXColor.init(netHex: 0xccc5b9)
     }
     
-    class func NFXDarkStarkWhiteColor() -> UIColor
+    class func NFXDarkStarkWhiteColor() -> NFXColor
     {
-        return UIColor.init(netHex: 0x9b958d)
+        return NFXColor.init(netHex: 0x9b958d)
     }
     
-    class func NFXLightGrayColor() -> UIColor
+    class func NFXLightGrayColor() -> NFXColor
     {
-        return UIColor.init(netHex: 0x9b9b9b)
+        return NFXColor.init(netHex: 0x9b9b9b)
     }
     
-    class func NFXGray44Color() -> UIColor
+    class func NFXGray44Color() -> NFXColor
     {
-        return UIColor.init(netHex: 0x707070)
+        return NFXColor.init(netHex: 0x707070)
     }
     
-    class func NFXGray95Color() -> UIColor
+    class func NFXGray95Color() -> NFXColor
     {
-        return UIColor.init(netHex: 0xf2f2f2)
+        return NFXColor.init(netHex: 0xf2f2f2)
     }
     
-    class func NFXBlackColor() -> UIColor
+    class func NFXBlackColor() -> NFXColor
     {
-        return UIColor.init(netHex: 0x231f20)
+        return NFXColor.init(netHex: 0x231f20)
     }
 }
 
-extension UIFont
+extension NFXFont
 {
-    class func NFXFont(size: CGFloat) -> UIFont
+    class func NFXFont(size: CGFloat) -> NFXFont
     {
-        return UIFont(name: "HelveticaNeue", size: size)!
+        return NFXFont(name: "HelveticaNeue", size: size)!
     }
     
-    class func NFXFontBold(size: CGFloat) -> UIFont
+    class func NFXFontBold(size: CGFloat) -> NFXFont
     {
-        return UIFont(name: "HelveticaNeue-Bold", size: size)!
+        return NFXFont(name: "HelveticaNeue-Bold", size: size)!
     }
 }
 
@@ -141,12 +127,12 @@ extension NSURLRequest
     func getNFXCachePolicy() -> String
     {
         switch cachePolicy {
-            case .UseProtocolCachePolicy: return "UseProtocolCachePolicy"
-            case .ReloadIgnoringLocalCacheData: return "ReloadIgnoringLocalCacheData"
-            case .ReloadIgnoringLocalAndRemoteCacheData: return "ReloadIgnoringLocalAndRemoteCacheData"
-            case .ReturnCacheDataElseLoad: return "ReturnCacheDataElseLoad"
-            case .ReturnCacheDataDontLoad: return "ReturnCacheDataDontLoad"
-            case .ReloadRevalidatingCacheData: return "ReloadRevalidatingCacheData"
+        case .UseProtocolCachePolicy: return "UseProtocolCachePolicy"
+        case .ReloadIgnoringLocalCacheData: return "ReloadIgnoringLocalCacheData"
+        case .ReloadIgnoringLocalAndRemoteCacheData: return "ReloadIgnoringLocalAndRemoteCacheData"
+        case .ReturnCacheDataElseLoad: return "ReturnCacheDataElseLoad"
+        case .ReturnCacheDataDontLoad: return "ReturnCacheDataDontLoad"
+        case .ReloadRevalidatingCacheData: return "ReloadRevalidatingCacheData"
         }
         
     }
@@ -184,21 +170,21 @@ extension NSURLResponse
     }
 }
 
-extension UIImage
+extension NFXImage
 {
-    class func NFXSettings() -> UIImage
+    class func NFXSettings() -> NFXImage
     {
-        return UIImage(data: NFXAssets.getImage(NFXImage.SETTINGS), scale: 1.7)!
+        return UIImage(data: NFXAssets.getImage(NFXAssetName.SETTINGS), scale: 1.7)!
     }
     
-    class func NFXInfo() -> UIImage
+    class func NFXInfo() -> NFXImage
     {
-        return UIImage(data: NFXAssets.getImage(NFXImage.INFO), scale: 1.7)!
+        return UIImage(data: NFXAssets.getImage(NFXAssetName.INFO), scale: 1.7)!
     }
     
-    class func NFXStatistics() -> UIImage
+    class func NFXStatistics() -> NFXImage
     {
-        return UIImage(data: NFXAssets.getImage(NFXImage.STATISTICS), scale: 1.7)!
+        return UIImage(data: NFXAssets.getImage(NFXAssetName.STATISTICS), scale: 1.7)!
     }
 }
 
@@ -210,73 +196,8 @@ extension NSDate
             return true
         } else {
             return false
-        }        
-    }
-}
-
-public extension UIDevice
-{
-    
-    class func getNFXDeviceType() -> String
-    {
-        var systemInfo = utsname()
-        uname(&systemInfo)
-        
-        let machine = systemInfo.machine
-        let mirror = Mirror(reflecting: machine)
-        var identifier = ""
-        
-        for child in mirror.children {
-            if let value = child.value as? Int8 where value != 0 {
-                identifier.append(UnicodeScalar(UInt8(value)))
-            }
-        }
-        
-        return parseDeviceType(identifier)
-    }
-
-    class func parseDeviceType(identifier: String) -> String {
-        
-        if identifier == "i386" || identifier == "x86_64" {
-            return "Simulator"
-        }
-        
-        switch identifier {
-        case "iPhone1,1": return "iPhone 2G"
-        case "iPhone1,2": return "iPhone 3G"
-        case "iPhone2,1": return "iPhone 3GS"
-        case "iPhone3,1", "iPhone3,2", "iPhone3,3": return "IPhone 4"
-        case "iPhone4,1": return "iPhone 4S"
-        case "iPhone5,1", "iPhone5,2": return "iPhone 5"
-        case "iPhone5,3", "iPhone5,4": return "iPhone 5C"
-        case "iPhone6,1", "iPhone6,2": return "iPhone 5S"
-        case "iPhone7,1": return "iPhone 6 Plus"
-        case "iPhone7,2": return "iPhone 6"
-        case "iPhone8,1": return "iPhone 6S Plus"
-        case "iPhone8,2": return "iPhone 6S"
-            
-        case "iPod1,1": return "iPodTouch 1G"
-        case "iPod2,1": return "iPodTouch 2G"
-        case "iPod3,1": return "iPodTouch 3G"
-        case "iPod4,1": return "iPodTouch 4G"
-        case "iPod5,1": return "iPodTouch 5G"
-            
-        case "iPad1,1", "iPad1,2": return "iPad"
-        case "iPad2,1", "iPad2,2", "iPad2,3", "iPad2,4": return "iPad 2"
-        case "iPad2,5", "iPad2,6", "iPad2,7": return "iPad Mini"
-        case "iPad3,1", "iPad3,2", "iPad3,3": return "iPad 3"
-        case "iPad3,4", "iPad3,5", "iPad3,6": return "iPad 4"
-        case "iPad4,1", "iPad4,2", "iPad4,3": return "iPad Air"
-        case "iPad4,4", "iPad4,5", "iPad4,6": return "iPad Mini Retina"
-        case "iPad4,7", "iPad4,8": return "iPad Mini 3"
-        case "iPad5,3", "iPad5,4": return "iPad Air 2"
-            
-        default: return "Not Available"
         }
     }
-    
-    
-    
 }
 
 class NFXDebugInfo {
@@ -301,20 +222,34 @@ class NFXDebugInfo {
         return NSBundle.mainBundle().bundleIdentifier ?? ""
     }
     
-    class func getNFXiOSVersion() -> String
+    class func getNFXOSVersion() -> String
     {
-        return UIDevice.currentDevice().systemVersion ?? ""
+        #if os(iOS)
+            return UIDevice.currentDevice().systemVersion ?? ""
+        #elseif os(OSX)
+            return NSProcessInfo.processInfo().operatingSystemVersionString
+        #endif
     }
     
     class func getNFXDeviceType() -> String
     {
-        return UIDevice.getNFXDeviceType() ?? ""
+        #if os(iOS)
+            return UIDevice.getNFXDeviceType() ?? ""
+        #elif os(OSX)
+            return ""
+        #endif
     }
     
     class func getNFXDeviceScreenResolution() -> String
     {
-        let scale = UIScreen.mainScreen().scale
-        let bounds = UIScreen.mainScreen().bounds
+        #if os(iOS)
+            let scale = UIScreen.mainScreen().scale
+            let bounds = UIScreen.mainScreen().bounds
+        #elif os(OSX)
+            let scale = NSScreen.mainScreen().scale
+            let bounds = NSScreen.mainScreen().bounds
+        #endif
+        
         let width = bounds.size.width * scale
         let height = bounds.size.height * scale
         return "\(width) x \(height)"
@@ -339,7 +274,7 @@ class NFXDebugInfo {
                 completion(result: "-")
             }
             
-        }.resume()
+            }.resume()
     }
     
 }
