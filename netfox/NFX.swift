@@ -142,33 +142,15 @@ public class NFX: NSObject
         return self.lastVisitDate
     }
     
-    // WARN: iOS
-    
     private func showNFX()
     {
         if self.presented {
             return
         }
         
-        var navigationController: UINavigationController?
-
-        var listController: NFXListController
-        listController = NFXListController()
-        
-        navigationController = UINavigationController(rootViewController: listController)
-        navigationController!.navigationBar.translucent = false
-        navigationController!.navigationBar.tintColor = UIColor.NFXOrangeColor()
-        navigationController!.navigationBar.barTintColor = UIColor.NFXStarkWhiteColor()
-        navigationController!.navigationBar.titleTextAttributes = [NSForegroundColorAttributeName : UIColor.NFXOrangeColor()]
-        
+        self.showNFXFollowingPlatform()
         self.presented = true
-        presentingViewController?.presentViewController(navigationController!, animated: true, completion: nil)
-    }
-    
-    private var presentingViewController: UIViewController?
-    {
-        let rootViewController = UIApplication.sharedApplication().keyWindow?.rootViewController
-        return rootViewController?.presentedViewController ?? rootViewController
+
     }
     
     private func hideNFX()
@@ -178,11 +160,10 @@ public class NFX: NSObject
         }
         
         NSNotificationCenter.defaultCenter().postNotificationName("NFXDeactivateSearch", object: nil)
-        
-        presentingViewController?.dismissViewControllerAnimated(true, completion: { () -> Void in
+        self.hideNFXFollowingPlatform { () -> Void in
             self.presented = false
             self.lastVisitDate = NSDate()
-        })
+        }
     }
     
     internal func clearOldData()
@@ -223,3 +204,60 @@ public class NFX: NSObject
         return self.filters
     }
 }
+
+#if os(iOS)
+
+extension NFX {
+    
+    func showNFXFollowingPlatform()
+    {
+        var navigationController: UINavigationController?
+        
+        var listController: NFXListController
+        listController = NFXListController()
+        
+        navigationController = UINavigationController(rootViewController: listController)
+        navigationController!.navigationBar.translucent = false
+        navigationController!.navigationBar.tintColor = UIColor.NFXOrangeColor()
+        navigationController!.navigationBar.barTintColor = UIColor.NFXStarkWhiteColor()
+        navigationController!.navigationBar.titleTextAttributes = [NSForegroundColorAttributeName : UIColor.NFXOrangeColor()]
+        
+        presentingViewController?.presentViewController(navigationController!, animated: true, completion: nil)
+    }
+    
+    func hideNFXFollowingPlatform(completion: (() -> Void)?)
+    {
+        presentingViewController?.dismissViewControllerAnimated(true, completion: { () -> Void in
+            if let notNilCompletion = completion {
+                notNilCompletion()
+            }
+        })
+    }
+    
+    private var presentingViewController: UIViewController?
+        {
+            let rootViewController = UIApplication.sharedApplication().keyWindow?.rootViewController
+            return rootViewController?.presentedViewController ?? rootViewController
+    }
+    
+}
+
+#elseif os(OSX)
+    
+extension NFX {
+    
+    func showNFXFollowingPlatform()
+    {
+
+    }
+    
+    func hideNFXFollowingPlatform(completion: (() -> Void)?)
+    {
+        if let notNilCompletion = completion {
+            notNilCompletion()
+        }
+    }
+    
+}
+    
+#endif

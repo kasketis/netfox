@@ -79,26 +79,42 @@
 		CEFE42B41C0DDBD8001A56E0 /* netfox */ = {
 			isa = PBXGroup;
 			children = (
+				E20F5DD81C3EFF5400D3E906 /* OSX */,
+				E20F5DD71C3EFF4F00D3E906 /* iOS */,
+				E20F5DD31C3EECE200D3E906 /* NFXConstants.swift */,
 				CEFE42B51C0DDBD8001A56E0 /* NFX.swift */,
 				CEFE42B61C0DDBD8001A56E0 /* NFXAssets.swift */,
-				CEFE42B71C0DDBD8001A56E0 /* NFXDetailsController.swift */,
-				CEFE42B81C0DDBD8001A56E0 /* NFXGenericBodyDetailsController.swift */,
 				CEFE42B91C0DDBD8001A56E0 /* NFXGenericController.swift */,
-				CEFE42BA1C0DDBD8001A56E0 /* NFXHelperIOS.swift */,
 				E20F5DD51C3EEE2200D3E906 /* NFXHelper.swift */,
 				CEFE42BB1C0DDBD8001A56E0 /* NFXHTTPModel.swift */,
 				CEFE42BC1C0DDBD8001A56E0 /* NFXHTTPModelManager.swift */,
-				CEFE42BD1C0DDBD8001A56E0 /* NFXImageBodyDetailsController.swift */,
 				CEFE42BE1C0DDBD8001A56E0 /* NFXInfoController.swift */,
-				CEFE42BF1C0DDBD8001A56E0 /* NFXListCell.swift */,
 				CEFE42C01C0DDBD8001A56E0 /* NFXListController.swift */,
 				CEFE42C11C0DDBD8001A56E0 /* NFXProtocol.swift */,
+			);
+			path = netfox;
+			sourceTree = "<group>";
+		};
+		E20F5DD71C3EFF4F00D3E906 /* iOS */ = {
+			isa = PBXGroup;
+			children = (
+				CEFE42BA1C0DDBD8001A56E0 /* NFXHelperIOS.swift */,
+				CEFE42B71C0DDBD8001A56E0 /* NFXDetailsController.swift */,
+				CEFE42B81C0DDBD8001A56E0 /* NFXGenericBodyDetailsController.swift */,
+				CEFE42BD1C0DDBD8001A56E0 /* NFXImageBodyDetailsController.swift */,
+				CEFE42BF1C0DDBD8001A56E0 /* NFXListCell.swift */,
 				CEFE42C21C0DDBD8001A56E0 /* NFXRawBodyDetailsController.swift */,
 				CEFE42C31C0DDBD8001A56E0 /* NFXSettingsController.swift */,
 				CEFE42C41C0DDBD8001A56E0 /* NFXStatisticsController.swift */,
-				E20F5DD31C3EECE200D3E906 /* NFXConstants.swift */,
 			);
-			path = netfox;
+			name = iOS;
+			sourceTree = "<group>";
+		};
+		E20F5DD81C3EFF5400D3E906 /* OSX */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = OSX;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
