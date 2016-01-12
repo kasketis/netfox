@@ -6,20 +6,23 @@
 //
 
 import Foundation
+#if os(iOS)
 import UIKit
+#elseif os(OSX)
+import Cocoa
+#endif
 
-class NFXGenericController: UIViewController
+class NFXGenericController: NFXViewController
 {
     var selectedModel: NFXHTTPModel = NFXHTTPModel()
 
     override func viewDidLoad()
     {
         super.viewDidLoad()
-        
+        #if os(iOS)
         self.edgesForExtendedLayout = .None
-        
-        self.view.backgroundColor = UIColor.NFXGray95Color()
-        
+        self.view.backgroundColor = NFXColor.NFXGray95Color()
+        #endif
     }
     
     func selectedModel(model: NFXHTTPModel)
@@ -38,15 +41,15 @@ class NFXGenericController: UIViewController
         let matchesBodyHeaders = regexBodyHeaders.matchesInString(string, options: NSMatchingOptions.WithoutAnchoringBounds, range: NSMakeRange(0, l)) as Array<NSTextCheckingResult>
         
         for match in matchesBodyHeaders {
-            tempMutableString.addAttribute(NSFontAttributeName, value: UIFont.NFXFontBold(14), range: match.range)
-            tempMutableString.addAttribute(NSForegroundColorAttributeName, value: UIColor.NFXOrangeColor(), range: match.range)
+            tempMutableString.addAttribute(NSFontAttributeName, value: NFXFont.NFXFontBold(14), range: match.range)
+            tempMutableString.addAttribute(NSForegroundColorAttributeName, value: NFXColor.NFXOrangeColor(), range: match.range)
         }
         
         let regexKeys = try! NSRegularExpression(pattern: "\\[.+?\\]", options: NSRegularExpressionOptions.CaseInsensitive)
         let matchesKeys = regexKeys.matchesInString(string, options: NSMatchingOptions.WithoutAnchoringBounds, range: NSMakeRange(0, l)) as Array<NSTextCheckingResult>
         
         for match in matchesKeys {
-            tempMutableString.addAttribute(NSForegroundColorAttributeName, value: UIColor.NFXBlackColor(), range: match.range)
+            tempMutableString.addAttribute(NSForegroundColorAttributeName, value: NFXColor.NFXBlackColor(), range: match.range)
         }
         
         

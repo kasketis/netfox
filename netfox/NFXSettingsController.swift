@@ -5,6 +5,8 @@
 //  Copyright © 2015 kasketis. All rights reserved.
 //
 
+#if os(iOS)
+    
 import Foundation
 import UIKit
 
@@ -287,3 +289,5 @@ class NFXSettingsController: NFXGenericController, UITableViewDelegate, UITableV
     }
     
 }
+
+#endif

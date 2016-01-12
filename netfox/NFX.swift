@@ -6,7 +6,6 @@
 //
 
 import Foundation
-import UIKit
 
 let nfxVersion = "1.7.2"
 
@@ -248,7 +247,7 @@ extension NFX {
     
     func showNFXFollowingPlatform()
     {
-
+// TODO
     }
     
     func hideNFXFollowingPlatform(completion: (() -> Void)?)

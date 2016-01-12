@@ -6,6 +6,8 @@
 //
 
 
+#if os(iOS)
+    
 import Foundation
 import UIKit
 
@@ -75,3 +77,5 @@ class NFXInfoController: NFXGenericController
     
 
 }
+
+#endif
