@@ -5,6 +5,8 @@
 //  Copyright © 2015 kasketis. All rights reserved.
 //
 
+#if os(iOS)
+    
 import UIKit
 
 extension UIWindow
@@ -83,3 +85,5 @@ public extension UIDevice
     }
 
 }
+
+#endif

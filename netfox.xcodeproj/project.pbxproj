@@ -88,8 +88,6 @@
 				E20F5DD51C3EEE2200D3E906 /* NFXHelper.swift */,
 				CEFE42BB1C0DDBD8001A56E0 /* NFXHTTPModel.swift */,
 				CEFE42BC1C0DDBD8001A56E0 /* NFXHTTPModelManager.swift */,
-				CEFE42BE1C0DDBD8001A56E0 /* NFXInfoController.swift */,
-				CEFE42C01C0DDBD8001A56E0 /* NFXListController.swift */,
 				CEFE42C11C0DDBD8001A56E0 /* NFXProtocol.swift */,
 			);
 			path = netfox;
@@ -106,6 +104,8 @@
 				CEFE42C21C0DDBD8001A56E0 /* NFXRawBodyDetailsController.swift */,
 				CEFE42C31C0DDBD8001A56E0 /* NFXSettingsController.swift */,
 				CEFE42C41C0DDBD8001A56E0 /* NFXStatisticsController.swift */,
+				CEFE42BE1C0DDBD8001A56E0 /* NFXInfoController.swift */,
+				CEFE42C01C0DDBD8001A56E0 /* NFXListController.swift */,
 			);
 			name = iOS;
 			sourceTree = "<group>";

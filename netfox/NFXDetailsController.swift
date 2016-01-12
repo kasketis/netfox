@@ -5,6 +5,8 @@
 //  Copyright © 2015 kasketis. All rights reserved.
 //
 
+#if os(iOS)
+    
 import Foundation
 import UIKit
 import MessageUI
@@ -333,3 +335,4 @@ class NFXDetailsController: NFXGenericController, MFMailComposeViewControllerDel
     
 }
 
+#endif

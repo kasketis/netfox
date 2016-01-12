@@ -7,6 +7,8 @@
 
 import Foundation
 
+#if os(iOS)
+    
 import UIKit
 
 class NFXListCell: UITableViewCell
@@ -182,3 +184,5 @@ class NFXListCell: UITableViewCell
         }
     }
 }
+
+#endif
