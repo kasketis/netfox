@@ -6,12 +6,18 @@
 //
 
 import Foundation
+#if os(OSX)
+import Cocoa
+#endif
 
 let nfxVersion = "1.7"
 
 @objc
 public class NFX: NSObject
 {
+    #if os(OSX)
+    var windowController: NFXWindowController?
+    #endif
     
     // swiftSharedInstance is not accessible from ObjC
     class var swiftSharedInstance: NFX
@@ -33,13 +39,6 @@ public class NFX: NSObject
     {
         case shake
         case custom
-        
-        func name() -> String {
-            switch self {
-            case .shake: return "shake"
-            case .custom: return "custom"
-            }
-        }
     }
     
     private var started: Bool = false
@@ -56,7 +55,7 @@ public class NFX: NSObject
         register()
         enable()
         clearOldData()
-        showMessage("Started!")
+        showMessage("Started!")        
     }
     
     @objc public func stop()
@@ -247,11 +246,16 @@ extension NFX {
     
     func showNFXFollowingPlatform()
     {
-// TODO
+        self.windowController = NFXWindowController(window: NSWindow(contentRect: NSMakeRect(100, 100, NSScreen.mainScreen()!.frame.width / 2, NSScreen.mainScreen()!.frame.height / 2),
+                styleMask: NSTitledWindowMask | NSResizableWindowMask | NSMiniaturizableWindowMask | NSClosableWindowMask, backing: NSBackingStoreType.Buffered,
+                `defer`: false))
+        self.windowController?.showWindow(nil)
+        self.windowController?.window?.makeKeyAndOrderFront(nil)
     }
     
     func hideNFXFollowingPlatform(completion: (() -> Void)?)
     {
+        self.windowController?.close()
         if let notNilCompletion = completion {
             notNilCompletion()
         }

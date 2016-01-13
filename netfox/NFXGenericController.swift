@@ -22,6 +22,8 @@ class NFXGenericController: NFXViewController
         #if os(iOS)
         self.edgesForExtendedLayout = .None
         self.view.backgroundColor = NFXColor.NFXGray95Color()
+        #elseif os(OSX)
+        self.view.layer?.backgroundColor = NFXColor.NFXGray95Color().CGColor
         #endif
     }
     
