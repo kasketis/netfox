@@ -7,7 +7,9 @@
 //
 
 import Foundation
+#if os(OSX)
 import Cocoa
+#endif
 
 enum HTTPModelShortType: String
 {
@@ -97,12 +99,12 @@ extension NFXFont
     #if os(iOS)
     class func NFXFont(size: CGFloat) -> UIFont
     {
-        return UIXFont(name: "HelveticaNeue", size: size)!
+        return UIFont(name: "HelveticaNeue", size: size)!
     }
     
     class func NFXFontBold(size: CGFloat) -> UIFont
     {
-        return UIXFont(name: "HelveticaNeue-Bold", size: size)!
+        return UIFont(name: "HelveticaNeue-Bold", size: size)!
     }
     #elseif os(OSX)
     class func NFXFont(size: CGFloat) -> NSFont

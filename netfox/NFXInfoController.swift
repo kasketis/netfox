@@ -64,7 +64,7 @@ class NFXInfoController: NFXGenericController
         
         tempString += "[App bundle identifier] \n\(NFXDebugInfo.getNFXBundleIdentifier())\n\n"
 
-        tempString += "[Device OS] \niOS \(NFXDebugInfo.getNFXiOSVersion())\n\n"
+        tempString += "[Device OS] \niOS \(NFXDebugInfo.getNFXOSVersion())\n\n"
 
         tempString += "[Device type] \n\(NFXDebugInfo.getNFXDeviceType())\n\n"
 
