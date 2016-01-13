@@ -17,6 +17,8 @@ public class NFX: NSObject
 {
     #if os(OSX)
     var windowController: NFXWindowController?
+    let mainMenu: NSMenu? = NSApp.mainMenu
+    var nfxMenuItem: NSMenuItem = NSMenuItem(title: "netfox", action: "show", keyEquivalent: String(character: NSF9FunctionKey, length: 1))
     #endif
     
     // swiftSharedInstance is not accessible from ObjC
@@ -55,7 +57,10 @@ public class NFX: NSObject
         register()
         enable()
         clearOldData()
-        showMessage("Started!")        
+        showMessage("Started!")
+        #if os(OSX)
+        self.addNetfoxToMainMenu()
+        #endif
     }
     
     @objc public func stop()
@@ -65,6 +70,9 @@ public class NFX: NSObject
         clearOldData()
         self.started = false
         showMessage("Stopped!")
+        #if os(OSX)
+        self.removeNetfoxFromMainmenu()
+        #endif
     }
     
     private func showMessage(msg: String) {
@@ -110,6 +118,13 @@ public class NFX: NSObject
     @objc public func setGesture(gesture: ENFXGesture)
     {
         self.selectedGesture = gesture
+        #if os(OSX)
+            if gesture == .shake {
+                self.addNetfoxToMainMenu()
+            } else {
+                self.removeNetfoxFromMainmenu()
+            }
+        #endif
     }
     
     @objc public func show()
@@ -201,13 +216,14 @@ public class NFX: NSObject
         }
         return self.filters
     }
+    
 }
 
 #if os(iOS)
 
 extension NFX {
     
-    func showNFXFollowingPlatform()
+    private func showNFXFollowingPlatform()
     {
         var navigationController: UINavigationController?
         
@@ -223,7 +239,7 @@ extension NFX {
         presentingViewController?.presentViewController(navigationController!, animated: true, completion: nil)
     }
     
-    func hideNFXFollowingPlatform(completion: (() -> Void)?)
+    private func hideNFXFollowingPlatform(completion: (() -> Void)?)
     {
         presentingViewController?.dismissViewControllerAnimated(true, completion: { () -> Void in
             if let notNilCompletion = completion {
@@ -244,7 +260,27 @@ extension NFX {
     
 extension NFX {
     
-    func showNFXFollowingPlatform()
+    private func setupNetfoxMenuItem() {
+        self.nfxMenuItem.target = self
+        self.nfxMenuItem.action = "motionDetected"
+        self.nfxMenuItem.keyEquivalent = "n"
+        self.nfxMenuItem.keyEquivalentModifierMask = Int(NSEventModifierFlags.CommandKeyMask.rawValue | NSEventModifierFlags.ControlKeyMask.rawValue)
+    }
+    
+    private func addNetfoxToMainMenu() {
+        self.setupNetfoxMenuItem()
+        if let menu = self.mainMenu {
+            menu.itemArray[1].submenu?.insertItem(self.nfxMenuItem, atIndex: 0)
+        }
+    }
+    
+    private func removeNetfoxFromMainmenu() {
+        if let menu = self.mainMenu {
+            menu.removeItem(self.nfxMenuItem)
+        }
+    }
+    
+    private func showNFXFollowingPlatform()
     {
         self.windowController = NFXWindowController(window: NSWindow(contentRect: NSMakeRect(100, 100, NSScreen.mainScreen()!.frame.width / 2, NSScreen.mainScreen()!.frame.height / 2),
                 styleMask: NSTitledWindowMask | NSResizableWindowMask | NSMiniaturizableWindowMask | NSClosableWindowMask, backing: NSBackingStoreType.Buffered,
@@ -253,7 +289,7 @@ extension NFX {
         self.windowController?.window?.makeKeyAndOrderFront(nil)
     }
     
-    func hideNFXFollowingPlatform(completion: (() -> Void)?)
+    private func hideNFXFollowingPlatform(completion: (() -> Void)?)
     {
         self.windowController?.close()
         if let notNilCompletion = completion {
