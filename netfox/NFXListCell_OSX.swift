@@ -80,8 +80,8 @@ class NFXListCell_OSX: NSTableCellView {
         fatalError("init(coder:) has not been implemented")
     }
     
-    override func layoutSubtreeIfNeeded() {
-        super.layoutSubtreeIfNeeded()
+    override func layout() {
+        super.layout()
         
         self.statusView.frame = CGRectMake(0, 0, 50, frame.height - 1)
         

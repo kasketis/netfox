@@ -10,25 +10,37 @@
 
 import Cocoa
 
-class NFXListController_OSX: NFXListController, NSTableViewDelegate, NSTableViewDataSource {
+class NFXListController_OSX: NFXListController, NSTableViewDelegate, NSTableViewDataSource, NSSearchFieldDelegate {
     
     // MARK: Properties
     
+    var searchField: NSSearchField!
     var tableView: NSTableView = NSTableView()
     var isSearchControllerActive: Bool = false
     var delegate: NFXWindowControllerDelegate?
     
     // MARK: View Life Cycle
-    
+
     override func viewDidLoad()
     {
         super.viewDidLoad()
+    }
 
-        self.tableView.frame = self.view.frame
+    func initializeWithFrame(frame: CGRect) {
+        self.view.frame = frame
+        self.view.translatesAutoresizingMaskIntoConstraints = true
+        
+        self.searchField = NSSearchField(frame: CGRectMake(0, NSHeight(frame) - 22.0, NSWidth(frame), 22.0))
+        self.searchField.autoresizingMask = [.ViewWidthSizable]
+        self.searchField.backgroundColor = NSColor.yellowColor()
+        self.view.addSubview(self.searchField)
+        
+        self.tableView.frame = CGRectMake(0, NSHeight(self.searchField.frame), NSWidth(frame), NSHeight(frame) - NSHeight(self.searchField.frame))
         self.tableView.autoresizingMask = [.ViewWidthSizable, .ViewHeightSizable]
         self.tableView.translatesAutoresizingMaskIntoConstraints = true
         self.tableView.setDelegate(self)
         self.tableView.setDataSource(self)
+        self.tableView.layer?.backgroundColor = NSColor.greenColor().CGColor
         self.view.addSubview(self.tableView)
         self.tableView.registerNib(nil, forIdentifier: NSStringFromClass(NFXListCell_OSX))
     }
@@ -43,6 +55,30 @@ class NFXListController_OSX: NFXListController, NSTableViewDelegate, NSTableView
             self.tableView.reloadData()
             self.tableView.setNeedsDisplay()
         }
+    }
+    
+    // MARK: Notifications
+    
+    func deactivateSearchController()
+    {
+        self.isSearchControllerActive = false
+    }
+    
+    // MARK: Search
+    
+    func updateSearchResultsForSearchController()
+    {
+//        let predicateURL = NSPredicate(format: "requestURL contains[cd] '\(self.saearchField.stringValue!)'")
+//        let predicateMethod = NSPredicate(format: "requestMethod contains[cd] '\(self.saearchField.stringValue!)'")
+//        let predicateType = NSPredicate(format: "responseType contains[cd] '\(self.saearchField.stringValue!)'")
+//        
+//        let predicates = [predicateURL, predicateMethod, predicateType]
+//        
+//        let searchPredicate = NSCompoundPredicate(orPredicateWithSubpredicates: predicates)
+//        
+//        let array = (NFXHTTPModelManager.sharedInstance.getModels() as NSArray).filteredArrayUsingPredicate(searchPredicate)
+//        self.filteredTableData = array as! [NFXHTTPModel]
+        reloadData()
     }
     
     // MARK: UITableViewDataSource

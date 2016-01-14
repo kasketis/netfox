@@ -16,8 +16,8 @@ protocol NFXWindowControllerDelegate {
     
 class NFXWindowController: NSWindowController, NSWindowDelegate {
 
-    let listViewController = NFXListController_OSX()
-    let detailsViewController = NFXListController_OSX()
+    var listViewController: NFXListController_OSX!
+    let detailsViewController = NFXDetailsController_OSX()
     
     // MARK: Life cycle
     
@@ -45,9 +45,10 @@ class NFXWindowController: NSWindowController, NSWindowDelegate {
     }
     
     func sidebarSplitViewItem() -> NSSplitViewItem {
-        let windowWidth = NSWidth(self.window!.frame)
+        listViewController = NFXListController_OSX()
+        listViewController.initializeWithFrame(CGRect(x: 0, y: 0, width: NSWidth(self.window!.frame) / 3, height: NSHeight(self.window!.frame)))
+        
         listViewController.delegate = self
-        listViewController.view.frame = CGRect(x: 0, y: 0, width: windowWidth / 3, height: NSHeight(self.window!.frame))
         let sidebarSplitViewItem = NSSplitViewItem(viewController: listViewController)
         return sidebarSplitViewItem
     }

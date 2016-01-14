@@ -17,7 +17,7 @@ public class NFX: NSObject
 {
     #if os(OSX)
     var windowController: NFXWindowController?
-    let mainMenu: NSMenu? = NSApp.mainMenu
+    let mainMenu: NSMenu? = NSApp.mainMenu?.itemArray[1].submenu
     var nfxMenuItem: NSMenuItem = NSMenuItem(title: "netfox", action: "show", keyEquivalent: String(character: NSF9FunctionKey, length: 1))
     #endif
     
@@ -270,7 +270,7 @@ extension NFX {
     private func addNetfoxToMainMenu() {
         self.setupNetfoxMenuItem()
         if let menu = self.mainMenu {
-            menu.itemArray[1].submenu?.insertItem(self.nfxMenuItem, atIndex: 0)
+            menu.insertItem(self.nfxMenuItem, atIndex: 0)
         }
     }
     
