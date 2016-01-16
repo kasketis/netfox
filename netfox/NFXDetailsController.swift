@@ -89,6 +89,7 @@ class NFXDetailsController: NFXGenericController, MFMailComposeViewControllerDel
         textLabel.numberOfLines = 0
         textLabel.attributedText = content
         textLabel.sizeToFit()
+		textLabel.textAlignment = .Left
         scrollView.addSubview(textLabel)
         
         var moreButton: UIButton
