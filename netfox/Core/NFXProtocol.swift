@@ -70,29 +70,28 @@ public class NFXProtocol: NSURLProtocol
         
         session!.dataTaskWithRequest(req, completionHandler: {data, response, error in
             
-            if error != nil {
+            if let error = error {
                 self.model?.saveErrorResponse()
                 self.loaded()
-                self.client?.URLProtocol(self, didFailWithError: error!)
-                
+                self.client?.URLProtocol(self, didFailWithError: error)
             } else {
-                if ((data) != nil) {
-                    self.model?.saveResponse(response!, data: data!)
+                if let
+                    data = data,
+                    response = response {
+                    self.model?.saveResponse(response, data: data)
                 }
                 self.loaded()
             }
             
-            if (response != nil) {
-                self.client!.URLProtocol(self, didReceiveResponse: response!, cacheStoragePolicy: .NotAllowed)
+            if let response = response {
+                self.client?.URLProtocol(self, didReceiveResponse: response, cacheStoragePolicy: .NotAllowed)
             }
             
-            if (data != nil) {
-                self.client!.URLProtocol(self, didLoadData: data!)
+            if let data = data {
+                self.client?.URLProtocol(self, didLoadData: data)
             }
             
-            if let client = self.client {
-                client.URLProtocolDidFinishLoading(self)
-            }
+            self.client?.URLProtocolDidFinishLoading(self)
 
         }).resume()
         
