@@ -9,51 +9,37 @@
 #if os(OSX)
 
 import Cocoa
+    
+class TestView: NSView {
+    override func drawRect(dirtyRect: NSRect) {
+        NSRectFill(dirtyRect)
+    }
+}
 
 class NFXListController_OSX: NFXListController, NSTableViewDelegate, NSTableViewDataSource, NSSearchFieldDelegate {
     
     // MARK: Properties
     
-    var searchField: NSSearchField!
-    var tableView: NSTableView = NSTableView()
+    @IBOutlet var searchField: NSSearchField!
+    @IBOutlet var tableView: NSTableView!
+
     var isSearchControllerActive: Bool = false
     var delegate: NFXWindowControllerDelegate?
     
+    private let cellIdentifier = "NFXListCell_OSX"
+    
     // MARK: View Life Cycle
 
-    override func viewDidLoad()
-    {
-        super.viewDidLoad()
+    override func awakeFromNib() {
+        tableView.registerNib(NSNib(nibNamed: cellIdentifier, bundle: nil), forIdentifier: cellIdentifier)
     }
 
-    func initializeWithFrame(frame: CGRect) {
-        self.view.frame = frame
-        self.view.translatesAutoresizingMaskIntoConstraints = true
-        
-        self.searchField = NSSearchField(frame: CGRectMake(0, NSHeight(frame) - 22.0, NSWidth(frame), 22.0))
-        self.searchField.autoresizingMask = [.ViewWidthSizable]
-        self.searchField.backgroundColor = NSColor.yellowColor()
-        self.view.addSubview(self.searchField)
-        
-        self.tableView.frame = CGRectMake(0, NSHeight(self.searchField.frame), NSWidth(frame), NSHeight(frame) - NSHeight(self.searchField.frame))
-        self.tableView.autoresizingMask = [.ViewWidthSizable, .ViewHeightSizable]
-        self.tableView.translatesAutoresizingMaskIntoConstraints = true
-        self.tableView.setDelegate(self)
-        self.tableView.setDataSource(self)
-        self.tableView.layer?.backgroundColor = NSColor.greenColor().CGColor
-        self.view.addSubview(self.tableView)
-        self.tableView.registerNib(nil, forIdentifier: NSStringFromClass(NFXListCell_OSX))
-    }
-    
-    override func loadView() {
-        self.view = NSView()
-    }
-    
+    override func loadView() {}
+
     override func reloadData()
     {
         dispatch_async(dispatch_get_main_queue()) { () -> Void in
             self.tableView.reloadData()
-            self.tableView.setNeedsDisplay()
         }
     }
     
@@ -93,7 +79,9 @@ class NFXListController_OSX: NFXListController, NSTableViewDelegate, NSTableView
     
     func tableView(tableView: NSTableView, viewForTableColumn tableColumn: NSTableColumn?, row: Int) -> NSView? {
         
-        let cell = tableView.makeViewWithIdentifier(NSStringFromClass(NFXListCell_OSX), owner: nil) as! NFXListCell_OSX
+        guard let cell = tableView.makeViewWithIdentifier(cellIdentifier, owner: nil) as? NFXListCell_OSX else {
+            return nil
+        }
         
         if (self.isSearchControllerActive) {
             if self.filteredTableData.count > 0 {
@@ -117,6 +105,9 @@ class NFXListController_OSX: NFXListController, NSTableViewDelegate, NSTableView
     }
 
     func tableViewSelectionDidChange(notification: NSNotification) {
+        guard tableView.selectedRow >= 0 else {
+            return
+        }
         var model: NFXHTTPModel
         if (self.isSearchControllerActive) {
             model = self.filteredTableData[self.tableView.selectedRow]

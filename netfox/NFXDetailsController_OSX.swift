@@ -12,9 +12,7 @@ import Cocoa
 
 class NFXDetailsController_OSX: NFXGenericController {
 
-    override func loadView() {
-        self.view = NSView()
-    }
+    override func loadView() {}
 
     
 }

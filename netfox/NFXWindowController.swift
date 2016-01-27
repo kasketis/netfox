@@ -15,57 +15,53 @@ protocol NFXWindowControllerDelegate {
 }
     
 class NFXWindowController: NSWindowController, NSWindowDelegate {
+    
+    @IBOutlet var settingsButton: NSButton!
+    @IBOutlet var infoButtons: NSButton!
+    @IBOutlet var statisticsButton: NSButton!
 
-    var listViewController: NFXListController_OSX!
-    let detailsViewController = NFXDetailsController_OSX()
+    @IBOutlet var listView: NSView!
+    @IBOutlet var detailsView: NSView!
+    @IBOutlet var listViewController: NFXListController_OSX!
+    @IBOutlet var detailsViewController: NFXDetailsController_OSX!
     
-    // MARK: Life cycle
+    @IBOutlet var settingsPopover: NSPopover!
+    @IBOutlet var infoPopover: NSPopover!
+    @IBOutlet var statisticsPopover: NSPopover!
     
-    override init(window: NSWindow?) {
-        super.init(window: window)
-        self.window?.title = "netfox"
-        self.window?.delegate = self
-        self.setupSplitViewController()
+    // MARK: Lifecycle
+    
+    override func awakeFromNib() {
+        settingsButton.image = NSImage(data: NFXAssets.getImage(.INFO))
+        infoButtons.image = NSImage(data: NFXAssets.getImage(.SETTINGS))
+        statisticsButton.image = NSImage(data: NFXAssets.getImage(.STATISTICS))
+
+        listViewController.view = listView
+        detailsViewController.view = detailsView
+
+        listViewController.reloadData()
     }
 
-    required init?(coder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
-    }
-    
-    // MARK: setup
-    
-    func setupSplitViewController() {
-        let splitViewController = NSSplitViewController()
-        splitViewController.view.frame = self.window!.frame
-        splitViewController.addSplitViewItem(self.sidebarSplitViewItem())
-        splitViewController.addSplitViewItem(self.bodySplitViewItem())
-        splitViewController.splitView.layer?.backgroundColor = NFXColor.yellowColor().CGColor
-        splitViewController.splitView.wantsLayer = true
-        self.window?.contentViewController = splitViewController
-    }
-    
-    func sidebarSplitViewItem() -> NSSplitViewItem {
-        listViewController = NFXListController_OSX()
-        listViewController.initializeWithFrame(CGRect(x: 0, y: 0, width: NSWidth(self.window!.frame) / 3, height: NSHeight(self.window!.frame)))
-        
-        listViewController.delegate = self
-        let sidebarSplitViewItem = NSSplitViewItem(viewController: listViewController)
-        return sidebarSplitViewItem
-    }
-    
-    func bodySplitViewItem() -> NSSplitViewItem {
-        let windowWidth = NSWidth(self.window!.frame)
-        let sidebarWidth = windowWidth / 3
-        detailsViewController.view.frame = CGRect(x: sidebarWidth, y: 0, width: windowWidth - sidebarWidth, height: NSHeight(self.window!.frame))
-        let bodySplitViewItem = NSSplitViewItem(viewController: detailsViewController)
-        return bodySplitViewItem
-    }
-    
     // MARK: NSWindowDelegate
     
     func windowWillClose(notification: NSNotification) {
         self.window?.delegate = nil
         NFX.sharedInstance().stop()
+    }
+    
+    // MARK: Actions
+    
+    @IBAction func settingsClicked(sender: AnyObject?) {
+        print("settings")
+        settingsPopover.showRelativeToRect(NSZeroRect, ofView: settingsButton, preferredEdge: NSRectEdge.MinY)
+    }
+    
+    @IBAction func infoClicked(sender: AnyObject?) {
+        print("info")
+    }
+    
+    @IBAction func statisticsClicked(sender: AnyObject?) {
+        print("statistics")
     }
 }
     
