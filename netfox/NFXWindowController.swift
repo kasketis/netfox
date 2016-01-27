@@ -17,7 +17,7 @@ protocol NFXWindowControllerDelegate {
 class NFXWindowController: NSWindowController, NSWindowDelegate {
     
     @IBOutlet var settingsButton: NSButton!
-    @IBOutlet var infoButtons: NSButton!
+    @IBOutlet var infoButton: NSButton!
     @IBOutlet var statisticsButton: NSButton!
 
     @IBOutlet var listView: NSView!
@@ -29,15 +29,28 @@ class NFXWindowController: NSWindowController, NSWindowDelegate {
     @IBOutlet var infoPopover: NSPopover!
     @IBOutlet var statisticsPopover: NSPopover!
     
+    @IBOutlet var settingsViewController: NFXSettingsController_OSX!
+    @IBOutlet var settingsView: NSView!
+
+//    @IBOutlet var infoViewController: NFXInfoController_OSX!
+//    @IBOutlet var infoView: NSView!
+    
+    @IBOutlet var statisticsViewController: NFXStatisticsController_OSX!
+    @IBOutlet var statisticsView: NSView!
+    
     // MARK: Lifecycle
     
     override func awakeFromNib() {
-        settingsButton.image = NSImage(data: NFXAssets.getImage(.INFO))
-        infoButtons.image = NSImage(data: NFXAssets.getImage(.SETTINGS))
+        settingsButton.image = NSImage(data: NFXAssets.getImage(.SETTINGS))
+        infoButton.image = NSImage(data: NFXAssets.getImage(.INFO))
         statisticsButton.image = NSImage(data: NFXAssets.getImage(.STATISTICS))
 
         listViewController.view = listView
         detailsViewController.view = detailsView
+        
+        settingsViewController.view = settingsView
+//        infoViewController.view = infoView
+        statisticsViewController.view = statisticsView
 
         listViewController.reloadData()
     }
@@ -52,16 +65,15 @@ class NFXWindowController: NSWindowController, NSWindowDelegate {
     // MARK: Actions
     
     @IBAction func settingsClicked(sender: AnyObject?) {
-        print("settings")
         settingsPopover.showRelativeToRect(NSZeroRect, ofView: settingsButton, preferredEdge: NSRectEdge.MinY)
     }
     
     @IBAction func infoClicked(sender: AnyObject?) {
-        print("info")
+        infoPopover.showRelativeToRect(NSZeroRect, ofView: infoButton, preferredEdge: NSRectEdge.MinY)
     }
     
     @IBAction func statisticsClicked(sender: AnyObject?) {
-        print("statistics")
+        statisticsPopover.showRelativeToRect(NSZeroRect, ofView: statisticsButton, preferredEdge: NSRectEdge.MinY)
     }
 }
     
