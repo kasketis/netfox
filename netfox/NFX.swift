@@ -280,13 +280,11 @@ extension NFX {
         }
     }
     
-    private func showNFXFollowingPlatform()
-    {
-        self.windowController = NFXWindowController(window: NSWindow(contentRect: NSMakeRect(100, 100, NSScreen.mainScreen()!.frame.width / 2, NSScreen.mainScreen()!.frame.height / 2),
-                styleMask: NSTitledWindowMask | NSResizableWindowMask | NSMiniaturizableWindowMask | NSClosableWindowMask, backing: NSBackingStoreType.Buffered,
-                `defer`: false))
+    private func showNFXFollowingPlatform()  {
+        if self.windowController == nil {
+            self.windowController = NFXWindowController(windowNibName: "NetfoxWindow")
+        }
         self.windowController?.showWindow(nil)
-        self.windowController?.window?.makeKeyAndOrderFront(nil)
     }
     
     private func hideNFXFollowingPlatform(completion: (() -> Void)?)
