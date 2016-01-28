@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="9531" systemVersion="15D21" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES" customObjectInstantitationMethod="direct">
+<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="9531" systemVersion="15D21" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES">
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="9531"/>
     </dependencies>
@@ -10,6 +10,8 @@
                 <outlet property="detailsViewController" destination="m3Y-f4-6bj" id="2K2-pF-1Da"/>
                 <outlet property="infoButton" destination="5gc-X4-gpJ" id="QAD-Kx-h3B"/>
                 <outlet property="infoPopover" destination="5Ji-HP-h74" id="xE2-uz-N2e"/>
+                <outlet property="infoView" destination="3zB-N6-XRF" id="mXI-4N-t1X"/>
+                <outlet property="infoViewController" destination="CXf-9K-qWP" id="Wm4-DV-MnG"/>
                 <outlet property="listView" destination="KBu-Ny-MmK" id="UhK-Pv-T6T"/>
                 <outlet property="listViewController" destination="9sg-fL-85B" id="bcK-iC-AUl"/>
                 <outlet property="settingsButton" destination="8B4-L1-Eyx" id="6G6-cq-nc5"/>
@@ -207,7 +209,7 @@
             </view>
             <point key="canvasLocation" x="600.5" y="451"/>
         </window>
-        <viewController id="9sg-fL-85B" customClass="NFXListController_OSX" customModule="KaraFun" customModuleProvider="target">
+        <viewController id="9sg-fL-85B" customClass="NFXListController_OSX" customModule="KaraFun">
             <connections>
                 <outlet property="searchField" destination="gCb-Cj-45V" id="uUx-a0-ceG"/>
                 <outlet property="tableView" destination="jfJ-0b-tAz" id="hdK-b7-8EX"/>
@@ -218,6 +220,7 @@
             <connections>
                 <outlet property="nfxURLButton" destination="nbr-YK-put" id="ejg-6G-o3M"/>
                 <outlet property="nfxVersionLabel" destination="Bdo-cd-sT9" id="D64-83-wpt"/>
+                <outlet property="responseTypesTableView" destination="Ulh-Eo-vFb" id="sgu-SU-mki"/>
             </connections>
         </viewController>
         <popover behavior="t" id="2km-Aw-Tnf" userLabel="Popover - Settings">
@@ -245,7 +248,7 @@
                 <scrollView autohidesScrollers="YES" horizontalLineScroll="19" horizontalPageScroll="10" verticalLineScroll="19" verticalPageScroll="10" usesPredominantAxisScrolling="NO" translatesAutoresizingMaskIntoConstraints="NO" id="HRy-zu-fkn">
                     <rect key="frame" x="0.0" y="108" width="247" height="144"/>
                     <clipView key="contentView" id="dZI-AB-6Mb">
-                        <rect key="frame" x="1" y="23" width="245" height="120"/>
+                        <rect key="frame" x="1" y="0.0" width="245" height="143"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <tableView verticalHuggingPriority="750" allowsExpansionToolTips="YES" columnAutoresizingStyle="lastColumnOnly" columnReordering="NO" columnSelection="YES" columnResizing="NO" multipleSelection="NO" autosaveColumns="NO" rowSizeStyle="automatic" headerView="lve-EN-zin" viewBased="YES" id="Ulh-Eo-vFb">
@@ -288,6 +291,10 @@
                                         </prototypeCellViews>
                                     </tableColumn>
                                 </tableColumns>
+                                <connections>
+                                    <outlet property="dataSource" destination="nry-se-EGu" id="BAm-UH-V09"/>
+                                    <outlet property="delegate" destination="nry-se-EGu" id="3yu-xJ-NBP"/>
+                                </connections>
                             </tableView>
                         </subviews>
                         <color key="backgroundColor" name="controlBackgroundColor" catalog="System" colorSpace="catalog"/>
@@ -299,7 +306,7 @@
                         <rect key="frame" x="1" y="124" width="212" height="16"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </scroller>
-                    <scroller key="verticalScroller" hidden="YES" verticalHuggingPriority="750" doubleValue="1" horizontal="NO" id="85c-W9-JQS">
+                    <scroller key="verticalScroller" hidden="YES" verticalHuggingPriority="750" horizontal="NO" id="85c-W9-JQS">
                         <rect key="frame" x="224" y="17" width="15" height="102"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </scroller>
@@ -329,7 +336,7 @@
                 <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="Bdo-cd-sT9">
                     <rect key="frame" x="18" y="45" width="211" height="14"/>
                     <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" alignment="center" title="netfox - 1.7" id="QI0-hz-THc">
-                        <font key="font" metaFont="system" size="11"/>
+                        <font key="font" metaFont="smallSystem"/>
                         <color key="textColor" red="1" green="0.0" blue="0.35576311081816314" alpha="1" colorSpace="calibratedRGB"/>
                         <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
                     </textFieldCell>
@@ -341,7 +348,7 @@
                     </constraints>
                     <buttonCell key="cell" type="bevel" title="Button" bezelStyle="rounded" alignment="center" imageScaling="proportionallyDown" inset="2" id="ate-C6-t7k">
                         <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
-                        <font key="font" metaFont="system" size="11"/>
+                        <font key="font" metaFont="smallSystem"/>
                     </buttonCell>
                     <connections>
                         <action selector="nfxURLButtonClicked:" target="nry-se-EGu" id="X8Q-qH-BFC"/>
@@ -369,11 +376,11 @@
                 <constraint firstAttribute="trailing" secondItem="4FJ-AJ-ZZu" secondAttribute="trailing" constant="20" id="sve-EO-CwZ"/>
                 <constraint firstAttribute="trailing" secondItem="XMU-yV-S1C" secondAttribute="trailing" constant="20" id="waS-NV-gUn"/>
             </constraints>
-            <point key="canvasLocation" x="271.5" y="-47.5"/>
+            <point key="canvasLocation" x="130.5" y="-106.5"/>
         </customView>
-        <viewController id="CXf-9K-qWP" userLabel="Popover Info View Controller">
+        <viewController id="CXf-9K-qWP" userLabel="Popover Info View Controller" customClass="NFXInfoController_OSX" customModule="KaraFun" customModuleProvider="target">
             <connections>
-                <outlet property="view" destination="3zB-N6-XRF" id="j0B-l9-d5O"/>
+                <outlet property="textView" destination="MNB-tj-Xyc" id="F3E-pZ-Az8"/>
             </connections>
         </viewController>
         <popover behavior="t" id="5Ji-HP-h74" userLabel="Popover - Info">
@@ -385,13 +392,21 @@
             <rect key="frame" x="0.0" y="0.0" width="290" height="315"/>
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
             <subviews>
+                <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="pCf-fP-gAY">
+                    <rect key="frame" x="18" y="278" width="254" height="17"/>
+                    <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" alignment="center" title="Info" id="RKO-hy-VZi">
+                        <font key="font" metaFont="systemBold"/>
+                        <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
+                        <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
+                    </textFieldCell>
+                </textField>
                 <scrollView horizontalLineScroll="10" horizontalPageScroll="10" verticalLineScroll="10" verticalPageScroll="10" hasHorizontalScroller="NO" usesPredominantAxisScrolling="NO" translatesAutoresizingMaskIntoConstraints="NO" id="189-LR-VRH">
                     <rect key="frame" x="20" y="20" width="250" height="250"/>
                     <clipView key="contentView" id="WAD-aS-nC2">
                         <rect key="frame" x="1" y="1" width="248" height="248"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <textView editable="NO" importsGraphics="NO" findStyle="panel" continuousSpellChecking="YES" allowsUndo="YES" usesRuler="YES" usesFontPanel="YES" verticallyResizable="YES" allowsNonContiguousLayout="YES" quoteSubstitution="YES" dashSubstitution="YES" spellingCorrection="YES" smartInsertDelete="YES" id="MNB-tj-Xyc">
+                            <textView editable="NO" importsGraphics="NO" findStyle="panel" continuousSpellChecking="YES" allowsUndo="YES" usesRuler="YES" usesFontPanel="YES" verticallyResizable="YES" allowsNonContiguousLayout="YES" quoteSubstitution="YES" dashSubstitution="YES" spellingCorrection="YES" smartInsertDelete="YES" id="MNB-tj-Xyc" userLabel="Text View - Info">
                                 <rect key="frame" x="0.0" y="0.0" width="248" height="248"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -417,14 +432,6 @@
                         <autoresizingMask key="autoresizingMask"/>
                     </scroller>
                 </scrollView>
-                <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="pCf-fP-gAY">
-                    <rect key="frame" x="18" y="278" width="254" height="17"/>
-                    <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" alignment="center" title="Info" id="RKO-hy-VZi">
-                        <font key="font" metaFont="systemBold"/>
-                        <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
-                        <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
-                    </textFieldCell>
-                </textField>
             </subviews>
             <constraints>
                 <constraint firstItem="pCf-fP-gAY" firstAttribute="top" secondItem="3zB-N6-XRF" secondAttribute="top" constant="20" symbolic="YES" id="Jbk-nQ-IW0"/>
@@ -441,13 +448,21 @@
             <rect key="frame" x="0.0" y="0.0" width="290" height="315"/>
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
             <subviews>
+                <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="oSX-MK-Tts">
+                    <rect key="frame" x="18" y="278" width="254" height="17"/>
+                    <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" alignment="center" title="Statistics" id="WBR-K3-Idq">
+                        <font key="font" metaFont="systemBold"/>
+                        <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
+                        <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
+                    </textFieldCell>
+                </textField>
                 <scrollView horizontalLineScroll="10" horizontalPageScroll="10" verticalLineScroll="10" verticalPageScroll="10" hasHorizontalScroller="NO" usesPredominantAxisScrolling="NO" translatesAutoresizingMaskIntoConstraints="NO" id="unB-kv-F42">
                     <rect key="frame" x="20" y="20" width="250" height="250"/>
                     <clipView key="contentView" id="KhA-eS-wlq">
                         <rect key="frame" x="1" y="1" width="248" height="248"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <textView editable="NO" importsGraphics="NO" findStyle="panel" continuousSpellChecking="YES" allowsUndo="YES" usesRuler="YES" usesFontPanel="YES" verticallyResizable="YES" allowsNonContiguousLayout="YES" quoteSubstitution="YES" dashSubstitution="YES" spellingCorrection="YES" smartInsertDelete="YES" id="x6g-1e-icD">
+                            <textView editable="NO" importsGraphics="NO" findStyle="panel" continuousSpellChecking="YES" allowsUndo="YES" usesRuler="YES" usesFontPanel="YES" verticallyResizable="YES" allowsNonContiguousLayout="YES" quoteSubstitution="YES" dashSubstitution="YES" spellingCorrection="YES" smartInsertDelete="YES" id="x6g-1e-icD" userLabel="Text View - Statistics">
                                 <rect key="frame" x="0.0" y="0.0" width="248" height="248"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -473,14 +488,6 @@
                         <autoresizingMask key="autoresizingMask"/>
                     </scroller>
                 </scrollView>
-                <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="oSX-MK-Tts">
-                    <rect key="frame" x="18" y="278" width="254" height="17"/>
-                    <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" alignment="center" title="Statistics" id="WBR-K3-Idq">
-                        <font key="font" metaFont="systemBold"/>
-                        <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
-                        <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
-                    </textFieldCell>
-                </textField>
             </subviews>
             <constraints>
                 <constraint firstItem="oSX-MK-Tts" firstAttribute="leading" secondItem="o2t-Bo-0qK" secondAttribute="leading" constant="20" symbolic="YES" id="5bh-BC-WaD"/>
@@ -493,7 +500,11 @@
             </constraints>
             <point key="canvasLocation" x="813" y="-104"/>
         </customView>
-        <viewController id="DZ0-EN-1Ob" userLabel="Popover Statistics View Controller" customClass="NFXStatisticsController_OSX" customModule="KaraFun" customModuleProvider="target"/>
+        <viewController id="DZ0-EN-1Ob" userLabel="Popover Statistics View Controller" customClass="NFXStatisticsController_OSX" customModule="KaraFun" customModuleProvider="target">
+            <connections>
+                <outlet property="textView" destination="x6g-1e-icD" id="WQy-Ki-qmU"/>
+            </connections>
+        </viewController>
         <popover behavior="t" id="qC0-2M-a94" userLabel="Popover - Statistics">
             <connections>
                 <outlet property="contentViewController" destination="DZ0-EN-1Ob" id="yNq-fy-uYU"/>

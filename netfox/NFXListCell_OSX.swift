@@ -26,23 +26,7 @@ class NFXListCell_OSX: NSTableCellView
     let padding: CGFloat = 5
     
     // MARK: Life cycle
-    
-//    override init(frame frameRect: NSRect) 
-//    {
-//        super.init(frame: frameRect)
-//        layer?.backgroundColor = NFXColor.clearColor().CGColor
-//
-//        self.circleView.layer?.backgroundColor = NSColor.NFXGray44Color().CGColor
-//        self.circleView.layer?.cornerRadius = 4
-//        self.circleView.alphaValue = 0.2
-//    }
-//    
-//    required init?(coder aDecoder: NSCoder)
-//    {
-//        super.init(coder: aDecoder)
-//        
-//    }
-    
+        
     override func awakeFromNib() {
         layer?.backgroundColor = NFXColor.clearColor().CGColor
         
