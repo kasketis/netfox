@@ -164,7 +164,9 @@ class NFXHTTPModel: NSObject
     {
         do {
             try dataString.writeToFile(toFile, atomically: false, encoding: NSUTF8StringEncoding)
-        } catch {}
+        } catch {
+            print("catch !!!")
+        }
     }
     
     func readRawData(fromFile: String) -> NSData?

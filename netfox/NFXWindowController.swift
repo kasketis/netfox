@@ -32,8 +32,8 @@ class NFXWindowController: NSWindowController, NSWindowDelegate {
     @IBOutlet var settingsViewController: NFXSettingsController_OSX!
     @IBOutlet var settingsView: NSView!
 
-//    @IBOutlet var infoViewController: NFXInfoController_OSX!
-//    @IBOutlet var infoView: NSView!
+    @IBOutlet var infoViewController: NFXInfoController_OSX!
+    @IBOutlet var infoView: NSView!
     
     @IBOutlet var statisticsViewController: NFXStatisticsController_OSX!
     @IBOutlet var statisticsView: NSView!
@@ -41,6 +41,7 @@ class NFXWindowController: NSWindowController, NSWindowDelegate {
     // MARK: Lifecycle
     
     override func awakeFromNib() {
+        print(__FUNCTION__)
         settingsButton.image = NSImage(data: NFXAssets.getImage(.SETTINGS))
         infoButton.image = NSImage(data: NFXAssets.getImage(.INFO))
         statisticsButton.image = NSImage(data: NFXAssets.getImage(.STATISTICS))
@@ -49,10 +50,11 @@ class NFXWindowController: NSWindowController, NSWindowDelegate {
         detailsViewController.view = detailsView
         
         settingsViewController.view = settingsView
-//        infoViewController.view = infoView
+        infoViewController.view = infoView
         statisticsViewController.view = statisticsView
 
         listViewController.reloadData()
+        statisticsViewController.reloadData()
     }
 
     // MARK: NSWindowDelegate
@@ -65,15 +67,15 @@ class NFXWindowController: NSWindowController, NSWindowDelegate {
     // MARK: Actions
     
     @IBAction func settingsClicked(sender: AnyObject?) {
-        settingsPopover.showRelativeToRect(NSZeroRect, ofView: settingsButton, preferredEdge: NSRectEdge.MinY)
+        settingsPopover.showRelativeToRect(NSZeroRect, ofView: settingsButton, preferredEdge: NSRectEdge.MaxY)
     }
     
     @IBAction func infoClicked(sender: AnyObject?) {
-        infoPopover.showRelativeToRect(NSZeroRect, ofView: infoButton, preferredEdge: NSRectEdge.MinY)
+        infoPopover.showRelativeToRect(NSZeroRect, ofView: infoButton, preferredEdge: NSRectEdge.MaxY)
     }
     
     @IBAction func statisticsClicked(sender: AnyObject?) {
-        statisticsPopover.showRelativeToRect(NSZeroRect, ofView: statisticsButton, preferredEdge: NSRectEdge.MinY)
+        statisticsPopover.showRelativeToRect(NSZeroRect, ofView: statisticsButton, preferredEdge: NSRectEdge.MaxY)
     }
 }
     

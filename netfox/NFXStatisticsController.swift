@@ -21,21 +21,6 @@ class NFXStatisticsController: NFXGenericController
     
     var fastestResponseTime: Float = 999
     var slowestResponseTime: Float = 0
-
-    
-    override func viewDidLoad()
-    {
-        super.viewDidLoad()
-        
-        generateStatics()
-        
-        NSNotificationCenter.defaultCenter().addObserver(
-            self,
-            selector: "reloadData",
-            name: "NFXReloadData",
-            object: nil)
-        
-    }
     
     func getReportString() -> NSAttributedString
     {
