@@ -29,22 +29,22 @@
         <customObject id="-3" userLabel="Application" customClass="NSObject"/>
         <window title="netfox" allowsToolTipsWhenApplicationIsInactive="NO" autorecalculatesKeyViewLoop="NO" oneShot="NO" releasedWhenClosed="NO" animationBehavior="default" id="QvC-M9-y7g">
             <windowStyleMask key="styleMask" titled="YES" closable="YES" miniaturizable="YES" resizable="YES"/>
-            <windowPositionMask key="initialPositionMask" leftStrut="YES" rightStrut="YES" topStrut="YES" bottomStrut="YES"/>
-            <rect key="contentRect" x="196" y="240" width="625" height="458"/>
+            <rect key="contentRect" x="196" y="240" width="900" height="458"/>
             <rect key="screenRect" x="0.0" y="0.0" width="1280" height="777"/>
+            <value key="minSize" type="size" width="200" height="200"/>
             <view key="contentView" id="EiT-Mj-1SZ">
-                <rect key="frame" x="0.0" y="0.0" width="625" height="458"/>
+                <rect key="frame" x="0.0" y="0.0" width="900" height="458"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
-                    <splitView arrangesAllSubviews="NO" dividerStyle="thin" vertical="YES" translatesAutoresizingMaskIntoConstraints="NO" id="UMW-gH-1cu" userLabel="Split View - Requests List and Details">
-                        <rect key="frame" x="0.0" y="0.0" width="625" height="458"/>
+                    <splitView arrangesAllSubviews="NO" dividerStyle="paneSplitter" vertical="YES" translatesAutoresizingMaskIntoConstraints="NO" id="UMW-gH-1cu" userLabel="Split View - Requests List and Details">
+                        <rect key="frame" x="0.0" y="0.0" width="900" height="458"/>
                         <subviews>
                             <customView id="KBu-Ny-MmK" userLabel="View - List">
-                                <rect key="frame" x="0.0" y="0.0" width="314" height="458"/>
+                                <rect key="frame" x="0.0" y="0.0" width="373" height="458"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <subviews>
                                     <customView translatesAutoresizingMaskIntoConstraints="NO" id="Xgn-y3-Pre" userLabel="View - Top Buttons">
-                                        <rect key="frame" x="125" y="433" width="65" height="25"/>
+                                        <rect key="frame" x="154" y="433" width="65" height="25"/>
                                         <subviews>
                                             <button focusRingType="none" translatesAutoresizingMaskIntoConstraints="NO" id="8B4-L1-Eyx" userLabel="Button - Settings">
                                                 <rect key="frame" x="0.0" y="5" width="15" height="15"/>
@@ -97,25 +97,25 @@
                                         </constraints>
                                     </customView>
                                     <box verticalHuggingPriority="750" title="Box" boxType="separator" titlePosition="noTitle" translatesAutoresizingMaskIntoConstraints="NO" id="N8i-fW-UjS" userLabel="Separator">
-                                        <rect key="frame" x="0.0" y="430" width="314" height="5"/>
+                                        <rect key="frame" x="0.0" y="430" width="373" height="5"/>
                                         <color key="borderColor" white="0.0" alpha="0.41999999999999998" colorSpace="calibratedWhite"/>
                                         <color key="fillColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                         <font key="titleFont" metaFont="system"/>
                                     </box>
                                     <scrollView borderType="none" autohidesScrollers="YES" horizontalLineScroll="19" horizontalPageScroll="10" verticalLineScroll="19" verticalPageScroll="10" usesPredominantAxisScrolling="NO" translatesAutoresizingMaskIntoConstraints="NO" id="fUE-k2-KwP" userLabel="Scroll View - Table View - Requests">
-                                        <rect key="frame" x="0.0" y="22" width="314" height="410"/>
+                                        <rect key="frame" x="0.0" y="22" width="373" height="410"/>
                                         <clipView key="contentView" id="clm-Wo-CWo">
-                                            <rect key="frame" x="0.0" y="0.0" width="314" height="410"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="373" height="410"/>
                                             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                             <subviews>
                                                 <tableView verticalHuggingPriority="750" allowsExpansionToolTips="YES" columnAutoresizingStyle="lastColumnOnly" alternatingRowBackgroundColors="YES" columnReordering="NO" columnSelection="YES" columnResizing="NO" multipleSelection="NO" autosaveColumns="NO" rowSizeStyle="automatic" viewBased="YES" id="jfJ-0b-tAz" userLabel="Table View - Requests">
-                                                    <rect key="frame" x="0.0" y="0.0" width="314" height="0.0"/>
+                                                    <rect key="frame" x="0.0" y="0.0" width="373" height="410"/>
                                                     <autoresizingMask key="autoresizingMask"/>
                                                     <size key="intercellSpacing" width="3" height="2"/>
                                                     <color key="backgroundColor" name="controlBackgroundColor" catalog="System" colorSpace="catalog"/>
                                                     <color key="gridColor" name="textColor" catalog="System" colorSpace="catalog"/>
                                                     <tableColumns>
-                                                        <tableColumn width="311" minWidth="40" maxWidth="1000" id="3rB-H2-boI">
+                                                        <tableColumn width="370" minWidth="40" maxWidth="1000" id="3rB-H2-boI">
                                                             <tableHeaderCell key="headerCell" lineBreakMode="truncatingTail" borderStyle="border">
                                                                 <font key="font" metaFont="smallSystem"/>
                                                                 <color key="textColor" name="headerTextColor" catalog="System" colorSpace="catalog"/>
@@ -129,7 +129,7 @@
                                                             <tableColumnResizingMask key="resizingMask" resizeWithTable="YES" userResizable="YES"/>
                                                             <prototypeCellViews>
                                                                 <tableCellView id="sb8-5p-P8W">
-                                                                    <rect key="frame" x="1" y="1" width="311" height="17"/>
+                                                                    <rect key="frame" x="1" y="1" width="370" height="17"/>
                                                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                                     <subviews>
                                                                         <textField verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="qpM-5W-hzE">
@@ -166,7 +166,7 @@
                                         </scroller>
                                     </scrollView>
                                     <searchField wantsLayer="YES" focusRingType="none" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="gCb-Cj-45V" userLabel="Search Field - Requests Filter">
-                                        <rect key="frame" x="0.0" y="0.0" width="314" height="22"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="373" height="22"/>
                                         <searchFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" borderStyle="bezel" focusRingType="none" usesSingleLineMode="YES" bezelStyle="round" id="NME-GA-zkc">
                                             <font key="font" metaFont="system"/>
                                             <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
@@ -190,7 +190,7 @@
                                 </constraints>
                             </customView>
                             <customView fixedFrame="YES" id="1TF-80-6Mk" userLabel="View - Details">
-                                <rect key="frame" x="315" y="0.0" width="310" height="458"/>
+                                <rect key="frame" x="383" y="0.0" width="517" height="458"/>
                                 <autoresizingMask key="autoresizingMask"/>
                             </customView>
                         </subviews>

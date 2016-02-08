@@ -12,19 +12,7 @@ class NFXListController: NFXGenericController {
     var filteredTableData = [NFXHTTPModel]()
 
     override func viewDidLoad() {
-        super.viewDidLoad()
-
-        NSNotificationCenter.defaultCenter().addObserver(
-            self,
-            selector: "reloadTableViewData",
-            name: "NFXReloadData",
-            object: nil)
-        
-        NSNotificationCenter.defaultCenter().addObserver(
-            self,
-            selector: "deactivateSearchController",
-            name: "NFXDeactivateSearch",
-            object: nil)
+        super.viewDidLoad()        
     }
     
 }

@@ -14,7 +14,7 @@ class NFXListController_OSX: NFXListController, NSTableViewDelegate, NSTableView
     
     // MARK: Properties
     
-    @IBOutlet var searchField: NSSearchField!
+    @IBOutlet var searchField: NSTextField!
     @IBOutlet var tableView: NSTableView!
 
     var isSearchControllerActive: Bool = false
@@ -26,6 +26,10 @@ class NFXListController_OSX: NFXListController, NSTableViewDelegate, NSTableView
 
     override func awakeFromNib() {
         tableView.registerNib(NSNib(nibNamed: cellIdentifier, bundle: nil), forIdentifier: cellIdentifier)
+        searchField.delegate = self
+        
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: "reloadTableViewData", name: "NFXReloadData", object: nil)
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: "deactivateSearchController", name: "NFXDeactivateSearch", object: nil)
     }
     
     // MARK: Notifications
@@ -40,23 +44,31 @@ class NFXListController_OSX: NFXListController, NSTableViewDelegate, NSTableView
     func deactivateSearchController()
     {
         self.isSearchControllerActive = false
+        self.tableView.reloadData()
     }
     
     // MARK: Search
     
     func updateSearchResultsForSearchController()
     {
-//        let predicateURL = NSPredicate(format: "requestURL contains[cd] '\(self.saearchField.stringValue!)'")
-//        let predicateMethod = NSPredicate(format: "requestMethod contains[cd] '\(self.saearchField.stringValue!)'")
-//        let predicateType = NSPredicate(format: "responseType contains[cd] '\(self.saearchField.stringValue!)'")
-//        
-//        let predicates = [predicateURL, predicateMethod, predicateType]
-//        
-//        let searchPredicate = NSCompoundPredicate(orPredicateWithSubpredicates: predicates)
-//        
-//        let array = (NFXHTTPModelManager.sharedInstance.getModels() as NSArray).filteredArrayUsingPredicate(searchPredicate)
-//        self.filteredTableData = array as! [NFXHTTPModel]
+        let predicateURL = NSPredicate(format: "requestURL contains[cd] '\(self.searchField.stringValue)'")
+        let predicateMethod = NSPredicate(format: "requestMethod contains[cd] '\(self.searchField.stringValue)'")
+        let predicateType = NSPredicate(format: "responseType contains[cd] '\(self.searchField.stringValue)'")
+        
+        let predicates = [predicateURL, predicateMethod, predicateType]
+        let searchPredicate = NSCompoundPredicate(orPredicateWithSubpredicates: predicates)
+        let array = (NFXHTTPModelManager.sharedInstance.getModels() as NSArray).filteredArrayUsingPredicate(searchPredicate)
+        self.filteredTableData = array as! [NFXHTTPModel]
         reloadData()
+    }
+
+    override func controlTextDidChange(obj: NSNotification) {
+        guard let searchField = obj.object as? NSSearchField else {
+            return
+        }
+        
+        isSearchControllerActive = searchField.stringValue.characters.count > 0
+        updateSearchResultsForSearchController()
     }
     
     // MARK: UITableViewDataSource

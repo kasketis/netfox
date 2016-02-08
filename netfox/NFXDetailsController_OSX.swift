@@ -10,7 +10,7 @@
     
 import Cocoa
 
-class NFXDetailsController_OSX: NFXGenericController {
+class NFXDetailsController_OSX: NFXDetailsController {
 
     override func loadView() {}
 
