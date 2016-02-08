@@ -9,12 +9,6 @@
 #if os(OSX)
 
 import Cocoa
-    
-class TestView: NSView {
-    override func drawRect(dirtyRect: NSRect) {
-        NSRectFill(dirtyRect)
-    }
-}
 
 class NFXListController_OSX: NFXListController, NSTableViewDelegate, NSTableViewDataSource, NSSearchFieldDelegate {
     
@@ -33,17 +27,15 @@ class NFXListController_OSX: NFXListController, NSTableViewDelegate, NSTableView
     override func awakeFromNib() {
         tableView.registerNib(NSNib(nibNamed: cellIdentifier, bundle: nil), forIdentifier: cellIdentifier)
     }
+    
+    // MARK: Notifications
 
-    override func loadView() {}
-
-    override func reloadData()
+    func reloadTableViewData()
     {
         dispatch_async(dispatch_get_main_queue()) { () -> Void in
             self.tableView.reloadData()
         }
     }
-    
-    // MARK: Notifications
     
     func deactivateSearchController()
     {
@@ -108,6 +100,7 @@ class NFXListController_OSX: NFXListController, NSTableViewDelegate, NSTableView
         guard tableView.selectedRow >= 0 else {
             return
         }
+        
         var model: NFXHTTPModel
         if (self.isSearchControllerActive) {
             model = self.filteredTableData[self.tableView.selectedRow]

@@ -41,7 +41,6 @@ class NFXWindowController: NSWindowController, NSWindowDelegate {
     // MARK: Lifecycle
     
     override func awakeFromNib() {
-        print(__FUNCTION__)
         settingsButton.image = NSImage(data: NFXAssets.getImage(.SETTINGS))
         infoButton.image = NSImage(data: NFXAssets.getImage(.INFO))
         statisticsButton.image = NSImage(data: NFXAssets.getImage(.STATISTICS))

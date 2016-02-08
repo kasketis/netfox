@@ -131,7 +131,7 @@ class NFXListController_iOS: NFXListController, UITableViewDelegate, UITableView
         return UIView.init(frame: CGRectZero)
     }
     
-    override func reloadData()
+    override func reloadTableViewData()
     {
         dispatch_async(dispatch_get_main_queue()) { () -> Void in
             self.tableView.reloadData()

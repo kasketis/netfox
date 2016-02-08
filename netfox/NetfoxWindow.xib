@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="9531" systemVersion="15D21" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES">
+<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="9532" systemVersion="15D21" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES">
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="9531"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="9532"/>
     </dependencies>
     <objects>
         <customObject id="-2" userLabel="File's Owner" customClass="NFXWindowController" customModule="KaraFun" customModuleProvider="target">
@@ -31,7 +31,7 @@
             <windowStyleMask key="styleMask" titled="YES" closable="YES" miniaturizable="YES" resizable="YES"/>
             <windowPositionMask key="initialPositionMask" leftStrut="YES" rightStrut="YES" topStrut="YES" bottomStrut="YES"/>
             <rect key="contentRect" x="196" y="240" width="625" height="458"/>
-            <rect key="screenRect" x="0.0" y="0.0" width="1920" height="1057"/>
+            <rect key="screenRect" x="0.0" y="0.0" width="1280" height="777"/>
             <view key="contentView" id="EiT-Mj-1SZ">
                 <rect key="frame" x="0.0" y="0.0" width="625" height="458"/>
                 <autoresizingMask key="autoresizingMask"/>
@@ -108,12 +108,12 @@
                                             <rect key="frame" x="0.0" y="0.0" width="314" height="410"/>
                                             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                             <subviews>
-                                                <tableView verticalHuggingPriority="750" allowsExpansionToolTips="YES" columnAutoresizingStyle="lastColumnOnly" columnReordering="NO" columnSelection="YES" columnResizing="NO" multipleSelection="NO" autosaveColumns="NO" rowSizeStyle="automatic" viewBased="YES" id="jfJ-0b-tAz" userLabel="Table View - Requests">
+                                                <tableView verticalHuggingPriority="750" allowsExpansionToolTips="YES" columnAutoresizingStyle="lastColumnOnly" alternatingRowBackgroundColors="YES" columnReordering="NO" columnSelection="YES" columnResizing="NO" multipleSelection="NO" autosaveColumns="NO" rowSizeStyle="automatic" viewBased="YES" id="jfJ-0b-tAz" userLabel="Table View - Requests">
                                                     <rect key="frame" x="0.0" y="0.0" width="314" height="0.0"/>
                                                     <autoresizingMask key="autoresizingMask"/>
                                                     <size key="intercellSpacing" width="3" height="2"/>
                                                     <color key="backgroundColor" name="controlBackgroundColor" catalog="System" colorSpace="catalog"/>
-                                                    <color key="gridColor" name="gridColor" catalog="System" colorSpace="catalog"/>
+                                                    <color key="gridColor" name="textColor" catalog="System" colorSpace="catalog"/>
                                                     <tableColumns>
                                                         <tableColumn width="311" minWidth="40" maxWidth="1000" id="3rB-H2-boI">
                                                             <tableHeaderCell key="headerCell" lineBreakMode="truncatingTail" borderStyle="border">
@@ -442,7 +442,7 @@
                 <constraint firstItem="189-LR-VRH" firstAttribute="leading" secondItem="3zB-N6-XRF" secondAttribute="leading" constant="20" symbolic="YES" id="pdo-Io-a4s"/>
                 <constraint firstAttribute="trailing" secondItem="189-LR-VRH" secondAttribute="trailing" constant="20" symbolic="YES" id="xuz-RB-Jp2"/>
             </constraints>
-            <point key="canvasLocation" x="462" y="-115"/>
+            <point key="canvasLocation" x="460" y="-104.5"/>
         </customView>
         <customView id="o2t-Bo-0qK" userLabel="View - Statistics">
             <rect key="frame" x="0.0" y="0.0" width="290" height="315"/>
@@ -498,7 +498,7 @@
                 <constraint firstItem="unB-kv-F42" firstAttribute="top" secondItem="oSX-MK-Tts" secondAttribute="bottom" constant="8" symbolic="YES" id="cWd-DS-Ojy"/>
                 <constraint firstItem="oSX-MK-Tts" firstAttribute="top" secondItem="o2t-Bo-0qK" secondAttribute="top" constant="20" symbolic="YES" id="dBr-cJ-Oo7"/>
             </constraints>
-            <point key="canvasLocation" x="813" y="-104"/>
+            <point key="canvasLocation" x="807" y="-106.5"/>
         </customView>
         <viewController id="DZ0-EN-1Ob" userLabel="Popover Statistics View Controller" customClass="NFXStatisticsController_OSX" customModule="KaraFun" customModuleProvider="target">
             <connections>
