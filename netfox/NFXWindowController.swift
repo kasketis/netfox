@@ -57,11 +57,17 @@ class NFXWindowController: NSWindowController, NSWindowDelegate, NFXWindowContro
         statisticsViewController.reloadData()
     }
 
+    override func windowDidLoad() {
+        super.windowDidLoad()
+        self.window?.delegate = self
+    }
+    
     // MARK: NSWindowDelegate
     
     func windowWillClose(notification: NSNotification) {
-        self.window?.delegate = nil
-        NFX.sharedInstance().stop()
+        if let window = notification.object as? NSWindow where window == self.window {
+            NFX.sharedInstance().windowDidClose()
+        }
     }
     
     // MARK: Actions
@@ -77,6 +83,7 @@ class NFXWindowController: NSWindowController, NSWindowDelegate, NFXWindowContro
     @IBAction func statisticsClicked(sender: AnyObject?) {
         statisticsPopover.showRelativeToRect(NSZeroRect, ofView: statisticsButton, preferredEdge: NSRectEdge.MaxY)
     }
+
 }
     
 extension NFXWindowController {

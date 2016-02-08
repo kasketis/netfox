@@ -44,7 +44,6 @@ class NFXListController_OSX: NFXListController, NSTableViewDelegate, NSTableView
     func deactivateSearchController()
     {
         self.isSearchControllerActive = false
-        self.tableView.reloadData()
     }
     
     // MARK: Search

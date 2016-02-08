@@ -260,6 +260,10 @@ extension NFX {
     
 extension NFX {
     
+    public func windowDidClose() {
+        self.presented = false
+    }
+    
     private func setupNetfoxMenuItem() {
         self.nfxMenuItem.target = self
         self.nfxMenuItem.action = "motionDetected"
