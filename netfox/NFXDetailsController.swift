@@ -56,9 +56,14 @@ class NFXDetailsController: NFXGenericController {
             tempString += "Request headers are empty\n\n"
         }
         
-        
-        tempString += "\n-- Body --\n\n"
-        
+        #if os(iOS)
+            tempString += getRequestBodyStringFooter(object)
+        #endif
+        return formatNFXString(tempString)
+    }
+
+    func getRequestBodyStringFooter(object: NFXHTTPModel) -> String {
+        var tempString = "\n-- Body --\n\n"
         if (object.requestBodyLength == 0) {
             tempString += "Request body is empty\n"
         } else if (object.requestBodyLength > 1024) {
@@ -66,8 +71,7 @@ class NFXDetailsController: NFXGenericController {
         } else {
             tempString += "\(object.getRequestBody())\n"
         }
-        
-        return formatNFXString(tempString)
+        return tempString
     }
     
     func getResponseStringFromObject(object: NFXHTTPModel) -> NSAttributedString
@@ -90,8 +94,14 @@ class NFXDetailsController: NFXGenericController {
         }
         
         
-        tempString += "\n-- Body --\n\n"
-        
+    #if os(iOS)
+        tempString += getResponseBodyStringFooter(object)
+    #endif
+        return formatNFXString(tempString)
+    }
+    
+    func getResponseBodyStringFooter(object: NFXHTTPModel) -> String {
+        var tempString = "\n-- Body --\n\n"
         if (object.responseBodyLength == 0) {
             tempString += "Response body is empty\n"
         } else if (object.responseBodyLength > 1024) {
@@ -99,8 +109,7 @@ class NFXDetailsController: NFXGenericController {
         } else {
             tempString += "\(object.getResponseBody())\n"
         }
-        
-        return formatNFXString(tempString)
+        return tempString
     }
 
 }

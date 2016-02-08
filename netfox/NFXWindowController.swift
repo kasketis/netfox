@@ -81,7 +81,7 @@ class NFXWindowController: NSWindowController, NSWindowDelegate, NFXWindowContro
     
 extension NFXWindowController {
     func httpModelSelectedDidChange(model: NFXHTTPModel) {
-        self.detailsViewController.selectedModel = model
+        self.detailsViewController.selectedModel(model)
     }
 }
 
