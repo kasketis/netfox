@@ -8,6 +8,8 @@
 import Foundation
 #if os(OSX)
 import Cocoa
+#else
+import UIKit
 #endif
 
 let nfxVersion = "1.7.2"

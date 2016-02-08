@@ -1,10 +1,11 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="9532" systemVersion="15D21" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES">
     <dependencies>
+        <deployment identifier="macosx"/>
         <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="9532"/>
     </dependencies>
     <objects>
-        <customObject id="-2" userLabel="File's Owner" customClass="NFXWindowController" customModule="KaraFun" customModuleProvider="target">
+        <customObject id="-2" userLabel="File's Owner" customClass="NFXWindowController" customModule="netfox" customModuleProvider="target">
             <connections>
                 <outlet property="detailsView" destination="1TF-80-6Mk" id="yHM-Yi-fT7"/>
                 <outlet property="detailsViewController" destination="m3Y-f4-6bj" id="2K2-pF-1Da"/>
@@ -109,7 +110,7 @@
                                             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                             <subviews>
                                                 <tableView verticalHuggingPriority="750" allowsExpansionToolTips="YES" columnAutoresizingStyle="lastColumnOnly" alternatingRowBackgroundColors="YES" columnReordering="NO" columnSelection="YES" columnResizing="NO" multipleSelection="NO" autosaveColumns="NO" rowSizeStyle="automatic" viewBased="YES" id="jfJ-0b-tAz" userLabel="Table View - Requests">
-                                                    <rect key="frame" x="0.0" y="0.0" width="262" height="352"/>
+                                                    <rect key="frame" x="0.0" y="0.0" width="262" height="0.0"/>
                                                     <autoresizingMask key="autoresizingMask"/>
                                                     <size key="intercellSpacing" width="3" height="2"/>
                                                     <color key="backgroundColor" name="controlBackgroundColor" catalog="System" colorSpace="catalog"/>
@@ -203,7 +204,7 @@
                                                     <rect key="frame" x="10" y="33" width="296" height="250"/>
                                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                     <subviews>
-                                                        <scrollView horizontalLineScroll="10" horizontalPageScroll="10" verticalLineScroll="10" verticalPageScroll="10" hasHorizontalScroller="NO" usesPredominantAxisScrolling="NO" translatesAutoresizingMaskIntoConstraints="NO" id="3g6-Xq-UrN">
+                                                        <scrollView misplaced="YES" horizontalLineScroll="10" horizontalPageScroll="10" verticalLineScroll="10" verticalPageScroll="10" hasHorizontalScroller="NO" usesPredominantAxisScrolling="NO" translatesAutoresizingMaskIntoConstraints="NO" id="3g6-Xq-UrN">
                                                             <rect key="frame" x="10" y="10" width="276" height="230"/>
                                                             <clipView key="contentView" id="L69-QZ-kqb">
                                                                 <rect key="frame" x="1" y="1" width="274" height="228"/>
@@ -214,10 +215,10 @@
                                                                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                                         <size key="minSize" width="274" height="228"/>
-                                                                        <size key="maxSize" width="463" height="10000000"/>
+                                                                        <size key="maxSize" width="480" height="10000000"/>
                                                                         <color key="insertionPointColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
                                                                         <size key="minSize" width="274" height="228"/>
-                                                                        <size key="maxSize" width="463" height="10000000"/>
+                                                                        <size key="maxSize" width="480" height="10000000"/>
                                                                     </textView>
                                                                 </subviews>
                                                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -382,10 +383,10 @@
                                                                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                                         <size key="minSize" width="480" height="328"/>
-                                                                        <size key="maxSize" width="480" height="10000000"/>
+                                                                        <size key="maxSize" width="482" height="10000000"/>
                                                                         <color key="insertionPointColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
                                                                         <size key="minSize" width="480" height="328"/>
-                                                                        <size key="maxSize" width="480" height="10000000"/>
+                                                                        <size key="maxSize" width="482" height="10000000"/>
                                                                     </textView>
                                                                 </subviews>
                                                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -449,7 +450,7 @@
                 <outlet property="textViewResponse" destination="nuU-0x-4AK" id="Dww-cI-ZWZ"/>
             </connections>
         </viewController>
-        <viewController id="nry-se-EGu" userLabel="Popover Settings View Controller" customClass="NFXSettingsController_OSX" customModule="KaraFun" customModuleProvider="target">
+        <viewController id="nry-se-EGu" userLabel="Popover Settings View Controller" customClass="NFXSettingsController_OSX" customModule="netfox" customModuleProvider="target">
             <connections>
                 <outlet property="nfxURLButton" destination="nbr-YK-put" id="ejg-6G-o3M"/>
                 <outlet property="nfxVersionLabel" destination="Bdo-cd-sT9" id="D64-83-wpt"/>
@@ -611,7 +612,7 @@
             </constraints>
             <point key="canvasLocation" x="130.5" y="-106.5"/>
         </customView>
-        <viewController id="CXf-9K-qWP" userLabel="Popover Info View Controller" customClass="NFXInfoController_OSX" customModule="KaraFun" customModuleProvider="target">
+        <viewController id="CXf-9K-qWP" userLabel="Popover Info View Controller" customClass="NFXInfoController_OSX" customModule="netfox" customModuleProvider="target">
             <connections>
                 <outlet property="textView" destination="MNB-tj-Xyc" id="F3E-pZ-Az8"/>
             </connections>
@@ -733,7 +734,7 @@
             </constraints>
             <point key="canvasLocation" x="807" y="-106.5"/>
         </customView>
-        <viewController id="DZ0-EN-1Ob" userLabel="Popover Statistics View Controller" customClass="NFXStatisticsController_OSX" customModule="KaraFun" customModuleProvider="target">
+        <viewController id="DZ0-EN-1Ob" userLabel="Popover Statistics View Controller" customClass="NFXStatisticsController_OSX" customModule="netfox" customModuleProvider="target">
             <connections>
                 <outlet property="textView" destination="x6g-1e-icD" id="WQy-Ki-qmU"/>
             </connections>

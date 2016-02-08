@@ -9,6 +9,8 @@
 import Foundation
 #if os(OSX)
 import Cocoa
+#else
+import UIKit
 #endif
 
 enum HTTPModelShortType: String

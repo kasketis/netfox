@@ -6,6 +6,8 @@
 //  Copyright © 2016 Netfox. All rights reserved.
 //
 
+import Foundation
+
 class NFXDetailsController: NFXGenericController {
 
     enum EDetailsView

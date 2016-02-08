@@ -6,6 +6,8 @@
 //  Copyright © 2016 Netfox. All rights reserved.
 //
 
+import Foundation
+
 class NFXListController: NFXGenericController {
 
     var tableData = [NFXHTTPModel]()
