@@ -34,7 +34,7 @@ class NFXListController_OSX: NFXListController, NSTableViewDelegate, NSTableView
     
     // MARK: Notifications
 
-    func reloadTableViewData()
+    override func reloadTableViewData()
     {
         dispatch_async(dispatch_get_main_queue()) { () -> Void in
             self.tableView.reloadData()
@@ -51,15 +51,8 @@ class NFXListController_OSX: NFXListController, NSTableViewDelegate, NSTableView
     
     func updateSearchResultsForSearchController()
     {
-        let predicateURL = NSPredicate(format: "requestURL contains[cd] '\(self.searchField.stringValue)'")
-        let predicateMethod = NSPredicate(format: "requestMethod contains[cd] '\(self.searchField.stringValue)'")
-        let predicateType = NSPredicate(format: "responseType contains[cd] '\(self.searchField.stringValue)'")
-        
-        let predicates = [predicateURL, predicateMethod, predicateType]
-        let searchPredicate = NSCompoundPredicate(orPredicateWithSubpredicates: predicates)
-        let array = (NFXHTTPModelManager.sharedInstance.getModels() as NSArray).filteredArrayUsingPredicate(searchPredicate)
-        self.filteredTableData = array as! [NFXHTTPModel]
-        reloadData()
+        self.updateSearchResultsForSearchControllerWithString(searchField.stringValue)
+        reloadTableViewData()
     }
 
     override func controlTextDidChange(obj: NSNotification) {

@@ -90,17 +90,8 @@ class NFXListController_iOS: NFXListController, UITableViewDelegate, UITableView
     
     func updateSearchResultsForSearchController(searchController: UISearchController)
     {
-        let predicateURL = NSPredicate(format: "requestURL contains[cd] '\(searchController.searchBar.text!)'")
-        let predicateMethod = NSPredicate(format: "requestMethod contains[cd] '\(searchController.searchBar.text!)'")
-        let predicateType = NSPredicate(format: "responseType contains[cd] '\(searchController.searchBar.text!)'")
-
-        let predicates = [predicateURL, predicateMethod, predicateType]
-        
-        let searchPredicate = NSCompoundPredicate(orPredicateWithSubpredicates: predicates)
-        
-        let array = (NFXHTTPModelManager.sharedInstance.getModels() as NSArray).filteredArrayUsingPredicate(searchPredicate)
-        self.filteredTableData = array as! [NFXHTTPModel]
-        reloadData()
+        self.updateSearchResultsForSearchControllerWithString(searchController.searchBar.text!)
+        reloadTableViewData()
     }
     
     func deactivateSearchController()
