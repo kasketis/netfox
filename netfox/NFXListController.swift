@@ -16,7 +16,7 @@ class NFXListController: NFXGenericController {
 
         NSNotificationCenter.defaultCenter().addObserver(
             self,
-            selector: "reloadData",
+            selector: "reloadTableViewData",
             name: "NFXReloadData",
             object: nil)
         
