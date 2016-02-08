@@ -36,7 +36,7 @@
                 <rect key="frame" x="0.0" y="0.0" width="900" height="458"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
-                    <splitView arrangesAllSubviews="NO" dividerStyle="paneSplitter" vertical="YES" translatesAutoresizingMaskIntoConstraints="NO" id="UMW-gH-1cu" userLabel="Split View - Requests List and Details">
+                    <splitView dividerStyle="paneSplitter" vertical="YES" translatesAutoresizingMaskIntoConstraints="NO" id="UMW-gH-1cu" userLabel="Split View - Requests List and Details">
                         <rect key="frame" x="0.0" y="0.0" width="900" height="458"/>
                         <subviews>
                             <customView id="KBu-Ny-MmK" userLabel="View - List">

@@ -48,6 +48,7 @@ class NFXSettingsController_OSX: NFXSettingsController, NSTableViewDataSource, N
     
     @IBAction func clearDataClicked(sender: AnyObject?) {
         NFX.sharedInstance().clearOldData()
+        NSNotificationCenter.defaultCenter().postNotificationName("NFXReloadData", object: nil)
     }
     
     @IBAction func nfxURLButtonClicked(sender: NSButton) {
@@ -56,6 +57,8 @@ class NFXSettingsController_OSX: NFXSettingsController, NSTableViewDataSource, N
     
     @IBAction func toggleResponseTypeClicked(sender: NSButton) {
         filters[sender.tag] = !filters[sender.tag]
+        NFX.sharedInstance().cacheFilters(filters)
+        NSNotificationCenter.defaultCenter().postNotificationName("NFXReloadData", object: nil)
     }
     
     func reloadTableData() {
@@ -81,7 +84,6 @@ class NFXSettingsController_OSX: NFXSettingsController, NSTableViewDataSource, N
         cell.activeCheckbox.tag = row
         cell.activeCheckbox.target = self
         cell.activeCheckbox.action = "toggleResponseTypeClicked:"
-
         return cell
     }
     

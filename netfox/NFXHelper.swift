@@ -263,7 +263,7 @@ class NFXDebugInfo {
         #if os(iOS)
             return UIDevice.getNFXDeviceType() ?? ""
         #elseif os(OSX)
-            return ""
+            return "Not implemented yet. PR welcomes"
         #endif
     }
     
