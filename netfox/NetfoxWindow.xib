@@ -31,7 +31,7 @@
             <windowStyleMask key="styleMask" titled="YES" closable="YES" miniaturizable="YES" resizable="YES"/>
             <rect key="contentRect" x="196" y="240" width="900" height="458"/>
             <rect key="screenRect" x="0.0" y="0.0" width="1280" height="777"/>
-            <value key="minSize" type="size" width="200" height="200"/>
+            <value key="minSize" type="size" width="500" height="300"/>
             <view key="contentView" id="EiT-Mj-1SZ">
                 <rect key="frame" x="0.0" y="0.0" width="900" height="458"/>
                 <autoresizingMask key="autoresizingMask"/>
@@ -46,8 +46,28 @@
                                     <customView translatesAutoresizingMaskIntoConstraints="NO" id="Xgn-y3-Pre" userLabel="View - Top Buttons">
                                         <rect key="frame" x="154" y="433" width="65" height="25"/>
                                         <subviews>
-                                            <button focusRingType="none" translatesAutoresizingMaskIntoConstraints="NO" id="8B4-L1-Eyx" userLabel="Button - Settings">
+                                            <button focusRingType="none" translatesAutoresizingMaskIntoConstraints="NO" id="5gc-X4-gpJ" userLabel="Button - Info">
                                                 <rect key="frame" x="0.0" y="5" width="15" height="15"/>
+                                                <buttonCell key="cell" type="square" bezelStyle="shadowlessSquare" image="NSBluetoothTemplate" imagePosition="only" alignment="center" focusRingType="none" imageScaling="proportionallyDown" inset="2" id="Hdz-MP-MY0">
+                                                    <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
+                                                    <font key="font" metaFont="system"/>
+                                                </buttonCell>
+                                                <connections>
+                                                    <action selector="infoClicked:" target="-2" id="Umn-tJ-QZ7"/>
+                                                </connections>
+                                            </button>
+                                            <button focusRingType="none" translatesAutoresizingMaskIntoConstraints="NO" id="xhd-y0-i4t" userLabel="Button - Statistics">
+                                                <rect key="frame" x="25" y="5" width="15" height="15"/>
+                                                <buttonCell key="cell" type="square" bezelStyle="shadowlessSquare" imagePosition="only" alignment="center" focusRingType="none" imageScaling="proportionallyDown" inset="2" id="8k3-lJ-Wii">
+                                                    <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
+                                                    <font key="font" metaFont="system"/>
+                                                </buttonCell>
+                                                <connections>
+                                                    <action selector="statisticsClicked:" target="-2" id="lgl-FU-uxX"/>
+                                                </connections>
+                                            </button>
+                                            <button focusRingType="none" translatesAutoresizingMaskIntoConstraints="NO" id="8B4-L1-Eyx" userLabel="Button - Settings">
+                                                <rect key="frame" x="50" y="5" width="15" height="15"/>
                                                 <constraints>
                                                     <constraint firstAttribute="width" constant="15" id="9KW-hu-wUv"/>
                                                     <constraint firstAttribute="height" constant="15" id="Maj-Js-Nug"/>
@@ -60,38 +80,18 @@
                                                     <action selector="settingsClicked:" target="-2" id="amJ-0L-i01"/>
                                                 </connections>
                                             </button>
-                                            <button focusRingType="none" translatesAutoresizingMaskIntoConstraints="NO" id="5gc-X4-gpJ" userLabel="Button - Info">
-                                                <rect key="frame" x="25" y="5" width="15" height="15"/>
-                                                <buttonCell key="cell" type="square" bezelStyle="shadowlessSquare" image="NSBluetoothTemplate" imagePosition="only" alignment="center" focusRingType="none" imageScaling="proportionallyDown" inset="2" id="Hdz-MP-MY0">
-                                                    <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
-                                                    <font key="font" metaFont="system"/>
-                                                </buttonCell>
-                                                <connections>
-                                                    <action selector="infoClicked:" target="-2" id="Umn-tJ-QZ7"/>
-                                                </connections>
-                                            </button>
-                                            <button focusRingType="none" translatesAutoresizingMaskIntoConstraints="NO" id="xhd-y0-i4t" userLabel="Button - Statistics">
-                                                <rect key="frame" x="50" y="5" width="15" height="15"/>
-                                                <buttonCell key="cell" type="square" bezelStyle="shadowlessSquare" imagePosition="only" alignment="center" focusRingType="none" imageScaling="proportionallyDown" inset="2" id="8k3-lJ-Wii">
-                                                    <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
-                                                    <font key="font" metaFont="system"/>
-                                                </buttonCell>
-                                                <connections>
-                                                    <action selector="statisticsClicked:" target="-2" id="lgl-FU-uxX"/>
-                                                </connections>
-                                            </button>
                                         </subviews>
                                         <constraints>
-                                            <constraint firstItem="8B4-L1-Eyx" firstAttribute="leading" secondItem="Xgn-y3-Pre" secondAttribute="leading" id="0VJ-uc-qpR"/>
                                             <constraint firstItem="5gc-X4-gpJ" firstAttribute="centerY" secondItem="8B4-L1-Eyx" secondAttribute="centerY" id="5a0-cZ-kha"/>
-                                            <constraint firstItem="xhd-y0-i4t" firstAttribute="leading" secondItem="5gc-X4-gpJ" secondAttribute="trailing" constant="10" symbolic="YES" id="BcX-jc-nEf"/>
                                             <constraint firstItem="xhd-y0-i4t" firstAttribute="width" secondItem="8B4-L1-Eyx" secondAttribute="width" id="KG9-fv-5O5"/>
-                                            <constraint firstAttribute="trailing" secondItem="xhd-y0-i4t" secondAttribute="trailing" id="L6t-fe-car"/>
                                             <constraint firstItem="8B4-L1-Eyx" firstAttribute="top" secondItem="Xgn-y3-Pre" secondAttribute="top" constant="5" id="MTQ-xl-5II"/>
-                                            <constraint firstItem="5gc-X4-gpJ" firstAttribute="leading" secondItem="8B4-L1-Eyx" secondAttribute="trailing" constant="10" symbolic="YES" id="TTl-8U-cwv"/>
                                             <constraint firstAttribute="bottom" secondItem="8B4-L1-Eyx" secondAttribute="bottom" constant="5" id="Vx9-aK-rRT"/>
+                                            <constraint firstAttribute="trailing" secondItem="8B4-L1-Eyx" secondAttribute="trailing" id="aVZ-n6-ZN8"/>
                                             <constraint firstItem="xhd-y0-i4t" firstAttribute="centerY" secondItem="8B4-L1-Eyx" secondAttribute="centerY" id="ee4-cf-tF8"/>
+                                            <constraint firstItem="8B4-L1-Eyx" firstAttribute="leading" secondItem="xhd-y0-i4t" secondAttribute="trailing" constant="10" id="eqQ-1O-e9M"/>
+                                            <constraint firstItem="xhd-y0-i4t" firstAttribute="leading" secondItem="5gc-X4-gpJ" secondAttribute="trailing" constant="10" id="nyy-np-QF6"/>
                                             <constraint firstItem="xhd-y0-i4t" firstAttribute="height" secondItem="8B4-L1-Eyx" secondAttribute="height" id="qw8-2g-qyc"/>
+                                            <constraint firstItem="5gc-X4-gpJ" firstAttribute="leading" secondItem="Xgn-y3-Pre" secondAttribute="leading" id="sod-RE-afV"/>
                                             <constraint firstItem="5gc-X4-gpJ" firstAttribute="height" secondItem="8B4-L1-Eyx" secondAttribute="height" id="wJu-Ua-1aR"/>
                                             <constraint firstItem="5gc-X4-gpJ" firstAttribute="width" secondItem="8B4-L1-Eyx" secondAttribute="width" id="wkW-aG-6EQ"/>
                                         </constraints>
@@ -181,6 +181,7 @@
                                     <constraint firstAttribute="bottom" secondItem="gCb-Cj-45V" secondAttribute="bottom" id="Q8T-AS-u4s"/>
                                     <constraint firstItem="fUE-k2-KwP" firstAttribute="top" secondItem="N8i-fW-UjS" secondAttribute="bottom" id="Xiq-W4-Yes"/>
                                     <constraint firstItem="gCb-Cj-45V" firstAttribute="top" secondItem="fUE-k2-KwP" secondAttribute="bottom" id="dZl-sv-biA"/>
+                                    <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="200" id="eLM-Ax-OeX"/>
                                     <constraint firstAttribute="trailing" secondItem="fUE-k2-KwP" secondAttribute="trailing" id="kEM-C0-MEJ"/>
                                     <constraint firstItem="Xgn-y3-Pre" firstAttribute="top" secondItem="KBu-Ny-MmK" secondAttribute="top" id="nCH-GJ-rN0"/>
                                     <constraint firstItem="fUE-k2-KwP" firstAttribute="leading" secondItem="KBu-Ny-MmK" secondAttribute="leading" id="ogt-k8-8FP"/>
