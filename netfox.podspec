@@ -14,6 +14,7 @@ DESC
   s.source           = { :git => "https://github.com/kasketis/netfox.git", :tag => '1.7.2' }
 
   s.platform     = :ios, '8.0'
+  s.platform     = :osx, '10.0'
   s.requires_arc = true
 
   s.source_files = "netfox"
