@@ -59,6 +59,18 @@ class NFXListController_iOS: NFXListController, UITableViewDelegate, UITableView
         self.searchController.view.backgroundColor = UIColor.clearColor()
         
         self.navigationItem.titleView = searchView
+        
+        NSNotificationCenter.defaultCenter().addObserver(
+            self,
+            selector: "reloadTableViewData",
+            name: "NFXReloadData",
+            object: nil)
+        
+        NSNotificationCenter.defaultCenter().addObserver(
+            self,
+            selector: "deactivateSearchController",
+            name: "NFXDeactivateSearch",
+            object: nil)        
     }
     
     override func viewWillAppear(animated: Bool)

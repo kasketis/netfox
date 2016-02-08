@@ -14,7 +14,7 @@ protocol NFXWindowControllerDelegate {
     func httpModelSelectedDidChange(model: NFXHTTPModel)
 }
     
-class NFXWindowController: NSWindowController, NSWindowDelegate {
+class NFXWindowController: NSWindowController, NSWindowDelegate, NFXWindowControllerDelegate {
     
     @IBOutlet var settingsButton: NSButton!
     @IBOutlet var infoButton: NSButton!
@@ -46,6 +46,7 @@ class NFXWindowController: NSWindowController, NSWindowDelegate {
         statisticsButton.image = NSImage(data: NFXAssets.getImage(.STATISTICS))
 
         listViewController.view = listView
+        listViewController.delegate = self
         detailsViewController.view = detailsView
         
         settingsViewController.view = settingsView
@@ -78,7 +79,7 @@ class NFXWindowController: NSWindowController, NSWindowDelegate {
     }
 }
     
-extension NFXWindowController: NFXWindowControllerDelegate {
+extension NFXWindowController {
     func httpModelSelectedDidChange(model: NFXHTTPModel) {
         self.detailsViewController.selectedModel = model
     }
