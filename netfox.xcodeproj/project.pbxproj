@@ -15,7 +15,6 @@
 		E20FD3181C6912E800DCFF61 /* NFXAssets.swift in Sources */ = {isa = PBXBuildFile; fileRef = E20FD2F31C6912E800DCFF61 /* NFXAssets.swift */; };
 		E20FD3191C6912E800DCFF61 /* NFXConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = E20FD2F41C6912E800DCFF61 /* NFXConstants.swift */; };
 		E20FD31A1C6912E800DCFF61 /* NFXConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = E20FD2F41C6912E800DCFF61 /* NFXConstants.swift */; };
-		E20FD31C1C6912E800DCFF61 /* NFXDetailsController_iOS.swift in Sources */ = {isa = PBXBuildFile; fileRef = E20FD2F51C6912E800DCFF61 /* NFXDetailsController_iOS.swift */; };
 		E20FD31F1C6912E800DCFF61 /* NFXDetailsController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E20FD2F71C6912E800DCFF61 /* NFXDetailsController.swift */; };
 		E20FD3201C6912E800DCFF61 /* NFXDetailsController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E20FD2F71C6912E800DCFF61 /* NFXDetailsController.swift */; };
 		E20FD3211C6912E800DCFF61 /* NFXGenericBodyDetailsController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E20FD2F81C6912E800DCFF61 /* NFXGenericBodyDetailsController.swift */; };
@@ -66,38 +65,38 @@
 		E20FD2E91C6912D400DCFF61 /* netfox_osx.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = netfox_osx.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		E20FD2EB1C6912D400DCFF61 /* netfox OS X.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "netfox OS X.h"; sourceTree = "<group>"; };
 		E20FD2ED1C6912D400DCFF61 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		E20FD2F11C6912E800DCFF61 /* NetfoxWindow.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = NetfoxWindow.xib; sourceTree = "<group>"; };
+		E20FD2F11C6912E800DCFF61 /* NetfoxWindow.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = NetfoxWindow.xib; path = "OS X/NetfoxWindow.xib"; sourceTree = "<group>"; };
 		E20FD2F21C6912E800DCFF61 /* NFX.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NFX.swift; sourceTree = "<group>"; };
 		E20FD2F31C6912E800DCFF61 /* NFXAssets.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NFXAssets.swift; sourceTree = "<group>"; };
 		E20FD2F41C6912E800DCFF61 /* NFXConstants.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NFXConstants.swift; sourceTree = "<group>"; };
-		E20FD2F51C6912E800DCFF61 /* NFXDetailsController_iOS.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NFXDetailsController_iOS.swift; sourceTree = "<group>"; };
-		E20FD2F61C6912E800DCFF61 /* NFXDetailsController_OSX.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NFXDetailsController_OSX.swift; sourceTree = "<group>"; };
+		E20FD2F51C6912E800DCFF61 /* NFXDetailsController_iOS.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = NFXDetailsController_iOS.swift; path = iOS/NFXDetailsController_iOS.swift; sourceTree = "<group>"; };
+		E20FD2F61C6912E800DCFF61 /* NFXDetailsController_OSX.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = NFXDetailsController_OSX.swift; path = "OS X/NFXDetailsController_OSX.swift"; sourceTree = "<group>"; };
 		E20FD2F71C6912E800DCFF61 /* NFXDetailsController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NFXDetailsController.swift; sourceTree = "<group>"; };
 		E20FD2F81C6912E800DCFF61 /* NFXGenericBodyDetailsController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NFXGenericBodyDetailsController.swift; sourceTree = "<group>"; };
 		E20FD2F91C6912E800DCFF61 /* NFXGenericController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NFXGenericController.swift; sourceTree = "<group>"; };
 		E20FD2FA1C6912E800DCFF61 /* NFXHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NFXHelper.swift; sourceTree = "<group>"; };
-		E20FD2FB1C6912E800DCFF61 /* NFXHelperIOS.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NFXHelperIOS.swift; sourceTree = "<group>"; };
+		E20FD2FB1C6912E800DCFF61 /* NFXHelperIOS.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = NFXHelperIOS.swift; path = iOS/NFXHelperIOS.swift; sourceTree = "<group>"; };
 		E20FD2FC1C6912E800DCFF61 /* NFXHTTPModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NFXHTTPModel.swift; sourceTree = "<group>"; };
 		E20FD2FD1C6912E800DCFF61 /* NFXHTTPModelManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NFXHTTPModelManager.swift; sourceTree = "<group>"; };
 		E20FD2FE1C6912E800DCFF61 /* NFXImageBodyDetailsController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NFXImageBodyDetailsController.swift; sourceTree = "<group>"; };
-		E20FD2FF1C6912E800DCFF61 /* NFXInfoController_iOS.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NFXInfoController_iOS.swift; sourceTree = "<group>"; };
-		E20FD3001C6912E800DCFF61 /* NFXInfoController_OSX.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NFXInfoController_OSX.swift; sourceTree = "<group>"; };
+		E20FD2FF1C6912E800DCFF61 /* NFXInfoController_iOS.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = NFXInfoController_iOS.swift; path = iOS/NFXInfoController_iOS.swift; sourceTree = "<group>"; };
+		E20FD3001C6912E800DCFF61 /* NFXInfoController_OSX.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = NFXInfoController_OSX.swift; path = "OS X/NFXInfoController_OSX.swift"; sourceTree = "<group>"; };
 		E20FD3011C6912E800DCFF61 /* NFXInfoController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NFXInfoController.swift; sourceTree = "<group>"; };
-		E20FD3021C6912E800DCFF61 /* NFXListCell_iOS.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NFXListCell_iOS.swift; sourceTree = "<group>"; };
-		E20FD3031C6912E800DCFF61 /* NFXListCell_OSX.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NFXListCell_OSX.swift; sourceTree = "<group>"; };
-		E20FD3041C6912E800DCFF61 /* NFXListCell_OSX.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = NFXListCell_OSX.xib; sourceTree = "<group>"; };
-		E20FD3051C6912E800DCFF61 /* NFXListController_iOS.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NFXListController_iOS.swift; sourceTree = "<group>"; };
-		E20FD3061C6912E800DCFF61 /* NFXListController_OSX.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NFXListController_OSX.swift; sourceTree = "<group>"; };
+		E20FD3021C6912E800DCFF61 /* NFXListCell_iOS.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = NFXListCell_iOS.swift; path = iOS/NFXListCell_iOS.swift; sourceTree = "<group>"; };
+		E20FD3031C6912E800DCFF61 /* NFXListCell_OSX.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = NFXListCell_OSX.swift; path = "OS X/NFXListCell_OSX.swift"; sourceTree = "<group>"; };
+		E20FD3041C6912E800DCFF61 /* NFXListCell_OSX.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = NFXListCell_OSX.xib; path = "OS X/NFXListCell_OSX.xib"; sourceTree = "<group>"; };
+		E20FD3051C6912E800DCFF61 /* NFXListController_iOS.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = NFXListController_iOS.swift; path = iOS/NFXListController_iOS.swift; sourceTree = "<group>"; };
+		E20FD3061C6912E800DCFF61 /* NFXListController_OSX.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = NFXListController_OSX.swift; path = "OS X/NFXListController_OSX.swift"; sourceTree = "<group>"; };
 		E20FD3071C6912E800DCFF61 /* NFXListController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NFXListController.swift; sourceTree = "<group>"; };
 		E20FD3081C6912E800DCFF61 /* NFXProtocol.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NFXProtocol.swift; sourceTree = "<group>"; };
 		E20FD3091C6912E800DCFF61 /* NFXRawBodyDetailsController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NFXRawBodyDetailsController.swift; sourceTree = "<group>"; };
-		E20FD30A1C6912E800DCFF61 /* NFXResponseTypeCell_OSX.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NFXResponseTypeCell_OSX.swift; sourceTree = "<group>"; };
-		E20FD30B1C6912E800DCFF61 /* NFXResponseTypeCell_OSX.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = NFXResponseTypeCell_OSX.xib; sourceTree = "<group>"; };
-		E20FD30C1C6912E800DCFF61 /* NFXSettingsController_iOS.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NFXSettingsController_iOS.swift; sourceTree = "<group>"; };
-		E20FD30D1C6912E800DCFF61 /* NFXSettingsController_OSX.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NFXSettingsController_OSX.swift; sourceTree = "<group>"; };
+		E20FD30A1C6912E800DCFF61 /* NFXResponseTypeCell_OSX.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = NFXResponseTypeCell_OSX.swift; path = "OS X/NFXResponseTypeCell_OSX.swift"; sourceTree = "<group>"; };
+		E20FD30B1C6912E800DCFF61 /* NFXResponseTypeCell_OSX.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = NFXResponseTypeCell_OSX.xib; path = "OS X/NFXResponseTypeCell_OSX.xib"; sourceTree = "<group>"; };
+		E20FD30C1C6912E800DCFF61 /* NFXSettingsController_iOS.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = NFXSettingsController_iOS.swift; path = iOS/NFXSettingsController_iOS.swift; sourceTree = "<group>"; };
+		E20FD30D1C6912E800DCFF61 /* NFXSettingsController_OSX.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = NFXSettingsController_OSX.swift; path = "OS X/NFXSettingsController_OSX.swift"; sourceTree = "<group>"; };
 		E20FD30E1C6912E800DCFF61 /* NFXSettingsController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NFXSettingsController.swift; sourceTree = "<group>"; };
-		E20FD30F1C6912E800DCFF61 /* NFXStatisticsController_iOS.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NFXStatisticsController_iOS.swift; sourceTree = "<group>"; };
-		E20FD3101C6912E800DCFF61 /* NFXStatisticsController_OSX.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NFXStatisticsController_OSX.swift; sourceTree = "<group>"; };
+		E20FD30F1C6912E800DCFF61 /* NFXStatisticsController_iOS.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = NFXStatisticsController_iOS.swift; path = iOS/NFXStatisticsController_iOS.swift; sourceTree = "<group>"; };
+		E20FD3101C6912E800DCFF61 /* NFXStatisticsController_OSX.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = NFXStatisticsController_OSX.swift; path = "OS X/NFXStatisticsController_OSX.swift"; sourceTree = "<group>"; };
 		E20FD3111C6912E800DCFF61 /* NFXStatisticsController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NFXStatisticsController.swift; sourceTree = "<group>"; };
 		E20FD3121C6912E800DCFF61 /* NFXWindowController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NFXWindowController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -350,7 +349,6 @@
 				E20FD3421C6912E800DCFF61 /* NFXProtocol.swift in Sources */,
 				E20FD3561C6912E800DCFF61 /* NFXWindowController.swift in Sources */,
 				E20FD3381C6912E800DCFF61 /* NFXListCell_OSX.swift in Sources */,
-				E20FD31C1C6912E800DCFF61 /* NFXDetailsController_iOS.swift in Sources */,
 				E20FD3221C6912E800DCFF61 /* NFXGenericBodyDetailsController.swift in Sources */,
 				E20FD32E1C6912E800DCFF61 /* NFXImageBodyDetailsController.swift in Sources */,
 				E20FD3521C6912E800DCFF61 /* NFXStatisticsController_OSX.swift in Sources */,
@@ -564,6 +562,7 @@
 				E20FD2EF1C6912D400DCFF61 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};

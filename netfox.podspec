@@ -17,5 +17,7 @@ DESC
   s.platform     = :osx, '10.0'
   s.requires_arc = true
 
-  s.source_files = "netfox"
+  s.source_files = "netfox/*.swift"
+  s.ios.source_files = "netfox/iOS/*.swift"
+  s.osx.source_files = "netfox/OS X/*.swift"  
 end
