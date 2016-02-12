@@ -16,7 +16,6 @@ final class NFXHTTPModelManager: NSObject
     
     func add(obj: NFXHTTPModel)
     {
-        print("Got \(obj)")
         self.models.insert(obj, atIndex: 0)
     }
     
