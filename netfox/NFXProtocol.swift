@@ -85,7 +85,9 @@ public class NFXProtocol: NSURLProtocol
                 self.client!.URLProtocol(self, didLoadData: data!)
             }
             
-            self.client!.URLProtocolDidFinishLoading(self)
+            if let client = self.client {
+                client.URLProtocolDidFinishLoading(self)
+            }
 
             
         }).resume()
