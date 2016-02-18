@@ -13,11 +13,12 @@ DESC
   s.author           = "Christos Kasketis"
   s.source           = { :git => "https://github.com/kasketis/netfox.git", :tag => '1.7.2' }
 
-  s.platform     = :ios, '8.0'
-  s.platform     = :osx, '10.0'
+  s.ios.deployment_target = '8.0'
+  s.osx.deployment_target = '10.10'
+
   s.requires_arc = true
 
   s.source_files = "netfox/*.swift"
   s.ios.source_files = "netfox/iOS/*.swift"
-  s.osx.source_files = "netfox/OS X/*.swift"  
+  s.osx.source_files = "netfox/OS X/*.{swift,xib}"  
 end
