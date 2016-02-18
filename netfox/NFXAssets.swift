@@ -6,9 +6,8 @@
 //
 
 import Foundation
-import UIKit
 
-enum NFXImage {
+enum NFXAssetName {
     case SETTINGS
     case INFO
     case STATISTICS
@@ -16,7 +15,7 @@ enum NFXImage {
 
 class NFXAssets
 {
-    class func getImage(image: NFXImage) -> NSData
+    class func getImage(image: NFXAssetName) -> NSData
     {
         var base64Image: String
 

@@ -6,13 +6,22 @@
 //
 
 import Foundation
+#if os(OSX)
+import Cocoa
+#else
 import UIKit
+#endif
 
 let nfxVersion = "1.7.2"
 
 @objc
 public class NFX: NSObject
 {
+    #if os(OSX)
+    var windowController: NFXWindowController?
+    let mainMenu: NSMenu? = NSApp.mainMenu?.itemArray[1].submenu
+    var nfxMenuItem: NSMenuItem = NSMenuItem(title: "netfox", action: "show", keyEquivalent: String(character: NSF9FunctionKey, length: 1))
+    #endif
     
     // swiftSharedInstance is not accessible from ObjC
     class var swiftSharedInstance: NFX
@@ -34,13 +43,6 @@ public class NFX: NSObject
     {
         case shake
         case custom
-        
-        func name() -> String {
-            switch self {
-            case .shake: return "shake"
-            case .custom: return "custom"
-            }
-        }
     }
     
     private var started: Bool = false
@@ -58,6 +60,9 @@ public class NFX: NSObject
         enable()
         clearOldData()
         showMessage("Started!")
+        #if os(OSX)
+        self.addNetfoxToMainMenu()
+        #endif
     }
     
     @objc public func stop()
@@ -67,6 +72,9 @@ public class NFX: NSObject
         clearOldData()
         self.started = false
         showMessage("Stopped!")
+        #if os(OSX)
+        self.removeNetfoxFromMainmenu()
+        #endif
     }
     
     private func showMessage(msg: String) {
@@ -112,6 +120,13 @@ public class NFX: NSObject
     @objc public func setGesture(gesture: ENFXGesture)
     {
         self.selectedGesture = gesture
+        #if os(OSX)
+            if gesture == .shake {
+                self.addNetfoxToMainMenu()
+            } else {
+                self.removeNetfoxFromMainmenu()
+            }
+        #endif
     }
     
     @objc public func show()
@@ -148,25 +163,9 @@ public class NFX: NSObject
             return
         }
         
-        var navigationController: UINavigationController?
-
-        var listController: NFXListController
-        listController = NFXListController()
-        
-        navigationController = UINavigationController(rootViewController: listController)
-        navigationController!.navigationBar.translucent = false
-        navigationController!.navigationBar.tintColor = UIColor.NFXOrangeColor()
-        navigationController!.navigationBar.barTintColor = UIColor.NFXStarkWhiteColor()
-        navigationController!.navigationBar.titleTextAttributes = [NSForegroundColorAttributeName : UIColor.NFXOrangeColor()]
-        
+        self.showNFXFollowingPlatform()
         self.presented = true
-        presentingViewController?.presentViewController(navigationController!, animated: true, completion: nil)
-    }
-    
-    private var presentingViewController: UIViewController?
-    {
-        let rootViewController = UIApplication.sharedApplication().keyWindow?.rootViewController
-        return rootViewController?.presentedViewController ?? rootViewController
+
     }
     
     private func hideNFX()
@@ -176,11 +175,10 @@ public class NFX: NSObject
         }
         
         NSNotificationCenter.defaultCenter().postNotificationName("NFXDeactivateSearch", object: nil)
-        
-        presentingViewController?.dismissViewControllerAnimated(true, completion: { () -> Void in
+        self.hideNFXFollowingPlatform { () -> Void in
             self.presented = false
             self.lastVisitDate = NSDate()
-        })
+        }
     }
     
     internal func clearOldData()
@@ -220,4 +218,89 @@ public class NFX: NSObject
         }
         return self.filters
     }
+    
 }
+
+#if os(iOS)
+
+extension NFX {
+    
+    private func showNFXFollowingPlatform()
+    {
+        var navigationController: UINavigationController?
+        
+        var listController: NFXListController
+        listController = NFXListController()
+        
+        navigationController = UINavigationController(rootViewController: listController)
+        navigationController!.navigationBar.translucent = false
+        navigationController!.navigationBar.tintColor = UIColor.NFXOrangeColor()
+        navigationController!.navigationBar.barTintColor = UIColor.NFXStarkWhiteColor()
+        navigationController!.navigationBar.titleTextAttributes = [NSForegroundColorAttributeName : UIColor.NFXOrangeColor()]
+        
+        presentingViewController?.presentViewController(navigationController!, animated: true, completion: nil)
+    }
+    
+    private func hideNFXFollowingPlatform(completion: (() -> Void)?)
+    {
+        presentingViewController?.dismissViewControllerAnimated(true, completion: { () -> Void in
+            if let notNilCompletion = completion {
+                notNilCompletion()
+            }
+        })
+    }
+    
+    private var presentingViewController: UIViewController?
+        {
+            let rootViewController = UIApplication.sharedApplication().keyWindow?.rootViewController
+            return rootViewController?.presentedViewController ?? rootViewController
+    }
+    
+}
+
+#elseif os(OSX)
+    
+extension NFX {
+    
+    public func windowDidClose() {
+        self.presented = false
+    }
+    
+    private func setupNetfoxMenuItem() {
+        self.nfxMenuItem.target = self
+        self.nfxMenuItem.action = "motionDetected"
+        self.nfxMenuItem.keyEquivalent = "n"
+        self.nfxMenuItem.keyEquivalentModifierMask = Int(NSEventModifierFlags.CommandKeyMask.rawValue | NSEventModifierFlags.ShiftKeyMask.rawValue)
+    }
+    
+    private func addNetfoxToMainMenu() {
+        self.setupNetfoxMenuItem()
+        if let menu = self.mainMenu {
+            menu.insertItem(self.nfxMenuItem, atIndex: 0)
+        }
+    }
+    
+    private func removeNetfoxFromMainmenu() {
+        if let menu = self.mainMenu {
+            menu.removeItem(self.nfxMenuItem)
+        }
+    }
+    
+    private func showNFXFollowingPlatform()  {
+        if self.windowController == nil {
+            self.windowController = NFXWindowController(windowNibName: "NetfoxWindow")
+        }
+        self.windowController?.showWindow(nil)
+    }
+    
+    private func hideNFXFollowingPlatform(completion: (() -> Void)?)
+    {
+        self.windowController?.close()
+        if let notNilCompletion = completion {
+            notNilCompletion()
+        }
+    }
+    
+}
+    
+#endif
