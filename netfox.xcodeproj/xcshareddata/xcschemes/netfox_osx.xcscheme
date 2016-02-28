@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Scheme
-   LastUpgradeVersion = "0710"
+   LastUpgradeVersion = "0720"
    version = "1.3">
    <BuildAction
       parallelizeBuildables = "YES"
@@ -14,9 +14,9 @@
             buildForAnalyzing = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "B3BC020E1C09CDA000C17F3A"
-               BuildableName = "netfox.framework"
-               BlueprintName = "netfox"
+               BlueprintIdentifier = "E20FD2E81C6912D400DCFF61"
+               BuildableName = "netfox_osx.framework"
+               BlueprintName = "netfox_osx"
                ReferencedContainer = "container:netfox.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
@@ -45,9 +45,9 @@
       <MacroExpansion>
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "B3BC020E1C09CDA000C17F3A"
-            BuildableName = "netfox.framework"
-            BlueprintName = "netfox"
+            BlueprintIdentifier = "E20FD2E81C6912D400DCFF61"
+            BuildableName = "netfox_osx.framework"
+            BlueprintName = "netfox_osx"
             ReferencedContainer = "container:netfox.xcodeproj">
          </BuildableReference>
       </MacroExpansion>
@@ -63,9 +63,9 @@
       <MacroExpansion>
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "B3BC020E1C09CDA000C17F3A"
-            BuildableName = "netfox.framework"
-            BlueprintName = "netfox"
+            BlueprintIdentifier = "E20FD2E81C6912D400DCFF61"
+            BuildableName = "netfox_osx.framework"
+            BlueprintName = "netfox_osx"
             ReferencedContainer = "container:netfox.xcodeproj">
          </BuildableReference>
       </MacroExpansion>

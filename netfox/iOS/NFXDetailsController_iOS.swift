@@ -2,7 +2,7 @@
 //  NFXDetailsController.swift
 //  netfox
 //
-//  Copyright © 2015 kasketis. All rights reserved.
+//  Copyright © 2016 netfox. All rights reserved.
 //
 
 #if os(iOS)
@@ -108,7 +108,7 @@ class NFXDetailsController_iOS: NFXDetailsController, MFMailComposeViewControlle
         return scrollView
     }
     
-    func actionButtonPressed()
+    func actionButtonPressed(sender: UIBarButtonItem)
     {
         let actionSheetController: UIAlertController = UIAlertController(title: "Share", message: "", preferredStyle: .ActionSheet)
         

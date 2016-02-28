@@ -1,9 +1,8 @@
 //
 //  NFXListController_OSX.swift
-//  NetfoxForMac
+//  netfox
 //
-//  Created by Tom Baranes on 12/01/16.
-//  Copyright © 2016 Netfox. All rights reserved.
+//  Copyright © 2016 netfox. All rights reserved.
 //
 
 #if os(OSX)

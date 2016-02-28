@@ -1,9 +1,8 @@
 //
 //  NFXSettingsController_iOS.swift
-//  KaraFun
+//  netfox
 //
-//  Created by vince on 27/01/2016.
-//  Copyright © 2016 Recisio. All rights reserved.
+//  Copyright © 2016 netfox. All rights reserved.
 //
 
 #if os(iOS)
@@ -78,15 +77,15 @@ class NFXSettingsController_iOS: NFXSettingsController, UITableViewDelegate, UIT
     
     func infoButtonPressed()
     {
-        var infoController: NFXInfoController
-        infoController = NFXInfoController()
+        var infoController: NFXInfoController_iOS
+        infoController = NFXInfoController_iOS()
         self.navigationController?.pushViewController(infoController, animated: true)
     }
     
     func statisticsButtonPressed()
     {
-        var statisticsController: NFXStatisticsController
-        statisticsController = NFXStatisticsController()
+        var statisticsController: NFXStatisticsController_iOS
+        statisticsController = NFXStatisticsController_iOS()
         self.navigationController?.pushViewController(statisticsController, animated: true)
     }
     

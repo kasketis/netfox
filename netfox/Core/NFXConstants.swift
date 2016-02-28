@@ -2,8 +2,7 @@
 //  NFXConstants.swift
 //  netfox
 //
-//  Created by Tom Baranes on 07/01/16.
-//  Copyright © 2016 kasketis. All rights reserved.
+//  Copyright © 2016 netfox. All rights reserved.
 //
 
 #if os(iOS)

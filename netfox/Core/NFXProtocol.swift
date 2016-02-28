@@ -2,7 +2,7 @@
 //  NFXProtocol.swift
 //  netfox
 //
-//  Copyright © 2015 kasketis. All rights reserved.
+//  Copyright © 2016 netfox. All rights reserved.
 //
 
 import Foundation
@@ -12,6 +12,7 @@ public class NFXProtocol: NSURLProtocol
 {
     var connection: NSURLConnection?
     var model: NFXHTTPModel?
+    var session: NSURLSession?
     
     override public class func canInitWithRequest(request: NSURLRequest) -> Bool
     {
@@ -63,10 +64,14 @@ public class NFXProtocol: NSURLProtocol
                 
         NSURLProtocol.setProperty("1", forKey: "NFXInternal", inRequest: req)
         
-        let session = NSURLSession.sharedSession()
-        session.dataTaskWithRequest(req, completionHandler: {data, response, error in
+        if (session == nil) {
+            session = NSURLSession(configuration: NSURLSessionConfiguration.defaultSessionConfiguration())
+        }
+        
+        session!.dataTaskWithRequest(req, completionHandler: {data, response, error in
             
             if error != nil {
+                self.model?.saveErrorResponse()
                 self.loaded()
                 self.client?.URLProtocol(self, didFailWithError: error!)
                 
@@ -86,9 +91,14 @@ public class NFXProtocol: NSURLProtocol
             }
             
             self.client!.URLProtocolDidFinishLoading(self)
+            self.connection = nil
 
-            
+            self.session!.invalidateAndCancel()
+            self.session = nil
+
         }).resume()
+        
+
     }
     
     override public func stopLoading()
@@ -100,7 +110,7 @@ public class NFXProtocol: NSURLProtocol
     {
         return request
     }
-    
+        
     func loaded()
     {
         if (self.model != nil) {

@@ -2,7 +2,7 @@
 //  NFXListController.swift
 //  netfox
 //
-//  Copyright © 2015 kasketis. All rights reserved.
+//  Copyright © 2016 netfox. All rights reserved.
 //
 
 #if os(iOS)
@@ -76,13 +76,12 @@ class NFXListController_iOS: NFXListController, UITableViewDelegate, UITableView
     override func viewWillAppear(animated: Bool)
     {
         super.viewWillAppear(animated)
-        reloadData()
     }
     
     func settingsButtonPressed()
     {
-        var settingsController: NFXSettingsController
-        settingsController = NFXSettingsController()
+        var settingsController: NFXSettingsController_iOS
+        settingsController = NFXSettingsController_iOS()
         self.navigationController?.pushViewController(settingsController, animated: true)
     }
     
@@ -149,8 +148,8 @@ class NFXListController_iOS: NFXListController, UITableViewDelegate, UITableView
     
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath)
     {
-        var detailsController : NFXDetailsController
-        detailsController = NFXDetailsController()
+        var detailsController : NFXDetailsController_iOS
+        detailsController = NFXDetailsController_iOS()
         var model: NFXHTTPModel
         if (self.searchController.active) {
             model = self.filteredTableData[indexPath.row]

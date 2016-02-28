@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="9532" systemVersion="15D21" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES">
+<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="9532" systemVersion="14F27" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES">
     <dependencies>
         <deployment identifier="macosx"/>
         <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="9532"/>
     </dependencies>
     <objects>
-        <customObject id="-2" userLabel="File's Owner" customClass="NFXWindowController" customModule="netfox" customModuleProvider="target">
+        <customObject id="-2" userLabel="File's Owner" customClass="NFXWindowController" customModule="netfox_osx" customModuleProvider="target">
             <connections>
                 <outlet property="detailsView" destination="1TF-80-6Mk" id="yHM-Yi-fT7"/>
                 <outlet property="detailsViewController" destination="m3Y-f4-6bj" id="2K2-pF-1Da"/>
@@ -207,17 +207,17 @@
                                                         <scrollView misplaced="YES" horizontalLineScroll="10" horizontalPageScroll="10" verticalLineScroll="10" verticalPageScroll="10" hasHorizontalScroller="NO" usesPredominantAxisScrolling="NO" translatesAutoresizingMaskIntoConstraints="NO" id="3g6-Xq-UrN">
                                                             <rect key="frame" x="10" y="10" width="276" height="230"/>
                                                             <clipView key="contentView" id="L69-QZ-kqb">
-                                                                <rect key="frame" x="1" y="1" width="274" height="228"/>
+                                                                <rect key="frame" x="1" y="1" width="259" height="228"/>
                                                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                                 <subviews>
                                                                     <textView editable="NO" importsGraphics="NO" findStyle="panel" continuousSpellChecking="YES" allowsUndo="YES" usesRuler="YES" usesFontPanel="YES" verticallyResizable="YES" allowsNonContiguousLayout="YES" quoteSubstitution="YES" dashSubstitution="YES" spellingCorrection="YES" smartInsertDelete="YES" id="yXb-Sq-62K">
-                                                                        <rect key="frame" x="0.0" y="0.0" width="274" height="228"/>
+                                                                        <rect key="frame" x="0.0" y="0.0" width="259" height="228"/>
                                                                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                                                        <size key="minSize" width="274" height="228"/>
+                                                                        <size key="minSize" width="259" height="228"/>
                                                                         <size key="maxSize" width="480" height="10000000"/>
                                                                         <color key="insertionPointColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
-                                                                        <size key="minSize" width="274" height="228"/>
+                                                                        <size key="minSize" width="259" height="228"/>
                                                                         <size key="maxSize" width="480" height="10000000"/>
                                                                     </textView>
                                                                 </subviews>
@@ -228,7 +228,7 @@
                                                                 <autoresizingMask key="autoresizingMask"/>
                                                             </scroller>
                                                             <scroller key="verticalScroller" verticalHuggingPriority="750" doubleValue="1" horizontal="NO" id="Zhb-iu-gmj">
-                                                                <rect key="frame" x="259" y="1" width="16" height="228"/>
+                                                                <rect key="frame" x="260" y="1" width="15" height="228"/>
                                                                 <autoresizingMask key="autoresizingMask"/>
                                                             </scroller>
                                                         </scrollView>
@@ -256,10 +256,10 @@
                                                                         <rect key="frame" x="0.0" y="0.0" width="295" height="228"/>
                                                                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                                                        <size key="minSize" width="295" height="228"/>
+                                                                        <size key="minSize" width="280" height="228"/>
                                                                         <size key="maxSize" width="463" height="10000000"/>
                                                                         <color key="insertionPointColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
-                                                                        <size key="minSize" width="295" height="228"/>
+                                                                        <size key="minSize" width="280" height="228"/>
                                                                         <size key="maxSize" width="463" height="10000000"/>
                                                                     </textView>
                                                                 </subviews>
@@ -270,7 +270,7 @@
                                                                 <autoresizingMask key="autoresizingMask"/>
                                                             </scroller>
                                                             <scroller key="verticalScroller" verticalHuggingPriority="750" doubleValue="1" horizontal="NO" id="1vA-Uu-d6q">
-                                                                <rect key="frame" x="280" y="1" width="16" height="228"/>
+                                                                <rect key="frame" x="281" y="1" width="15" height="228"/>
                                                                 <autoresizingMask key="autoresizingMask"/>
                                                             </scroller>
                                                         </scrollView>
@@ -298,10 +298,10 @@
                                                                         <rect key="frame" x="0.0" y="0.0" width="480" height="328"/>
                                                                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                                                        <size key="minSize" width="480" height="328"/>
+                                                                        <size key="minSize" width="465" height="328"/>
                                                                         <size key="maxSize" width="533" height="10000000"/>
                                                                         <color key="insertionPointColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
-                                                                        <size key="minSize" width="480" height="328"/>
+                                                                        <size key="minSize" width="465" height="328"/>
                                                                         <size key="maxSize" width="533" height="10000000"/>
                                                                     </textView>
                                                                 </subviews>
@@ -312,7 +312,7 @@
                                                                 <autoresizingMask key="autoresizingMask"/>
                                                             </scroller>
                                                             <scroller key="verticalScroller" verticalHuggingPriority="750" doubleValue="1" horizontal="NO" id="xVE-bp-Yt9">
-                                                                <rect key="frame" x="465" y="1" width="16" height="328"/>
+                                                                <rect key="frame" x="466" y="1" width="15" height="328"/>
                                                                 <autoresizingMask key="autoresizingMask"/>
                                                             </scroller>
                                                         </scrollView>
@@ -340,10 +340,10 @@
                                                                         <rect key="frame" x="0.0" y="0.0" width="274" height="228"/>
                                                                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                                                        <size key="minSize" width="274" height="228"/>
+                                                                        <size key="minSize" width="259" height="228"/>
                                                                         <size key="maxSize" width="463" height="10000000"/>
                                                                         <color key="insertionPointColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
-                                                                        <size key="minSize" width="274" height="228"/>
+                                                                        <size key="minSize" width="259" height="228"/>
                                                                         <size key="maxSize" width="463" height="10000000"/>
                                                                     </textView>
                                                                 </subviews>
@@ -354,7 +354,7 @@
                                                                 <autoresizingMask key="autoresizingMask"/>
                                                             </scroller>
                                                             <scroller key="verticalScroller" verticalHuggingPriority="750" doubleValue="1" horizontal="NO" id="0rI-qV-O0B">
-                                                                <rect key="frame" x="259" y="1" width="16" height="228"/>
+                                                                <rect key="frame" x="260" y="1" width="15" height="228"/>
                                                                 <autoresizingMask key="autoresizingMask"/>
                                                             </scroller>
                                                         </scrollView>
@@ -382,10 +382,10 @@
                                                                         <rect key="frame" x="0.0" y="0.0" width="480" height="328"/>
                                                                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                                                        <size key="minSize" width="480" height="328"/>
+                                                                        <size key="minSize" width="465" height="328"/>
                                                                         <size key="maxSize" width="482" height="10000000"/>
                                                                         <color key="insertionPointColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
-                                                                        <size key="minSize" width="480" height="328"/>
+                                                                        <size key="minSize" width="465" height="328"/>
                                                                         <size key="maxSize" width="482" height="10000000"/>
                                                                     </textView>
                                                                 </subviews>
@@ -396,7 +396,7 @@
                                                                 <autoresizingMask key="autoresizingMask"/>
                                                             </scroller>
                                                             <scroller key="verticalScroller" verticalHuggingPriority="750" doubleValue="1" horizontal="NO" id="58D-aT-X9b">
-                                                                <rect key="frame" x="465" y="1" width="16" height="328"/>
+                                                                <rect key="frame" x="466" y="1" width="15" height="328"/>
                                                                 <autoresizingMask key="autoresizingMask"/>
                                                             </scroller>
                                                         </scrollView>
@@ -450,7 +450,7 @@
                 <outlet property="textViewResponse" destination="nuU-0x-4AK" id="Dww-cI-ZWZ"/>
             </connections>
         </viewController>
-        <viewController id="nry-se-EGu" userLabel="Popover Settings View Controller" customClass="NFXSettingsController_OSX" customModule="netfox" customModuleProvider="target">
+        <viewController id="nry-se-EGu" userLabel="Popover Settings View Controller" customClass="NFXSettingsController_OSX" customModule="netfox_osx" customModuleProvider="target">
             <connections>
                 <outlet property="nfxURLButton" destination="nbr-YK-put" id="ejg-6G-o3M"/>
                 <outlet property="nfxVersionLabel" destination="Bdo-cd-sT9" id="D64-83-wpt"/>
@@ -486,7 +486,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <tableView verticalHuggingPriority="750" allowsExpansionToolTips="YES" columnAutoresizingStyle="lastColumnOnly" columnReordering="NO" columnSelection="YES" columnResizing="NO" multipleSelection="NO" autosaveColumns="NO" rowSizeStyle="automatic" headerView="lve-EN-zin" viewBased="YES" id="Ulh-Eo-vFb">
-                                <rect key="frame" x="0.0" y="0.0" width="245" height="120"/>
+                                <rect key="frame" x="0.0" y="0.0" width="245" height="0.0"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <size key="intercellSpacing" width="3" height="2"/>
                                 <color key="backgroundColor" name="controlBackgroundColor" catalog="System" colorSpace="catalog"/>
@@ -612,7 +612,7 @@
             </constraints>
             <point key="canvasLocation" x="130.5" y="-106.5"/>
         </customView>
-        <viewController id="CXf-9K-qWP" userLabel="Popover Info View Controller" customClass="NFXInfoController_OSX" customModule="netfox" customModuleProvider="target">
+        <viewController id="CXf-9K-qWP" userLabel="Popover Info View Controller" customClass="NFXInfoController_OSX" customModule="netfox_osx" customModuleProvider="target">
             <connections>
                 <outlet property="textView" destination="MNB-tj-Xyc" id="F3E-pZ-Az8"/>
             </connections>
@@ -644,10 +644,10 @@
                                 <rect key="frame" x="0.0" y="0.0" width="248" height="248"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                <size key="minSize" width="248" height="248"/>
+                                <size key="minSize" width="233" height="248"/>
                                 <size key="maxSize" width="463" height="10000000"/>
                                 <color key="insertionPointColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
-                                <size key="minSize" width="248" height="248"/>
+                                <size key="minSize" width="233" height="248"/>
                                 <size key="maxSize" width="463" height="10000000"/>
                             </textView>
                         </subviews>
@@ -662,7 +662,7 @@
                         <autoresizingMask key="autoresizingMask"/>
                     </scroller>
                     <scroller key="verticalScroller" verticalHuggingPriority="750" doubleValue="1" horizontal="NO" id="eqr-u6-Tlv">
-                        <rect key="frame" x="233" y="1" width="16" height="248"/>
+                        <rect key="frame" x="234" y="1" width="15" height="248"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </scroller>
                 </scrollView>
@@ -700,10 +700,10 @@
                                 <rect key="frame" x="0.0" y="0.0" width="248" height="248"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                <size key="minSize" width="248" height="248"/>
+                                <size key="minSize" width="233" height="248"/>
                                 <size key="maxSize" width="463" height="10000000"/>
                                 <color key="insertionPointColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
-                                <size key="minSize" width="248" height="248"/>
+                                <size key="minSize" width="233" height="248"/>
                                 <size key="maxSize" width="463" height="10000000"/>
                             </textView>
                         </subviews>
@@ -718,7 +718,7 @@
                         <autoresizingMask key="autoresizingMask"/>
                     </scroller>
                     <scroller key="verticalScroller" verticalHuggingPriority="750" doubleValue="1" horizontal="NO" id="1oO-uN-Zik">
-                        <rect key="frame" x="233" y="1" width="16" height="248"/>
+                        <rect key="frame" x="234" y="1" width="15" height="248"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </scroller>
                 </scrollView>
@@ -734,7 +734,7 @@
             </constraints>
             <point key="canvasLocation" x="807" y="-106.5"/>
         </customView>
-        <viewController id="DZ0-EN-1Ob" userLabel="Popover Statistics View Controller" customClass="NFXStatisticsController_OSX" customModule="netfox" customModuleProvider="target">
+        <viewController id="DZ0-EN-1Ob" userLabel="Popover Statistics View Controller" customClass="NFXStatisticsController_OSX" customModule="netfox_osx" customModuleProvider="target">
             <connections>
                 <outlet property="textView" destination="x6g-1e-icD" id="WQy-Ki-qmU"/>
             </connections>

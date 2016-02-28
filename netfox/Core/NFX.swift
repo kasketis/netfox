@@ -2,7 +2,7 @@
 //  NFX.swift
 //  netfox
 //
-//  Copyright © 2015 kasketis. All rights reserved.
+//  Copyright © 2016 netfox. All rights reserved.
 //
 
 import Foundation
@@ -12,7 +12,7 @@ import Cocoa
 import UIKit
 #endif
 
-let nfxVersion = "1.7.2"
+let nfxVersion = "1.7.3"
 
 @objc
 public class NFX: NSObject
@@ -229,8 +229,8 @@ extension NFX {
     {
         var navigationController: UINavigationController?
         
-        var listController: NFXListController
-        listController = NFXListController()
+        var listController: NFXListController_iOS
+        listController = NFXListController_iOS()
         
         navigationController = UINavigationController(rootViewController: listController)
         navigationController!.navigationBar.translucent = false

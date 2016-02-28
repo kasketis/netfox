@@ -1,9 +1,8 @@
 //
 //  NFXSettingsController_OSX.swift
-//  KaraFun
+//  netfox
 //
-//  Created by vince on 27/01/2016.
-//  Copyright © 2016 Recisio. All rights reserved.
+//  Copyright © 2016 netfox. All rights reserved.
 //
 
 #if os(OSX)

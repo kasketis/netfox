@@ -2,7 +2,7 @@
 //  NFXRawBodyDetailsController.swift
 //  netfox
 //
-//  Copyright © 2015 kasketis. All rights reserved.
+//  Copyright © 2016 netfox. All rights reserved.
 //
 
 #if os(iOS)
