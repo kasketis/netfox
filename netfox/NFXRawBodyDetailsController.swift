@@ -22,6 +22,7 @@ class NFXRawBodyDetailsController: NFXGenericBodyDetailsController
         self.bodyView.autoresizingMask = [.FlexibleWidth, .FlexibleHeight]
         self.bodyView.backgroundColor = UIColor.clearColor()
         self.bodyView.textColor = UIColor.NFXGray44Color()
+		self.bodyView.textAlignment = .Left
         self.bodyView.editable = false
         self.bodyView.font = UIFont.NFXFont(13)
         

@@ -1,6 +1,6 @@
 ![](https://raw.githubusercontent.com/kasketis/netfox/master/assets/netfox_logo.png)
 
-[![Version](https://img.shields.io/badge/version-1.7-green.svg?style=flat-square)]()
+[![Version](https://img.shields.io/badge/version-1.7.2-green.svg?style=flat-square)]()
 [![Cocoapods Compatible](https://img.shields.io/cocoapods/v/netfox.svg?style=flat-square)](https://github.com/cocoapods/cocoapods)
 [![Carthage compatible](https://img.shields.io/badge/carthage-compatible-4BC51D.svg?style=flat-square)](https://github.com/Carthage/Carthage)
 [![Platform](https://img.shields.io/cocoapods/p/netfox.svg?style=flat-square)](http://cocoadocs.org/docsets/netfox)

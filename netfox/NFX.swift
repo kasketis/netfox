@@ -8,7 +8,11 @@
 import Foundation
 import UIKit
 
-let nfxVersion = "1.7"
+let nfxVersion = "1.7.2"
+
+// Notifications posted when NFX opens/closes, for client application that wish to log that information.
+let nfxWillOpenNotification = "NFXWillOpenNotification"
+let nfxWillCloseNotification = "NFXWillCloseNotification"
 
 @objc
 public class NFX: NSObject
@@ -159,6 +163,7 @@ public class NFX: NSObject
         navigationController!.navigationBar.barTintColor = UIColor.NFXStarkWhiteColor()
         navigationController!.navigationBar.titleTextAttributes = [NSForegroundColorAttributeName : UIColor.NFXOrangeColor()]
         
+        NSNotificationCenter.defaultCenter().postNotificationName(nfxWillOpenNotification, object: nil)
         self.presented = true
         presentingViewController?.presentViewController(navigationController!, animated: true, completion: nil)
     }
@@ -176,6 +181,7 @@ public class NFX: NSObject
         }
         
         NSNotificationCenter.defaultCenter().postNotificationName("NFXDeactivateSearch", object: nil)
+        NSNotificationCenter.defaultCenter().postNotificationName(nfxWillCloseNotification, object: nil)
         
         presentingViewController?.dismissViewControllerAnimated(true, completion: { () -> Void in
             self.presented = false
