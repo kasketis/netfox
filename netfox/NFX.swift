@@ -126,6 +126,15 @@ public class NFX: NSObject
             print("netfox \(nfxVersion) - [ERROR]: Please call start() and setGesture(.custom) first")
         }
     }
+
+    @objc public func showWithHideButton()
+    {
+        if (self.started) && (self.selectedGesture == .custom) {
+            showNFX(true)
+        } else {
+            print("netfox \(nfxVersion) - [ERROR]: Please call start() and setGesture(.custom) first")
+        }
+    }
     
     @objc public func hide()
     {
@@ -146,7 +155,7 @@ public class NFX: NSObject
         return self.lastVisitDate
     }
     
-    private func showNFX()
+    private func showNFX(addHideButton :Bool = false)
     {
         if self.presented {
             return
@@ -156,6 +165,12 @@ public class NFX: NSObject
 
         var listController: NFXListController
         listController = NFXListController()
+
+        if addHideButton {
+            listController.setHideButton({[unowned self] in
+                self.hideNFX()
+            })
+        }
         
         navigationController = UINavigationController(rootViewController: listController)
         navigationController!.navigationBar.translucent = false
