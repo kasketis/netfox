@@ -9,12 +9,12 @@ import Foundation
 
 private let _sharedInstance = NFXHTTPModelManager()
 
-final class NFXHTTPModelManager: NSObject
+public final class NFXHTTPModelManager: NSObject
 {
-    static let sharedInstance = NFXHTTPModelManager()
+    public static let sharedInstance = NFXHTTPModelManager()
     private var models = [NFXHTTPModel]()
     
-    func add(obj: NFXHTTPModel)
+    public func add(obj: NFXHTTPModel)
     {
         self.models.insert(obj, atIndex: 0)
     }
