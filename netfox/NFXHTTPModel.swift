@@ -7,7 +7,7 @@
 
 import Foundation
 
-class NFXHTTPModel: NSObject
+public class NFXHTTPModel: NSObject
 {
     var requestURL: String?
     var requestMethod: String?
@@ -34,7 +34,7 @@ class NFXHTTPModel: NSObject
     
     var noResponse: Bool = true
     
-    func saveRequest(request: NSURLRequest)
+    public func saveRequest(request: NSURLRequest)
     {
         self.requestDate = NSDate()
         self.requestTime = getTimeFromDate(self.requestDate!)
