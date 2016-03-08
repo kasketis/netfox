@@ -47,7 +47,7 @@ public class NFXHTTPModel: NSObject
         saveRequestBodyData(request.getNFXBody())
     }
     
-    func saveResponse(response: NSURLResponse, data: NSData)
+    public func saveResponse(response: NSURLResponse, data: NSData)
     {
         self.noResponse = false
         
