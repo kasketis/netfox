@@ -13,7 +13,9 @@ DESC
   s.author           = "Christos Kasketis"
   s.source           = { :git => "https://github.com/kasketis/netfox.git", :tag => '1.7.2' }
 
-  s.platform     = :ios, '8.0'
+  s.ios.deployment_target = '8.0'
+  s.tvos.deployment_target = '9.0'
+  s.watchos.deployment_target = '2.0'
   s.requires_arc = true
 
   s.source_files = "netfox"
