@@ -50,14 +50,16 @@ public class NFX: NSObject
     private var started: Bool = false
     private var presented: Bool = false
     private var enabled: Bool = false
+    private var manualRecording:Bool = false
     private var selectedGesture: ENFXGesture = .shake
     private var ignoredURLs = [String]()
     private var filters = [Bool]()
     private var lastVisitDate: NSDate = NSDate()
-
-    @objc public func start()
+    
+    @objc public func start(manualRecording manualRecording:Bool = false)
     {
         self.started = true
+        self.manualRecording = manualRecording
         register()
         enable()
         clearOldData()
@@ -94,11 +96,13 @@ public class NFX: NSObject
     
     private func register()
     {
+        guard manualRecording == false else { return }
         NSURLProtocol.registerClass(NFXProtocol)
     }
     
     private func unregister()
     {
+        guard manualRecording == false else { return }
         NSURLProtocol.unregisterClass(NFXProtocol)
     }
     
