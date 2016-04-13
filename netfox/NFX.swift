@@ -174,8 +174,8 @@ public class NFX: NSObject
     
     private var presentingViewController: UIViewController?
     {
-        let rootViewController = UIApplication.sharedApplication().keyWindow?.rootViewController
-        return rootViewController?.presentedViewController ?? rootViewController
+        let rootViewController = UIApplication.topViewController()
+        return rootViewController
     }
     
     private func hideNFX()
@@ -229,5 +229,30 @@ public class NFX: NSObject
             self.filters = [Bool](count: HTTPModelShortType.allValues.count, repeatedValue: true)
         }
         return self.filters
+    }
+}
+
+private extension UIApplication {
+    class func topViewController(base: UIViewController? = UIApplication.sharedApplication().keyWindow?.rootViewController) -> UIViewController? {
+        
+        if let nav = base as? UINavigationController {
+            return topViewController(nav.visibleViewController)
+        }
+        
+        if let tab = base as? UITabBarController {
+            let moreNavigationController = tab.moreNavigationController
+            
+            if let top = moreNavigationController.topViewController where top.view.window != nil {
+                return topViewController(top)
+            } else if let selected = tab.selectedViewController {
+                return topViewController(selected)
+            }
+        }
+        
+        if let presented = base?.presentedViewController {
+            return topViewController(presented)
+        }
+        
+        return base
     }
 }
