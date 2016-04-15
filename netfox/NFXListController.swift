@@ -39,6 +39,10 @@ class NFXListController: NFXGenericController, UITableViewDelegate, UITableViewD
         
         self.tableView.registerClass(NFXListCell.self, forCellReuseIdentifier: NSStringFromClass(NFXListCell))
         
+        if NFX.sharedInstance().getSelectedGesture() ~= .custom {
+            self.navigationItem.leftBarButtonItem = UIBarButtonItem(barButtonSystemItem: .Done, target: NFX.sharedInstance(), action: Selector("hide"))
+        }
+        
         self.navigationItem.rightBarButtonItem = UIBarButtonItem(image: UIImage.NFXSettings(), style: .Plain, target: self, action: Selector("settingsButtonPressed"))
 
         let searchView = UIView()
