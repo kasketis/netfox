@@ -216,8 +216,6 @@ class NFXSettingsController: NFXGenericController, UITableViewDelegate, UITableV
         }
         
         tableView.deselectRowAtIndexPath(indexPath, animated: true)
-
-
     }
     
     func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat
@@ -311,6 +309,8 @@ class NFXSettingsController: NFXGenericController, UITableViewDelegate, UITableV
             if let sessionLogData = NSData(contentsOfFile: NFXPath.SessionLog as String) {
                 mailComposer.addAttachmentData(sessionLogData, mimeType: "text/plain", fileName: "session.log")
             }
+            
+            self.presentViewController(mailComposer, animated: true, completion: nil)
         }
     }
     
