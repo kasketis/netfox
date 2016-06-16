@@ -240,16 +240,39 @@ class NFXHTTPModel: NSObject
     func formattedRequestLogEntry() -> String {
         var log = String()
         
-        log.appendContentsOf("-------START REQUEST -  \(requestURL) -------\n")
-        log.appendContentsOf("Request URL: \(requestURL)\n")
-        log.appendContentsOf("Request Method: \(requestMethod)\n")
-        log.appendContentsOf("Request Date: \(requestDate)\n")
-        log.appendContentsOf("Request Time: \(requestTime)\n")
-        log.appendContentsOf("Request Type: \(requestType)\n")
-        log.appendContentsOf("Request Timeout: \(requestTimeout)\n")
-        log.appendContentsOf("Request Headers:\n\(requestHeaders)\n")
-        log.appendContentsOf("Request Body:\n \(getRequestBody())\n")
-        log.appendContentsOf("-------END REQUEST-------\n")
+        if let requestURL = self.requestURL {
+            log.appendContentsOf("-------START REQUEST -  \(requestURL) -------\n")
+        }
+
+        if let requestMethod = self.requestMethod {
+            log.appendContentsOf("[Request Method] \(requestMethod)\n")
+        }
+        
+        if let requestDate = self.requestDate {
+            log.appendContentsOf("[Request Date] \(requestDate)\n")
+        }
+        
+        if let requestTime = self.requestTime {
+            log.appendContentsOf("[Request Time] \(requestTime)\n")
+        }
+        
+        if let requestType = self.requestType {
+            log.appendContentsOf("[Request Type] \(requestType)\n")
+        }
+            
+        if let requestTimeout = self.requestTimeout {
+            log.appendContentsOf("[Request Timeout] \(requestTimeout)\n")
+        }
+            
+        if let requestHeaders = self.requestHeaders {
+            log.appendContentsOf("[Request Headers]\n\(requestHeaders)\n")
+        }
+        
+        log.appendContentsOf("[Request Body]\n \(getRequestBody())\n")
+        
+        if let requestURL = self.requestURL {
+            log.appendContentsOf("-------END REQUEST - \(requestURL) -------\n\n")
+        }
         
         return log;
     }
@@ -257,15 +280,35 @@ class NFXHTTPModel: NSObject
     func formattedResponseLogEntry() -> String {
         var log = String()
         
-        log.appendContentsOf("-------START RESPONSE -  \(requestURL) -------\n")
-        log.appendContentsOf("Response Status: \(responseStatus)")
-        log.appendContentsOf("Response Type: \(responseType)")
-        log.appendContentsOf("Response Date: \(responseDate)")
-        log.appendContentsOf("Response Time: \(responseTime)")
-        log.appendContentsOf("Response Headers:\n\(responseHeaders)\n")
-        log.appendContentsOf("Response Body:\n \(getResponseBody())\n")
-        log.appendContentsOf("-------END RESPONSE - \(requestURL) -------\n")
+        if let requestURL = self.requestURL {
+            log.appendContentsOf("-------START RESPONSE -  \(requestURL) -------\n")
+        }
         
+        if let responseStatus = self.responseStatus {
+            log.appendContentsOf("[Response Status] \(responseStatus)\n")
+        }
+        
+        if let responseType = self.responseType {
+            log.appendContentsOf("[Response Type] \(responseType)\n")
+        }
+        
+        if let responseDate = self.responseDate {
+            log.appendContentsOf("[Response Date] \(responseDate)\n")
+        }
+        
+        if let responseTime = self.responseTime {
+            log.appendContentsOf("[Response Time] \(responseTime)\n")
+        }
+        
+        if let responseHeaders = self.responseHeaders {
+            log.appendContentsOf("[Response Headers]\n\(responseHeaders)\n\n")
+        }
+        
+        log.appendContentsOf("[Response Body]\n \(getResponseBody())\n")
+        
+        if let requestURL = self.requestURL {
+            log.appendContentsOf("-------END RESPONSE - \(requestURL) -------\n\n")
+        }
         
         return log;
     }

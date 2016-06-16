@@ -354,9 +354,8 @@ struct NFXPath {
 
 extension String
 {
-    func appendToFile(fileName: String) {
+    func appendToFile(filePath: String) {
         let contentToAppend = self
-        let filePath = NSHomeDirectory() + "/Documents/" + fileName
         
         if let fileHandle = NSFileHandle(forWritingAtPath: filePath) {
             /* Append to file */
