@@ -7,8 +7,10 @@
 
 import Foundation
 import UIKit
+import MessageUI
 
-class NFXSettingsController: NFXGenericController, UITableViewDelegate, UITableViewDataSource
+
+class NFXSettingsController: NFXGenericController, UITableViewDelegate, UITableViewDataSource, MFMailComposeViewControllerDelegate
 {
     // MARK: Properties
 
@@ -103,6 +105,8 @@ class NFXSettingsController: NFXGenericController, UITableViewDelegate, UITableV
         case 0: return 1
         case 1: return self.tableData.count
         case 2: return 1
+        case 3: return 1
+
         default: return 0
         }
     }
@@ -132,12 +136,17 @@ class NFXSettingsController: NFXGenericController, UITableViewDelegate, UITableV
 
         case 2:
             cell.textLabel?.textAlignment = .Center
+            cell.textLabel?.text = "Share Session Logs"
+            cell.textLabel?.textColor = UIColor.NFXGreenColor()
+            cell.textLabel?.font = UIFont.NFXFont(16)
+            return cell
+            
+        case 3:
+            cell.textLabel?.textAlignment = .Center
             cell.textLabel?.text = "Clear data"
             cell.textLabel?.textColor = UIColor.NFXRedColor()
             cell.textLabel?.font = UIFont.NFXFont(16)
-
             return cell
-
             
         default: return UITableViewCell()
 
@@ -155,7 +164,7 @@ class NFXSettingsController: NFXGenericController, UITableViewDelegate, UITableV
     
     func numberOfSectionsInTableView(tableView: UITableView) -> Int
     {
-        return 3
+        return 4
     }
     
     func tableView(tableView: UITableView, viewForHeaderInSection section: Int) -> UIView?
@@ -196,6 +205,10 @@ class NFXSettingsController: NFXGenericController, UITableViewDelegate, UITableV
             break
             
         case 2:
+            shareSessionLogsPressed()
+            break
+            
+        case 3:
             clearDataButtonPressedOnTableIndex(indexPath)
             break
             
@@ -203,8 +216,6 @@ class NFXSettingsController: NFXGenericController, UITableViewDelegate, UITableV
         }
         
         tableView.deselectRowAtIndexPath(indexPath, animated: true)
-
-
     }
     
     func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat
@@ -212,7 +223,8 @@ class NFXSettingsController: NFXGenericController, UITableViewDelegate, UITableV
         switch indexPath.section {
         case 0: return 44
         case 1: return 33
-        case 2: return 44
+        case 2,3: return 44
+
         default: return 0
         }
     }
@@ -233,12 +245,13 @@ class NFXSettingsController: NFXGenericController, UITableViewDelegate, UITableV
             } else {
                 return 60
             }
-        case 2:
+        case 2, 3:
             if iPhone4s {
                 return 25
             } else {
                 return 50
             }
+            
         default: return 0
         }
     }
@@ -284,6 +297,26 @@ class NFXSettingsController: NFXGenericController, UITableViewDelegate, UITableV
         actionSheetController.addAction(noAction)
 
         self.presentViewController(actionSheetController, animated: true, completion: nil)
+    }
+    
+    func shareSessionLogsPressed()
+    {
+        if (MFMailComposeViewController.canSendMail()) {
+            let mailComposer = MFMailComposeViewController()
+            mailComposer.mailComposeDelegate = self
+            
+            mailComposer.setSubject("netfox log - Session Log \(NSDate())")
+            if let sessionLogData = NSData(contentsOfFile: NFXPath.SessionLog as String) {
+                mailComposer.addAttachmentData(sessionLogData, mimeType: "text/plain", fileName: "session.log")
+            }
+            
+            self.presentViewController(mailComposer, animated: true, completion: nil)
+        }
+    }
+    
+    func mailComposeController(controller: MFMailComposeViewController, didFinishWithResult result: MFMailComposeResult, error: NSError?)
+    {
+        self.dismissViewControllerAnimated(true, completion: nil)
     }
     
 }

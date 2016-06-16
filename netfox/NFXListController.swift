@@ -8,6 +8,7 @@
 import Foundation
 import UIKit
 
+
 @available(iOS 8.0, *)
 class NFXListController: NFXGenericController, UITableViewDelegate, UITableViewDataSource, UISearchResultsUpdating, UISearchControllerDelegate
 {
@@ -177,5 +178,8 @@ class NFXListController: NFXGenericController, UITableViewDelegate, UITableViewD
     {
         return 58
     }
+
+    
+
 
 }
