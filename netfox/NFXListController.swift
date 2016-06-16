@@ -7,9 +7,11 @@
 
 import Foundation
 import UIKit
+import MessageUI
+
 
 @available(iOS 8.0, *)
-class NFXListController: NFXGenericController, UITableViewDelegate, UITableViewDataSource, UISearchResultsUpdating, UISearchControllerDelegate
+class NFXListController: NFXGenericController, UITableViewDelegate, UITableViewDataSource, UISearchResultsUpdating, UISearchControllerDelegate, MFMailComposeViewControllerDelegate
 {
     // MARK: Properties
     
@@ -40,6 +42,8 @@ class NFXListController: NFXGenericController, UITableViewDelegate, UITableViewD
         self.tableView.registerClass(NFXListCell.self, forCellReuseIdentifier: NSStringFromClass(NFXListCell))
         
         self.navigationItem.rightBarButtonItem = UIBarButtonItem(image: UIImage.NFXSettings(), style: .Plain, target: self, action: Selector("settingsButtonPressed"))
+        
+        self.navigationItem.leftBarButtonItem = UIBarButtonItem(barButtonSystemItem: .Action, target: self, action: Selector("shareSessionLogsPressed"))
 
         let searchView = UIView()
         searchView.frame = CGRectMake(0, 0, CGRectGetWidth(self.view.frame) - 60, 0)
@@ -176,6 +180,24 @@ class NFXListController: NFXGenericController, UITableViewDelegate, UITableViewD
     func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat
     {
         return 58
+    }
+    
+    func shareSessionLogsPressed()
+    {
+        if (MFMailComposeViewController.canSendMail()) {
+            let mailComposer = MFMailComposeViewController()
+            mailComposer.mailComposeDelegate = self
+            
+            mailComposer.setSubject("netfox log - Session Log \(NSDate())")
+            if let sessionLogData = NSData(contentsOfFile: NFXPath.SessionLog as String) {
+                mailComposer.addAttachmentData(sessionLogData, mimeType: "text/plain", fileName: "session.log")
+            }
+        }
+    }
+    
+    func mailComposeController(controller: MFMailComposeViewController, didFinishWithResult result: MFMailComposeResult, error: NSError?)
+    {
+        self.dismissViewControllerAnimated(true, completion: nil)
     }
 
 }

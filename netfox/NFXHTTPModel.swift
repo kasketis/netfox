@@ -64,6 +64,8 @@ class NFXHTTPModel: NSObject
         self.timeInterval = Float(self.responseDate!.timeIntervalSinceDate(self.requestDate!))
         
         saveResponseBodyData(data)
+        
+        formattedRequestLogEntry().appendToFile(NFXPath.SessionLog)
 
     }
     
@@ -95,6 +97,7 @@ class NFXHTTPModel: NSObject
             saveData(bodyString!, toFile: getResponseBodyFilepath())
         }
         
+        formattedResponseLogEntry().appendToFile(NFXPath.SessionLog)
     }
     
     private func prettyOutput(rawData: NSData, contentType: String? = nil) -> NSString
@@ -232,4 +235,39 @@ class NFXHTTPModel: NSObject
             return false
         }
     }
+    
+    
+    func formattedRequestLogEntry() -> String {
+        var log = String()
+        
+        log.appendContentsOf("-------START REQUEST -  \(requestURL) -------\n")
+        log.appendContentsOf("Request URL: \(requestURL)\n")
+        log.appendContentsOf("Request Method: \(requestMethod)\n")
+        log.appendContentsOf("Request Date: \(requestDate)\n")
+        log.appendContentsOf("Request Time: \(requestTime)\n")
+        log.appendContentsOf("Request Type: \(requestType)\n")
+        log.appendContentsOf("Request Timeout: \(requestTimeout)\n")
+        log.appendContentsOf("Request Headers:\n\(requestHeaders)\n")
+        log.appendContentsOf("Request Body:\n \(getRequestBody())\n")
+        log.appendContentsOf("-------END REQUEST-------\n")
+        
+        return log;
+    }
+    
+    func formattedResponseLogEntry() -> String {
+        var log = String()
+        
+        log.appendContentsOf("-------START RESPONSE -  \(requestURL) -------\n")
+        log.appendContentsOf("Response Status: \(responseStatus)")
+        log.appendContentsOf("Response Type: \(responseType)")
+        log.appendContentsOf("Response Date: \(responseDate)")
+        log.appendContentsOf("Response Time: \(responseTime)")
+        log.appendContentsOf("Response Headers:\n\(responseHeaders)\n")
+        log.appendContentsOf("Response Body:\n \(getResponseBody())\n")
+        log.appendContentsOf("-------END RESPONSE - \(requestURL) -------\n")
+        
+        
+        return log;
+    }
+
 }
