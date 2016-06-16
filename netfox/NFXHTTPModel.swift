@@ -45,6 +45,8 @@ class NFXHTTPModel: NSObject
         self.requestHeaders = request.getNFXHeaders()
         self.requestType = requestHeaders?["Content-Type"]
         saveRequestBodyData(request.getNFXBody())
+        formattedRequestLogEntry().appendToFile(NFXPath.SessionLog)
+
     }
     
     func saveResponse(response: NSURLResponse, data: NSData)
@@ -64,9 +66,7 @@ class NFXHTTPModel: NSObject
         self.timeInterval = Float(self.responseDate!.timeIntervalSinceDate(self.requestDate!))
         
         saveResponseBodyData(data)
-        
-        formattedRequestLogEntry().appendToFile(NFXPath.SessionLog)
-
+        formattedResponseLogEntry().appendToFile(NFXPath.SessionLog)
     }
     
     
@@ -97,7 +97,6 @@ class NFXHTTPModel: NSObject
             saveData(bodyString!, toFile: getResponseBodyFilepath())
         }
         
-        formattedResponseLogEntry().appendToFile(NFXPath.SessionLog)
     }
     
     private func prettyOutput(rawData: NSData, contentType: String? = nil) -> NSString
