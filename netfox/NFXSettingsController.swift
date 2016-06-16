@@ -225,7 +225,8 @@ class NFXSettingsController: NFXGenericController, UITableViewDelegate, UITableV
         switch indexPath.section {
         case 0: return 44
         case 1: return 33
-        case 2: return 44
+        case 2,3: return 44
+
         default: return 0
         }
     }
@@ -246,12 +247,13 @@ class NFXSettingsController: NFXGenericController, UITableViewDelegate, UITableV
             } else {
                 return 60
             }
-        case 2:
+        case 2, 3:
             if iPhone4s {
                 return 25
             } else {
                 return 50
             }
+            
         default: return 0
         }
     }
