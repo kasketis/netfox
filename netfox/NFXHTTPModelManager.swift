@@ -14,9 +14,9 @@ final class NFXHTTPModelManager: NSObject
     static let sharedInstance = NFXHTTPModelManager()
     private var models = [NFXHTTPModel]()
     
-    func add(obj: NFXHTTPModel)
+    func add(_ obj: NFXHTTPModel)
     {
-        self.models.insert(obj, atIndex: 0)
+        self.models.insert(obj, at: 0)
     }
     
     func clear()
@@ -26,7 +26,7 @@ final class NFXHTTPModelManager: NSObject
     
     func getModels() -> [NFXHTTPModel]
     {        
-        var predicates = [NSPredicate]()
+        var predicates = [Predicate]()
         
         let filterValues = NFX.sharedInstance().getCachedFilters()
         let filterNames = HTTPModelShortType.allValues
@@ -35,16 +35,16 @@ final class NFXHTTPModelManager: NSObject
         for filterValue in filterValues {
             if filterValue {
                 let filterName = filterNames[index].rawValue
-                let predicate = NSPredicate(format: "shortType == '\(filterName)'")
+                let predicate = Predicate(format: "shortType == '\(filterName)'")
                 predicates.append(predicate)
 
             }
-            index++
+            index += 1
         }
 
-        let searchPredicate = NSCompoundPredicate(orPredicateWithSubpredicates: predicates)
+        let searchPredicate = CompoundPredicate(orPredicateWithSubpredicates: predicates)
         
-        let array = (self.models as NSArray).filteredArrayUsingPredicate(searchPredicate)
+        let array = (self.models as NSArray).filtered(using: searchPredicate)
         
         return array as! [NFXHTTPModel]
     }

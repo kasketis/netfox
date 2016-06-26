@@ -21,14 +21,14 @@ enum HTTPModelShortType: String
 
 extension UIWindow
 {
-    override public func motionEnded(motion: UIEventSubtype, withEvent event: UIEvent?)
+    override public func motionEnded(_ motion: UIEventSubtype, with event: UIEvent?)
     {
         if NFX.sharedInstance().getSelectedGesture() == .shake {
-            if (event!.type == .Motion && event!.subtype == .MotionShake) {
+            if (event!.type == .motion && event!.subtype == .motionShake) {
                 NFX.sharedInstance().motionDetected()
             }
         } else {
-            super.motionEnded(motion, withEvent: event)
+            super.motionEnded(motion, with: event)
         }
     }
 }
@@ -107,23 +107,23 @@ extension UIColor
 
 extension UIFont
 {
-    class func NFXFont(size: CGFloat) -> UIFont
+    class func NFXFont(_ size: CGFloat) -> UIFont
     {
         return UIFont(name: "HelveticaNeue", size: size)!
     }
     
-    class func NFXFontBold(size: CGFloat) -> UIFont
+    class func NFXFontBold(_ size: CGFloat) -> UIFont
     {
         return UIFont(name: "HelveticaNeue-Bold", size: size)!
     }
 }
 
-extension NSURLRequest
+extension URLRequest
 {
     func getNFXURL() -> String
     {
-        if (URL != nil) {
-            return URL!.absoluteString;
+        if (url != nil) {
+            return url!.absoluteString!;
         } else {
             return "-"
         }
@@ -131,8 +131,8 @@ extension NSURLRequest
     
     func getNFXMethod() -> String
     {
-        if (HTTPMethod != nil) {
-            return HTTPMethod!
+        if (httpMethod != nil) {
+            return httpMethod!
         } else {
             return "-"
         }
@@ -141,12 +141,12 @@ extension NSURLRequest
     func getNFXCachePolicy() -> String
     {
         switch cachePolicy {
-            case .UseProtocolCachePolicy: return "UseProtocolCachePolicy"
-            case .ReloadIgnoringLocalCacheData: return "ReloadIgnoringLocalCacheData"
-            case .ReloadIgnoringLocalAndRemoteCacheData: return "ReloadIgnoringLocalAndRemoteCacheData"
-            case .ReturnCacheDataElseLoad: return "ReturnCacheDataElseLoad"
-            case .ReturnCacheDataDontLoad: return "ReturnCacheDataDontLoad"
-            case .ReloadRevalidatingCacheData: return "ReloadRevalidatingCacheData"
+            case .useProtocolCachePolicy: return "UseProtocolCachePolicy"
+            case .reloadIgnoringLocalCacheData: return "ReloadIgnoringLocalCacheData"
+            case .reloadIgnoringLocalAndRemoteCacheData: return "ReloadIgnoringLocalAndRemoteCacheData"
+            case .returnCacheDataElseLoad: return "ReturnCacheDataElseLoad"
+            case .returnCacheDataDontLoad: return "ReturnCacheDataDontLoad"
+            case .reloadRevalidatingCacheData: return "ReloadRevalidatingCacheData"
         }
         
     }
@@ -165,22 +165,22 @@ extension NSURLRequest
         }
     }
     
-    func getNFXBody() -> NSData
+    func getNFXBody() -> Data
     {
-        return HTTPBody ?? NSURLProtocol.propertyForKey("NFXBodyData", inRequest: self) as? NSData ?? NSData()
+        return httpBody ?? URLProtocol.property(forKey: "NFXBodyData", in: self) as? Data ?? Data()
     }
 }
 
-extension NSURLResponse
+extension URLResponse
 {
     func getNFXStatus() -> Int
     {
-        return (self as? NSHTTPURLResponse)?.statusCode ?? 999
+        return (self as? HTTPURLResponse)?.statusCode ?? 999
     }
     
     func getNFXHeaders() -> Dictionary<NSObject, AnyObject>
     {
-        return (self as? NSHTTPURLResponse)?.allHeaderFields ?? Dictionary()
+        return (self as? HTTPURLResponse)?.allHeaderFields ?? Dictionary()
     }
 }
 
@@ -188,25 +188,25 @@ extension UIImage
 {
     class func NFXSettings() -> UIImage
     {
-        return UIImage(data: NFXAssets.getImage(NFXImage.SETTINGS), scale: 1.7)!
+        return UIImage(data: NFXAssets.getImage(NFXImage.settings), scale: 1.7)!
     }
     
     class func NFXInfo() -> UIImage
     {
-        return UIImage(data: NFXAssets.getImage(NFXImage.INFO), scale: 1.7)!
+        return UIImage(data: NFXAssets.getImage(NFXImage.info), scale: 1.7)!
     }
     
     class func NFXStatistics() -> UIImage
     {
-        return UIImage(data: NFXAssets.getImage(NFXImage.STATISTICS), scale: 1.7)!
+        return UIImage(data: NFXAssets.getImage(NFXImage.statistics), scale: 1.7)!
     }
 }
 
-extension NSDate
+extension Date
 {
-    func isGreaterThanDate(dateToCompare: NSDate) -> Bool
+    func isGreaterThanDate(_ dateToCompare: Date) -> Bool
     {
-        if self.compare(dateToCompare) == NSComparisonResult.OrderedDescending {
+        if self.compare(dateToCompare) == ComparisonResult.orderedDescending {
             return true
         } else {
             return false
@@ -235,7 +235,7 @@ public extension UIDevice
         return parseDeviceType(identifier)
     }
 
-    class func parseDeviceType(identifier: String) -> String {
+    class func parseDeviceType(_ identifier: String) -> String {
         
         if identifier == "i386" || identifier == "x86_64" {
             return "Simulator"
@@ -283,27 +283,27 @@ class NFXDebugInfo {
     
     class func getNFXAppName() -> String
     {
-        return NSBundle.mainBundle().infoDictionary?["CFBundleName"] as? String ?? ""
+        return Bundle.main().infoDictionary?["CFBundleName"] as? String ?? ""
     }
     
     class func getNFXAppVersionNumber() -> String
     {
-        return NSBundle.mainBundle().infoDictionary?["CFBundleShortVersionString"] as? String ?? ""
+        return Bundle.main().infoDictionary?["CFBundleShortVersionString"] as? String ?? ""
     }
     
     class func getNFXAppBuildNumber() -> String
     {
-        return NSBundle.mainBundle().infoDictionary?["CFBundleVersion"] as? String ?? ""
+        return Bundle.main().infoDictionary?["CFBundleVersion"] as? String ?? ""
     }
     
     class func getNFXBundleIdentifier() -> String
     {
-        return NSBundle.mainBundle().bundleIdentifier ?? ""
+        return Bundle.main().bundleIdentifier ?? ""
     }
     
     class func getNFXiOSVersion() -> String
     {
-        return UIDevice.currentDevice().systemVersion ?? ""
+        return UIDevice.current().systemVersion ?? ""
     }
     
     class func getNFXDeviceType() -> String
@@ -313,24 +313,24 @@ class NFXDebugInfo {
     
     class func getNFXDeviceScreenResolution() -> String
     {
-        let scale = UIScreen.mainScreen().scale
-        let bounds = UIScreen.mainScreen().bounds
+        let scale = UIScreen.main().scale
+        let bounds = UIScreen.main().bounds
         let width = bounds.size.width * scale
         let height = bounds.size.height * scale
         return "\(width) x \(height)"
     }
     
-    class func getNFXIP(completion:(result: String) -> Void)
+    class func getNFXIP(_ completion:(result: String) -> Void)
     {
         var req: NSMutableURLRequest
-        req = NSMutableURLRequest(URL: NSURL(string: "https://api.ipify.org/?format=json")!)
-        NSURLProtocol.setProperty("1", forKey: "NFXInternal", inRequest: req)
+        req = NSMutableURLRequest(url: URL(string: "https://api.ipify.org/?format=json")!)
+        URLProtocol.setProperty("1", forKey: "NFXInternal", in: req)
         
-        let session = NSURLSession.sharedSession()
-        session.dataTaskWithRequest(req) { (data, response, error) in
+        let session = URLSession.shared()
+        session.dataTask(with: req as URLRequest) { (data, response, error) in
             do {
-                let rawJsonData = try NSJSONSerialization.JSONObjectWithData(data!, options: [.AllowFragments])
-                if let ipAddress = rawJsonData.valueForKey("ip") {
+                let rawJsonData = try JSONSerialization.jsonObject(with: data!, options: [.allowFragments])
+                if let ipAddress = rawJsonData.value(forKey: "ip") {
                     completion(result: ipAddress as! String)
                 } else {
                     completion(result: "-")

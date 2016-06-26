@@ -132,7 +132,7 @@
 		B3BC02061C09CDA000C17F3A /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
-				LastUpgradeCheck = 0710;
+				LastUpgradeCheck = 0800;
 				ORGANIZATIONNAME = kasketis;
 				TargetAttributes = {
 					B3BC020E1C09CDA000C17F3A = {
@@ -312,6 +312,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = com.kasketis.netfox;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
+				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
 			};
 			name = Release;
 		};
