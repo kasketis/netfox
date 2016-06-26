@@ -38,7 +38,7 @@ class NFXManager: Alamofire.Manager
 
 Then just use NFXManager.sharedManager instead of Alamofire.request()
 
-More [#4](https://github.com/kasketis/netfox/issues/4)
+More [^4](https://github.com/kasketis/netfox/issues/4)
 
 ### KFSwiftImageLoader
 
@@ -69,13 +69,13 @@ in the KFImageCacheManager.swift file
 
 Note: You will get image log only the first time because KFSwiftImageLoader caches the images and doesn't request them again
 
-More [#21](https://github.com/kasketis/netfox/issues/21)
+More [^21](https://github.com/kasketis/netfox/issues/21)
 
 ## No HTTP body for requests
 
-Unfortunately, due to a limitation in NSURLProtocol, netfox is unable to log the HTTP body of some requests (check [this](http://openradar.appspot.com/15993891) radar for more details)
+Unfortunately, due to a limitation in NSURLProtocol, netfox is unable to log the HTTP body of some requests (check [this][1] radar for more details)
 
-[jasoncabot](https://github.com/jasoncabot) posted a nice workaround on this:
+[jasoncabot][2] posted a nice workaround on this:
 
 You can do the following to monitor these requests
 <pre>
@@ -84,6 +84,13 @@ if let bodyData = mutableURLRequest.HTTPBody {
 }
 </pre>
 
+### Obj-C No HTTP body for requests
+For AFNetworking 3.0 see this GIST for a solution:
+[https://gist.github.com/jmurff/ca9cba8c36228b01ac8867b6e93f657a]()
+
 Tip for Alamofire users: Subclass URLRequestConvertible and make all the work there
 
-More [#16](https://github.com/kasketis/netfox/issues/16)
+More [^16](https://github.com/kasketis/netfox/issues/16)
+
+[1]:	http://openradar.appspot.com/15993891
+[2]:	https://github.com/jasoncabot

@@ -21,9 +21,9 @@ class NFXDetailsController: NFXGenericController, MFMailComposeViewControllerDel
     
     enum EDetailsView
     {
-        case INFO
-        case REQUEST
-        case RESPONSE
+        case info
+        case request
+        case response
     }
     
     override func viewDidLoad()
@@ -32,103 +32,102 @@ class NFXDetailsController: NFXGenericController, MFMailComposeViewControllerDel
         
         self.title = "Details"
         
-        self.navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .Action, target: self, action: Selector("actionButtonPressed:"))
+        self.navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .action, target: self, action: #selector(NFXDetailsController.actionButtonPressed(_:)))
         
-        self.infoButton = createHeaderButton("Info", x: 0, selector: Selector("infoButtonPressed"))
+        self.infoButton = createHeaderButton("Info", x: 0, selector: #selector(NFXDetailsController.infoButtonPressed))
         self.view.addSubview(self.infoButton)
         
-        self.requestButton = createHeaderButton("Request", x: CGRectGetMaxX(self.infoButton.frame), selector: Selector("requestButtonPressed"))
+        self.requestButton = createHeaderButton("Request", x: self.infoButton.frame.maxX, selector: #selector(NFXDetailsController.requestButtonPressed))
         self.view.addSubview(self.requestButton)
         
-        self.responseButton = createHeaderButton("Response", x: CGRectGetMaxX(self.requestButton.frame), selector: Selector("responseButtonPressed"))
+        self.responseButton = createHeaderButton("Response", x: self.requestButton.frame.maxX, selector: #selector(NFXDetailsController.responseButtonPressed))
         self.view.addSubview(self.responseButton)
 
-        self.infoView = createDetailsView(getInfoStringFromObject(self.selectedModel), forView: .INFO)
+        self.infoView = createDetailsView(getInfoStringFromObject(self.selectedModel), forView: .info)
         self.view.addSubview(self.infoView)
         
-        self.requestView = createDetailsView(getRequestStringFromObject(self.selectedModel), forView: .REQUEST)
+        self.requestView = createDetailsView(getRequestStringFromObject(self.selectedModel), forView: .request)
         self.view.addSubview(self.requestView)
 
-        self.responseView = createDetailsView(getResponseStringFromObject(self.selectedModel), forView: .RESPONSE)
+        self.responseView = createDetailsView(getResponseStringFromObject(self.selectedModel), forView: .response)
         self.view.addSubview(self.responseView)
         
         infoButtonPressed()
-        
     }
     
     
-    func createHeaderButton(title: String, x: CGFloat, selector: Selector) -> UIButton
+    func createHeaderButton(_ title: String, x: CGFloat, selector: Selector) -> UIButton
     {
         var tempButton: UIButton
         tempButton = UIButton()
-        tempButton.frame = CGRectMake(x, 0, CGRectGetWidth(self.view.frame) / 3, 44)
-        tempButton.autoresizingMask = [.FlexibleLeftMargin, .FlexibleRightMargin, .FlexibleWidth]
+        tempButton.frame = CGRect(x: x, y: 0, width: self.view.frame.width / 3, height: 44)
+        tempButton.autoresizingMask = [.flexibleLeftMargin, .flexibleRightMargin, .flexibleWidth]
         tempButton.backgroundColor = UIColor.NFXDarkStarkWhiteColor()
-        tempButton.setTitle(title, forState: .Normal)
-        tempButton.setTitleColor(UIColor.init(netHex: 0x6d6d6d), forState: .Normal)
-        tempButton.setTitleColor(UIColor.init(netHex: 0xf3f3f4), forState: .Selected)
+        tempButton.setTitle(title, for: UIControlState())
+        tempButton.setTitleColor(UIColor.init(netHex: 0x6d6d6d), for: UIControlState())
+        tempButton.setTitleColor(UIColor.init(netHex: 0xf3f3f4), for: .selected)
         tempButton.titleLabel?.font = UIFont.NFXFont(15)
-        tempButton.addTarget(self, action: selector, forControlEvents: .TouchUpInside)
+        tempButton.addTarget(self, action: selector, for: .touchUpInside)
         return tempButton
     }
     
-    func createDetailsView(content: NSAttributedString, forView: EDetailsView) -> UIScrollView
+    func createDetailsView(_ content: AttributedString, forView: EDetailsView) -> UIScrollView
     {
         var scrollView: UIScrollView
         scrollView = UIScrollView()
-        scrollView.frame = CGRectMake(0, 44, CGRectGetWidth(self.view.frame), CGRectGetHeight(self.view.frame) - 44)
-        scrollView.autoresizingMask = [.FlexibleWidth, .FlexibleHeight]
+        scrollView.frame = CGRect(x: 0, y: 44, width: self.view.frame.width, height: self.view.frame.height - 44)
+        scrollView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
         scrollView.autoresizesSubviews = true
-        scrollView.backgroundColor = UIColor.clearColor()
+        scrollView.backgroundColor = UIColor.clear()
         
         var textLabel: UILabel
         textLabel = UILabel()
-        textLabel.frame = CGRectMake(20, 20, CGRectGetWidth(scrollView.frame) - 40, CGRectGetHeight(scrollView.frame) - 20);
+        textLabel.frame = CGRect(x: 20, y: 20, width: scrollView.frame.width - 40, height: scrollView.frame.height - 20);
         textLabel.font = UIFont.NFXFont(13)
         textLabel.textColor = UIColor.NFXGray44Color()
         textLabel.numberOfLines = 0
         textLabel.attributedText = content
         textLabel.sizeToFit()
-		textLabel.textAlignment = .Left
+		textLabel.textAlignment = .left
         scrollView.addSubview(textLabel)
         
         var moreButton: UIButton
-        moreButton = UIButton.init(frame: CGRectMake(20, CGRectGetMaxY(textLabel.frame) + 10, CGRectGetWidth(scrollView.frame) - 40, 40))
+        moreButton = UIButton.init(frame: CGRect(x: 20, y: textLabel.frame.maxY + 10, width: scrollView.frame.width - 40, height: 40))
         moreButton.backgroundColor = UIColor.NFXGray44Color()
         
-        if ((forView == EDetailsView.REQUEST) && (self.selectedModel.requestBodyLength > 1024)) {
-            moreButton.setTitle("Show request body", forState: .Normal)
-            moreButton.addTarget(self, action: Selector("requestBodyButtonPressed"), forControlEvents: .TouchUpInside)
+        if ((forView == EDetailsView.request) && (self.selectedModel.requestBodyLength > 1024)) {
+            moreButton.setTitle("Show request body", for: UIControlState())
+            moreButton.addTarget(self, action: #selector(NFXDetailsController.requestBodyButtonPressed), for: .touchUpInside)
             scrollView.addSubview(moreButton)
-            scrollView.contentSize = CGSizeMake(textLabel.frame.width, CGRectGetMaxY(moreButton.frame))
+            scrollView.contentSize = CGSize(width: textLabel.frame.width, height: moreButton.frame.maxY)
 
-        } else if ((forView == EDetailsView.RESPONSE) && (self.selectedModel.responseBodyLength > 1024)) {
-            moreButton.setTitle("Show response body", forState: .Normal)
-            moreButton.addTarget(self, action: Selector("responseBodyButtonPressed"), forControlEvents: .TouchUpInside)
+        } else if ((forView == EDetailsView.response) && (self.selectedModel.responseBodyLength > 1024)) {
+            moreButton.setTitle("Show response body", for: UIControlState())
+            moreButton.addTarget(self, action: #selector(NFXDetailsController.responseBodyButtonPressed), for: .touchUpInside)
             scrollView.addSubview(moreButton)
-            scrollView.contentSize = CGSizeMake(textLabel.frame.width, CGRectGetMaxY(moreButton.frame))
+            scrollView.contentSize = CGSize(width: textLabel.frame.width, height: moreButton.frame.maxY)
             
         } else {
-            scrollView.contentSize = CGSizeMake(textLabel.frame.width, CGRectGetMaxY(textLabel.frame))
+            scrollView.contentSize = CGSize(width: textLabel.frame.width, height: textLabel.frame.maxY)
         }
         
         return scrollView
     }
     
-    func actionButtonPressed(sender: UIBarButtonItem)
+    func actionButtonPressed(_ sender: UIBarButtonItem)
     {
-        let actionSheetController: UIAlertController = UIAlertController(title: "Share", message: "", preferredStyle: .ActionSheet)
+        let actionSheetController: UIAlertController = UIAlertController(title: "Share", message: "", preferredStyle: .actionSheet)
         
-        let cancelAction: UIAlertAction = UIAlertAction(title: "Cancel", style: .Cancel) { action -> Void in
+        let cancelAction: UIAlertAction = UIAlertAction(title: "Cancel", style: .cancel) { action -> Void in
         }
         actionSheetController.addAction(cancelAction)
         
-        let simpleLog: UIAlertAction = UIAlertAction(title: "Simple log", style: .Default) { action -> Void in
+        let simpleLog: UIAlertAction = UIAlertAction(title: "Simple log", style: .default) { action -> Void in
             self.sendMailWithBodies(false)
         }
         actionSheetController.addAction(simpleLog)
         
-        let fullLogAction: UIAlertAction = UIAlertAction(title: "Full log", style: .Default) { action -> Void in
+        let fullLogAction: UIAlertAction = UIAlertAction(title: "Full log", style: .default) { action -> Void in
             self.sendMailWithBodies(true)
         }
         actionSheetController.addAction(fullLogAction)
@@ -137,7 +136,7 @@ class NFXDetailsController: NFXGenericController, MFMailComposeViewControllerDel
             popoverController.barButtonItem = sender
         }
         
-        self.presentViewController(actionSheetController, animated: true, completion: nil)
+        self.present(actionSheetController, animated: true, completion: nil)
     }
     
     
@@ -156,27 +155,27 @@ class NFXDetailsController: NFXGenericController, MFMailComposeViewControllerDel
         buttonPressed(self.responseButton)
     }
     
-    func buttonPressed(button: UIButton)
+    func buttonPressed(_ button: UIButton)
     {
-        self.infoButton.selected = false
-        self.requestButton.selected = false
-        self.responseButton.selected = false
+        self.infoButton.isSelected = false
+        self.requestButton.isSelected = false
+        self.responseButton.isSelected = false
         
-        self.infoView.hidden = true
-        self.requestView.hidden = true
-        self.responseView.hidden = true
+        self.infoView.isHidden = true
+        self.requestView.isHidden = true
+        self.responseView.isHidden = true
         
         if button == self.infoButton {
-            self.infoButton.selected = true
-            self.infoView.hidden = false
+            self.infoButton.isSelected = true
+            self.infoView.isHidden = false
             
         } else if button == requestButton {
-            self.requestButton.selected = true
-            self.requestView.hidden = false
+            self.requestButton.isSelected = true
+            self.requestView.isHidden = false
             
         } else if button == responseButton {
-            self.responseButton.selected = true
-            self.responseView.hidden = false
+            self.responseButton.isSelected = true
+            self.responseView.isHidden = false
             
         }
     }
@@ -184,12 +183,12 @@ class NFXDetailsController: NFXGenericController, MFMailComposeViewControllerDel
     
     func responseBodyButtonPressed()
     {
-        bodyButtonPressed().bodyType = NFXBodyType.RESPONSE
+        bodyButtonPressed().bodyType = NFXBodyType.response
     }
     
     func requestBodyButtonPressed()
     {
-        bodyButtonPressed().bodyType = NFXBodyType.REQUEST
+        bodyButtonPressed().bodyType = NFXBodyType.request
     }
     
     func bodyButtonPressed() -> NFXGenericBodyDetailsController {
@@ -207,7 +206,7 @@ class NFXDetailsController: NFXGenericController, MFMailComposeViewControllerDel
     }
     
     
-    func getInfoStringFromObject(object: NFXHTTPModel) -> NSAttributedString
+    func getInfoStringFromObject(_ object: NFXHTTPModel) -> AttributedString
     {
         var tempString: String
         tempString = String()
@@ -228,7 +227,7 @@ class NFXDetailsController: NFXGenericController, MFMailComposeViewControllerDel
         return formatNFXString(tempString)
     }
     
-    func getRequestStringFromObject(object: NFXHTTPModel) -> NSAttributedString
+    func getRequestStringFromObject(_ object: NFXHTTPModel) -> AttributedString
     {
         var tempString: String
         tempString = String()
@@ -257,7 +256,7 @@ class NFXDetailsController: NFXGenericController, MFMailComposeViewControllerDel
         return formatNFXString(tempString)
     }
     
-    func getResponseStringFromObject(object: NFXHTTPModel) -> NSAttributedString
+    func getResponseStringFromObject(_ object: NFXHTTPModel) -> AttributedString
     {
         if (object.noResponse) {
             return NSMutableAttributedString(string: "No response")
@@ -290,7 +289,7 @@ class NFXDetailsController: NFXGenericController, MFMailComposeViewControllerDel
         return formatNFXString(tempString)
     }
     
-    func sendMailWithBodies(bodies: Bool)
+    func sendMailWithBodies(_ bodies: Bool)
     {
         if (MFMailComposeViewController.canSendMail()) {
             
@@ -317,23 +316,23 @@ class NFXDetailsController: NFXGenericController, MFMailComposeViewControllerDel
             
             if bodies {
                 let requestFilePath = self.selectedModel.getRequestBodyFilepath()
-                if let requestFileData = NSData(contentsOfFile: requestFilePath as String) {
+                if let requestFileData = try? Data(contentsOf: URL(fileURLWithPath: requestFilePath as String)) {
                     mailComposer.addAttachmentData(requestFileData, mimeType: "text/plain", fileName: "request-body")
                 }
                 
                 let responseFilePath = self.selectedModel.getResponseBodyFilepath()
-                if let responseFileData = NSData(contentsOfFile: responseFilePath as String) {
+                if let responseFileData = try? Data(contentsOf: URL(fileURLWithPath: responseFilePath as String)) {
                     mailComposer.addAttachmentData(responseFileData, mimeType: "text/plain", fileName: "response-body")
                 }
             }
 
-            self.presentViewController(mailComposer, animated: true, completion: nil)
+            self.present(mailComposer, animated: true, completion: nil)
         }
     }
     
-    func mailComposeController(controller: MFMailComposeViewController, didFinishWithResult result: MFMailComposeResult, error: NSError?)
+    func mailComposeController(_ controller: MFMailComposeViewController, didFinishWith result: MFMailComposeResult, error: NSError?)
     {
-        self.dismissViewControllerAnimated(true, completion: nil)
+        self.dismiss(animated: true, completion: nil)
     }
     
 }

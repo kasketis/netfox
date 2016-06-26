@@ -12,7 +12,7 @@ class NFXHTTPModel: NSObject
     var requestURL: String?
     var requestMethod: String?
     var requestCachePolicy: String?
-    var requestDate: NSDate?
+    var requestDate: Date?
     var requestTime: String?
     var requestTimeout: String?
     var requestHeaders: Dictionary<String, String>?
@@ -21,7 +21,7 @@ class NFXHTTPModel: NSObject
     
     var responseStatus: Int?
     var responseType: String?
-    var responseDate: NSDate?
+    var responseDate: Date?
     var responseTime: String?
     var responseHeaders: Dictionary<NSObject, AnyObject>?
     var responseBodyLength: Int?
@@ -34,9 +34,9 @@ class NFXHTTPModel: NSObject
     
     var noResponse: Bool = true
     
-    func saveRequest(request: NSURLRequest)
+    func saveRequest(_ request: URLRequest)
     {
-        self.requestDate = NSDate()
+        self.requestDate = Date()
         self.requestTime = getTimeFromDate(self.requestDate!)
         self.requestURL = request.getNFXURL()
         self.requestMethod = request.getNFXMethod()
@@ -47,57 +47,57 @@ class NFXHTTPModel: NSObject
         saveRequestBodyData(request.getNFXBody())
     }
     
-    func saveResponse(response: NSURLResponse, data: NSData)
+    func saveResponse(_ response: URLResponse, data: Data)
     {
         self.noResponse = false
         
-        self.responseDate = NSDate()
+        self.responseDate = Date()
         self.responseTime = getTimeFromDate(self.responseDate!)
         self.responseStatus = response.getNFXStatus()
         self.responseHeaders = response.getNFXHeaders()
         
         if let contentType = response.getNFXHeaders()["Content-Type"] as? String {
-            self.responseType = contentType.componentsSeparatedByString(";")[0]
+            self.responseType = contentType.components(separatedBy: ";")[0]
             self.shortType = getShortTypeFrom(self.responseType!).rawValue
         }
         
-        self.timeInterval = Float(self.responseDate!.timeIntervalSinceDate(self.requestDate!))
+        self.timeInterval = Float(self.responseDate!.timeIntervalSince(self.requestDate!))
         
         saveResponseBodyData(data)
 
     }
     
     
-    func saveRequestBodyData(data: NSData)
+    func saveRequestBodyData(_ data: Data)
     {
-        let tempBodyString = NSString.init(data: data, encoding: NSUTF8StringEncoding)
-        self.requestBodyLength = data.length
+        let tempBodyString = NSString.init(data: data, encoding: String.Encoding.utf8.rawValue)
+        self.requestBodyLength = data.count
         if (tempBodyString != nil) {
             saveData(tempBodyString!, toFile: getRequestBodyFilepath())
         }
     }
     
-    func saveResponseBodyData(data: NSData)
+    func saveResponseBodyData(_ data: Data)
     {
         var bodyString: NSString?
         
         if self.shortType == HTTPModelShortType.IMAGE.rawValue {
-            bodyString = data.base64EncodedStringWithOptions(.EncodingEndLineWithLineFeed)
+            bodyString = data.base64EncodedString(.encodingEndLineWithLineFeed)
 
         } else {
-            if let tempBodyString = NSString.init(data: data, encoding: NSUTF8StringEncoding) {
+            if let tempBodyString = NSString.init(data: data, encoding: String.Encoding.utf8.rawValue) {
                 bodyString = tempBodyString
             }
         }
         
         if (bodyString != nil) {
-            self.responseBodyLength = data.length
+            self.responseBodyLength = data.count
             saveData(bodyString!, toFile: getResponseBodyFilepath())
         }
         
     }
     
-    private func prettyOutput(rawData: NSData, contentType: String? = nil) -> NSString
+    private func prettyOutput(_ rawData: Data, contentType: String? = nil) -> NSString
     {
         if let contentType = contentType {
             let shortType = getShortTypeFrom(contentType)
@@ -105,7 +105,7 @@ class NFXHTTPModel: NSObject
                 return output
             }
         }
-        return NSString(data: rawData, encoding: NSUTF8StringEncoding) ?? ""
+        return NSString(data: rawData, encoding: String.Encoding.utf8.rawValue) ?? ""
     }
 
     func getRequestBody() -> NSString
@@ -128,7 +128,7 @@ class NFXHTTPModel: NSObject
     func getRandomHash() -> NSString
     {
         if !(self.randomHash != nil) {
-            self.randomHash = NSUUID().UUIDString
+            self.randomHash = UUID().uuidString
         }
         return self.randomHash!
     }
@@ -136,46 +136,46 @@ class NFXHTTPModel: NSObject
     func getRequestBodyFilepath() -> String
     {
         let dir = getDocumentsPath() as NSString
-        return dir.stringByAppendingPathComponent(getRequestBodyFilename())
+        return dir.appendingPathComponent(getRequestBodyFilename())
     }
     
     func getRequestBodyFilename() -> String
     {
-        return String("nfx_request_body_").stringByAppendingString("\(self.requestTime!)_\(getRandomHash() as String)")
+        return String("nfx_request_body_") + "\(self.requestTime!)_\(getRandomHash() as String)"
     }
     
     func getResponseBodyFilepath() -> String
     {
         let dir = getDocumentsPath() as NSString
-        return dir.stringByAppendingPathComponent(getResponseBodyFilename())
+        return dir.appendingPathComponent(getResponseBodyFilename())
     }
     
     func getResponseBodyFilename() -> String
     {
-        return String("nfx_response_body_").stringByAppendingString("\(self.requestTime!)_\(getRandomHash() as String)")
+        return String("nfx_response_body_") + "\(self.requestTime!)_\(getRandomHash() as String)"
     }
     
     func getDocumentsPath() -> String
     {
-        return NSSearchPathForDirectoriesInDomains(NSSearchPathDirectory.DocumentDirectory, NSSearchPathDomainMask.AllDomainsMask, true).first!
+        return NSSearchPathForDirectoriesInDomains(FileManager.SearchPathDirectory.documentDirectory, FileManager.SearchPathDomainMask.allDomainsMask, true).first!
     }
     
-    func saveData(dataString: NSString, toFile: String)
+    func saveData(_ dataString: NSString, toFile: String)
     {
         do {
-            try dataString.writeToFile(toFile, atomically: false, encoding: NSUTF8StringEncoding)
+            try dataString.write(toFile: toFile, atomically: false, encoding: String.Encoding.utf8.rawValue)
         } catch {}
     }
     
-    func readRawData(fromFile: String) -> NSData?
+    func readRawData(_ fromFile: String) -> Data?
     {
-        return NSData(contentsOfFile: fromFile)
+        return (try? Data(contentsOf: URL(fileURLWithPath: fromFile)))
     }
     
-    func getTimeFromDate(date: NSDate) -> String
+    func getTimeFromDate(_ date: Date) -> String
     {
-        let calendar = NSCalendar.currentCalendar()
-        let components = calendar.components([.Hour, .Minute], fromDate: date)
+        let calendar = Calendar.current()
+        let components = calendar.components([.hour, .minute], from: date)
         let hour = components.hour
         let minutes = components.minute
         if minutes < 10 {
@@ -185,7 +185,7 @@ class NFXHTTPModel: NSObject
         }
     }
     
-    func getShortTypeFrom(contentType: String) -> HTTPModelShortType
+    func getShortTypeFrom(_ contentType: String) -> HTTPModelShortType
     {
         if contentType == "application/json" {
             return .JSON
@@ -206,14 +206,14 @@ class NFXHTTPModel: NSObject
         return .OTHER
     }
     
-    func prettyPrint(rawData: NSData, type: HTTPModelShortType) -> String?
+    func prettyPrint(_ rawData: Data, type: HTTPModelShortType) -> String?
     {
         switch type {
         case .JSON:
             do {
-                let rawJsonData = try NSJSONSerialization.JSONObjectWithData(rawData, options: [])
-                let prettyPrintedString = try NSJSONSerialization.dataWithJSONObject(rawJsonData, options: [.PrettyPrinted])
-                return NSString(data: prettyPrintedString, encoding: NSUTF8StringEncoding) as? String
+                let rawJsonData = try JSONSerialization.jsonObject(with: rawData, options: [])
+                let prettyPrintedString = try JSONSerialization.data(withJSONObject: rawJsonData, options: [.prettyPrinted])
+                return NSString(data: prettyPrintedString, encoding: String.Encoding.utf8.rawValue) as? String
             } catch {
                 return nil
             }
