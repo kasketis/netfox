@@ -1,24 +1,18 @@
 //
-//  NFXSettingsController.swift
+//  NFXSettingsController_iOS.swift
 //  netfox
 //
-//  Copyright © 2015 kasketis. All rights reserved.
+//  Copyright © 2016 netfox. All rights reserved.
 //
 
-import Foundation
+#if os(iOS)
+    
 import UIKit
 
-class NFXSettingsController: NFXGenericController, UITableViewDelegate, UITableViewDataSource
-{
-    // MARK: Properties
-
-    var nfxURL = "https://github.com/kasketis/netfox"
+class NFXSettingsController_iOS: NFXSettingsController, UITableViewDelegate, UITableViewDataSource {
     
     var tableView: UITableView = UITableView()
     
-    var tableData = [HTTPModelShortType]()
-    var filters = [Bool]()
-
     // MARK: View Life Cycle
     
     override func viewDidLoad()
@@ -26,7 +20,7 @@ class NFXSettingsController: NFXGenericController, UITableViewDelegate, UITableV
         super.viewDidLoad()
         
         self.title = "Settings"
-                
+        
         self.tableData = HTTPModelShortType.allValues
         self.filters =  NFX.sharedInstance().getCachedFilters()
         
@@ -35,7 +29,7 @@ class NFXSettingsController: NFXGenericController, UITableViewDelegate, UITableV
         self.automaticallyAdjustsScrollViewInsets = false
         
         self.navigationItem.rightBarButtonItems = [UIBarButtonItem(image: UIImage.NFXStatistics(), style: .Plain, target: self, action: Selector("statisticsButtonPressed")), UIBarButtonItem(image: UIImage.NFXInfo(), style: .Plain, target: self, action: Selector("infoButtonPressed"))]
-
+        
         self.tableView.frame = CGRectMake(0, 0, CGRectGetWidth(self.view.frame), CGRectGetHeight(self.view.frame) - 60)
         self.tableView.autoresizingMask = [.FlexibleWidth, .FlexibleHeight]
         self.tableView.translatesAutoresizingMaskIntoConstraints = true
@@ -53,7 +47,7 @@ class NFXSettingsController: NFXGenericController, UITableViewDelegate, UITableV
         nfxVersionLabel.font = UIFont.NFXFont(14)
         nfxVersionLabel.textColor = UIColor.NFXOrangeColor()
         nfxVersionLabel.textAlignment = .Center
-        nfxVersionLabel.text = "netfox - \(nfxVersion)"
+        nfxVersionLabel.text = nfxVersionString
         self.view.addSubview(nfxVersionLabel)
         
         var nfxURLButton: UIButton
@@ -83,15 +77,15 @@ class NFXSettingsController: NFXGenericController, UITableViewDelegate, UITableV
     
     func infoButtonPressed()
     {
-        var infoController: NFXInfoController
-        infoController = NFXInfoController()
+        var infoController: NFXInfoController_iOS
+        infoController = NFXInfoController_iOS()
         self.navigationController?.pushViewController(infoController, animated: true)
     }
     
     func statisticsButtonPressed()
     {
-        var statisticsController: NFXStatisticsController
-        statisticsController = NFXStatisticsController()
+        var statisticsController: NFXStatisticsController_iOS
+        statisticsController = NFXStatisticsController_iOS()
         self.navigationController?.pushViewController(statisticsController, animated: true)
     }
     
@@ -112,7 +106,7 @@ class NFXSettingsController: NFXGenericController, UITableViewDelegate, UITableV
         let cell = UITableViewCell()
         cell.textLabel?.font = UIFont.NFXFont(14)
         cell.tintColor = UIColor.NFXOrangeColor()
-
+        
         switch indexPath.section
         {
         case 0:
@@ -129,18 +123,18 @@ class NFXSettingsController: NFXGenericController, UITableViewDelegate, UITableV
             cell.textLabel?.text = shortType.rawValue
             configureCell(cell, indexPath: indexPath)
             return cell
-
+            
         case 2:
             cell.textLabel?.textAlignment = .Center
             cell.textLabel?.text = "Clear data"
             cell.textLabel?.textColor = UIColor.NFXRedColor()
             cell.textLabel?.font = UIFont.NFXFont(16)
-
+            
             return cell
-
+            
             
         default: return UITableViewCell()
-
+            
         }
         
     }
@@ -182,7 +176,7 @@ class NFXSettingsController: NFXGenericController, UITableViewDelegate, UITableV
         }
         
         return headerView
-
+        
     }
     
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath)
@@ -203,8 +197,7 @@ class NFXSettingsController: NFXGenericController, UITableViewDelegate, UITableV
         }
         
         tableView.deselectRowAtIndexPath(indexPath, animated: true)
-
-
+        
     }
     
     func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat
@@ -252,7 +245,7 @@ class NFXSettingsController: NFXGenericController, UITableViewDelegate, UITableV
                 cell!.accessoryType = .None
             }
         }
-
+        
     }
     
     func nfxEnabledSwitchValueChanged(sender: UISwitch)
@@ -269,21 +262,23 @@ class NFXSettingsController: NFXGenericController, UITableViewDelegate, UITableV
         let actionSheetController: UIAlertController = UIAlertController(title: "Clear data?", message: "", preferredStyle: .ActionSheet)
         actionSheetController.popoverPresentationController?.sourceView = tableView
         actionSheetController.popoverPresentationController?.sourceRect = tableView.rectForRowAtIndexPath(index)
-
+        
         let cancelAction: UIAlertAction = UIAlertAction(title: "Cancel", style: .Cancel) { action -> Void in
         }
         actionSheetController.addAction(cancelAction)
-
+        
         let yesAction: UIAlertAction = UIAlertAction(title: "Yes", style: .Default) { action -> Void in
             NFX.sharedInstance().clearOldData()
         }
         actionSheetController.addAction(yesAction)
-
+        
         let noAction: UIAlertAction = UIAlertAction(title: "No", style: .Default) { action -> Void in
         }
         actionSheetController.addAction(noAction)
-
+        
         self.presentViewController(actionSheetController, animated: true, completion: nil)
     }
-    
+
 }
+    
+#endif

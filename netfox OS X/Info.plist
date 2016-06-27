@@ -15,13 +15,13 @@
 	<key>CFBundlePackageType</key>
 	<string>FMWK</string>
 	<key>CFBundleShortVersionString</key>
-	<string>1.7.3</string>
+	<string>1.0</string>
 	<key>CFBundleSignature</key>
 	<string>????</string>
 	<key>CFBundleVersion</key>
 	<string>$(CURRENT_PROJECT_VERSION)</string>
-	<key>Copyright (human-readable)</key>
-	<string>Copyright © 2016 netfox. All rights reserved.</string>
+	<key>NSHumanReadableCopyright</key>
+	<string>Copyright © 2016 kasketis. All rights reserved.</string>
 	<key>NSPrincipalClass</key>
 	<string></string>
 </dict>

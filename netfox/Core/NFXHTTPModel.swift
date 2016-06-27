@@ -2,7 +2,7 @@
 //  NFXHTTPModel.swift
 //  netfox
 //
-//  Copyright © 2015 kasketis. All rights reserved.
+//  Copyright © 2016 netfox. All rights reserved.
 //
 
 import Foundation
@@ -45,6 +45,11 @@ class NFXHTTPModel: NSObject
         self.requestHeaders = request.getNFXHeaders()
         self.requestType = requestHeaders?["Content-Type"]
         saveRequestBodyData(request.getNFXBody())
+    }
+    
+    func saveErrorResponse()
+    {
+        self.responseDate = NSDate()
     }
     
     func saveResponse(response: NSURLResponse, data: NSData)
@@ -164,7 +169,9 @@ class NFXHTTPModel: NSObject
     {
         do {
             try dataString.writeToFile(toFile, atomically: false, encoding: NSUTF8StringEncoding)
-        } catch {}
+        } catch {
+            print("catch !!!")
+        }
     }
     
     func readRawData(fromFile: String) -> NSData?

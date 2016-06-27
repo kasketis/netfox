@@ -2,13 +2,12 @@
 //  NFXAssets.swift
 //  netfox
 //
-//  Copyright © 2015 kasketis. All rights reserved.
+//  Copyright © 2016 netfox. All rights reserved.
 //
 
 import Foundation
-import UIKit
 
-enum NFXImage {
+enum NFXAssetName {
     case SETTINGS
     case INFO
     case STATISTICS
@@ -16,7 +15,7 @@ enum NFXImage {
 
 class NFXAssets
 {
-    class func getImage(image: NFXImage) -> NSData
+    class func getImage(image: NFXAssetName) -> NSData
     {
         var base64Image: String
 

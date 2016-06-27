@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="9532" systemVersion="14F27" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES" customObjectInstantitationMethod="direct">
+    <dependencies>
+        <deployment identifier="macosx"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="9532"/>
+    </dependencies>
+    <objects>
+        <customObject id="-2" userLabel="File's Owner"/>
+        <customObject id="-1" userLabel="First Responder" customClass="FirstResponder"/>
+        <customObject id="-3" userLabel="Application" customClass="NSObject"/>
+        <customView id="c22-O7-iKe" customClass="NFXResponseTypeCell_OSX" customModule="netfox_osx" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="419" height="65"/>
+            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+            <subviews>
+                <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="BGd-oh-Fzr">
+                    <rect key="frame" x="20" y="24" width="353" height="17"/>
+                    <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="Label" drawsBackground="YES" id="7tM-ck-UAQ">
+                        <font key="font" metaFont="system"/>
+                        <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    </textFieldCell>
+                </textField>
+                <button translatesAutoresizingMaskIntoConstraints="NO" id="Nii-LN-rF8">
+                    <rect key="frame" x="379" y="23" width="22" height="18"/>
+                    <constraints>
+                        <constraint firstAttribute="width" constant="18" id="a5u-aG-Jhx"/>
+                    </constraints>
+                    <buttonCell key="cell" type="check" bezelStyle="regularSquare" imagePosition="left" state="on" inset="2" id="OQA-PZ-Nsc">
+                        <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
+                        <font key="font" metaFont="system"/>
+                    </buttonCell>
+                </button>
+            </subviews>
+            <constraints>
+                <constraint firstItem="Nii-LN-rF8" firstAttribute="leading" secondItem="BGd-oh-Fzr" secondAttribute="trailing" constant="8" symbolic="YES" id="1hM-6V-jkb"/>
+                <constraint firstItem="Nii-LN-rF8" firstAttribute="centerY" secondItem="c22-O7-iKe" secondAttribute="centerY" id="E6D-5T-vAl"/>
+                <constraint firstAttribute="trailing" secondItem="Nii-LN-rF8" secondAttribute="trailing" constant="20" symbolic="YES" id="c6H-9o-bLr"/>
+                <constraint firstItem="BGd-oh-Fzr" firstAttribute="centerY" secondItem="c22-O7-iKe" secondAttribute="centerY" id="eUv-JF-GPt"/>
+                <constraint firstItem="BGd-oh-Fzr" firstAttribute="leading" secondItem="c22-O7-iKe" secondAttribute="leading" constant="20" id="wPg-gw-sUc"/>
+            </constraints>
+            <connections>
+                <outlet property="activeCheckbox" destination="Nii-LN-rF8" id="jEt-ot-vjB"/>
+                <outlet property="typeLabel" destination="BGd-oh-Fzr" id="3pd-8b-E3f"/>
+            </connections>
+            <point key="canvasLocation" x="46.5" y="180.5"/>
+        </customView>
+    </objects>
+</document>

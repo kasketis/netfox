@@ -1,16 +1,16 @@
 //
-//  NFXInfoController.swift
+//  NFXInfoController_iOS.swift
 //  netfox
 //
-//  Copyright © 2015 kasketis. All rights reserved.
+//  Copyright © 2016 netfox. All rights reserved.
 //
 
+#if os(iOS)
 
-import Foundation
 import UIKit
 
-class NFXInfoController: NFXGenericController
-{
+class NFXInfoController_iOS: NFXInfoController {
+    
     var scrollView: UIScrollView = UIScrollView()
     var textLabel: UILabel = UILabel()
     
@@ -41,7 +41,7 @@ class NFXInfoController: NFXGenericController
         generateInfo()
         
     }
-    
+
     func generateInfo()
     {
         NFXDebugInfo.getNFXIP { (result) -> Void in
@@ -50,28 +50,7 @@ class NFXInfoController: NFXGenericController
             }
         }
     }
-    
-    func generateInfoString(ipAddress: String) -> NSAttributedString
-    {
-        var tempString: String
-        tempString = String()
-        
-        tempString += "[App name] \n\(NFXDebugInfo.getNFXAppName())\n\n"
-        
-        tempString += "[App version] \n\(NFXDebugInfo.getNFXAppVersionNumber()) (build \(NFXDebugInfo.getNFXAppBuildNumber()))\n\n"
-        
-        tempString += "[App bundle identifier] \n\(NFXDebugInfo.getNFXBundleIdentifier())\n\n"
-
-        tempString += "[Device OS] \niOS \(NFXDebugInfo.getNFXiOSVersion())\n\n"
-
-        tempString += "[Device type] \n\(NFXDebugInfo.getNFXDeviceType())\n\n"
-
-        tempString += "[Device screen resolution] \n\(NFXDebugInfo.getNFXDeviceScreenResolution())\n\n"
-        
-        tempString += "[Device IP address] \n\(ipAddress)\n\n"
-
-        return formatNFXString(tempString)
-    }
-    
 
 }
+
+#endif

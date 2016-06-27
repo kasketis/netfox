@@ -2,11 +2,13 @@
 //  NFXListCell.swift
 //  netfox
 //
-//  Copyright © 2015 kasketis. All rights reserved.
+//  Copyright © 2016 netfox. All rights reserved.
 //
 
 import Foundation
 
+#if os(iOS)
+    
 import UIKit
 
 class NFXListCell: UITableViewCell
@@ -182,3 +184,5 @@ class NFXListCell: UITableViewCell
         }
     }
 }
+
+#endif

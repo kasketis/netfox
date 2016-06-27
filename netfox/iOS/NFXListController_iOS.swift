@@ -2,22 +2,20 @@
 //  NFXListController.swift
 //  netfox
 //
-//  Copyright © 2015 kasketis. All rights reserved.
+//  Copyright © 2016 netfox. All rights reserved.
 //
 
+#if os(iOS)
+    
 import Foundation
 import UIKit
 
 @available(iOS 8.0, *)
-class NFXListController: NFXGenericController, UITableViewDelegate, UITableViewDataSource, UISearchResultsUpdating, UISearchControllerDelegate
+class NFXListController_iOS: NFXListController, UITableViewDelegate, UITableViewDataSource, UISearchResultsUpdating, UISearchControllerDelegate
 {
     // MARK: Properties
     
     var tableView: UITableView = UITableView()
-    
-    var tableData = [NFXHTTPModel]()
-    var filteredTableData = [NFXHTTPModel]()
-    
     var searchController: UISearchController!
     
     // MARK: View Life Cycle
@@ -61,10 +59,10 @@ class NFXListController: NFXGenericController, UITableViewDelegate, UITableViewD
         self.searchController.view.backgroundColor = UIColor.clearColor()
         
         self.navigationItem.titleView = searchView
-
+        
         NSNotificationCenter.defaultCenter().addObserver(
             self,
-            selector: "reloadData",
+            selector: "reloadTableViewData",
             name: "NFXReloadData",
             object: nil)
         
@@ -72,19 +70,19 @@ class NFXListController: NFXGenericController, UITableViewDelegate, UITableViewD
             self,
             selector: "deactivateSearchController",
             name: "NFXDeactivateSearch",
-            object: nil)
+            object: nil)        
     }
     
     override func viewWillAppear(animated: Bool)
     {
         super.viewWillAppear(animated)
-        reloadData()
+        reloadTableViewData()
     }
     
     func settingsButtonPressed()
     {
-        var settingsController: NFXSettingsController
-        settingsController = NFXSettingsController()
+        var settingsController: NFXSettingsController_iOS
+        settingsController = NFXSettingsController_iOS()
         self.navigationController?.pushViewController(settingsController, animated: true)
     }
     
@@ -92,17 +90,8 @@ class NFXListController: NFXGenericController, UITableViewDelegate, UITableViewD
     
     func updateSearchResultsForSearchController(searchController: UISearchController)
     {
-        let predicateURL = NSPredicate(format: "requestURL contains[cd] '\(searchController.searchBar.text!)'")
-        let predicateMethod = NSPredicate(format: "requestMethod contains[cd] '\(searchController.searchBar.text!)'")
-        let predicateType = NSPredicate(format: "responseType contains[cd] '\(searchController.searchBar.text!)'")
-
-        let predicates = [predicateURL, predicateMethod, predicateType]
-        
-        let searchPredicate = NSCompoundPredicate(orPredicateWithSubpredicates: predicates)
-        
-        let array = (NFXHTTPModelManager.sharedInstance.getModels() as NSArray).filteredArrayUsingPredicate(searchPredicate)
-        self.filteredTableData = array as! [NFXHTTPModel]
-        reloadData()
+        self.updateSearchResultsForSearchControllerWithString(searchController.searchBar.text!)
+        reloadTableViewData()
     }
     
     func deactivateSearchController()
@@ -145,7 +134,7 @@ class NFXListController: NFXGenericController, UITableViewDelegate, UITableViewD
         return UIView.init(frame: CGRectZero)
     }
     
-    override func reloadData()
+    override func reloadTableViewData()
     {
         dispatch_async(dispatch_get_main_queue()) { () -> Void in
             self.tableView.reloadData()
@@ -160,8 +149,8 @@ class NFXListController: NFXGenericController, UITableViewDelegate, UITableViewD
     
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath)
     {
-        var detailsController : NFXDetailsController
-        detailsController = NFXDetailsController()
+        var detailsController : NFXDetailsController_iOS
+        detailsController = NFXDetailsController_iOS()
         var model: NFXHTTPModel
         if (self.searchController.active) {
             model = self.filteredTableData[indexPath.row]
@@ -179,3 +168,5 @@ class NFXListController: NFXGenericController, UITableViewDelegate, UITableViewD
     }
 
 }
+
+#endif
