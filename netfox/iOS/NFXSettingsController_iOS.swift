@@ -198,7 +198,6 @@ class NFXSettingsController_iOS: NFXSettingsController, UITableViewDelegate, UIT
         
         tableView.deselectRowAtIndexPath(indexPath, animated: true)
         
-        
     }
     
     func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat

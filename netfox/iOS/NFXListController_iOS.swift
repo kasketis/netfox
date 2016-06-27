@@ -76,6 +76,7 @@ class NFXListController_iOS: NFXListController, UITableViewDelegate, UITableView
     override func viewWillAppear(animated: Bool)
     {
         super.viewWillAppear(animated)
+        reloadTableViewData()
     }
     
     func settingsButtonPressed()

@@ -57,9 +57,9 @@ class NFXDetailsController: NFXGenericController {
             tempString += "Request headers are empty\n\n"
         }
         
-        #if os(iOS)
-            tempString += getRequestBodyStringFooter(object)
-        #endif
+    #if os(iOS)
+        tempString += getRequestBodyStringFooter(object)
+    #endif
         return formatNFXString(tempString)
     }
 

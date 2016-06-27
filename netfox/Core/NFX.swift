@@ -18,9 +18,9 @@ let nfxVersion = "1.7.3"
 public class NFX: NSObject
 {
     #if os(OSX)
-    var windowController: NFXWindowController?
-    let mainMenu: NSMenu? = NSApp.mainMenu?.itemArray[1].submenu
-    var nfxMenuItem: NSMenuItem = NSMenuItem(title: "netfox", action: "show", keyEquivalent: String(character: NSF9FunctionKey, length: 1))
+        var windowController: NFXWindowController?
+        let mainMenu: NSMenu? = NSApp.mainMenu?.itemArray[1].submenu
+        var nfxMenuItem: NSMenuItem = NSMenuItem(title: "netfox", action: "show", keyEquivalent: String(character: NSF9FunctionKey, length: 1))
     #endif
     
     // swiftSharedInstance is not accessible from ObjC
@@ -60,9 +60,9 @@ public class NFX: NSObject
         enable()
         clearOldData()
         showMessage("Started!")
-        #if os(OSX)
+    #if os(OSX)
         self.addNetfoxToMainMenu()
-        #endif
+    #endif
     }
     
     @objc public func stop()
@@ -72,9 +72,9 @@ public class NFX: NSObject
         clearOldData()
         self.started = false
         showMessage("Stopped!")
-        #if os(OSX)
+    #if os(OSX)
         self.removeNetfoxFromMainmenu()
-        #endif
+    #endif
     }
     
     private func showMessage(msg: String) {
@@ -120,13 +120,13 @@ public class NFX: NSObject
     @objc public func setGesture(gesture: ENFXGesture)
     {
         self.selectedGesture = gesture
-        #if os(OSX)
-            if gesture == .shake {
-                self.addNetfoxToMainMenu()
-            } else {
-                self.removeNetfoxFromMainmenu()
-            }
-        #endif
+    #if os(OSX)
+        if gesture == .shake {
+            self.addNetfoxToMainMenu()
+        } else {
+            self.removeNetfoxFromMainmenu()
+        }
+    #endif
     }
     
     @objc public func show()

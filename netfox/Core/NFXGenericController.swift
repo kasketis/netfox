@@ -19,13 +19,13 @@ class NFXGenericController: NFXViewController
     override func viewDidLoad()
     {
         super.viewDidLoad()
-        #if os(iOS)
+    #if os(iOS)
         self.edgesForExtendedLayout = .None
         self.view.backgroundColor = NFXColor.NFXGray95Color()
-        #elseif os(OSX)
+    #elseif os(OSX)
         self.view.wantsLayer = true
         self.view.layer?.backgroundColor = NFXColor.NFXGray95Color().CGColor
-        #endif
+    #endif
     }
     
     func selectedModel(model: NFXHTTPModel)

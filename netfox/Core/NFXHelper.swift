@@ -97,7 +97,7 @@ extension NFXColor
 
 extension NFXFont
 {
-    #if os(iOS)
+#if os(iOS)
     class func NFXFont(size: CGFloat) -> UIFont
     {
         return UIFont(name: "HelveticaNeue", size: size)!
@@ -107,7 +107,8 @@ extension NFXFont
     {
         return UIFont(name: "HelveticaNeue-Bold", size: size)!
     }
-    #elseif os(OSX)
+    
+#elseif os(OSX)
     class func NFXFont(size: CGFloat) -> NSFont
     {
         return NSFont(name: "HelveticaNeue", size: size)!
@@ -117,7 +118,7 @@ extension NFXFont
     {
         return NSFont(name: "HelveticaNeue-Bold", size: size)!
     }
-    #endif
+#endif
 }
 
 extension NSURLRequest
@@ -190,29 +191,29 @@ extension NFXImage
 {
     class func NFXSettings() -> NFXImage
     {
-        #if os (iOS)
-            return UIImage(data: NFXAssets.getImage(NFXAssetName.SETTINGS), scale: 1.7)!
-        #elseif os(OSX)
-            return NSImage(data: NFXAssets.getImage(NFXAssetName.SETTINGS))!
-        #endif
+    #if os (iOS)
+        return UIImage(data: NFXAssets.getImage(NFXAssetName.SETTINGS), scale: 1.7)!
+    #elseif os(OSX)
+        return NSImage(data: NFXAssets.getImage(NFXAssetName.SETTINGS))!
+    #endif
     }
     
     class func NFXInfo() -> NFXImage
     {
-        #if os (iOS)
-            return UIImage(data: NFXAssets.getImage(NFXAssetName.INFO), scale: 1.7)!
-        #elseif os(OSX)
-            return NSImage(data: NFXAssets.getImage(NFXAssetName.INFO))!
-        #endif
+    #if os (iOS)
+        return UIImage(data: NFXAssets.getImage(NFXAssetName.INFO), scale: 1.7)!
+    #elseif os(OSX)
+        return NSImage(data: NFXAssets.getImage(NFXAssetName.INFO))!
+    #endif
     }
     
     class func NFXStatistics() -> NFXImage
     {
-        #if os (iOS)
-            return UIImage(data: NFXAssets.getImage(NFXAssetName.STATISTICS), scale: 1.7)!
-        #elseif os(OSX)
-            return NSImage(data: NFXAssets.getImage(NFXAssetName.STATISTICS))!
-        #endif
+    #if os (iOS)
+        return UIImage(data: NFXAssets.getImage(NFXAssetName.STATISTICS), scale: 1.7)!
+    #elseif os(OSX)
+        return NSImage(data: NFXAssets.getImage(NFXAssetName.STATISTICS))!
+    #endif
     }
 }
 
@@ -252,33 +253,33 @@ class NFXDebugInfo {
     
     class func getNFXOSVersion() -> String
     {
-        #if os(iOS)
-            return UIDevice.currentDevice().systemVersion ?? ""
-        #elseif os(OSX)
-            return NSProcessInfo.processInfo().operatingSystemVersionString
-        #endif
+    #if os(iOS)
+        return UIDevice.currentDevice().systemVersion ?? ""
+    #elseif os(OSX)
+        return NSProcessInfo.processInfo().operatingSystemVersionString
+    #endif
     }
     
     class func getNFXDeviceType() -> String
     {
-        #if os(iOS)
-            return UIDevice.getNFXDeviceType() ?? ""
-        #elseif os(OSX)
-            return "Not implemented yet. PR welcomes"
-        #endif
+    #if os(iOS)
+        return UIDevice.getNFXDeviceType() ?? ""
+    #elseif os(OSX)
+        return "Not implemented yet. PR welcomes"
+    #endif
     }
     
     class func getNFXDeviceScreenResolution() -> String
     {
-        #if os(iOS)
-            let scale = UIScreen.mainScreen().scale
-            let bounds = UIScreen.mainScreen().bounds
-            let width = bounds.size.width * scale
-            let height = bounds.size.height * scale
-            return "\(width) x \(height)"
-        #elseif os(OSX)
-            return "0"
-        #endif
+    #if os(iOS)
+        let scale = UIScreen.mainScreen().scale
+        let bounds = UIScreen.mainScreen().bounds
+        let width = bounds.size.width * scale
+        let height = bounds.size.height * scale
+        return "\(width) x \(height)"
+    #elseif os(OSX)
+        return "0"
+    #endif
     }
     
     class func getNFXIP(completion:(result: String) -> Void)
