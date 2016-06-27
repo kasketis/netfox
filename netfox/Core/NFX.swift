@@ -197,6 +197,7 @@ public class NFX: NSObject
                 }
             }
             
+            try NSFileManager.defaultManager().removeItemAtPath(NFXPath.SessionLog)
         } catch {}
     }
     

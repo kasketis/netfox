@@ -229,7 +229,8 @@ extension NSDate
     }
 }
 
-class NFXDebugInfo {
+class NFXDebugInfo
+{
     
     class func getNFXAppName() -> String
     {
@@ -304,4 +305,33 @@ class NFXDebugInfo {
             }.resume()
     }
     
+}
+
+
+struct NFXPath
+{
+    static let Documents = NSSearchPathForDirectoriesInDomains(NSSearchPathDirectory.DocumentDirectory, NSSearchPathDomainMask.AllDomainsMask, true).first! as NSString
+    
+    static let SessionLog = NFXPath.Documents.stringByAppendingPathComponent("session.log");
+}
+
+
+extension String
+{
+    func appendToFile(filePath: String) {
+        let contentToAppend = self
+        
+        if let fileHandle = NSFileHandle(forWritingAtPath: filePath) {
+            /* Append to file */
+            fileHandle.seekToEndOfFile()
+            fileHandle.writeData(contentToAppend.dataUsingEncoding(NSUTF8StringEncoding)!)
+        } else {
+            /* Create new file */
+            do {
+                try contentToAppend.writeToFile(filePath, atomically: true, encoding: NSUTF8StringEncoding)
+            } catch {
+                print("Error creating \(filePath)")
+            }
+        }
+    }
 }
