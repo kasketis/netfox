@@ -16,7 +16,7 @@ Implemented in Swift 2.1 - bridged also for Objective-C
 Feel free to contribute :)
 
 ### Overview
-| ![](https://raw.githubusercontent.com/kasketis/netfox/master/assets/overview1_5_3.gif)  | ![](https://cloud.githubusercontent.com/assets/1402212/12893259/78de16ba-ce90-11e5-976f-a2b875e25cbd.png) |
+| ![](https://raw.githubusercontent.com/kasketis/netfox/master/assets/overview1_5_3.gif)  | ![](https://cloud.githubusercontent.com/assets/1402212/12893260/78f90916-ce90-11e5-830a-d1a1b91b2ac4.png) |
 |---|---|
 
 ## Installation
@@ -70,8 +70,8 @@ You can do it by copying the "netfox" folder in your project (make sure that "Cr
 
 The above folder contains 3 subfolders: Core, iOS and OSX. 
 
-If you target on iOS keep only Core and iOS folders (remove OSX folder)
-If you target on OSX keep only Core and OSX folders (remove iOS folder)
+- If you target on iOS keep only Core and iOS folders (remove OSX folder)
+- If you target on OSX keep only Core and OSX folders (remove iOS folder)
 
 ## Start
 
