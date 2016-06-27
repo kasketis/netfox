@@ -1,12 +1,12 @@
 ![](https://raw.githubusercontent.com/kasketis/netfox/master/assets/netfox_logo.png)
 
-[![Version](https://img.shields.io/badge/version-1.7.2-green.svg?style=flat-square)]()
+[![Version](https://img.shields.io/badge/version-1.8-green.svg?style=flat-square)]()
 [![Cocoapods Compatible](https://img.shields.io/cocoapods/v/netfox.svg?style=flat-square)](https://github.com/cocoapods/cocoapods)
 [![Carthage compatible](https://img.shields.io/badge/carthage-compatible-4BC51D.svg?style=flat-square)](https://github.com/Carthage/Carthage)
 [![Platform](https://img.shields.io/cocoapods/p/netfox.svg?style=flat-square)](http://cocoadocs.org/docsets/netfox)
 [![License](https://img.shields.io/badge/license-MIT-orange.svg?style=flat-square)](https://opensource.org/licenses/MIT)
 
-A lightweight, one line setup, network debugging library that provides a quick look on all executed network requests performed by your app.
+A lightweight, one line setup, network debugging library that provides a quick look on all executed network requests performed by your iOS or OSX app.
 It grabs all requests - of course yours, requests from 3rd party libraries (such as AFNetworking, Alamofire or else), UIWebViews, and more
 
 Very useful and handy for network related issues and bugs
@@ -16,7 +16,8 @@ Implemented in Swift 2.1 - bridged also for Objective-C
 Feel free to contribute :)
 
 ### Overview
-![](https://raw.githubusercontent.com/kasketis/netfox/master/assets/overview1_5_3.gif)
+| ![](https://raw.githubusercontent.com/kasketis/netfox/master/assets/overview1_5_3.gif)  | ![](https://cloud.githubusercontent.com/assets/1402212/12893259/78de16ba-ce90-11e5-976f-a2b875e25cbd.png) |
+|---|---|
 
 ## Installation
 
@@ -66,6 +67,11 @@ and follow [these](https://github.com/Carthage/Carthage#if-youre-building-for-io
 If you prefer not to use dependency managers, you can integrate netfox into your project manually.
 
 You can do it by copying the "netfox" folder in your project (make sure that "Create groups" option is selected)
+
+The above folder contains 3 subfolders: Core, iOS and OSX. 
+
+If you target on iOS keep only Core and iOS folders (remove OSX folder)
+If you target on OSX keep only Core and OSX folders (remove iOS folder)
 
 ## Start
 
@@ -154,6 +160,10 @@ Tip: You can use the url of the host (for example "https://www.github.com") to i
 
 - If you experience any problems with request logging please check [this](https://github.com/kasketis/netfox/blob/master/Workarounds.md). If you don't get your answer please open an [issue](https://github.com/kasketis/netfox/issues)
 - Due to the large size of request/response bodies, the library provides disk storage for low memory overhead
+
+## Thanks
+
+Special thanks to [tbaranes](https://github.com/tbaranes) and [vincedev](https://github.com/vincedev) for their contribution on OSX library!
 
 ## Licence
 
