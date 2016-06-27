@@ -12,7 +12,11 @@ import Cocoa
 import UIKit
 #endif
 
-let nfxVersion = "1.7.3"
+let nfxVersion = "1.8"
+
+// Notifications posted when NFX opens/closes, for client application that wish to log that information.
+let nfxWillOpenNotification = "NFXWillOpenNotification"
+let nfxWillCloseNotification = "NFXWillCloseNotification"
 
 @objc
 public class NFX: NSObject

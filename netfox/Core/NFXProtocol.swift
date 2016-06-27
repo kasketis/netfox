@@ -90,11 +90,9 @@ public class NFXProtocol: NSURLProtocol
                 self.client!.URLProtocol(self, didLoadData: data!)
             }
             
-            self.client!.URLProtocolDidFinishLoading(self)
-            self.connection = nil
-
-            self.session!.invalidateAndCancel()
-            self.session = nil
+            if let client = self.client {
+                client.URLProtocolDidFinishLoading(self)
+            }
 
         }).resume()
         
