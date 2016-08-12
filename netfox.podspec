@@ -11,15 +11,13 @@ DESC
   s.screenshots      = "https://raw.githubusercontent.com/kasketis/netfox/master/assets/overview1_5_3.gif"
   s.license          = 'MIT'
   s.author           = "Christos Kasketis"
-  s.source           = { :git => "https://github.com/kasketis/netfox.git", :tag => '1.8' }
+  s.source           = { :git => "https://github.com/kasketis/netfox.git", :tag => "#{s.version}" }
 
   s.ios.deployment_target   = '8.0'
   s.osx.deployment_target   = '10.10'
+
   s.requires_arc = true
-
-  s.ios.source_files = "netfox/Core/*.swift", "netfox/iOS/*.swift"
-  s.osx.source_files = "netfox/Core/*.swift", "netfox/OSX/*.{swift,xib}"
-
-  s.ios.source_files      = 'Sources/ios/*.swift' 
-  s.osx.source_files      = 'Sources/osx/*.swift' 
+  s.source_files = "netfox/Core/*.swift"
+  s.ios.source_files = "netfox/iOS/*.swift"
+  s.osx.source_files = "netfox/OSX/*.{swift,xib}"  
 end
