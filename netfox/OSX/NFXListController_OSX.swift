@@ -27,8 +27,8 @@ class NFXListController_OSX: NFXListController, NSTableViewDelegate, NSTableView
         tableView.registerNib(NSNib(nibNamed: cellIdentifier, bundle: nil), forIdentifier: cellIdentifier)
         searchField.delegate = self
         
-        NSNotificationCenter.defaultCenter().addObserver(self, selector: "reloadTableViewData", name: "NFXReloadData", object: nil)
-        NSNotificationCenter.defaultCenter().addObserver(self, selector: "deactivateSearchController", name: "NFXDeactivateSearch", object: nil)
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(reloadTableViewData), name: "NFXReloadData", object: nil)
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(deactivateSearchController), name: "NFXDeactivateSearch", object: nil)
     }
     
     // MARK: Notifications

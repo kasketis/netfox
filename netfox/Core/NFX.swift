@@ -24,7 +24,7 @@ public class NFX: NSObject
     #if os(OSX)
         var windowController: NFXWindowController?
         let mainMenu: NSMenu? = NSApp.mainMenu?.itemArray[1].submenu
-        var nfxMenuItem: NSMenuItem = NSMenuItem(title: "netfox", action: "show", keyEquivalent: String(character: NSF9FunctionKey, length: 1))
+        var nfxMenuItem: NSMenuItem = NSMenuItem(title: "netfox", action: #selector(show), keyEquivalent: String(character: NSF9FunctionKey, length: 1))
     #endif
     
     // swiftSharedInstance is not accessible from ObjC
@@ -272,7 +272,7 @@ extension NFX {
     
     private func setupNetfoxMenuItem() {
         self.nfxMenuItem.target = self
-        self.nfxMenuItem.action = "motionDetected"
+        self.nfxMenuItem.action = #selector(motionDetected)
         self.nfxMenuItem.keyEquivalent = "n"
         self.nfxMenuItem.keyEquivalentModifierMask = Int(NSEventModifierFlags.CommandKeyMask.rawValue | NSEventModifierFlags.ShiftKeyMask.rawValue)
     }

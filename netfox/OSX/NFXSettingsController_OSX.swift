@@ -82,7 +82,7 @@ class NFXSettingsController_OSX: NFXSettingsController, NSTableViewDataSource, N
         cell.activeCheckbox.state = filters[row] ? NSOnState : NSOffState
         cell.activeCheckbox.tag = row
         cell.activeCheckbox.target = self
-        cell.activeCheckbox.action = "toggleResponseTypeClicked:"
+        cell.activeCheckbox.action = #selector(toggleResponseTypeClicked(_:))
         return cell
     }
     
