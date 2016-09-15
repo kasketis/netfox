@@ -31,12 +31,13 @@ public class NFXProtocol: URLProtocol
         }
         
         if let url = request.url {
-            if (!((url.absoluteString?.hasPrefix("http"))!) && !((url.absoluteString?.hasPrefix("https"))!)) {
+            if (!((url.absoluteString.hasPrefix("http"))) &&
+                !((url.absoluteString.hasPrefix("https")))) {
                 return false
             }
 
             for ignoredURL in NFX.sharedInstance().getIgnoredURLs() {
-                if ((url.absoluteString?.hasPrefix(ignoredURL)) != nil) {
+                if (url.absoluteString.hasPrefix(ignoredURL)) {
                     return false
                 }
             }
@@ -63,7 +64,7 @@ public class NFXProtocol: URLProtocol
                 
         URLProtocol.setProperty("1", forKey: "NFXInternal", in: req)
         
-        let session = URLSession.shared()
+        let session = URLSession.shared
         session.dataTask(with: req as URLRequest, completionHandler: {data, response, error in
             
             if error != nil {
@@ -109,7 +110,7 @@ public class NFXProtocol: URLProtocol
             NFXHTTPModelManager.sharedInstance.add(self.model!)
         }
         
-        NotificationCenter.default().post(name: Notification.Name(rawValue: "NFXReloadData"), object: nil)
+        NotificationCenter.default.post(name: Notification.Name(rawValue: "NFXReloadData"), object: nil)
     }
     
 }

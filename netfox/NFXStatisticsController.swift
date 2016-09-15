@@ -40,12 +40,12 @@ class NFXStatisticsController: NFXGenericController
         self.scrollView.frame = CGRect(x: 0, y: 0, width: self.view.frame.width, height: self.view.frame.height)
         self.scrollView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
         self.scrollView.autoresizesSubviews = true
-        self.scrollView.backgroundColor = UIColor.clear()
+        self.scrollView.backgroundColor = UIColor.clear
         self.view.addSubview(self.scrollView)
 
         self.textLabel = UILabel()
         self.textLabel.frame = CGRect(x: 20, y: 20, width: scrollView.frame.width - 40, height: scrollView.frame.height - 20);
-        self.textLabel.font = UIFont.NFXFont(13)
+        self.textLabel.font = UIFont.NFXFont(size: 13)
         self.textLabel.textColor = UIColor.NFXGray44Color()
         self.textLabel.numberOfLines = 0
         self.textLabel.attributedText = getReportString()
@@ -54,15 +54,15 @@ class NFXStatisticsController: NFXGenericController
         
         self.scrollView.contentSize = CGSize(width: scrollView.frame.width, height: self.textLabel.frame.maxY)
         
-        NotificationCenter.default().addObserver(
+        NotificationCenter.default.addObserver(
             self,
             selector: #selector(NFXGenericController.reloadData),
-            name: "NFXReloadData",
+            name: Notification.Name(rawValue: "NFXReloadData"),
             object: nil)
         
     }
     
-    func getReportString() -> AttributedString
+    func getReportString() -> NSAttributedString
     {
         var tempString: String
         tempString = String()
@@ -126,11 +126,11 @@ class NFXStatisticsController: NFXGenericController
             if (model.timeInterval != nil) {
                 totalResponseTime += model.timeInterval!
                 
-                if model.timeInterval < self.fastestResponseTime {
+                if model.timeInterval! < self.fastestResponseTime {
                     self.fastestResponseTime = model.timeInterval!
                 }
                 
-                if model.timeInterval > self.slowestResponseTime {
+                if model.timeInterval! > self.slowestResponseTime {
                     self.slowestResponseTime = model.timeInterval!
                 }
             }

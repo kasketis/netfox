@@ -33,6 +33,15 @@ class NFXDetailsController: NFXGenericController, MFMailComposeViewControllerDel
         self.title = "Details"
         
         self.navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .action, target: self, action: #selector(NFXDetailsController.actionButtonPressed(_:)))
+        self.navigationItem.rightBarButtonItem?.tintColor = UIColor.white
+        
+        var backImage = UIImage(named: "button_back")
+        backImage = backImage?.withRenderingMode(UIImageRenderingMode.alwaysTemplate)
+        self.navigationItem.leftBarButtonItem = UIBarButtonItem(image: backImage,
+                                                                style: .plain,
+                                                                target: self,
+                                                                action: #selector(NFXDetailsController.backButtonPressed))
+        self.navigationItem.leftBarButtonItem?.tintColor = UIColor.white
         
         self.infoButton = createHeaderButton("Info", x: 0, selector: #selector(NFXDetailsController.infoButtonPressed))
         self.view.addSubview(self.infoButton)
@@ -66,24 +75,24 @@ class NFXDetailsController: NFXGenericController, MFMailComposeViewControllerDel
         tempButton.setTitle(title, for: UIControlState())
         tempButton.setTitleColor(UIColor.init(netHex: 0x6d6d6d), for: UIControlState())
         tempButton.setTitleColor(UIColor.init(netHex: 0xf3f3f4), for: .selected)
-        tempButton.titleLabel?.font = UIFont.NFXFont(15)
+        tempButton.titleLabel?.font = UIFont.NFXFont(size: 15)
         tempButton.addTarget(self, action: selector, for: .touchUpInside)
         return tempButton
     }
     
-    func createDetailsView(_ content: AttributedString, forView: EDetailsView) -> UIScrollView
+    func createDetailsView(_ content: NSAttributedString, forView: EDetailsView) -> UIScrollView
     {
         var scrollView: UIScrollView
         scrollView = UIScrollView()
         scrollView.frame = CGRect(x: 0, y: 44, width: self.view.frame.width, height: self.view.frame.height - 44)
         scrollView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
         scrollView.autoresizesSubviews = true
-        scrollView.backgroundColor = UIColor.clear()
+        scrollView.backgroundColor = UIColor.clear
         
         var textLabel: UILabel
         textLabel = UILabel()
         textLabel.frame = CGRect(x: 20, y: 20, width: scrollView.frame.width - 40, height: scrollView.frame.height - 20);
-        textLabel.font = UIFont.NFXFont(13)
+        textLabel.font = UIFont.NFXFont(size: 13)
         textLabel.textColor = UIColor.NFXGray44Color()
         textLabel.numberOfLines = 0
         textLabel.attributedText = content
@@ -95,13 +104,15 @@ class NFXDetailsController: NFXGenericController, MFMailComposeViewControllerDel
         moreButton = UIButton.init(frame: CGRect(x: 20, y: textLabel.frame.maxY + 10, width: scrollView.frame.width - 40, height: 40))
         moreButton.backgroundColor = UIColor.NFXGray44Color()
         
-        if ((forView == EDetailsView.request) && (self.selectedModel.requestBodyLength > 1024)) {
+        if ((forView == EDetailsView.request) &&
+            (self.selectedModel.requestBodyLength! > 1024)) {
             moreButton.setTitle("Show request body", for: UIControlState())
             moreButton.addTarget(self, action: #selector(NFXDetailsController.requestBodyButtonPressed), for: .touchUpInside)
             scrollView.addSubview(moreButton)
             scrollView.contentSize = CGSize(width: textLabel.frame.width, height: moreButton.frame.maxY)
 
-        } else if ((forView == EDetailsView.response) && (self.selectedModel.responseBodyLength > 1024)) {
+        } else if ((forView == EDetailsView.response) &&
+            (self.selectedModel.responseBodyLength! > 1024)) {
             moreButton.setTitle("Show response body", for: UIControlState())
             moreButton.addTarget(self, action: #selector(NFXDetailsController.responseBodyButtonPressed), for: .touchUpInside)
             scrollView.addSubview(moreButton)
@@ -114,25 +125,46 @@ class NFXDetailsController: NFXGenericController, MFMailComposeViewControllerDel
         return scrollView
     }
     
+    func backButtonPressed()
+    {
+        _ = self.navigationController?.popViewController(animated: true)
+    }
+    
     func actionButtonPressed(_ sender: UIBarButtonItem)
     {
-        let actionSheetController: UIAlertController = UIAlertController(title: "Share", message: "", preferredStyle: .actionSheet)
+        let actionSheetController: UIAlertController = UIAlertController(title: "Share",
+                                                                         message: "",
+                                                                         preferredStyle: .actionSheet)
         
-        let cancelAction: UIAlertAction = UIAlertAction(title: "Cancel", style: .cancel) { action -> Void in
+        let cancelAction: UIAlertAction = UIAlertAction(title: "Cancel",
+                                                        style: .cancel)
+        { action -> Void in
         }
         actionSheetController.addAction(cancelAction)
         
-        let simpleLog: UIAlertAction = UIAlertAction(title: "Simple log", style: .default) { action -> Void in
-            self.sendMailWithBodies(false)
+        let simpleLog: UIAlertAction = UIAlertAction(title: "Simple Details log",
+                                                     style: .default)
+        { action -> Void in
+            self.sendMailWithBodies(false, fullLog: false)
         }
         actionSheetController.addAction(simpleLog)
         
-        let fullLogAction: UIAlertAction = UIAlertAction(title: "Full log", style: .default) { action -> Void in
-            self.sendMailWithBodies(true)
+        let fullLogAction: UIAlertAction = UIAlertAction(title: "Full Details log",
+                                                         style: .default)
+        { action -> Void in
+            self.sendMailWithBodies(true, fullLog: false)
         }
         actionSheetController.addAction(fullLogAction)
         
-        if let popoverController = actionSheetController.popoverPresentationController {
+        let completeLogAction: UIAlertAction = UIAlertAction(title: "Complete HTTP log",
+                                                             style: .default)
+        { action -> Void in
+            self.sendMailWithBodies(false, fullLog: true)
+        }
+        actionSheetController.addAction(completeLogAction)
+        
+        if let popoverController = actionSheetController.popoverPresentationController
+        {
             popoverController.barButtonItem = sender
         }
         
@@ -206,7 +238,7 @@ class NFXDetailsController: NFXGenericController, MFMailComposeViewControllerDel
     }
     
     
-    func getInfoStringFromObject(_ object: NFXHTTPModel) -> AttributedString
+    func getInfoStringFromObject(_ object: NFXHTTPModel) -> NSAttributedString
     {
         var tempString: String
         tempString = String()
@@ -227,14 +259,14 @@ class NFXDetailsController: NFXGenericController, MFMailComposeViewControllerDel
         return formatNFXString(tempString)
     }
     
-    func getRequestStringFromObject(_ object: NFXHTTPModel) -> AttributedString
+    func getRequestStringFromObject(_ object: NFXHTTPModel) -> NSAttributedString
     {
         var tempString: String
         tempString = String()
         
         tempString += "-- Headers --\n\n"
 
-        if object.requestHeaders?.count > 0 {
+        if (object.requestHeaders?.count)! > 0 {
             for (key, val) in (object.requestHeaders)! {
                 tempString += "[\(key)] \n\(val)\n\n"
             }
@@ -247,7 +279,7 @@ class NFXDetailsController: NFXGenericController, MFMailComposeViewControllerDel
 
         if (object.requestBodyLength == 0) {
             tempString += "Request body is empty\n"
-        } else if (object.requestBodyLength > 1024) {
+        } else if (object.requestBodyLength! > 1024) {
             tempString += "Too long to show. If you want to see it, please tap the following button\n"
         } else {
             tempString += "\(object.getRequestBody())\n"
@@ -256,7 +288,7 @@ class NFXDetailsController: NFXGenericController, MFMailComposeViewControllerDel
         return formatNFXString(tempString)
     }
     
-    func getResponseStringFromObject(_ object: NFXHTTPModel) -> AttributedString
+    func getResponseStringFromObject(_ object: NFXHTTPModel) -> NSAttributedString
     {
         if (object.noResponse) {
             return NSMutableAttributedString(string: "No response")
@@ -267,7 +299,7 @@ class NFXDetailsController: NFXGenericController, MFMailComposeViewControllerDel
         
         tempString += "-- Headers --\n\n"
 
-        if object.responseHeaders?.count > 0 {
+        if (object.responseHeaders?.count)! > 0 {
             for (key, val) in object.responseHeaders! {
                 tempString += "[\(key)] \n\(val)\n\n"
             }
@@ -280,7 +312,7 @@ class NFXDetailsController: NFXGenericController, MFMailComposeViewControllerDel
 
         if (object.responseBodyLength == 0) {
             tempString += "Response body is empty\n"
-        } else if (object.responseBodyLength > 1024) {
+        } else if (object.responseBodyLength! > 1024) {
             tempString += "Too long to show. If you want to see it, please tap the following button\n"
         } else {
             tempString += "\(object.getResponseBody())\n"
@@ -289,7 +321,7 @@ class NFXDetailsController: NFXGenericController, MFMailComposeViewControllerDel
         return formatNFXString(tempString)
     }
     
-    func sendMailWithBodies(_ bodies: Bool)
+    func sendMailWithBodies(_ bodies: Bool, fullLog: Bool)
     {
         if (MFMailComposeViewController.canSendMail()) {
             
@@ -325,12 +357,23 @@ class NFXDetailsController: NFXGenericController, MFMailComposeViewControllerDel
                     mailComposer.addAttachmentData(responseFileData, mimeType: "text/plain", fileName: "response-body")
                 }
             }
+            
+            if fullLog
+            {
+                
+                let responseFilePath = self.selectedModel.getFullLogFilepath()
+                if let responseFileData = try? Data(contentsOf: URL(fileURLWithPath: responseFilePath as String))
+                {
+                    mailComposer.addAttachmentData(responseFileData, mimeType: "text/plain", fileName: "all-http-data")
+                }
+            }
 
             self.present(mailComposer, animated: true, completion: nil)
         }
     }
     
-    func mailComposeController(_ controller: MFMailComposeViewController, didFinishWith result: MFMailComposeResult, error: NSError?)
+    func mailComposeController(_ controller: MFMailComposeViewController, didFinishWith result: MFMailComposeResult, error: Error?)
+    //func mailComposeController(controller: MFMailComposeViewController, didFinishWithResult result: MFMailComposeResult, error: NSError?)
     {
         self.dismiss(animated: true, completion: nil)
     }

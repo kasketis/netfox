@@ -27,7 +27,7 @@ class NFXListCell: UITableViewCell
     override init(style: UITableViewCellStyle, reuseIdentifier: String?)
     {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
-        backgroundColor = UIColor.clear()
+        backgroundColor = UIColor.clear
         selectionStyle = .none
         
 
@@ -36,30 +36,30 @@ class NFXListCell: UITableViewCell
         
         self.requestTimeLabel = UILabel(frame: CGRect.zero)
         self.requestTimeLabel.textAlignment = .center
-        self.requestTimeLabel.textColor = UIColor.white()
-        self.requestTimeLabel.font = UIFont.NFXFontBold(13)
+        self.requestTimeLabel.textColor = UIColor.white
+        self.requestTimeLabel.font = UIFont.NFXFontBold(size: 13)
         contentView.addSubview(self.requestTimeLabel)
         
         self.timeIntervalLabel = UILabel(frame: CGRect.zero)
         self.timeIntervalLabel.textAlignment = .center
-        self.timeIntervalLabel.font = UIFont.NFXFont(12)
+        self.timeIntervalLabel.font = UIFont.NFXFont(size: 12)
         contentView.addSubview(self.timeIntervalLabel)
         
         self.URLLabel = UILabel(frame: CGRect.zero)
         self.URLLabel.textColor = UIColor.NFXBlackColor()
-        self.URLLabel.font = UIFont.NFXFont(12)
+        self.URLLabel.font = UIFont.NFXFont(size: 12)
         self.URLLabel.numberOfLines = 2
         contentView.addSubview(self.URLLabel)
 
         self.methodLabel = UILabel(frame: CGRect.zero)
         self.methodLabel.textAlignment = .left
         self.methodLabel.textColor = UIColor.NFXGray44Color()
-        self.methodLabel.font = UIFont.NFXFont(12)
+        self.methodLabel.font = UIFont.NFXFont(size: 12)
         contentView.addSubview(self.methodLabel)
         
         self.typeLabel = UILabel(frame: CGRect.zero)
         self.typeLabel.textColor = UIColor.NFXGray44Color()
-        self.typeLabel.font = UIFont.NFXFont(12)
+        self.typeLabel.font = UIFont.NFXFont(size: 12)
         contentView.addSubview(self.typeLabel)
         
         self.circleView = UIView(frame: CGRect.zero)
@@ -69,7 +69,7 @@ class NFXListCell: UITableViewCell
         contentView.addSubview(self.circleView)
         
         self.leftSeparator = UIView(frame: CGRect.zero)
-        self.leftSeparator.backgroundColor = UIColor.white()
+        self.leftSeparator.backgroundColor = UIColor.white
         contentView.addSubview(self.leftSeparator)
         
         self.rightSeparator = UIView(frame: CGRect.zero)
@@ -136,7 +136,7 @@ class NFXListCell: UITableViewCell
     {
         if status == 999 {
             self.statusView.backgroundColor = UIColor.NFXGray44Color() //gray
-            self.timeIntervalLabel.textColor = UIColor.white()
+            self.timeIntervalLabel.textColor = UIColor.white
 
         } else if status < 400 {
             self.statusView.backgroundColor = UIColor.NFXGreenColor() //green
@@ -175,7 +175,7 @@ class NFXListCell: UITableViewCell
     
     func isNewBasedOnDate(_ responseDate: Date)
     {
-        if responseDate.isGreaterThanDate(NFX.sharedInstance().getLastVisitDate()) {
+        if responseDate.isGreaterThanDate(dateToCompare: NFX.sharedInstance().getLastVisitDate()) {
             self.isNew()
         } else {
             self.isOld()

@@ -96,12 +96,12 @@ public class NFX: NSObject
     
     private func register()
     {
-        URLProtocol.registerClass(NFXProtocol)
+        URLProtocol.registerClass(NFXProtocol.self)
     }
     
     private func unregister()
     {
-        URLProtocol.unregisterClass(NFXProtocol)
+        URLProtocol.unregisterClass(NFXProtocol.self)
     }
     
     func motionDetected()
@@ -186,14 +186,14 @@ public class NFX: NSObject
         navigationController!.navigationBar.barTintColor = UIColor.NFXStarkWhiteColor()
         navigationController!.navigationBar.titleTextAttributes = [NSForegroundColorAttributeName : UIColor.NFXOrangeColor()]
         
-        NotificationCenter.default().post(name: Notification.Name(rawValue: nfxWillOpenNotification), object: nil)
+        NotificationCenter.default.post(name: Notification.Name(rawValue: nfxWillOpenNotification), object: nil)
         self.presented = true
         presentingViewController?.present(navigationController!, animated: true, completion: nil)
     }
     
     private var presentingViewController: UIViewController?
     {
-        let rootViewController = UIApplication.shared().keyWindow?.rootViewController
+        let rootViewController = UIApplication.shared.keyWindow?.rootViewController
         return rootViewController?.presentedViewController ?? rootViewController
     }
     
@@ -203,8 +203,8 @@ public class NFX: NSObject
             return
         }
         
-        NotificationCenter.default().post(name: Notification.Name(rawValue: "NFXDeactivateSearch"), object: nil)
-        NotificationCenter.default().post(name: Notification.Name(rawValue: nfxWillCloseNotification), object: nil)
+        NotificationCenter.default.post(name: Notification.Name(rawValue: "NFXDeactivateSearch"), object: nil)
+        NotificationCenter.default.post(name: Notification.Name(rawValue: nfxWillCloseNotification), object: nil)
         
         presentingViewController?.dismiss(animated: true, completion: { () -> Void in
             self.presented = false
@@ -216,11 +216,12 @@ public class NFX: NSObject
     {
         NFXHTTPModelManager.sharedInstance.clear()
         do {
-            let documentsPath = NSSearchPathForDirectoriesInDomains(FileManager.SearchPathDirectory.documentDirectory, FileManager.SearchPathDomainMask.allDomainsMask, true).first!
-            let filePathsArray = try FileManager.default().subpathsOfDirectory(atPath: documentsPath)
+            let documentsPath = NSSearchPathForDirectoriesInDomains(FileManager.SearchPathDirectory.documentDirectory,
+                                                                    FileManager.SearchPathDomainMask.allDomainsMask, true).first!
+            let filePathsArray = try FileManager.default.subpathsOfDirectory(atPath: documentsPath)
             for filePath in filePathsArray {
                 if filePath.hasPrefix("nfx") {
-                    try FileManager.default().removeItem(atPath: (documentsPath as NSString).appendingPathComponent(filePath))
+                    try FileManager.default.removeItem(atPath: (documentsPath as NSString).appendingPathComponent(filePath))
                 }
             }
             

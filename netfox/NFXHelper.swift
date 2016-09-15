@@ -21,16 +21,7 @@ enum HTTPModelShortType: String
 
 extension UIWindow
 {
-    override public func motionEnded(_ motion: UIEventSubtype, with event: UIEvent?)
-    {
-        if NFX.sharedInstance().getSelectedGesture() == .shake {
-            if (event!.type == .motion && event!.subtype == .motionShake) {
-                NFX.sharedInstance().motionDetected()
-            }
-        } else {
-            super.motionEnded(motion, with: event)
-        }
-    }
+    
 }
 
 extension UIColor
@@ -107,12 +98,12 @@ extension UIColor
 
 extension UIFont
 {
-    class func NFXFont(_ size: CGFloat) -> UIFont
+    class func NFXFont(size: CGFloat) -> UIFont
     {
         return UIFont(name: "HelveticaNeue", size: size)!
     }
     
-    class func NFXFontBold(_ size: CGFloat) -> UIFont
+    class func NFXFontBold(size: CGFloat) -> UIFont
     {
         return UIFont(name: "HelveticaNeue-Bold", size: size)!
     }
@@ -122,33 +113,50 @@ extension URLRequest
 {
     func getNFXURL() -> String
     {
-        if (url != nil) {
-            return url!.absoluteString!;
-        } else {
+        if (url != nil)
+        {
+            return url!.absoluteString;
+        }
+        else
+        {
             return "-"
         }
     }
     
     func getNFXMethod() -> String
     {
-        if (httpMethod != nil) {
+        if (httpMethod != nil)
+        {
             return httpMethod!
-        } else {
+        }
+        else
+        {
             return "-"
         }
     }
     
     func getNFXCachePolicy() -> String
     {
-        switch cachePolicy {
-            case .useProtocolCachePolicy: return "UseProtocolCachePolicy"
-            case .reloadIgnoringLocalCacheData: return "ReloadIgnoringLocalCacheData"
-            case .reloadIgnoringLocalAndRemoteCacheData: return "ReloadIgnoringLocalAndRemoteCacheData"
-            case .returnCacheDataElseLoad: return "ReturnCacheDataElseLoad"
-            case .returnCacheDataDontLoad: return "ReturnCacheDataDontLoad"
-            case .reloadRevalidatingCacheData: return "ReloadRevalidatingCacheData"
+        switch cachePolicy
+        {
+            case .useProtocolCachePolicy:
+                return "UseProtocolCachePolicy"
+            
+            case .reloadIgnoringLocalCacheData:
+                return "ReloadIgnoringLocalCacheData"
+            
+            case .reloadIgnoringLocalAndRemoteCacheData:
+                return "ReloadIgnoringLocalAndRemoteCacheData"
+            
+            case .returnCacheDataElseLoad:
+                return "ReturnCacheDataElseLoad"
+            
+            case .returnCacheDataDontLoad:
+                return "ReturnCacheDataDontLoad"
+            
+            case .reloadRevalidatingCacheData:
+                return "ReloadRevalidatingCacheData"
         }
-        
     }
     
     func getNFXTimeout() -> String
@@ -158,16 +166,20 @@ extension URLRequest
     
     func getNFXHeaders() -> Dictionary<String, String>
     {
-        if (allHTTPHeaderFields != nil) {
+        if (allHTTPHeaderFields != nil)
+        {
             return allHTTPHeaderFields!
-        } else {
+        }
+        else
+        {
             return Dictionary()
         }
     }
     
     func getNFXBody() -> Data
     {
-        return httpBody ?? URLProtocol.property(forKey: "NFXBodyData", in: self) as? Data ?? Data()
+        return httpBody ?? URLProtocol.property(forKey: "NFXBodyData",
+                                                in: self as URLRequest) as? Data ?? Data()
     }
 }
 
@@ -180,7 +192,7 @@ extension URLResponse
     
     func getNFXHeaders() -> Dictionary<NSObject, AnyObject>
     {
-        return (self as? HTTPURLResponse)?.allHeaderFields ?? Dictionary()
+        return (self as? HTTPURLResponse)?.allHeaderFields as [NSObject : AnyObject]? ?? Dictionary()
     }
 }
 
@@ -204,11 +216,14 @@ extension UIImage
 
 extension Date
 {
-    func isGreaterThanDate(_ dateToCompare: Date) -> Bool
+    func isGreaterThanDate(dateToCompare: Date) -> Bool
     {
-        if self.compare(dateToCompare) == ComparisonResult.orderedDescending {
+        if self.compare(dateToCompare) == ComparisonResult.orderedDescending
+        {
             return true
-        } else {
+        }
+        else
+        {
             return false
         }        
     }
@@ -227,15 +242,17 @@ public extension UIDevice
         var identifier = ""
         
         for child in mirror.children {
-            if let value = child.value as? Int8 where value != 0 {
-                identifier.append(UnicodeScalar(UInt8(value)))
+            if let value = child.value as? Int8 , value != 0
+            {
+                let uni = UnicodeScalar(UInt8(value))
+                identifier = identifier.appending(uni.escaped(asASCII: true))
             }
         }
         
-        return parseDeviceType(identifier)
+        return parseDeviceType(identifier: identifier)
     }
 
-    class func parseDeviceType(_ identifier: String) -> String {
+    class func parseDeviceType(identifier: String) -> String {
         
         if identifier == "i386" || identifier == "x86_64" {
             return "Simulator"
@@ -283,60 +300,65 @@ class NFXDebugInfo {
     
     class func getNFXAppName() -> String
     {
-        return Bundle.main().infoDictionary?["CFBundleName"] as? String ?? ""
+        return Bundle.main.infoDictionary?["CFBundleName"] as? String ?? ""
     }
     
     class func getNFXAppVersionNumber() -> String
     {
-        return Bundle.main().infoDictionary?["CFBundleShortVersionString"] as? String ?? ""
+        return Bundle.main.infoDictionary?["CFBundleShortVersionString"] as? String ?? ""
     }
     
     class func getNFXAppBuildNumber() -> String
     {
-        return Bundle.main().infoDictionary?["CFBundleVersion"] as? String ?? ""
+        return Bundle.main.infoDictionary?["CFBundleVersion"] as? String ?? ""
     }
     
     class func getNFXBundleIdentifier() -> String
     {
-        return Bundle.main().bundleIdentifier ?? ""
+        return Bundle.main.bundleIdentifier! 
     }
     
     class func getNFXiOSVersion() -> String
     {
-        return UIDevice.current().systemVersion ?? ""
+        return UIDevice.current.systemVersion
     }
     
     class func getNFXDeviceType() -> String
     {
-        return UIDevice.getNFXDeviceType() ?? ""
+        return UIDevice.getNFXDeviceType() 
     }
     
     class func getNFXDeviceScreenResolution() -> String
     {
-        let scale = UIScreen.main().scale
-        let bounds = UIScreen.main().bounds
+        let scale = UIScreen.main.scale
+        let bounds = UIScreen.main.bounds
         let width = bounds.size.width * scale
         let height = bounds.size.height * scale
         return "\(width) x \(height)"
     }
     
-    class func getNFXIP(_ completion:(result: String) -> Void)
+    class func getNFXIP(completion:@escaping (_ result: String) -> Void)
     {
         var req: NSMutableURLRequest
-        req = NSMutableURLRequest(url: URL(string: "https://api.ipify.org/?format=json")!)
+        req = NSMutableURLRequest(url: NSURL(string: "https://api.ipify.org/?format=json")! as URL)
         URLProtocol.setProperty("1", forKey: "NFXInternal", in: req)
         
-        let session = URLSession.shared()
+        let session = URLSession.shared
         session.dataTask(with: req as URLRequest) { (data, response, error) in
             do {
                 let rawJsonData = try JSONSerialization.jsonObject(with: data!, options: [.allowFragments])
-                if let ipAddress = rawJsonData.value(forKey: "ip") {
-                    completion(result: ipAddress as! String)
-                } else {
-                    completion(result: "-")
+                if let ipAddress = (rawJsonData as AnyObject).value(forKey: "ip")
+                {
+                    completion(ipAddress as! String)
                 }
-            } catch {
-                completion(result: "-")
+                else
+                {
+                    completion("-")
+                }
+            }
+            catch
+            {
+                completion("-")
             }
             
         }.resume()
