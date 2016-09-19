@@ -8,6 +8,26 @@
 
 import Foundation
 import UIKit
+fileprivate func < <T : Comparable>(lhs: T?, rhs: T?) -> Bool {
+  switch (lhs, rhs) {
+  case let (l?, r?):
+    return l < r
+  case (nil, _?):
+    return true
+  default:
+    return false
+  }
+}
+
+fileprivate func > <T : Comparable>(lhs: T?, rhs: T?) -> Bool {
+  switch (lhs, rhs) {
+  case let (l?, r?):
+    return l > r
+  default:
+    return rhs < lhs
+  }
+}
+
 
 class NFXStatisticsController: NFXGenericController
 {
@@ -37,14 +57,14 @@ class NFXStatisticsController: NFXGenericController
         generateStatics()
         
         self.scrollView = UIScrollView()
-        self.scrollView.frame = CGRectMake(0, 0, CGRectGetWidth(self.view.frame), CGRectGetHeight(self.view.frame))
-        self.scrollView.autoresizingMask = [.FlexibleWidth, .FlexibleHeight]
+        self.scrollView.frame = CGRect(x: 0, y: 0, width: self.view.frame.width, height: self.view.frame.height)
+        self.scrollView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
         self.scrollView.autoresizesSubviews = true
-        self.scrollView.backgroundColor = UIColor.clearColor()
+        self.scrollView.backgroundColor = UIColor.clear
         self.view.addSubview(self.scrollView)
 
         self.textLabel = UILabel()
-        self.textLabel.frame = CGRectMake(20, 20, CGRectGetWidth(scrollView.frame) - 40, CGRectGetHeight(scrollView.frame) - 20);
+        self.textLabel.frame = CGRect(x: 20, y: 20, width: scrollView.frame.width - 40, height: scrollView.frame.height - 20);
         self.textLabel.font = UIFont.NFXFont(13)
         self.textLabel.textColor = UIColor.NFXGray44Color()
         self.textLabel.numberOfLines = 0
@@ -52,12 +72,12 @@ class NFXStatisticsController: NFXGenericController
         self.textLabel.sizeToFit()
         self.scrollView.addSubview(self.textLabel)
         
-        self.scrollView.contentSize = CGSizeMake(CGRectGetWidth(scrollView.frame), CGRectGetMaxY(self.textLabel.frame))
+        self.scrollView.contentSize = CGSize(width: scrollView.frame.width, height: self.textLabel.frame.maxY)
         
-        NSNotificationCenter.defaultCenter().addObserver(
+        NotificationCenter.default.addObserver(
             self,
-            selector: "reloadData",
-            name: "NFXReloadData",
+            selector: #selector(NFXGenericController.reloadData),
+            name: NSNotification.Name(rawValue: "NFXReloadData"),
             object: nil)
         
     }
@@ -110,9 +130,9 @@ class NFXStatisticsController: NFXGenericController
         for model in models {
             
             if model.isSuccessful() {
-                successfulRequests++
+                successfulRequests += 1
             } else  {
-                failedRequests++
+                failedRequests += 1
             }
             
             if (model.requestBodyLength != nil) {
@@ -154,7 +174,7 @@ class NFXStatisticsController: NFXGenericController
     {
         clearStatistics()
         generateStatics()
-        dispatch_async(dispatch_get_main_queue()) { () -> Void in
+        DispatchQueue.main.async { () -> Void in
             self.textLabel.attributedText = self.getReportString()
         }
     }

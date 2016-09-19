@@ -137,6 +137,7 @@
 				TargetAttributes = {
 					B3BC020E1C09CDA000C17F3A = {
 						CreatedOnToolsVersion = 7.1.1;
+						LastSwiftMigration = 0800;
 					};
 				};
 			};
@@ -296,6 +297,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = com.kasketis.netfox;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
+				SWIFT_VERSION = 3.0;
 			};
 			name = Debug;
 		};
@@ -312,6 +314,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = com.kasketis.netfox;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
+				SWIFT_VERSION = 3.0;
 			};
 			name = Release;
 		};

@@ -9,33 +9,33 @@ import Foundation
 import UIKit
 
 enum NFXImage {
-    case SETTINGS
-    case INFO
-    case STATISTICS
+    case settings
+    case info
+    case statistics
 }
 
 class NFXAssets
 {
-    class func getImage(image: NFXImage) -> NSData
+    class func getImage(_ image: NFXImage) -> Data
     {
         var base64Image: String
 
         switch image {
-        case .SETTINGS:
+        case .settings:
             base64Image = getSettingsImageBase64()
             break
-        case .INFO:
+        case .info:
             base64Image = getInfoImageBase64()
             break
-        case .STATISTICS:
+        case .statistics:
             base64Image = getStatisticsImageBase64()
             break
         }
         
-        if let imageData = NSData(base64EncodedString: base64Image, options: NSDataBase64DecodingOptions.IgnoreUnknownCharacters) {
+        if let imageData = Data(base64Encoded: base64Image, options: NSData.Base64DecodingOptions.ignoreUnknownCharacters) {
             return imageData
         } else {
-            return NSData()
+            return Data()
         }
     }
     
