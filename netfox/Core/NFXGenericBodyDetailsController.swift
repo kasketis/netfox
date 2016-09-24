@@ -9,13 +9,13 @@ import Foundation
 
 enum NFXBodyType: Int
 {
-    case REQUEST  = 0
-    case RESPONSE = 1
+    case request  = 0
+    case response = 1
 }
 
 class NFXGenericBodyDetailsController: NFXGenericController
 {
-    var bodyType: NFXBodyType = NFXBodyType.RESPONSE
+    var bodyType: NFXBodyType = NFXBodyType.response
     
     override func viewDidLoad()
     {

@@ -24,46 +24,46 @@ class NFXSettingsController_iOS: NFXSettingsController, UITableViewDelegate, UIT
         self.tableData = HTTPModelShortType.allValues
         self.filters =  NFX.sharedInstance().getCachedFilters()
         
-        self.edgesForExtendedLayout = .None
+        self.edgesForExtendedLayout = UIRectEdge()
         self.extendedLayoutIncludesOpaqueBars = false
         self.automaticallyAdjustsScrollViewInsets = false
         
-        self.navigationItem.rightBarButtonItems = [UIBarButtonItem(image: UIImage.NFXStatistics(), style: .Plain, target: self, action: Selector("statisticsButtonPressed")), UIBarButtonItem(image: UIImage.NFXInfo(), style: .Plain, target: self, action: Selector("infoButtonPressed"))]
+        self.navigationItem.rightBarButtonItems = [UIBarButtonItem(image: UIImage.NFXStatistics(), style: .plain, target: self, action: #selector(NFXSettingsController_iOS.statisticsButtonPressed)), UIBarButtonItem(image: UIImage.NFXInfo(), style: .plain, target: self, action: #selector(NFXSettingsController_iOS.infoButtonPressed))]
         
-        self.tableView.frame = CGRectMake(0, 0, CGRectGetWidth(self.view.frame), CGRectGetHeight(self.view.frame) - 60)
-        self.tableView.autoresizingMask = [.FlexibleWidth, .FlexibleHeight]
+        self.tableView.frame = CGRect(x: 0, y: 0, width: self.view.frame.width, height: self.view.frame.height - 60)
+        self.tableView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
         self.tableView.translatesAutoresizingMaskIntoConstraints = true
         self.tableView.delegate = self
         self.tableView.dataSource = self
         self.tableView.alwaysBounceVertical = false
-        self.tableView.backgroundColor = UIColor.clearColor()
-        self.tableView.tableFooterView = UIView(frame: CGRectZero)
-        self.tableView.tableFooterView?.hidden = true
+        self.tableView.backgroundColor = UIColor.clear
+        self.tableView.tableFooterView = UIView(frame: CGRect.zero)
+        self.tableView.tableFooterView?.isHidden = true
         self.view.addSubview(self.tableView)
         
         var nfxVersionLabel: UILabel
-        nfxVersionLabel = UILabel(frame: CGRectMake(10, CGRectGetHeight(self.view.frame) - 60, CGRectGetWidth(self.view.frame) - 2*10, 30))
-        nfxVersionLabel.autoresizingMask = [.FlexibleTopMargin, .FlexibleWidth]
+        nfxVersionLabel = UILabel(frame: CGRect(x: 10, y: self.view.frame.height - 60, width: self.view.frame.width - 2*10, height: 30))
+        nfxVersionLabel.autoresizingMask = [.flexibleTopMargin, .flexibleWidth]
         nfxVersionLabel.font = UIFont.NFXFont(14)
         nfxVersionLabel.textColor = UIColor.NFXOrangeColor()
-        nfxVersionLabel.textAlignment = .Center
+        nfxVersionLabel.textAlignment = .center
         nfxVersionLabel.text = nfxVersionString
         self.view.addSubview(nfxVersionLabel)
         
         var nfxURLButton: UIButton
-        nfxURLButton = UIButton(frame: CGRectMake(10, CGRectGetHeight(self.view.frame) - 40, CGRectGetWidth(self.view.frame) - 2*10, 30))
-        nfxURLButton.autoresizingMask = [.FlexibleTopMargin, .FlexibleWidth]
+        nfxURLButton = UIButton(frame: CGRect(x: 10, y: self.view.frame.height - 40, width: self.view.frame.width - 2*10, height: 30))
+        nfxURLButton.autoresizingMask = [.flexibleTopMargin, .flexibleWidth]
         nfxURLButton.titleLabel?.font = UIFont.NFXFont(12)
-        nfxURLButton.setTitleColor(UIColor.NFXGray44Color(), forState: .Normal)
-        nfxURLButton.titleLabel?.textAlignment = .Center
-        nfxURLButton.setTitle(nfxURL, forState: .Normal)
-        nfxURLButton.addTarget(self, action: Selector("nfxURLButtonPressed"), forControlEvents: .TouchUpInside)
+        nfxURLButton.setTitleColor(UIColor.NFXGray44Color(), for: UIControlState())
+        nfxURLButton.titleLabel?.textAlignment = .center
+        nfxURLButton.setTitle(nfxURL, for: UIControlState())
+        nfxURLButton.addTarget(self, action: #selector(NFXSettingsController_iOS.nfxURLButtonPressed), for: .touchUpInside)
         self.view.addSubview(nfxURLButton)
         
         
     }
     
-    override func viewWillDisappear(animated: Bool)
+    override func viewWillDisappear(_ animated: Bool)
     {
         super.viewWillDisappear(animated)
         
@@ -72,7 +72,7 @@ class NFXSettingsController_iOS: NFXSettingsController, UITableViewDelegate, UIT
     
     func nfxURLButtonPressed()
     {
-        UIApplication.sharedApplication().openURL(NSURL(string: nfxURL)!)
+        UIApplication.shared.openURL(URL(string: nfxURL)!)
     }
     
     func infoButtonPressed()
@@ -91,7 +91,7 @@ class NFXSettingsController_iOS: NFXSettingsController, UITableViewDelegate, UIT
     
     // MARK: UITableViewDataSource
     
-    func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int
     {
         switch section {
         case 0: return 1
@@ -101,31 +101,31 @@ class NFXSettingsController_iOS: NFXSettingsController, UITableViewDelegate, UIT
         }
     }
     
-    func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell
     {
         let cell = UITableViewCell()
         cell.textLabel?.font = UIFont.NFXFont(14)
         cell.tintColor = UIColor.NFXOrangeColor()
         
-        switch indexPath.section
+        switch (indexPath as NSIndexPath).section
         {
         case 0:
             cell.textLabel?.text = "Logging"
             let nfxEnabledSwitch: UISwitch
             nfxEnabledSwitch = UISwitch()
             nfxEnabledSwitch.setOn(NFX.sharedInstance().isEnabled(), animated: false)
-            nfxEnabledSwitch.addTarget(self, action: Selector("nfxEnabledSwitchValueChanged:"), forControlEvents: .ValueChanged)
+            nfxEnabledSwitch.addTarget(self, action: #selector(NFXSettingsController_iOS.nfxEnabledSwitchValueChanged(_:)), for: .valueChanged)
             cell.accessoryView = nfxEnabledSwitch
             return cell
             
         case 1:
-            let shortType = tableData[indexPath.row]
+            let shortType = tableData[(indexPath as NSIndexPath).row]
             cell.textLabel?.text = shortType.rawValue
             configureCell(cell, indexPath: indexPath)
             return cell
             
         case 2:
-            cell.textLabel?.textAlignment = .Center
+            cell.textLabel?.textAlignment = .center
             cell.textLabel?.text = "Clear data"
             cell.textLabel?.textColor = UIColor.NFXRedColor()
             cell.textLabel?.font = UIFont.NFXFont(16)
@@ -141,18 +141,18 @@ class NFXSettingsController_iOS: NFXSettingsController, UITableViewDelegate, UIT
     
     func reloadTableData()
     {
-        dispatch_async(dispatch_get_main_queue()) { () -> Void in
+        DispatchQueue.main.async { () -> Void in
             self.tableView.reloadData()
             self.tableView.setNeedsDisplay()
         }
     }
     
-    func numberOfSectionsInTableView(tableView: UITableView) -> Int
+    func numberOfSections(in tableView: UITableView) -> Int
     {
         return 3
     }
     
-    func tableView(tableView: UITableView, viewForHeaderInSection section: Int) -> UIView?
+    func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView?
     {
         let headerView = UIView()
         headerView.backgroundColor = UIColor.NFXGray95Color()
@@ -162,11 +162,11 @@ class NFXSettingsController_iOS: NFXSettingsController, UITableViewDelegate, UIT
             
             var filtersInfoLabel: UILabel
             filtersInfoLabel = UILabel(frame: headerView.bounds)
-            filtersInfoLabel.backgroundColor = UIColor.clearColor()
-            filtersInfoLabel.autoresizingMask = [.FlexibleWidth, .FlexibleHeight]
+            filtersInfoLabel.backgroundColor = UIColor.clear
+            filtersInfoLabel.autoresizingMask = [.flexibleWidth, .flexibleHeight]
             filtersInfoLabel.font = UIFont.NFXFont(13)
             filtersInfoLabel.textColor = UIColor.NFXGray44Color()
-            filtersInfoLabel.textAlignment = .Center
+            filtersInfoLabel.textAlignment = .center
             filtersInfoLabel.text = "\nSelect the types of responses that you want to see"
             filtersInfoLabel.numberOfLines = 2
             headerView.addSubview(filtersInfoLabel)
@@ -179,13 +179,13 @@ class NFXSettingsController_iOS: NFXSettingsController, UITableViewDelegate, UIT
         
     }
     
-    func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath)
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath)
     {
-        switch indexPath.section
+        switch (indexPath as NSIndexPath).section
         {
         case 1:
-            let cell = tableView.cellForRowAtIndexPath(indexPath)
-            self.filters[indexPath.row] = !self.filters[indexPath.row]
+            let cell = tableView.cellForRow(at: indexPath)
+            self.filters[(indexPath as NSIndexPath).row] = !self.filters[(indexPath as NSIndexPath).row]
             configureCell(cell, indexPath: indexPath)
             break
             
@@ -196,13 +196,13 @@ class NFXSettingsController_iOS: NFXSettingsController, UITableViewDelegate, UIT
         default: break
         }
         
-        tableView.deselectRowAtIndexPath(indexPath, animated: true)
+        tableView.deselectRow(at: indexPath, animated: true)
         
     }
     
-    func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat
     {
-        switch indexPath.section {
+        switch (indexPath as NSIndexPath).section {
         case 0: return 44
         case 1: return 33
         case 2: return 44
@@ -210,9 +210,9 @@ class NFXSettingsController_iOS: NFXSettingsController, UITableViewDelegate, UIT
         }
     }
     
-    func tableView(tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat
+    func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat
     {        
-        let iPhone4s = (UIScreen.mainScreen().bounds.height == 480)
+        let iPhone4s = (UIScreen.main.bounds.height == 480)
         switch section {
         case 0:
             if iPhone4s {
@@ -236,47 +236,47 @@ class NFXSettingsController_iOS: NFXSettingsController, UITableViewDelegate, UIT
         }
     }
     
-    func configureCell(cell: UITableViewCell?, indexPath: NSIndexPath)
+    func configureCell(_ cell: UITableViewCell?, indexPath: IndexPath)
     {
         if (cell != nil) {
-            if self.filters[indexPath.row] {
-                cell!.accessoryType = .Checkmark
+            if self.filters[(indexPath as NSIndexPath).row] {
+                cell!.accessoryType = .checkmark
             } else {
-                cell!.accessoryType = .None
+                cell!.accessoryType = .none
             }
         }
         
     }
     
-    func nfxEnabledSwitchValueChanged(sender: UISwitch)
+    func nfxEnabledSwitchValueChanged(_ sender: UISwitch)
     {
-        if sender.on {
+        if sender.isOn {
             NFX.sharedInstance().enable()
         } else {
             NFX.sharedInstance().disable()
         }
     }
     
-    func clearDataButtonPressedOnTableIndex(index: NSIndexPath)
+    func clearDataButtonPressedOnTableIndex(_ index: IndexPath)
     {
-        let actionSheetController: UIAlertController = UIAlertController(title: "Clear data?", message: "", preferredStyle: .ActionSheet)
+        let actionSheetController: UIAlertController = UIAlertController(title: "Clear data?", message: "", preferredStyle: .actionSheet)
         actionSheetController.popoverPresentationController?.sourceView = tableView
-        actionSheetController.popoverPresentationController?.sourceRect = tableView.rectForRowAtIndexPath(index)
+        actionSheetController.popoverPresentationController?.sourceRect = tableView.rectForRow(at: index)
         
-        let cancelAction: UIAlertAction = UIAlertAction(title: "Cancel", style: .Cancel) { action -> Void in
+        let cancelAction: UIAlertAction = UIAlertAction(title: "Cancel", style: .cancel) { action -> Void in
         }
         actionSheetController.addAction(cancelAction)
         
-        let yesAction: UIAlertAction = UIAlertAction(title: "Yes", style: .Default) { action -> Void in
+        let yesAction: UIAlertAction = UIAlertAction(title: "Yes", style: .default) { action -> Void in
             NFX.sharedInstance().clearOldData()
         }
         actionSheetController.addAction(yesAction)
         
-        let noAction: UIAlertAction = UIAlertAction(title: "No", style: .Default) { action -> Void in
+        let noAction: UIAlertAction = UIAlertAction(title: "No", style: .default) { action -> Void in
         }
         actionSheetController.addAction(noAction)
         
-        self.presentViewController(actionSheetController, animated: true, completion: nil)
+        self.present(actionSheetController, animated: true, completion: nil)
     }
 
 }

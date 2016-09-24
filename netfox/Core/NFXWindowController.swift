@@ -64,7 +64,7 @@ class NFXWindowController: NSWindowController, NSWindowDelegate, NFXWindowContro
     // MARK: NSWindowDelegate
     
     func windowWillClose(notification: NSNotification) {
-        if let window = notification.object as? NSWindow where window == self.window {
+        if let window = notification.object as? NSWindow , window == self.window {
             NFX.sharedInstance().windowDidClose()
         }
     }

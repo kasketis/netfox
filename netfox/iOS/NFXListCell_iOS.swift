@@ -29,52 +29,52 @@ class NFXListCell: UITableViewCell
     override init(style: UITableViewCellStyle, reuseIdentifier: String?)
     {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
-        backgroundColor = UIColor.clearColor()
-        selectionStyle = .None
+        backgroundColor = UIColor.clear
+        selectionStyle = .none
         
 
-        self.statusView = UIView(frame: CGRectZero)
+        self.statusView = UIView(frame: CGRect.zero)
         contentView.addSubview(self.statusView)
         
-        self.requestTimeLabel = UILabel(frame: CGRectZero)
-        self.requestTimeLabel.textAlignment = .Center
-        self.requestTimeLabel.textColor = UIColor.whiteColor()
+        self.requestTimeLabel = UILabel(frame: CGRect.zero)
+        self.requestTimeLabel.textAlignment = .center
+        self.requestTimeLabel.textColor = UIColor.white
         self.requestTimeLabel.font = UIFont.NFXFontBold(13)
         contentView.addSubview(self.requestTimeLabel)
         
-        self.timeIntervalLabel = UILabel(frame: CGRectZero)
-        self.timeIntervalLabel.textAlignment = .Center
+        self.timeIntervalLabel = UILabel(frame: CGRect.zero)
+        self.timeIntervalLabel.textAlignment = .center
         self.timeIntervalLabel.font = UIFont.NFXFont(12)
         contentView.addSubview(self.timeIntervalLabel)
         
-        self.URLLabel = UILabel(frame: CGRectZero)
+        self.URLLabel = UILabel(frame: CGRect.zero)
         self.URLLabel.textColor = UIColor.NFXBlackColor()
         self.URLLabel.font = UIFont.NFXFont(12)
         self.URLLabel.numberOfLines = 2
         contentView.addSubview(self.URLLabel)
 
-        self.methodLabel = UILabel(frame: CGRectZero)
-        self.methodLabel.textAlignment = .Left
+        self.methodLabel = UILabel(frame: CGRect.zero)
+        self.methodLabel.textAlignment = .left
         self.methodLabel.textColor = UIColor.NFXGray44Color()
         self.methodLabel.font = UIFont.NFXFont(12)
         contentView.addSubview(self.methodLabel)
         
-        self.typeLabel = UILabel(frame: CGRectZero)
+        self.typeLabel = UILabel(frame: CGRect.zero)
         self.typeLabel.textColor = UIColor.NFXGray44Color()
         self.typeLabel.font = UIFont.NFXFont(12)
         contentView.addSubview(self.typeLabel)
         
-        self.circleView = UIView(frame: CGRectZero)
+        self.circleView = UIView(frame: CGRect.zero)
         self.circleView.backgroundColor = UIColor.NFXGray44Color()
         self.circleView.layer.cornerRadius = 4
         self.circleView.alpha = 0.2
         contentView.addSubview(self.circleView)
         
-        self.leftSeparator = UIView(frame: CGRectZero)
-        self.leftSeparator.backgroundColor = UIColor.whiteColor()
+        self.leftSeparator = UIView(frame: CGRect.zero)
+        self.leftSeparator.backgroundColor = UIColor.white
         contentView.addSubview(self.leftSeparator)
         
-        self.rightSeparator = UIView(frame: CGRectZero)
+        self.rightSeparator = UIView(frame: CGRect.zero)
         self.rightSeparator.backgroundColor = UIColor.NFXLightGrayColor()
         contentView.addSubview(self.rightSeparator)
     }
@@ -88,37 +88,37 @@ class NFXListCell: UITableViewCell
     {
         super.layoutSubviews()
         
-        self.statusView.frame = CGRectMake(0, 0, 50, frame.height - 1)
+        self.statusView.frame = CGRect(x: 0, y: 0, width: 50, height: frame.height - 1)
 
-        self.requestTimeLabel.frame = CGRectMake(0, 13, CGRectGetWidth(statusView.frame), 14)
+        self.requestTimeLabel.frame = CGRect(x: 0, y: 13, width: statusView.frame.width, height: 14)
         
-        self.timeIntervalLabel.frame = CGRectMake(0, CGRectGetMaxY(requestTimeLabel.frame) + 5, CGRectGetWidth(statusView.frame), 14)
+        self.timeIntervalLabel.frame = CGRect(x: 0, y: requestTimeLabel.frame.maxY + 5, width: statusView.frame.width, height: 14)
         
-        self.URLLabel.frame = CGRectMake(CGRectGetMaxX(statusView.frame) + padding, 0, frame.width - CGRectGetMinX(URLLabel.frame) - 25 - padding, 40)
-        self.URLLabel.autoresizingMask = .FlexibleWidth
+        self.URLLabel.frame = CGRect(x: statusView.frame.maxX + padding, y: 0, width: frame.width - URLLabel.frame.minX - 25 - padding, height: 40)
+        self.URLLabel.autoresizingMask = .flexibleWidth
         
-        self.methodLabel.frame = CGRectMake(CGRectGetMaxX(statusView.frame) + padding, CGRectGetMaxY(URLLabel.frame) - 2, 40, frame.height - CGRectGetMaxY(URLLabel.frame) - 2)
+        self.methodLabel.frame = CGRect(x: statusView.frame.maxX + padding, y: URLLabel.frame.maxY - 2, width: 40, height: frame.height - URLLabel.frame.maxY - 2)
 
-        self.typeLabel.frame = CGRectMake(CGRectGetMaxX(methodLabel.frame) + padding, CGRectGetMaxY(URLLabel.frame) - 2, 180, frame.height - CGRectGetMaxY(URLLabel.frame) - 2)
+        self.typeLabel.frame = CGRect(x: methodLabel.frame.maxX + padding, y: URLLabel.frame.maxY - 2, width: 180, height: frame.height - URLLabel.frame.maxY - 2)
 
-        self.circleView.frame = CGRectMake(CGRectGetMaxX(self.URLLabel.frame) + 5, 17, 8, 8)
+        self.circleView.frame = CGRect(x: self.URLLabel.frame.maxX + 5, y: 17, width: 8, height: 8)
         
-        self.leftSeparator.frame = CGRectMake(0, frame.height - 1, CGRectGetWidth(self.statusView.frame), 1)
-        self.rightSeparator.frame = CGRectMake(CGRectGetMaxX(self.leftSeparator.frame), frame.height - 1, frame.width - CGRectGetMaxX(self.leftSeparator.frame), 1)
+        self.leftSeparator.frame = CGRect(x: 0, y: frame.height - 1, width: self.statusView.frame.width, height: 1)
+        self.rightSeparator.frame = CGRect(x: self.leftSeparator.frame.maxX, y: frame.height - 1, width: frame.width - self.leftSeparator.frame.maxX, height: 1)
         
     }
     
     func isNew()
     {
-        self.circleView.hidden = false
+        self.circleView.isHidden = false
     }
     
     func isOld()
     {
-        self.circleView.hidden = true
+        self.circleView.isHidden = true
     }
     
-    func configForObject(obj: NFXHTTPModel)
+    func configForObject(_ obj: NFXHTTPModel)
     {
         setURL(obj.requestURL ?? "-")
         setStatus(obj.responseStatus ?? 999)
@@ -126,19 +126,19 @@ class NFXListCell: UITableViewCell
         setRequestTime(obj.requestTime ?? "-")
         setType(obj.responseType ?? "-")
         setMethod(obj.requestMethod ?? "-")
-        isNewBasedOnDate(obj.responseDate ?? NSDate())
+        isNewBasedOnDate(obj.responseDate as Date? ?? Date())
     }
     
-    func setURL(url: String)
+    func setURL(_ url: String)
     {
         self.URLLabel.text = url
     }
     
-    func setStatus(status: Int)
+    func setStatus(_ status: Int)
     {
         if status == 999 {
             self.statusView.backgroundColor = UIColor.NFXGray44Color() //gray
-            self.timeIntervalLabel.textColor = UIColor.whiteColor()
+            self.timeIntervalLabel.textColor = UIColor.white
 
         } else if status < 400 {
             self.statusView.backgroundColor = UIColor.NFXGreenColor() //green
@@ -151,12 +151,12 @@ class NFXListCell: UITableViewCell
         }
     }
     
-    func setRequestTime(requestTime: String)
+    func setRequestTime(_ requestTime: String)
     {
         self.requestTimeLabel.text = requestTime
     }
     
-    func setTimeInterval(timeInterval: Float)
+    func setTimeInterval(_ timeInterval: Float)
     {
         if timeInterval == 999 {
             self.timeIntervalLabel.text = "-"
@@ -165,17 +165,17 @@ class NFXListCell: UITableViewCell
         }
     }
     
-    func setType(type: String)
+    func setType(_ type: String)
     {
         self.typeLabel.text = type
     }
     
-    func setMethod(method: String)
+    func setMethod(_ method: String)
     {
         self.methodLabel.text = method
     }
     
-    func isNewBasedOnDate(responseDate: NSDate)
+    func isNewBasedOnDate(_ responseDate: Date)
     {
         if responseDate.isGreaterThanDate(NFX.sharedInstance().getLastVisitDate()) {
             self.isNew()
