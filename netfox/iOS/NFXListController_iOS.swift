@@ -37,7 +37,7 @@ class NFXListController_iOS: NFXListController, UITableViewDelegate, UITableView
         
         self.tableView.registerClass(NFXListCell.self, forCellReuseIdentifier: NSStringFromClass(NFXListCell))
         
-        self.navigationItem.rightBarButtonItem = UIBarButtonItem(image: UIImage.NFXSettings(), style: .Plain, target: self, action: Selector("settingsButtonPressed"))
+        self.navigationItem.rightBarButtonItem = UIBarButtonItem(image: UIImage.NFXSettings(), style: .Plain, target: self, action: #selector(NFXListController_iOS.settingsButtonPressed))
 
         let searchView = UIView()
         searchView.frame = CGRectMake(0, 0, CGRectGetWidth(self.view.frame) - 60, 0)
@@ -62,13 +62,13 @@ class NFXListController_iOS: NFXListController, UITableViewDelegate, UITableView
         
         NSNotificationCenter.defaultCenter().addObserver(
             self,
-            selector: "reloadTableViewData",
+            selector: #selector(NFXListController.reloadTableViewData),
             name: "NFXReloadData",
             object: nil)
         
         NSNotificationCenter.defaultCenter().addObserver(
             self,
-            selector: "deactivateSearchController",
+            selector: #selector(NFXListController_iOS.deactivateSearchController),
             name: "NFXDeactivateSearch",
             object: nil)        
     }

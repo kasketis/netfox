@@ -30,14 +30,14 @@ public class NFXProtocol: NSURLProtocol
         if !NFX.sharedInstance().isEnabled() {
             return false
         }
-        
-        if let url = request.URL {
-            if (!(url.absoluteString.hasPrefix("http")) && !(url.absoluteString.hasPrefix("https"))) {
+
+        if let url = request.URL?.absoluteString {
+            if (!(url.hasPrefix("http")) && !(url.hasPrefix("https"))) {
                 return false
             }
 
             for ignoredURL in NFX.sharedInstance().getIgnoredURLs() {
-                if url.absoluteString.hasPrefix(ignoredURL) {
+                if url.hasPrefix(ignoredURL) {
                     return false
                 }
             }
