@@ -39,7 +39,7 @@ final class NFXHTTPModelManager: NSObject
                 predicates.append(predicate)
 
             }
-            index++
+            index += 1
         }
 
         let searchPredicate = NSCompoundPredicate(orPredicateWithSubpredicates: predicates)

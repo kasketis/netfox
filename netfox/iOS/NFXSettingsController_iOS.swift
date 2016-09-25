@@ -28,7 +28,7 @@ class NFXSettingsController_iOS: NFXSettingsController, UITableViewDelegate, UIT
         self.extendedLayoutIncludesOpaqueBars = false
         self.automaticallyAdjustsScrollViewInsets = false
         
-        self.navigationItem.rightBarButtonItems = [UIBarButtonItem(image: UIImage.NFXStatistics(), style: .Plain, target: self, action: Selector("statisticsButtonPressed")), UIBarButtonItem(image: UIImage.NFXInfo(), style: .Plain, target: self, action: Selector("infoButtonPressed"))]
+        self.navigationItem.rightBarButtonItems = [UIBarButtonItem(image: UIImage.NFXStatistics(), style: .Plain, target: self, action: #selector(NFXSettingsController_iOS.statisticsButtonPressed)), UIBarButtonItem(image: UIImage.NFXInfo(), style: .Plain, target: self, action: #selector(NFXSettingsController_iOS.infoButtonPressed))]
         
         self.tableView.frame = CGRectMake(0, 0, CGRectGetWidth(self.view.frame), CGRectGetHeight(self.view.frame) - 60)
         self.tableView.autoresizingMask = [.FlexibleWidth, .FlexibleHeight]
@@ -57,7 +57,7 @@ class NFXSettingsController_iOS: NFXSettingsController, UITableViewDelegate, UIT
         nfxURLButton.setTitleColor(UIColor.NFXGray44Color(), forState: .Normal)
         nfxURLButton.titleLabel?.textAlignment = .Center
         nfxURLButton.setTitle(nfxURL, forState: .Normal)
-        nfxURLButton.addTarget(self, action: Selector("nfxURLButtonPressed"), forControlEvents: .TouchUpInside)
+        nfxURLButton.addTarget(self, action: #selector(NFXSettingsController_iOS.nfxURLButtonPressed), forControlEvents: .TouchUpInside)
         self.view.addSubview(nfxURLButton)
         
         
@@ -114,7 +114,7 @@ class NFXSettingsController_iOS: NFXSettingsController, UITableViewDelegate, UIT
             let nfxEnabledSwitch: UISwitch
             nfxEnabledSwitch = UISwitch()
             nfxEnabledSwitch.setOn(NFX.sharedInstance().isEnabled(), animated: false)
-            nfxEnabledSwitch.addTarget(self, action: Selector("nfxEnabledSwitchValueChanged:"), forControlEvents: .ValueChanged)
+            nfxEnabledSwitch.addTarget(self, action: #selector(NFXSettingsController_iOS.nfxEnabledSwitchValueChanged(_:)), forControlEvents: .ValueChanged)
             cell.accessoryView = nfxEnabledSwitch
             return cell
             
