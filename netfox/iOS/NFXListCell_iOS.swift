@@ -126,7 +126,7 @@ class NFXListCell: UITableViewCell
         setRequestTime(obj.requestTime ?? "-")
         setType(obj.responseType ?? "-")
         setMethod(obj.requestMethod ?? "-")
-        isNewBasedOnDate(obj.responseDate as Date? ?? Date())
+        isNewBasedOnDate(obj.responseDate ?? Date())
     }
     
     func setURL(_ url: String)
