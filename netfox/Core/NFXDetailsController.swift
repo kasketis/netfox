@@ -6,14 +6,34 @@
 //
 
 import Foundation
+fileprivate func < <T : Comparable>(lhs: T?, rhs: T?) -> Bool {
+  switch (lhs, rhs) {
+  case let (l?, r?):
+    return l < r
+  case (nil, _?):
+    return true
+  default:
+    return false
+  }
+}
+
+fileprivate func > <T : Comparable>(lhs: T?, rhs: T?) -> Bool {
+  switch (lhs, rhs) {
+  case let (l?, r?):
+    return l > r
+  default:
+    return rhs < lhs
+  }
+}
+
 
 class NFXDetailsController: NFXGenericController {
 
     enum EDetailsView
     {
-        case INFO
-        case REQUEST
-        case RESPONSE
+        case info
+        case request
+        case response
     }
 
     override func viewDidLoad() {
@@ -21,7 +41,7 @@ class NFXDetailsController: NFXGenericController {
         // Do view setup here.
     }
     
-    func getInfoStringFromObject(object: NFXHTTPModel) -> NSAttributedString
+    func getInfoStringFromObject(_ object: NFXHTTPModel) -> NSAttributedString
     {
         var tempString: String
         tempString = String()
@@ -42,7 +62,7 @@ class NFXDetailsController: NFXGenericController {
         return formatNFXString(tempString)
     }
 
-    func getRequestStringFromObject(object: NFXHTTPModel) -> NSAttributedString
+    func getRequestStringFromObject(_ object: NFXHTTPModel) -> NSAttributedString
     {
         var tempString: String
         tempString = String()
@@ -63,7 +83,7 @@ class NFXDetailsController: NFXGenericController {
         return formatNFXString(tempString)
     }
 
-    func getRequestBodyStringFooter(object: NFXHTTPModel) -> String {
+    func getRequestBodyStringFooter(_ object: NFXHTTPModel) -> String {
         var tempString = "\n-- Body --\n\n"
         if (object.requestBodyLength == 0) {
             tempString += "Request body is empty\n"
@@ -75,7 +95,7 @@ class NFXDetailsController: NFXGenericController {
         return tempString
     }
     
-    func getResponseStringFromObject(object: NFXHTTPModel) -> NSAttributedString
+    func getResponseStringFromObject(_ object: NFXHTTPModel) -> NSAttributedString
     {
         if (object.noResponse) {
             return NSMutableAttributedString(string: "No response")
@@ -101,7 +121,7 @@ class NFXDetailsController: NFXGenericController {
         return formatNFXString(tempString)
     }
     
-    func getResponseBodyStringFooter(object: NFXHTTPModel) -> String {
+    func getResponseBodyStringFooter(_ object: NFXHTTPModel) -> String {
         var tempString = "\n-- Body --\n\n"
         if (object.responseBodyLength == 0) {
             tempString += "Response body is empty\n"
