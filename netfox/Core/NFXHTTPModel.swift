@@ -192,12 +192,13 @@ class NFXHTTPModel: NSObject
         return (try? Data(contentsOf: URL(fileURLWithPath: fromFile)))
     }
     
-    func getTimeFromDate(_ date: Date) -> String
+    func getTimeFromDate(_ date: Date) -> String?
     {
         let calendar = Calendar.current
         let components = (calendar as NSCalendar).components([.hour, .minute], from: date)
-        let hour = components.hour
-        let minutes = components.minute
+        guard let hour = components.hour, let minutes = components.minute else {
+            return nil
+        }
         if minutes < 10 {
             return "\(hour):0\(minutes)"
         } else {
