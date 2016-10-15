@@ -26,7 +26,7 @@ class NFXHTTPModel: NSObject
     var requestDate: Date?
     var requestTime: String?
     var requestTimeout: String?
-    var requestHeaders: Dictionary<String, String>?
+    var requestHeaders: [AnyHashable: Any]?
     var requestBodyLength: Int?
     var requestType: String?
     
@@ -54,7 +54,7 @@ class NFXHTTPModel: NSObject
         self.requestCachePolicy = request.getNFXCachePolicy()
         self.requestTimeout = request.getNFXTimeout()
         self.requestHeaders = request.getNFXHeaders()
-        self.requestType = requestHeaders?["Content-Type"]
+        self.requestType = requestHeaders?["Content-Type"] as! String?
         saveRequestBodyData(request.getNFXBody())
     }
     
