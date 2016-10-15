@@ -159,7 +159,7 @@ extension URLRequest
         return String(Double(timeoutInterval))
     }
     
-    func getNFXHeaders() -> Dictionary<String, String>
+    func getNFXHeaders() -> [AnyHashable: Any]
     {
         if (allHTTPHeaderFields != nil) {
             return allHTTPHeaderFields!
