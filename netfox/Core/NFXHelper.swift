@@ -194,7 +194,7 @@ extension NFXImage
     #if os (iOS)
         return UIImage(data: NFXAssets.getImage(NFXAssetName.settings), scale: 1.7)!
     #elseif os(OSX)
-        return NSImage(data: NFXAssets.getImage(NFXAssetName.SETTINGS))!
+        return NSImage(data: NFXAssets.getImage(NFXAssetName.settings))!
     #endif
     }
     
@@ -203,7 +203,7 @@ extension NFXImage
     #if os (iOS)
         return UIImage(data: NFXAssets.getImage(NFXAssetName.info), scale: 1.7)!
     #elseif os(OSX)
-        return NSImage(data: NFXAssets.getImage(NFXAssetName.INFO))!
+        return NSImage(data: NFXAssets.getImage(NFXAssetName.info))!
     #endif
     }
     
@@ -212,7 +212,7 @@ extension NFXImage
     #if os (iOS)
         return UIImage(data: NFXAssets.getImage(NFXAssetName.statistics), scale: 1.7)!
     #elseif os(OSX)
-        return NSImage(data: NFXAssets.getImage(NFXAssetName.STATISTICS))!
+        return NSImage(data: NFXAssets.getImage(NFXAssetName.statistics))!
     #endif
     }
 }
@@ -256,7 +256,7 @@ class NFXDebugInfo {
     #if os(iOS)
         return UIDevice.current.systemVersion
     #elseif os(OSX)
-        return NSProcessInfo.processInfo().operatingSystemVersionString
+        return ProcessInfo.processInfo.operatingSystemVersionString
     #endif
     }
     

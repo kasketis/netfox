@@ -27,39 +27,39 @@ class NFXListCell_OSX: NSTableCellView
     // MARK: Life cycle
         
     override func awakeFromNib() {
-        layer?.backgroundColor = NFXColor.clearColor().CGColor
+        layer?.backgroundColor = NFXColor.clear.cgColor
         
-        self.circleView.layer?.backgroundColor = NSColor.NFXGray44Color().CGColor
+        self.circleView.layer?.backgroundColor = NSColor.NFXGray44Color().cgColor
         self.circleView.layer?.cornerRadius = 4
         self.circleView.alphaValue = 0.2
         
-        self.requestTimeLabel.font = NSFont.NFXFontBold(13)
-        self.timeIntervalLabel.font = NSFont.NFXFont(12)
-        self.URLLabel.font = NSFont.NFXFont(12)
-        self.methodLabel.font = NSFont.NFXFont(12)
-        self.typeLabel.font = NSFont.NFXFont(12)
+        self.requestTimeLabel.font = NSFont.NFXFontBold(size: 13)
+        self.timeIntervalLabel.font = NSFont.NFXFont(size: 12)
+        self.URLLabel.font = NSFont.NFXFont(size: 12)
+        self.methodLabel.font = NSFont.NFXFont(size: 12)
+        self.typeLabel.font = NSFont.NFXFont(size: 12)
         
     }
         
     func isNew()
     {
-        self.circleView.hidden = false
+        self.circleView.isHidden = false
     }
     
     func isOld()
     {
-        self.circleView.hidden = true
+        self.circleView.isHidden = true
     }
     
     func configForObject(obj: NFXHTTPModel)
     {
-        setURL(obj.requestURL ?? "-")
-        setStatus(obj.responseStatus ?? 999)
-        setTimeInterval(obj.timeInterval ?? 999)
-        setRequestTime(obj.requestTime ?? "-")
-        setType(obj.responseType ?? "-")
-        setMethod(obj.requestMethod ?? "-")
-        isNewBasedOnDate(obj.responseDate ?? NSDate())
+        setURL(url: obj.requestURL ?? "-")
+        setStatus(status: obj.responseStatus ?? 999)
+        setTimeInterval(timeInterval: obj.timeInterval ?? 999)
+        setRequestTime(requestTime: obj.requestTime ?? "-")
+        setType(type: obj.responseType ?? "-")
+        setMethod(method: obj.requestMethod ?? "-")
+        isNewBasedOnDate(responseDate: obj.responseDate as NSDate? ?? NSDate())
     }
     
     func setURL(url: String)
@@ -70,15 +70,15 @@ class NFXListCell_OSX: NSTableCellView
     func setStatus(status: Int)
     {
         if status == 999 {
-            self.statusView.layer?.backgroundColor = NFXColor.NFXGray44Color().CGColor //gray
-            self.timeIntervalLabel.textColor = NFXColor.whiteColor()
+            self.statusView.layer?.backgroundColor = NFXColor.NFXGray44Color().cgColor //gray
+            self.timeIntervalLabel.textColor = NFXColor.white
             
         } else if status < 400 {
-            self.statusView.layer?.backgroundColor = NFXColor.NFXGreenColor().CGColor //green
+            self.statusView.layer?.backgroundColor = NFXColor.NFXGreenColor().cgColor //green
             self.timeIntervalLabel.textColor = NFXColor.NFXDarkGreenColor()
             
         } else {
-            self.statusView.layer?.backgroundColor = NFXColor.NFXRedColor().CGColor //red
+            self.statusView.layer?.backgroundColor = NFXColor.NFXRedColor().cgColor //red
             self.timeIntervalLabel.textColor = NFXColor.NFXDarkRedColor()
             
         }
@@ -110,7 +110,7 @@ class NFXListCell_OSX: NSTableCellView
     
     func isNewBasedOnDate(responseDate: NSDate)
     {
-        if responseDate.isGreaterThanDate(NFX.sharedInstance().getLastVisitDate()) {
+        if responseDate.isGreaterThan(NFX.sharedInstance().getLastVisitDate()) {
             self.isNew()
         } else {
             self.isOld()

@@ -23,8 +23,8 @@ open class NFX: NSObject
 {
     #if os(OSX)
         var windowController: NFXWindowController?
-        let mainMenu: NSMenu? = NSApp.mainMenu?.itemArray[1].submenu
-        var nfxMenuItem: NSMenuItem = NSMenuItem(title: "netfox", action: "show", keyEquivalent: String(character: NSF9FunctionKey, length: 1))
+        let mainMenu: NSMenu? = NSApp.mainMenu?.items[1].submenu
+        var nfxMenuItem: NSMenuItem = NSMenuItem(title: "netfox", action: #selector(NFX.show), keyEquivalent: String.init(describing: (character: NSF9FunctionKey, length: 1)))
     #endif
     
     // swiftSharedInstance is not accessible from ObjC
@@ -272,32 +272,32 @@ extension NFX {
     
     private func setupNetfoxMenuItem() {
         self.nfxMenuItem.target = self
-        self.nfxMenuItem.action = "motionDetected"
+        self.nfxMenuItem.action = #selector(NFX.motionDetected)
         self.nfxMenuItem.keyEquivalent = "n"
-        self.nfxMenuItem.keyEquivalentModifierMask = Int(NSEventModifierFlags.CommandKeyMask.rawValue | NSEventModifierFlags.ShiftKeyMask.rawValue)
+        self.nfxMenuItem.keyEquivalentModifierMask = NSEventModifierFlags(rawValue: UInt(Int(NSEventModifierFlags.command.rawValue | NSEventModifierFlags.shift.rawValue)))
     }
     
-    private func addNetfoxToMainMenu() {
+    public func addNetfoxToMainMenu() {
         self.setupNetfoxMenuItem()
         if let menu = self.mainMenu {
-            menu.insertItem(self.nfxMenuItem, atIndex: 0)
+            menu.insertItem(self.nfxMenuItem, at: 0)
         }
     }
     
-    private func removeNetfoxFromMainmenu() {
+    public func removeNetfoxFromMainmenu() {
         if let menu = self.mainMenu {
             menu.removeItem(self.nfxMenuItem)
         }
     }
     
-    private func showNFXFollowingPlatform()  {
+    public func showNFXFollowingPlatform()  {
         if self.windowController == nil {
             self.windowController = NFXWindowController(windowNibName: "NetfoxWindow")
         }
         self.windowController?.showWindow(nil)
     }
     
-    private func hideNFXFollowingPlatform(completion: (() -> Void)?)
+    public func hideNFXFollowingPlatform(completion: (() -> Void)?)
     {
         self.windowController?.close()
         if let notNilCompletion = completion {

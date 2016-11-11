@@ -24,7 +24,7 @@ class NFXGenericController: NFXViewController
         self.view.backgroundColor = NFXColor.NFXGray95Color()
     #elseif os(OSX)
         self.view.wantsLayer = true
-        self.view.layer?.backgroundColor = NFXColor.NFXGray95Color().CGColor
+        self.view.layer?.backgroundColor = NFXColor.NFXGray95Color().cgColor
     #endif
     }
     

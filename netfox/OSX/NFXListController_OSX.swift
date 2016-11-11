@@ -24,18 +24,18 @@ class NFXListController_OSX: NFXListController, NSTableViewDelegate, NSTableView
     // MARK: View Life Cycle
 
     override func awakeFromNib() {
-        tableView.registerNib(NSNib(nibNamed: cellIdentifier, bundle: nil), forIdentifier: cellIdentifier)
+        tableView.register(NSNib(nibNamed: cellIdentifier, bundle: nil), forIdentifier: cellIdentifier)
         searchField.delegate = self
         
-        NSNotificationCenter.defaultCenter().addObserver(self, selector: "reloadTableViewData", name: "NFXReloadData", object: nil)
-        NSNotificationCenter.defaultCenter().addObserver(self, selector: "deactivateSearchController", name: "NFXDeactivateSearch", object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(NFXListController.reloadTableViewData), name: NSNotification.Name(rawValue: "NFXReloadData"), object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(NFXListController_OSX.deactivateSearchController), name: NSNotification.Name(rawValue: "NFXDeactivateSearch"), object: nil)
     }
     
     // MARK: Notifications
 
     override func reloadTableViewData()
     {
-        dispatch_async(dispatch_get_main_queue()) { () -> Void in
+        DispatchQueue.main.async {
             self.tableView.reloadData()
         }
     }
@@ -53,7 +53,7 @@ class NFXListController_OSX: NFXListController, NSTableViewDelegate, NSTableView
         reloadTableViewData()
     }
 
-    override func controlTextDidChange(obj: NSNotification) {
+    func controlTextDidChange(obj: NSNotification) {
         guard let searchField = obj.object as? NSSearchField else {
             return
         }
@@ -74,19 +74,19 @@ class NFXListController_OSX: NFXListController, NSTableViewDelegate, NSTableView
     
     func tableView(tableView: NSTableView, viewForTableColumn tableColumn: NSTableColumn?, row: Int) -> NSView? {
         
-        guard let cell = tableView.makeViewWithIdentifier(cellIdentifier, owner: nil) as? NFXListCell_OSX else {
+        guard let cell = tableView.make(withIdentifier: cellIdentifier, owner: nil) as? NFXListCell_OSX else {
             return nil
         }
         
         if (self.isSearchControllerActive) {
             if self.filteredTableData.count > 0 {
                 let obj = self.filteredTableData[row]
-                cell.configForObject(obj)
+                cell.configForObject(obj: obj)
             }
         } else {
             if NFXHTTPModelManager.sharedInstance.getModels().count > 0 {
                 let obj = NFXHTTPModelManager.sharedInstance.getModels()[row]
-                cell.configForObject(obj)
+                cell.configForObject(obj: obj)
             }
         }
         
@@ -110,7 +110,7 @@ class NFXListController_OSX: NFXListController, NSTableViewDelegate, NSTableView
         } else {
             model = NFXHTTPModelManager.sharedInstance.getModels()[self.tableView.selectedRow]
         }
-        self.delegate?.httpModelSelectedDidChange(model)
+        self.delegate?.httpModelSelectedDidChange(model: model)
     }
     
 }

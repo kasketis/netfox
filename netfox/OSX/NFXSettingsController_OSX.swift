@@ -25,7 +25,7 @@ class NFXSettingsController_OSX: NFXSettingsController, NSTableViewDataSource, N
         
         nfxVersionLabel.stringValue = nfxVersionString
         nfxURLButton.title = nfxURL
-        responseTypesTableView.registerNib(NSNib(nibNamed: cellIdentifier, bundle: nil), forIdentifier: cellIdentifier)
+        responseTypesTableView.register(NSNib(nibNamed: cellIdentifier, bundle: nil), forIdentifier: cellIdentifier)
         
         reloadTableData()
     }
@@ -47,21 +47,21 @@ class NFXSettingsController_OSX: NFXSettingsController, NSTableViewDataSource, N
     
     @IBAction func clearDataClicked(sender: AnyObject?) {
         NFX.sharedInstance().clearOldData()
-        NSNotificationCenter.defaultCenter().postNotificationName("NFXReloadData", object: nil)
+        NotificationCenter.default.post(name: NSNotification.Name(rawValue: "NFXReloadData"), object: nil)
     }
     
     @IBAction func nfxURLButtonClicked(sender: NSButton) {
-        NSWorkspace.sharedWorkspace().openURL(NSURL(string: nfxURL)!)
+        NSWorkspace.shared().open(NSURL(string: nfxURL)! as URL)
     }
     
     @IBAction func toggleResponseTypeClicked(sender: NSButton) {
         filters[sender.tag] = !filters[sender.tag]
         NFX.sharedInstance().cacheFilters(filters)
-        NSNotificationCenter.defaultCenter().postNotificationName("NFXReloadData", object: nil)
+        NotificationCenter.default.post(name: NSNotification.Name(rawValue: "NFXReloadData"), object: nil)
     }
     
     func reloadTableData() {
-        dispatch_async(dispatch_get_main_queue()) { () -> Void in
+        DispatchQueue.main.async {
             self.responseTypesTableView.reloadData()
         }
     }
@@ -73,7 +73,7 @@ class NFXSettingsController_OSX: NFXSettingsController, NSTableViewDataSource, N
     }
     
     func tableView(tableView: NSTableView, viewForTableColumn tableColumn: NSTableColumn?, row: Int) -> NSView? {
-        guard let cell = tableView.makeViewWithIdentifier(cellIdentifier, owner: nil) as? NFXResponseTypeCell_OSX else {
+        guard let cell = tableView.make(withIdentifier: cellIdentifier, owner: nil) as? NFXResponseTypeCell_OSX else {
             return nil
         }
         
