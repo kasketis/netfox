@@ -13,6 +13,8 @@ Very useful and handy for network related issues and bugs
 
 Implemented in Swift 2.1 - bridged also for Objective-C
 
+For Swift 3 please check the related ![branch]9https://github.com/kasketis/netfox/tree/swift3)
+
 Feel free to contribute :)
 
 ### Overview
