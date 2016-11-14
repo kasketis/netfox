@@ -181,9 +181,9 @@ extension URLResponse
         return (self as? HTTPURLResponse)?.statusCode ?? 999
     }
     
-    func getNFXHeaders() -> Dictionary<String, String>
+    func getNFXHeaders() -> [AnyHashable: Any]
     {
-        return (self as? HTTPURLResponse)?.allHeaderFields as! [String : String]? ?? Dictionary()
+        return (self as? HTTPURLResponse)?.allHeaderFields ?? [:]
     }
 }
 
