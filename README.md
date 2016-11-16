@@ -13,6 +13,8 @@ Very useful and handy for network related issues and bugs
 
 Implemented in Swift 2.1 - bridged also for Objective-C
 
+This is the Swift3 branch
+
 Feel free to contribute :)
 
 ### Overview
