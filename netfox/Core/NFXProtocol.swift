@@ -32,12 +32,15 @@ public class NFXProtocol: NSURLProtocol
         }
         
         if let url = request.URL {
-            if (!(url.absoluteString.hasPrefix("http")) && !(url.absoluteString.hasPrefix("https"))) {
-                return false
-            }
+			
+			if let absoluteURL = url.absoluteString where
+				!absoluteURL.hasPrefix("http") && !absoluteURL.hasPrefix("https") {
+				return false
+			}
 
             for ignoredURL in NFX.sharedInstance().getIgnoredURLs() {
-                if url.absoluteString.hasPrefix(ignoredURL) {
+				
+				if let absoluteURL = url.absoluteString where absoluteURL.hasPrefix(ignoredURL) {
                     return false
                 }
             }
