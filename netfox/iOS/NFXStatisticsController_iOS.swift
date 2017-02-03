@@ -42,7 +42,7 @@ class NFXStatisticsController_iOS: NFXStatisticsController {
         
         NSNotificationCenter.defaultCenter().addObserver(
             self,
-            selector: "reloadData",
+            selector: #selector(NFXGenericController.reloadData),
             name: "NFXReloadData",
             object: nil)
         

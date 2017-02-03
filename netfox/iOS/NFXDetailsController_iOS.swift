@@ -27,15 +27,15 @@ class NFXDetailsController_iOS: NFXDetailsController, MFMailComposeViewControlle
         
         self.title = "Details"
         
-        self.navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .Action, target: self, action: Selector("actionButtonPressed:"))
+        self.navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .Action, target: self, action: #selector(NFXDetailsController_iOS.actionButtonPressed(_:)))
         
-        self.infoButton = createHeaderButton("Info", x: 0, selector: Selector("infoButtonPressed"))
+        self.infoButton = createHeaderButton("Info", x: 0, selector: #selector(NFXDetailsController_iOS.infoButtonPressed))
         self.view.addSubview(self.infoButton)
         
-        self.requestButton = createHeaderButton("Request", x: CGRectGetMaxX(self.infoButton.frame), selector: Selector("requestButtonPressed"))
+        self.requestButton = createHeaderButton("Request", x: CGRectGetMaxX(self.infoButton.frame), selector: #selector(NFXDetailsController_iOS.requestButtonPressed))
         self.view.addSubview(self.requestButton)
         
-        self.responseButton = createHeaderButton("Response", x: CGRectGetMaxX(self.requestButton.frame), selector: Selector("responseButtonPressed"))
+        self.responseButton = createHeaderButton("Response", x: CGRectGetMaxX(self.requestButton.frame), selector: #selector(NFXDetailsController_iOS.responseButtonPressed))
         self.view.addSubview(self.responseButton)
         
         self.infoView = createDetailsView(getInfoStringFromObject(self.selectedModel), forView: .INFO)
@@ -91,13 +91,13 @@ class NFXDetailsController_iOS: NFXDetailsController, MFMailComposeViewControlle
         
         if ((forView == EDetailsView.REQUEST) && (self.selectedModel.requestBodyLength > 1024)) {
             moreButton.setTitle("Show request body", forState: .Normal)
-            moreButton.addTarget(self, action: Selector("requestBodyButtonPressed"), forControlEvents: .TouchUpInside)
+            moreButton.addTarget(self, action: #selector(NFXDetailsController_iOS.requestBodyButtonPressed), forControlEvents: .TouchUpInside)
             scrollView.addSubview(moreButton)
             scrollView.contentSize = CGSizeMake(textLabel.frame.width, CGRectGetMaxY(moreButton.frame))
 
         } else if ((forView == EDetailsView.RESPONSE) && (self.selectedModel.responseBodyLength > 1024)) {
             moreButton.setTitle("Show response body", forState: .Normal)
-            moreButton.addTarget(self, action: Selector("responseBodyButtonPressed"), forControlEvents: .TouchUpInside)
+            moreButton.addTarget(self, action: #selector(NFXDetailsController_iOS.responseBodyButtonPressed), forControlEvents: .TouchUpInside)
             scrollView.addSubview(moreButton)
             scrollView.contentSize = CGSizeMake(textLabel.frame.width, CGRectGetMaxY(moreButton.frame))
             
