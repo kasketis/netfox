@@ -39,29 +39,29 @@ class NFXListCell: UITableViewCell
         self.requestTimeLabel = UILabel(frame: CGRect.zero)
         self.requestTimeLabel.textAlignment = .center
         self.requestTimeLabel.textColor = UIColor.white
-        self.requestTimeLabel.font = UIFont.NFXFontBold(13)
+        self.requestTimeLabel.font = UIFont.NFXFontBold(size: 13)
         contentView.addSubview(self.requestTimeLabel)
         
         self.timeIntervalLabel = UILabel(frame: CGRect.zero)
         self.timeIntervalLabel.textAlignment = .center
-        self.timeIntervalLabel.font = UIFont.NFXFont(12)
+        self.timeIntervalLabel.font = UIFont.NFXFont(size: 12)
         contentView.addSubview(self.timeIntervalLabel)
         
         self.URLLabel = UILabel(frame: CGRect.zero)
         self.URLLabel.textColor = UIColor.NFXBlackColor()
-        self.URLLabel.font = UIFont.NFXFont(12)
+        self.URLLabel.font = UIFont.NFXFont(size: 12)
         self.URLLabel.numberOfLines = 2
         contentView.addSubview(self.URLLabel)
 
         self.methodLabel = UILabel(frame: CGRect.zero)
         self.methodLabel.textAlignment = .left
         self.methodLabel.textColor = UIColor.NFXGray44Color()
-        self.methodLabel.font = UIFont.NFXFont(12)
+        self.methodLabel.font = UIFont.NFXFont(size: 12)
         contentView.addSubview(self.methodLabel)
         
         self.typeLabel = UILabel(frame: CGRect.zero)
         self.typeLabel.textColor = UIColor.NFXGray44Color()
-        self.typeLabel.font = UIFont.NFXFont(12)
+        self.typeLabel.font = UIFont.NFXFont(size: 12)
         contentView.addSubview(self.typeLabel)
         
         self.circleView = UIView(frame: CGRect.zero)

@@ -81,7 +81,7 @@ class NFXDetailsController_iOS: NFXDetailsController, MFMailComposeViewControlle
         tempButton.setTitle(title, for: UIControlState())
         tempButton.setTitleColor(UIColor.init(netHex: 0x6d6d6d), for: UIControlState())
         tempButton.setTitleColor(UIColor.init(netHex: 0xf3f3f4), for: .selected)
-        tempButton.titleLabel?.font = UIFont.NFXFont(15)
+        tempButton.titleLabel?.font = UIFont.NFXFont(size: 15)
         tempButton.addTarget(self, action: selector, for: .touchUpInside)
         return tempButton
     }
@@ -98,7 +98,7 @@ class NFXDetailsController_iOS: NFXDetailsController, MFMailComposeViewControlle
         var textLabel: UILabel
         textLabel = UILabel()
         textLabel.frame = CGRect(x: 20, y: 20, width: scrollView.frame.width - 40, height: scrollView.frame.height - 20);
-        textLabel.font = UIFont.NFXFont(13)
+        textLabel.font = UIFont.NFXFont(size: 13)
         textLabel.textColor = UIColor.NFXGray44Color()
         textLabel.numberOfLines = 0
         textLabel.attributedText = content

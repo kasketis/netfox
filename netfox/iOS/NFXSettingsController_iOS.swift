@@ -47,7 +47,7 @@ class NFXSettingsController_iOS: NFXSettingsController, UITableViewDelegate, UIT
         var nfxVersionLabel: UILabel
         nfxVersionLabel = UILabel(frame: CGRect(x: 10, y: self.view.frame.height - 60, width: self.view.frame.width - 2*10, height: 30))
         nfxVersionLabel.autoresizingMask = [.flexibleTopMargin, .flexibleWidth]
-        nfxVersionLabel.font = UIFont.NFXFont(14)
+        nfxVersionLabel.font = UIFont.NFXFont(size: 14)
         nfxVersionLabel.textColor = UIColor.NFXOrangeColor()
         nfxVersionLabel.textAlignment = .center
         nfxVersionLabel.text = nfxVersionString
@@ -56,7 +56,7 @@ class NFXSettingsController_iOS: NFXSettingsController, UITableViewDelegate, UIT
         var nfxURLButton: UIButton
         nfxURLButton = UIButton(frame: CGRect(x: 10, y: self.view.frame.height - 40, width: self.view.frame.width - 2*10, height: 30))
         nfxURLButton.autoresizingMask = [.flexibleTopMargin, .flexibleWidth]
-        nfxURLButton.titleLabel?.font = UIFont.NFXFont(12)
+        nfxURLButton.titleLabel?.font = UIFont.NFXFont(size: 12)
         nfxURLButton.setTitleColor(UIColor.NFXGray44Color(), for: UIControlState())
         nfxURLButton.titleLabel?.textAlignment = .center
         nfxURLButton.setTitle(nfxURL, for: UIControlState())
@@ -109,7 +109,7 @@ class NFXSettingsController_iOS: NFXSettingsController, UITableViewDelegate, UIT
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell
     {
         let cell = UITableViewCell()
-        cell.textLabel?.font = UIFont.NFXFont(14)
+        cell.textLabel?.font = UIFont.NFXFont(size: 14)
         cell.tintColor = UIColor.NFXOrangeColor()
         
         switch (indexPath as NSIndexPath).section
@@ -133,14 +133,14 @@ class NFXSettingsController_iOS: NFXSettingsController, UITableViewDelegate, UIT
             cell.textLabel?.textAlignment = .center
             cell.textLabel?.text = "Share Session Logs"
             cell.textLabel?.textColor = UIColor.NFXGreenColor()
-            cell.textLabel?.font = UIFont.NFXFont(16)
+            cell.textLabel?.font = UIFont.NFXFont(size: 16)
             return cell
             
         case 3:
             cell.textLabel?.textAlignment = .center
             cell.textLabel?.text = "Clear data"
             cell.textLabel?.textColor = UIColor.NFXRedColor()
-            cell.textLabel?.font = UIFont.NFXFont(16)
+            cell.textLabel?.font = UIFont.NFXFont(size: 16)
             
             return cell
             
@@ -175,7 +175,7 @@ class NFXSettingsController_iOS: NFXSettingsController, UITableViewDelegate, UIT
             filtersInfoLabel = UILabel(frame: headerView.bounds)
             filtersInfoLabel.backgroundColor = UIColor.clear
             filtersInfoLabel.autoresizingMask = [.flexibleWidth, .flexibleHeight]
-            filtersInfoLabel.font = UIFont.NFXFont(13)
+            filtersInfoLabel.font = UIFont.NFXFont(size: 13)
             filtersInfoLabel.textColor = UIColor.NFXGray44Color()
             filtersInfoLabel.textAlignment = .center
             filtersInfoLabel.text = "\nSelect the types of responses that you want to see"

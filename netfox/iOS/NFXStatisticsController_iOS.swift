@@ -31,7 +31,7 @@ class NFXStatisticsController_iOS: NFXStatisticsController {
         
         self.textLabel = UILabel()
         self.textLabel.frame = CGRect(x: 20, y: 20, width: scrollView.frame.width - 40, height: scrollView.frame.height - 20);
-        self.textLabel.font = UIFont.NFXFont(13)
+        self.textLabel.font = UIFont.NFXFont(size: 13)
         self.textLabel.textColor = UIColor.NFXGray44Color()
         self.textLabel.numberOfLines = 0
         self.textLabel.attributedText = getReportString()
