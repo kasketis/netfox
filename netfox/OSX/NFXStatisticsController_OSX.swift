@@ -18,16 +18,16 @@ class NFXStatisticsController_OSX: NFXStatisticsController {
         
         generateStatics()
         
-        NSNotificationCenter.defaultCenter().addObserver(
+        NotificationCenter.default.addObserver(
             self,
-            selector: "reloadData",
-            name: "NFXReloadData",
+            selector: #selector(NFXGenericController.reloadData),
+            name: NSNotification.Name(rawValue: "NFXReloadData"),
             object: nil)
     }
     
     override func reloadData() {
         super.reloadData()
-        dispatch_async(dispatch_get_main_queue()) { () -> Void in
+        DispatchQueue.main.async {
             self.textView.textStorage?.setAttributedString(self.getReportString())
         }
     }

@@ -11,14 +11,14 @@ import UIKit
 
 extension UIWindow
 {
-    override public func motionEnded(motion: UIEventSubtype, withEvent event: UIEvent?)
+    override open func motionEnded(_ motion: UIEventSubtype, with event: UIEvent?)
     {
         if NFX.sharedInstance().getSelectedGesture() == .shake {
-            if (event!.type == .Motion && event!.subtype == .MotionShake) {
+            if (event!.type == .motion && event!.subtype == .motionShake) {
                 NFX.sharedInstance().motionDetected()
             }
         } else {
-            super.motionEnded(motion, withEvent: event)
+            super.motionEnded(motion, with: event)
         }
     }
 }
@@ -36,15 +36,15 @@ public extension UIDevice
         var identifier = ""
         
         for child in mirror.children {
-            if let value = child.value as? Int8 where value != 0 {
-                identifier.append(UnicodeScalar(UInt8(value)))
+            if let value = child.value as? Int8 , value != 0 {
+                identifier.append(String(UnicodeScalar(UInt8(value))))
             }
         }
         
         return parseDeviceType(identifier)
     }
     
-    class func parseDeviceType(identifier: String) -> String {
+    class func parseDeviceType(_ identifier: String) -> String {
         
         if identifier == "i386" || identifier == "x86_64" {
             return "Simulator"

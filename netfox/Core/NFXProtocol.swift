@@ -8,30 +8,30 @@
 import Foundation
 
 @objc
-public class NFXProtocol: NSURLProtocol
+open class NFXProtocol: URLProtocol
 {
     var connection: NSURLConnection?
     var model: NFXHTTPModel?
-    var session: NSURLSession?
+    var session: URLSession?
     
-    override public class func canInitWithRequest(request: NSURLRequest) -> Bool
+    override open class func canInit(with request: URLRequest) -> Bool
     {
         return canServeRequest(request)
     }
     
-    override public class func canInitWithTask(task: NSURLSessionTask) -> Bool
+    override open class func canInit(with task: URLSessionTask) -> Bool
     {
         guard let request = task.currentRequest else { return false }
         return canServeRequest(request)
     }
     
-    private class func canServeRequest(request: NSURLRequest) -> Bool
+    fileprivate class func canServeRequest(_ request: URLRequest) -> Bool
     {
         if !NFX.sharedInstance().isEnabled() {
             return false
         }
         
-        if let url = request.URL {
+        if let url = request.url {
             if (!(url.absoluteString.hasPrefix("http")) && !(url.absoluteString.hasPrefix("https"))) {
                 return false
             }
@@ -46,34 +46,34 @@ public class NFXProtocol: NSURLProtocol
             return false
         }
         
-        if NSURLProtocol.propertyForKey("NFXInternal", inRequest: request) != nil {
+        if URLProtocol.property(forKey: "NFXInternal", in: request) != nil {
             return false
         }
         
         return true
     }
     
-    override public func startLoading()
+    override open func startLoading()
     {
         self.model = NFXHTTPModel()
                 
         var req: NSMutableURLRequest
-        req = NFXProtocol.canonicalRequestForRequest(request).mutableCopy() as! NSMutableURLRequest
+        req = (NFXProtocol.canonicalRequest(for: request) as NSURLRequest).mutableCopy() as! NSMutableURLRequest
         
-        self.model?.saveRequest(req)
+        self.model?.saveRequest(req as URLRequest)
                 
-        NSURLProtocol.setProperty("1", forKey: "NFXInternal", inRequest: req)
+        URLProtocol.setProperty("1", forKey: "NFXInternal", in: req)
         
         if (session == nil) {
-            session = NSURLSession(configuration: NSURLSessionConfiguration.defaultSessionConfiguration())
+            session = URLSession(configuration: URLSessionConfiguration.default)
         }
         
-        session!.dataTaskWithRequest(req, completionHandler: {data, response, error in
+        session!.dataTask(with: req as URLRequest, completionHandler: {data, response, error in
             
             if error != nil {
                 self.model?.saveErrorResponse()
                 self.loaded()
-                self.client?.URLProtocol(self, didFailWithError: error!)
+                self.client?.urlProtocol(self, didFailWithError: error!)
                 
             } else {
                 if ((data) != nil) {
@@ -83,15 +83,15 @@ public class NFXProtocol: NSURLProtocol
             }
             
             if (response != nil) {
-                self.client!.URLProtocol(self, didReceiveResponse: response!, cacheStoragePolicy: .NotAllowed)
+                self.client!.urlProtocol(self, didReceive: response!, cacheStoragePolicy: .notAllowed)
             }
             
             if (data != nil) {
-                self.client!.URLProtocol(self, didLoadData: data!)
+                self.client!.urlProtocol(self, didLoad: data!)
             }
             
             if let client = self.client {
-                client.URLProtocolDidFinishLoading(self)
+                client.urlProtocolDidFinishLoading(self)
             }
 
         }).resume()
@@ -99,12 +99,12 @@ public class NFXProtocol: NSURLProtocol
 
     }
     
-    override public func stopLoading()
+    override open func stopLoading()
     {
         
     }
     
-    override public class func canonicalRequestForRequest(request: NSURLRequest) -> NSURLRequest
+    override open class func canonicalRequest(for request: URLRequest) -> URLRequest
     {
         return request
     }
@@ -115,7 +115,7 @@ public class NFXProtocol: NSURLProtocol
             NFXHTTPModelManager.sharedInstance.add(self.model!)
         }
         
-        NSNotificationCenter.defaultCenter().postNotificationName("NFXReloadData", object: nil)
+        NotificationCenter.default.post(name: Notification.Name(rawValue: "NFXReloadData"), object: nil)
     }
     
 }

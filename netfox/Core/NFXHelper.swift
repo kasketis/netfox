@@ -98,12 +98,12 @@ extension NFXColor
 extension NFXFont
 {
 #if os(iOS)
-    class func NFXFont(size: CGFloat) -> UIFont
+    class func NFXFont(_ size: CGFloat) -> UIFont
     {
         return UIFont(name: "HelveticaNeue", size: size)!
     }
     
-    class func NFXFontBold(size: CGFloat) -> UIFont
+    class func NFXFontBold(_ size: CGFloat) -> UIFont
     {
         return UIFont(name: "HelveticaNeue-Bold", size: size)!
     }
@@ -121,12 +121,12 @@ extension NFXFont
 #endif
 }
 
-extension NSURLRequest
+extension URLRequest
 {
     func getNFXURL() -> String
     {
-        if (URL != nil) {
-            return URL!.absoluteString;
+        if (url != nil) {
+            return url!.absoluteString;
         } else {
             return "-"
         }
@@ -134,8 +134,8 @@ extension NSURLRequest
     
     func getNFXMethod() -> String
     {
-        if (HTTPMethod != nil) {
-            return HTTPMethod!
+        if (httpMethod != nil) {
+            return httpMethod!
         } else {
             return "-"
         }
@@ -144,12 +144,12 @@ extension NSURLRequest
     func getNFXCachePolicy() -> String
     {
         switch cachePolicy {
-        case .UseProtocolCachePolicy: return "UseProtocolCachePolicy"
-        case .ReloadIgnoringLocalCacheData: return "ReloadIgnoringLocalCacheData"
-        case .ReloadIgnoringLocalAndRemoteCacheData: return "ReloadIgnoringLocalAndRemoteCacheData"
-        case .ReturnCacheDataElseLoad: return "ReturnCacheDataElseLoad"
-        case .ReturnCacheDataDontLoad: return "ReturnCacheDataDontLoad"
-        case .ReloadRevalidatingCacheData: return "ReloadRevalidatingCacheData"
+        case .useProtocolCachePolicy: return "UseProtocolCachePolicy"
+        case .reloadIgnoringLocalCacheData: return "ReloadIgnoringLocalCacheData"
+        case .reloadIgnoringLocalAndRemoteCacheData: return "ReloadIgnoringLocalAndRemoteCacheData"
+        case .returnCacheDataElseLoad: return "ReturnCacheDataElseLoad"
+        case .returnCacheDataDontLoad: return "ReturnCacheDataDontLoad"
+        case .reloadRevalidatingCacheData: return "ReloadRevalidatingCacheData"
         }
         
     }
@@ -159,7 +159,7 @@ extension NSURLRequest
         return String(Double(timeoutInterval))
     }
     
-    func getNFXHeaders() -> Dictionary<String, String>
+    func getNFXHeaders() -> [AnyHashable: Any]
     {
         if (allHTTPHeaderFields != nil) {
             return allHTTPHeaderFields!
@@ -168,22 +168,22 @@ extension NSURLRequest
         }
     }
     
-    func getNFXBody() -> NSData
+    func getNFXBody() -> Data
     {
-        return HTTPBody ?? NSURLProtocol.propertyForKey("NFXBodyData", inRequest: self) as? NSData ?? NSData()
+        return httpBody ?? URLProtocol.property(forKey: "NFXBodyData", in: self) as? Data ?? Data()
     }
 }
 
-extension NSURLResponse
+extension URLResponse
 {
     func getNFXStatus() -> Int
     {
-        return (self as? NSHTTPURLResponse)?.statusCode ?? 999
+        return (self as? HTTPURLResponse)?.statusCode ?? 999
     }
     
-    func getNFXHeaders() -> Dictionary<NSObject, AnyObject>
+    func getNFXHeaders() -> [AnyHashable: Any]
     {
-        return (self as? NSHTTPURLResponse)?.allHeaderFields ?? Dictionary()
+        return (self as? HTTPURLResponse)?.allHeaderFields ?? [:]
     }
 }
 
@@ -192,36 +192,36 @@ extension NFXImage
     class func NFXSettings() -> NFXImage
     {
     #if os (iOS)
-        return UIImage(data: NFXAssets.getImage(NFXAssetName.SETTINGS), scale: 1.7)!
+        return UIImage(data: NFXAssets.getImage(NFXAssetName.settings), scale: 1.7)!
     #elseif os(OSX)
-        return NSImage(data: NFXAssets.getImage(NFXAssetName.SETTINGS))!
+        return NSImage(data: NFXAssets.getImage(NFXAssetName.settings))!
     #endif
     }
     
     class func NFXInfo() -> NFXImage
     {
     #if os (iOS)
-        return UIImage(data: NFXAssets.getImage(NFXAssetName.INFO), scale: 1.7)!
+        return UIImage(data: NFXAssets.getImage(NFXAssetName.info), scale: 1.7)!
     #elseif os(OSX)
-        return NSImage(data: NFXAssets.getImage(NFXAssetName.INFO))!
+        return NSImage(data: NFXAssets.getImage(NFXAssetName.info))!
     #endif
     }
     
     class func NFXStatistics() -> NFXImage
     {
     #if os (iOS)
-        return UIImage(data: NFXAssets.getImage(NFXAssetName.STATISTICS), scale: 1.7)!
+        return UIImage(data: NFXAssets.getImage(NFXAssetName.statistics), scale: 1.7)!
     #elseif os(OSX)
-        return NSImage(data: NFXAssets.getImage(NFXAssetName.STATISTICS))!
+        return NSImage(data: NFXAssets.getImage(NFXAssetName.statistics))!
     #endif
     }
 }
 
-extension NSDate
+extension Date
 {
-    func isGreaterThanDate(dateToCompare: NSDate) -> Bool
+    func isGreaterThanDate(_ dateToCompare: Date) -> Bool
     {
-        if self.compare(dateToCompare) == NSComparisonResult.OrderedDescending {
+        if self.compare(dateToCompare) == ComparisonResult.orderedDescending {
             return true
         } else {
             return false
@@ -234,37 +234,37 @@ class NFXDebugInfo
     
     class func getNFXAppName() -> String
     {
-        return NSBundle.mainBundle().infoDictionary?["CFBundleName"] as? String ?? ""
+        return Bundle.main.infoDictionary?["CFBundleName"] as? String ?? ""
     }
     
     class func getNFXAppVersionNumber() -> String
     {
-        return NSBundle.mainBundle().infoDictionary?["CFBundleShortVersionString"] as? String ?? ""
+        return Bundle.main.infoDictionary?["CFBundleShortVersionString"] as? String ?? ""
     }
     
     class func getNFXAppBuildNumber() -> String
     {
-        return NSBundle.mainBundle().infoDictionary?["CFBundleVersion"] as? String ?? ""
+        return Bundle.main.infoDictionary?["CFBundleVersion"] as? String ?? ""
     }
     
     class func getNFXBundleIdentifier() -> String
     {
-        return NSBundle.mainBundle().bundleIdentifier ?? ""
+        return Bundle.main.bundleIdentifier ?? ""
     }
     
     class func getNFXOSVersion() -> String
     {
     #if os(iOS)
-        return UIDevice.currentDevice().systemVersion ?? ""
+        return UIDevice.current.systemVersion
     #elseif os(OSX)
-        return NSProcessInfo.processInfo().operatingSystemVersionString
+        return ProcessInfo.processInfo.operatingSystemVersionString
     #endif
     }
     
     class func getNFXDeviceType() -> String
     {
     #if os(iOS)
-        return UIDevice.getNFXDeviceType() ?? ""
+        return UIDevice.getNFXDeviceType() 
     #elseif os(OSX)
         return "Not implemented yet. PR welcomes"
     #endif
@@ -273,8 +273,8 @@ class NFXDebugInfo
     class func getNFXDeviceScreenResolution() -> String
     {
     #if os(iOS)
-        let scale = UIScreen.mainScreen().scale
-        let bounds = UIScreen.mainScreen().bounds
+        let scale = UIScreen.main.scale
+        let bounds = UIScreen.main.bounds
         let width = bounds.size.width * scale
         let height = bounds.size.height * scale
         return "\(width) x \(height)"
@@ -283,26 +283,26 @@ class NFXDebugInfo
     #endif
     }
     
-    class func getNFXIP(completion:(result: String) -> Void)
+    class func getNFXIP(_ completion:@escaping (_ result: String) -> Void)
     {
         var req: NSMutableURLRequest
-        req = NSMutableURLRequest(URL: NSURL(string: "https://api.ipify.org/?format=json")!)
-        NSURLProtocol.setProperty("1", forKey: "NFXInternal", inRequest: req)
+        req = NSMutableURLRequest(url: URL(string: "https://api.ipify.org/?format=json")!)
+        URLProtocol.setProperty("1", forKey: "NFXInternal", in: req)
         
-        let session = NSURLSession.sharedSession()
-        session.dataTaskWithRequest(req) { (data, response, error) in
+        let session = URLSession.shared
+        session.dataTask(with: req as URLRequest, completionHandler: { (data, response, error) in
             do {
-                let rawJsonData = try NSJSONSerialization.JSONObjectWithData(data!, options: [.AllowFragments])
-                if let ipAddress = rawJsonData.valueForKey("ip") {
-                    completion(result: ipAddress as! String)
+                let rawJsonData = try JSONSerialization.jsonObject(with: data!, options: [.allowFragments])
+                if let ipAddress = (rawJsonData as AnyObject).value(forKey: "ip") {
+                    completion(ipAddress as! String)
                 } else {
-                    completion(result: "-")
+                    completion("-")
                 }
             } catch {
-                completion(result: "-")
+                completion("-")
             }
             
-            }.resume()
+            }) .resume()
     }
     
 }
@@ -310,9 +310,9 @@ class NFXDebugInfo
 
 struct NFXPath
 {
-    static let Documents = NSSearchPathForDirectoriesInDomains(NSSearchPathDirectory.DocumentDirectory, NSSearchPathDomainMask.AllDomainsMask, true).first! as NSString
+    static let Documents = NSSearchPathForDirectoriesInDomains(FileManager.SearchPathDirectory.documentDirectory, FileManager.SearchPathDomainMask.allDomainsMask, true).first! as NSString
     
-    static let SessionLog = NFXPath.Documents.stringByAppendingPathComponent("session.log");
+    static let SessionLog = NFXPath.Documents.appendingPathComponent("session.log");
 }
 
 
@@ -321,14 +321,14 @@ extension String
     func appendToFile(filePath: String) {
         let contentToAppend = self
         
-        if let fileHandle = NSFileHandle(forWritingAtPath: filePath) {
+        if let fileHandle = FileHandle(forWritingAtPath: filePath) {
             /* Append to file */
             fileHandle.seekToEndOfFile()
-            fileHandle.writeData(contentToAppend.dataUsingEncoding(NSUTF8StringEncoding)!)
+            fileHandle.write(contentToAppend.data(using: String.Encoding.utf8)!)
         } else {
             /* Create new file */
             do {
-                try contentToAppend.writeToFile(filePath, atomically: true, encoding: NSUTF8StringEncoding)
+                try contentToAppend.write(toFile: filePath, atomically: true, encoding: String.Encoding.utf8)
             } catch {
                 print("Error creating \(filePath)")
             }

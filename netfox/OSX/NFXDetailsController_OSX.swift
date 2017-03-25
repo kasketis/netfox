@@ -21,7 +21,7 @@ class NFXDetailsController_OSX: NFXDetailsController {
         super.viewDidLoad()
     }
     
-    override func selectedModel(model: NFXHTTPModel) {
+    override func selectedModel(_ model: NFXHTTPModel) {
         super.selectedModel(model)
         self.textViewInfo.textStorage?.setAttributedString(self.getInfoStringFromObject(model))
         self.textViewRequest.textStorage?.setAttributedString(self.getRequestStringFromObject(model))

@@ -40,9 +40,9 @@ class NFXWindowController: NSWindowController, NSWindowDelegate, NFXWindowContro
     // MARK: Lifecycle
     
     override func awakeFromNib() {
-        settingsButton.image = NSImage(data: NFXAssets.getImage(.SETTINGS))
-        infoButton.image = NSImage(data: NFXAssets.getImage(.INFO))
-        statisticsButton.image = NSImage(data: NFXAssets.getImage(.STATISTICS))
+        settingsButton.image = NSImage(data: NFXAssets.getImage(.settings))
+        infoButton.image = NSImage(data: NFXAssets.getImage(.info))
+        statisticsButton.image = NSImage(data: NFXAssets.getImage(.statistics))
 
         listViewController.view = listView
         listViewController.delegate = self
@@ -64,7 +64,7 @@ class NFXWindowController: NSWindowController, NSWindowDelegate, NFXWindowContro
     // MARK: NSWindowDelegate
     
     func windowWillClose(notification: NSNotification) {
-        if let window = notification.object as? NSWindow where window == self.window {
+        if let window = notification.object as? NSWindow , window == self.window {
             NFX.sharedInstance().windowDidClose()
         }
     }
@@ -72,15 +72,15 @@ class NFXWindowController: NSWindowController, NSWindowDelegate, NFXWindowContro
     // MARK: Actions
     
     @IBAction func settingsClicked(sender: AnyObject?) {
-        settingsPopover.showRelativeToRect(NSZeroRect, ofView: settingsButton, preferredEdge: NSRectEdge.MaxY)
+        settingsPopover.show(relativeTo: NSZeroRect, of: settingsButton, preferredEdge: NSRectEdge.maxY)
     }
     
     @IBAction func infoClicked(sender: AnyObject?) {
-        infoPopover.showRelativeToRect(NSZeroRect, ofView: infoButton, preferredEdge: NSRectEdge.MaxY)
+        infoPopover.show(relativeTo: NSZeroRect, of: infoButton, preferredEdge: NSRectEdge.maxY)
     }
     
     @IBAction func statisticsClicked(sender: AnyObject?) {
-        statisticsPopover.showRelativeToRect(NSZeroRect, ofView: statisticsButton, preferredEdge: NSRectEdge.MaxY)
+        statisticsPopover.show(relativeTo: NSZeroRect, of: statisticsButton, preferredEdge: NSRectEdge.maxY)
     }
 
 }
