@@ -1,6 +1,6 @@
 Pod::Spec.new do |s|
   s.name             = "netfox"
-  s.version          = "1.8"
+  s.version          = "1.9"
   s.summary          = "A lightweight, one line setup, iOS/OSX network debugging library!"
  
   s.description      = <<-DESC
