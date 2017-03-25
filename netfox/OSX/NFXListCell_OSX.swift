@@ -33,11 +33,11 @@ class NFXListCell_OSX: NSTableCellView
         self.circleView.layer?.cornerRadius = 4
         self.circleView.alphaValue = 0.2
         
-        self.requestTimeLabel.font = NSFont.NFXFontBold(size: 13)
-        self.timeIntervalLabel.font = NSFont.NFXFont(size: 12)
-        self.URLLabel.font = NSFont.NFXFont(size: 12)
-        self.methodLabel.font = NSFont.NFXFont(size: 12)
-        self.typeLabel.font = NSFont.NFXFont(size: 12)
+        self.requestTimeLabel.font = NSFont.NFXFontBold(13)
+        self.timeIntervalLabel.font = NSFont.NFXFont(12)
+        self.URLLabel.font = NSFont.NFXFont(12)
+        self.methodLabel.font = NSFont.NFXFont(12)
+        self.typeLabel.font = NSFont.NFXFont(12)
         
     }
         

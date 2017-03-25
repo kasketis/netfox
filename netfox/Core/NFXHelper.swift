@@ -109,12 +109,12 @@ extension NFXFont
     }
     
 #elseif os(OSX)
-    class func NFXFont(size: CGFloat) -> NSFont
+    class func NFXFont(_ size: CGFloat) -> NSFont
     {
         return NSFont(name: "HelveticaNeue", size: size)!
     }
     
-    class func NFXFontBold(size: CGFloat) -> NSFont
+    class func NFXFontBold(_ size: CGFloat) -> NSFont
     {
         return NSFont(name: "HelveticaNeue-Bold", size: size)!
     }
