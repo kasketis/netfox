@@ -44,7 +44,7 @@ class NFXGenericController: NFXViewController
         let matchesBodyHeaders = regexBodyHeaders.matches(in: string, options: NSRegularExpression.MatchingOptions.withoutAnchoringBounds, range: NSMakeRange(0, l)) as Array<NSTextCheckingResult>
         
         for match in matchesBodyHeaders {
-            tempMutableString.addAttribute(NSFontAttributeName, value: NFXFont.NFXFontBold(size: 14), range: match.range)
+            tempMutableString.addAttribute(NSFontAttributeName, value: NFXFont.NFXFontBold(14), range: match.range)
             tempMutableString.addAttribute(NSForegroundColorAttributeName, value: NFXColor.NFXOrangeColor(), range: match.range)
         }
         
