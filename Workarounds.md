@@ -3,10 +3,10 @@
 The most common issue requests don't get logged is the use of a custom NSURLSession (search for "NSURLSession" or "NSURLSessionConfiguration" in your code or in the 3rd party library's code).
 In this case you must add the following in the default configuration
 
-#### Swift
+#### Swift 3
 <pre>
-let configuration = NSURLSessionConfiguration.defaultSessionConfiguration()
-configuration.protocolClasses?.insert(NFXProtocol.self, atIndex: 0)
+let configuration = URLSessionConfiguration.default
+configuration.protocolClasses?.insert(NFXProtocol.self, at: 0)
 </pre>
 
 #### Obj-C
