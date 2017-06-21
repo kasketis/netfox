@@ -229,14 +229,14 @@ class NFXHTTPModel: NSObject
         return .OTHER
     }
     
-    func prettyPrint(_ rawData: Data, type: HTTPModelShortType) -> String?
+    func prettyPrint(_ rawData: Data, type: HTTPModelShortType) -> NSString?
     {
         switch type {
         case .JSON:
             do {
                 let rawJsonData = try JSONSerialization.jsonObject(with: rawData, options: [])
                 let prettyPrintedString = try JSONSerialization.data(withJSONObject: rawJsonData, options: [.prettyPrinted])
-                return NSString(data: prettyPrintedString, encoding: String.Encoding.utf8.rawValue) as? String
+                return NSString(data: prettyPrintedString, encoding: String.Encoding.utf8.rawValue)
             } catch {
                 return nil
             }
