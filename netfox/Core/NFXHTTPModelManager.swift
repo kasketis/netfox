@@ -24,7 +24,9 @@ final class NFXHTTPModelManager: NSObject
     
     func clear()
     {
-        self.models.removeAll()
+        syncQueue.async {
+            self.models.removeAll()
+        }
     }
     
     func getModels() -> [NFXHTTPModel]
