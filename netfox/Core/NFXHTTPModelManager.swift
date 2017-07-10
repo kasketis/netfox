@@ -13,10 +13,13 @@ final class NFXHTTPModelManager: NSObject
 {
     static let sharedInstance = NFXHTTPModelManager()
     fileprivate var models = [NFXHTTPModel]()
+    private let syncQueue = DispatchQueue(label: "NFXSyncQueue")
     
     func add(_ obj: NFXHTTPModel)
     {
-        self.models.insert(obj, at: 0)
+        syncQueue.async {
+            self.models.insert(obj, at: 0)
+        }
     }
     
     func clear()
