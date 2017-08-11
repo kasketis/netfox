@@ -70,24 +70,24 @@ open class NFXProtocol: URLProtocol
         
         session!.dataTask(with: req as URLRequest, completionHandler: {data, response, error in
             
-            if error != nil {
+            if let error = error {
                 self.model?.saveErrorResponse()
                 self.loaded()
-                self.client?.urlProtocol(self, didFailWithError: error!)
+                self.client?.urlProtocol(self, didFailWithError: error)
                 
             } else {
-                if ((data) != nil) {
-                    self.model?.saveResponse(response!, data: data!)
+                if let data = data {
+                    self.model?.saveResponse(response!, data: data)
                 }
                 self.loaded()
             }
             
-            if (response != nil) {
-                self.client!.urlProtocol(self, didReceive: response!, cacheStoragePolicy: .notAllowed)
+            if let response = response, let client = self.client {
+                client.urlProtocol(self, didReceive: response, cacheStoragePolicy: .notAllowed)
             }
             
-            if (data != nil) {
-                self.client!.urlProtocol(self, didLoad: data!)
+            if let data = data {
+                self.client!.urlProtocol(self, didLoad: data)
             }
             
             if let client = self.client {
