@@ -36,6 +36,7 @@ class NFXDetailsController_iOS: NFXDetailsController, MFMailComposeViewControlle
     var infoButton: UIButton = UIButton()
     var requestButton: UIButton = UIButton()
     var responseButton: UIButton = UIButton()
+    private var copyAlert: UIAlertController?
 
     var infoView: UIScrollView = UIScrollView()
     var requestView: UIScrollView = UIScrollView()
@@ -85,6 +86,30 @@ class NFXDetailsController_iOS: NFXDetailsController, MFMailComposeViewControlle
         tempButton.addTarget(self, action: selector, for: .touchUpInside)
         return tempButton
     }
+
+    @objc fileprivate func copyLabel(lpgr: UILongPressGestureRecognizer) {
+        guard let text = (lpgr.view as? UILabel)?.text,
+              copyAlert == nil else { return }
+
+        UIPasteboard.general.string = text
+
+        let alert = UIAlertController(title: "Text Copied!", message: nil, preferredStyle: .alert)
+        copyAlert = alert
+
+        self.present(alert, animated: true) { [weak self] in
+            guard let `self` = self else { return }
+
+            Timer.scheduledTimer(timeInterval: 0.45,
+                                 target: self,
+                                 selector: #selector(NFXDetailsController_iOS.dismissCopyAlert),
+                                 userInfo: nil,
+                                 repeats: false)
+        }
+    }
+
+    @objc fileprivate func dismissCopyAlert() {
+        copyAlert?.dismiss(animated: true) { [weak self] in self?.copyAlert = nil }
+    }
     
     func createDetailsView(_ content: NSAttributedString, forView: EDetailsView) -> UIScrollView
     {
@@ -103,7 +128,11 @@ class NFXDetailsController_iOS: NFXDetailsController, MFMailComposeViewControlle
         textLabel.numberOfLines = 0
         textLabel.attributedText = content
         textLabel.sizeToFit()
+        textLabel.isUserInteractionEnabled = true
         scrollView.addSubview(textLabel)
+
+        let lpgr = UILongPressGestureRecognizer(target: self, action: #selector(NFXDetailsController_iOS.copyLabel))
+        textLabel.addGestureRecognizer(lpgr)
         
         var moreButton: UIButton
         moreButton = UIButton.init(frame: CGRect(x: 20, y: textLabel.frame.maxY + 10, width: scrollView.frame.width - 40, height: 40))
@@ -113,16 +142,16 @@ class NFXDetailsController_iOS: NFXDetailsController, MFMailComposeViewControlle
             moreButton.setTitle("Show request body", for: UIControlState())
             moreButton.addTarget(self, action: #selector(NFXDetailsController_iOS.requestBodyButtonPressed), for: .touchUpInside)
             scrollView.addSubview(moreButton)
-            scrollView.contentSize = CGSize(width: textLabel.frame.width, height: moreButton.frame.maxY)
+            scrollView.contentSize = CGSize(width: textLabel.frame.width, height: moreButton.frame.maxY + 16)
 
         } else if ((forView == EDetailsView.response) && (self.selectedModel.responseBodyLength > 1024)) {
             moreButton.setTitle("Show response body", for: UIControlState())
             moreButton.addTarget(self, action: #selector(NFXDetailsController_iOS.responseBodyButtonPressed), for: .touchUpInside)
             scrollView.addSubview(moreButton)
-            scrollView.contentSize = CGSize(width: textLabel.frame.width, height: moreButton.frame.maxY)
+            scrollView.contentSize = CGSize(width: textLabel.frame.width, height: moreButton.frame.maxY + 16)
             
         } else {
-            scrollView.contentSize = CGSize(width: textLabel.frame.width, height: textLabel.frame.maxY)
+            scrollView.contentSize = CGSize(width: textLabel.frame.width, height: textLabel.frame.maxY + 16)
         }
         
         return scrollView
