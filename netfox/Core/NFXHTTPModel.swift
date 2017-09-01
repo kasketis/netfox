@@ -210,7 +210,8 @@ class NFXHTTPModel: NSObject
     
     func getShortTypeFrom(_ contentType: String) -> HTTPModelShortType
     {
-        if contentType == "application/json" {
+        if NSPredicate(format: "SELF MATCHES %@",
+                                "^application/(vnd\\.(.*)\\+)?json$").evaluate(with: contentType) {
             return .JSON
         }
         
