@@ -70,6 +70,16 @@ class NFXDetailsController_iOS: NFXDetailsController, MFMailComposeViewControlle
         self.requestView = createDetailsView(getRequestStringFromObject(self.selectedModel), forView: .request)
         self.responseView = createDetailsView(getResponseStringFromObject(self.selectedModel), forView: .response)
         self.infoViews.forEach { self.view.addSubview($0) }
+
+        // Swipe gestures
+        let lswgr = UISwipeGestureRecognizer(target: self, action: #selector(NFXDetailsController_iOS.handleSwipe(_:)))
+        lswgr.direction = UISwipeGestureRecognizerDirection.left
+        self.view.addGestureRecognizer(lswgr)
+
+        let rswgr = UISwipeGestureRecognizer(target: self, action: #selector(NFXDetailsController_iOS.handleSwipe(_:)))
+        rswgr.direction = UISwipeGestureRecognizerDirection.right
+        self.view.addGestureRecognizer(rswgr)
+
         infoButtonPressed()
     }
     
@@ -192,6 +202,21 @@ class NFXDetailsController_iOS: NFXDetailsController, MFMailComposeViewControlle
     func responseButtonPressed()
     {
         buttonPressed(self.responseButton)
+    }
+
+    func handleSwipe(_ gesture: UISwipeGestureRecognizer) {
+        guard let currentButtonIdx = headerButtons.index(where: { $0.isSelected }) else { return }
+        let numButtons = headerButtons.count
+
+        switch gesture.direction {
+            case UISwipeGestureRecognizerDirection.left:
+                let nextIdx = currentButtonIdx + 1
+                buttonPressed(headerButtons[nextIdx > numButtons - 1 ? 0 : nextIdx])
+            case UISwipeGestureRecognizerDirection.right:
+                let previousIdx = currentButtonIdx - 1
+                buttonPressed(headerButtons[previousIdx < 0 ? numButtons - 1 : previousIdx])
+            default: break
+        }
     }
     
     func buttonPressed(_ sender: UIButton)
