@@ -59,6 +59,11 @@ open class NFX: NSObject
 
     @objc open func start()
     {
+        guard !self.started else {
+            showMessage("Alredy started!")
+            return
+        }
+
         self.started = true
         register()
         enable()
