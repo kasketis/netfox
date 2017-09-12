@@ -37,7 +37,9 @@ class NFXListController_iOS: NFXListController, UITableViewDelegate, UITableView
         self.view.addSubview(self.tableView)
         
         self.tableView.register(NFXListCell.self, forCellReuseIdentifier: NSStringFromClass(NFXListCell.self))
-        
+
+        self.navigationItem.leftBarButtonItem = UIBarButtonItem(image: UIImage.NFXClose(), style: .plain, target: self, action: #selector(NFXListController_iOS.closeButtonPressed))
+
         self.navigationItem.rightBarButtonItem = UIBarButtonItem(image: UIImage.NFXSettings(), style: .plain, target: self, action: #selector(NFXListController_iOS.settingsButtonPressed))
 
         let searchView = UIView()
@@ -85,6 +87,11 @@ class NFXListController_iOS: NFXListController, UITableViewDelegate, UITableView
         var settingsController: NFXSettingsController_iOS
         settingsController = NFXSettingsController_iOS()
         self.navigationController?.pushViewController(settingsController, animated: true)
+    }
+
+    func closeButtonPressed()
+    {
+        NFX.sharedInstance().hide()
     }
     
     // MARK: UISearchResultsUpdating
