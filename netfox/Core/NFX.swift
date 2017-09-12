@@ -117,13 +117,8 @@ open class NFX: NSObject
     
     func motionDetected()
     {
-        if self.started {
-            if self.presented {
-                hideNFX()
-            } else {
-                showNFX()
-            }
-        }
+        guard self.started else { return }
+        toggleNFX()
     }
     
     @objc open func setGesture(_ gesture: ENFXGesture)
@@ -140,20 +135,20 @@ open class NFX: NSObject
     
     @objc open func show()
     {
-        if (self.started) && (self.selectedGesture == .custom) {
-            showNFX()
-        } else {
-            print("netfox \(nfxVersion) - [ERROR]: Please call start() and setGesture(.custom) first")
-        }
+        guard self.started else { return }
+        showNFX()
     }
     
     @objc open func hide()
     {
-        if (self.started) && (self.selectedGesture == .custom) {
-            hideNFX()
-        } else {
-            print("netfox \(nfxVersion) - [ERROR]: Please call start() and setGesture(.custom) first")
-        }
+        guard self.started else { return }
+        hideNFX()
+    }
+
+    @objc open func toggle()
+    {
+        guard self.started else { return }
+        toggleNFX()
     }
     
     @objc open func ignoreURL(_ url: String)
@@ -188,6 +183,11 @@ open class NFX: NSObject
             self.presented = false
             self.lastVisitDate = Date()
         }
+    }
+
+    fileprivate func toggleNFX()
+    {
+        self.presented ? hideNFX() : showNFX()
     }
     
     internal func clearOldData()

@@ -197,6 +197,15 @@ extension NFXImage
         return NSImage(data: NFXAssets.getImage(NFXAssetName.settings))!
     #endif
     }
+
+    class func NFXClose() -> NFXImage
+    {
+    #if os (iOS)
+        return UIImage(data: NFXAssets.getImage(NFXAssetName.close), scale: 1.7)!
+    #elseif os(OSX)
+        return NSImage(data: NFXAssets.getImage(NFXAssetName.close))!
+    #endif
+    }
     
     class func NFXInfo() -> NFXImage
     {

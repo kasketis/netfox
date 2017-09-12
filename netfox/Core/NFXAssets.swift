@@ -9,6 +9,7 @@ import Foundation
 
 enum NFXAssetName {
     case settings
+    case close
     case info
     case statistics
 }
@@ -17,31 +18,26 @@ class NFXAssets
 {
     class func getImage(_ image: NFXAssetName) -> Data
     {
-        var base64Image: String
+        var base64Image: String = {
+            switch image {
+            case .settings: return getSettingsImageBase64()
+            case .close: return getCloseImageBase64()
+            case .info: return getInfoImageBase64()
+            case .statistics: return getStatisticsImageBase64()
+            }
+        }()
 
-        switch image {
-        case .settings:
-            base64Image = getSettingsImageBase64()
-            break
-        case .info:
-            base64Image = getInfoImageBase64()
-            break
-        case .statistics:
-            base64Image = getStatisticsImageBase64()
-            break
-        }
-        
-        if let imageData = Data(base64Encoded: base64Image, options: NSData.Base64DecodingOptions.ignoreUnknownCharacters) {
-            return imageData
-        } else {
-            return Data()
-        }
+        return Data(base64Encoded: base64Image, options: NSData.Base64DecodingOptions.ignoreUnknownCharacters) ?? Data()
     }
-    
-    
+
     class func getSettingsImageBase64() -> String
     {
         return "iVBORw0KGgoAAAANSUhEUgAAACwAAAAsCAMAAAApWqozAAAAjVBMVEUAAADsXijtXSfsXSftXijsXibsXSftXibtXSftXijtXSftXSXtXijtXijtXibtXSftXSfsXijsXSfuXSbsXijtXiftXSfuXSbtXijsXSjsXSjsXSjsXSftXSbsXSftXijtXibtXSftXSbuXSXtXSfsXifsXSftXibtXibsXSjtXSjtXSbtXyXtXibsXigoILJHAAAALnRSTlMA+wPDvSDAgdqtlhUH1GpRGOnIk/j0XS7vz6mkdR0PtJw7MguQZFl8VuzMRSaGMJ3GQwAAAi5JREFUOMulVdm2ojAQTEJYZRcQBBQVl+tS//95MwGDAQev50xeslWS7upONXlvfp4kNMkz8k1bo9A0D85XYC8/ELKh2jfYBb12R9LDPGa5ZP1gh1J0Nvb93F2WbIoFilU3CnAWnYmgm648wJ5iuQNaiU3eoy7g4rBPseRYq1gHhksuCZyTBli6WNItgAct6IW4HPbLklZgu0sBO9j0i5tgC8D4a7lAlwP4Id9Z2nf1wdXWkdQ/Xqsc/ic2fXCV2xSreewK6UKdZyjYLLjAacqdmguuO6KqnZy+YSuHuqlFkXbW5VzDbgK+Qm5WACwLQPVc2MMYY/UhpA1Sv2as9lM0w9XhAGTh7mjg1k9MGIsnQwZM6f022y2YeLW0IB7uE7LGz2Lg8wd1NwgjANQrKwL8XMvqEsqLj2RoR3m1fjqX1xwgSbFRbI+pQn9IY2VrUyRk9H3cyFLdtiKVb40SanwLNihJvJCpZoQzZrDQS4jw0z7/5qBpexQgxzZOX9Tps9SlWpt1fu6z34Jy2iuc3Ydwl8jfw70goxZ/SiT+IUXP4xSN31K0QTuf/M70S37QwRjHUTrTVJ8H3ylVdlmBgHxoJ+U7s8HgZkZkHDRMgh1wEcDdtZOvgypfsWDiwLFmqjAy4gNmEANePQjj7QH4hElhHGTDWCPKRAiMkeRmOdZSchU0eP30plLFXDekmKtok8gy0YzKBDHLeWULEcsC9FVpc2Vp+/+iOS3H9N/l+A8JizxgzuMcJQAAAABJRU5ErkJggg=="
+    }
+
+    class func getCloseImageBase64() -> String
+    {
+        return "iVBORw0KGgoAAAANSUhEUgAAACwAAAAsCAYAAAAehFoBAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAAfhJREFUeNrs2FFOwzAMANA2qrgAp+BUfFGkZZPaIcEV4Gfjo+WD7YdTcQoOgIYojuQgq2ppHLvdhhop6jZNy6vnuEnSpmmSc2rpDJ7B/xX8cX1lL9/e66EfgO+JADAGa2zTg1jCpYJrNXUEYcwtjr0OBsPdOai7QzslGrEF9B0YNsFgRC8Jup4Ym/d9zwzkl0O/QF+MGWn47U0INrhKINa6iONNqE06aA5bhmAHI9yTHpqRZmGDwSPl9JaLZYE7croWYl3O7jnY6CcdYheIt5HYV+i3XQ8OtQiTSFsfaVfkY7ExY5vY/xTRNUa4YmB3sVgRuD0R8RqCzSVjZgqz3ddlh27Ie3WsFriN/oR+h++fNLGaYI92WL/K+oJ+j/m90hpEE5yQyHq0KlY86Xraoef1SUb4EfoDRvaAj14a8ZMC+4VMOw3cZxcd1eOo4N9VVwu7RqyrHmnEY3wUMMXmAyUvkaJFYLqtGaizauhsAixFp7hg+o4td5kQy111WcT6iLPRRoKFxU/MqmuFlWQ5sGCSgwl2H4ml6Kidi2Fg6Vb8RqG6+CUp6wjBMLAlpoHKqotMRNZu3ASmQSnIWdUjBMM4PlLHxhwhmMBqkCcjN4L+cyL2HbdaYemSoH31KILBeJhcTolt7cYLuD6rHaQcs83gGXzu4B8BBgBA+BOxy8YHYQAAAABJRU5ErkJggg=="
     }
     
     class func getInfoImageBase64() -> String
