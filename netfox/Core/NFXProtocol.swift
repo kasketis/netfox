@@ -32,10 +32,10 @@ open class NFXProtocol: URLProtocol
         }
         
         if let url = request.url {
-            if (!(url.absoluteString.hasPrefix("http")) && !(url.absoluteString.hasPrefix("https"))) {
+            if !(url.absoluteString.hasPrefix("http")) && !(url.absoluteString.hasPrefix("https")) {
                 return false
             }
-
+            
             for ignoredURL in NFX.sharedInstance().getIgnoredURLs() {
                 if url.absoluteString.hasPrefix(ignoredURL) {
                     return false
@@ -56,16 +56,16 @@ open class NFXProtocol: URLProtocol
     override open func startLoading()
     {
         self.model = NFXHTTPModel()
-                
+        
         var req: NSMutableURLRequest
         req = (NFXProtocol.canonicalRequest(for: request) as NSURLRequest).mutableCopy() as! NSMutableURLRequest
         
         self.model?.saveRequest(req as URLRequest)
-                
+        
         URLProtocol.setProperty("1", forKey: "NFXInternal", in: req)
         
-        if (session == nil) {
-            session = URLSession(configuration: URLSessionConfiguration.default)
+        if session == nil {
+            session = URLSession(configuration: URLSessionConfiguration.default, delegate: self, delegateQueue: nil)
         }
         
         session!.dataTask(with: req as URLRequest, completionHandler: {data, response, error in
@@ -93,22 +93,18 @@ open class NFXProtocol: URLProtocol
             if let client = self.client {
                 client.urlProtocolDidFinishLoading(self)
             }
-
+            
         }).resume()
-        
-
     }
-    
     override open func stopLoading()
     {
-        
     }
     
     override open class func canonicalRequest(for request: URLRequest) -> URLRequest
     {
         return request
     }
-        
+    
     func loaded()
     {
         if (self.model != nil) {
@@ -117,5 +113,13 @@ open class NFXProtocol: URLProtocol
         
         NotificationCenter.default.post(name: Notification.Name(rawValue: "NFXReloadData"), object: nil)
     }
-    
+}
+
+extension NFXProtocol : URLSessionTaskDelegate {
+    public func urlSession(_ session: URLSession, task: URLSessionTask, willPerformHTTPRedirection response: HTTPURLResponse, newRequest request: URLRequest, completionHandler: @escaping (URLRequest?) -> Void) {
+        if let mutableRequest = (request as NSURLRequest).mutableCopy() as? NSMutableURLRequest {
+            URLProtocol.removeProperty(forKey: "NFXInternal", in: mutableRequest)
+            client?.urlProtocol(self, wasRedirectedTo: request, redirectResponse: response)
+        }
+    }
 }
