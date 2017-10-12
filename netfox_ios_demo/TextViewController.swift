@@ -58,10 +58,6 @@ class TextViewController: UIViewController {
                     if let message = dict?["value"] as? String {
                         self.textView.text = message
                     }
-                    
-                    //                let image = UIImage(data: data)
-                    //                NSLog("\(image?.size.width ?? 0),\(image?.size.height ?? 0)")
-                    //                self.imageView.image = image
                 } catch {
                     
                 }
