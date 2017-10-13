@@ -168,7 +168,7 @@ class NFXDetailsController_iOS: NFXDetailsController, MFMailComposeViewControlle
         return scrollView
     }
     
-    func actionButtonPressed(_ sender: UIBarButtonItem)
+    @objc func actionButtonPressed(_ sender: UIBarButtonItem)
     {
         let actionSheetController: UIAlertController = UIAlertController(title: "Share", message: nil, preferredStyle: .actionSheet)
         
@@ -189,22 +189,22 @@ class NFXDetailsController_iOS: NFXDetailsController, MFMailComposeViewControlle
         self.present(actionSheetController, animated: true, completion: nil)
     }
     
-    func infoButtonPressed()
+    @objc func infoButtonPressed()
     {
         buttonPressed(self.infoButton)
     }
     
-    func requestButtonPressed()
+    @objc func requestButtonPressed()
     {
         buttonPressed(self.requestButton)
     }
     
-    func responseButtonPressed()
+    @objc func responseButtonPressed()
     {
         buttonPressed(self.responseButton)
     }
 
-    func handleSwipe(_ gesture: UISwipeGestureRecognizer) {
+    @objc func handleSwipe(_ gesture: UISwipeGestureRecognizer) {
         guard let currentButtonIdx = headerButtons.index(where: { $0.isSelected }) else { return }
         let numButtons = headerButtons.count
 
@@ -244,12 +244,12 @@ class NFXDetailsController_iOS: NFXDetailsController, MFMailComposeViewControlle
                        completion: nil)
     }
     
-    func responseBodyButtonPressed()
+    @objc func responseBodyButtonPressed()
     {
         bodyButtonPressed().bodyType = NFXBodyType.response
     }
     
-    func requestBodyButtonPressed()
+    @objc func requestBodyButtonPressed()
     {
         bodyButtonPressed().bodyType = NFXBodyType.request
     }
