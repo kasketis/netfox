@@ -24,7 +24,7 @@ class NFXListController_OSX: NFXListController, NSTableViewDelegate, NSTableView
     // MARK: View Life Cycle
 
     override func awakeFromNib() {
-        tableView.register(NSNib(nibNamed: cellIdentifier, bundle: nil), forIdentifier: cellIdentifier)
+        tableView.register(NSNib(nibNamed: NSNib.Name(rawValue: cellIdentifier), bundle: nil), forIdentifier: NSUserInterfaceItemIdentifier(rawValue: cellIdentifier))
         searchField.delegate = self
         
         NotificationCenter.default.addObserver(self, selector: #selector(NFXListController.reloadTableViewData), name: NSNotification.Name(rawValue: "NFXReloadData"), object: nil)
@@ -40,7 +40,7 @@ class NFXListController_OSX: NFXListController, NSTableViewDelegate, NSTableView
         }
     }
     
-    func deactivateSearchController()
+    @objc func deactivateSearchController()
     {
         self.isSearchControllerActive = false
     }
@@ -72,9 +72,9 @@ class NFXListController_OSX: NFXListController, NSTableViewDelegate, NSTableView
         }
     }
     
-    func tableView(tableView: NSTableView, viewForTableColumn tableColumn: NSTableColumn?, row: Int) -> NSView? {
+    func tableView(_ tableView: NSTableView, viewFor tableColumn: NSTableColumn?, row: Int) -> NSView? {
         
-        guard let cell = tableView.make(withIdentifier: cellIdentifier, owner: nil) as? NFXListCell_OSX else {
+        guard let cell = tableView.makeView(withIdentifier: NSUserInterfaceItemIdentifier(rawValue: cellIdentifier), owner: nil) as? NFXListCell_OSX else {
             return nil
         }
         
@@ -95,11 +95,11 @@ class NFXListController_OSX: NFXListController, NSTableViewDelegate, NSTableView
     
     // MARK: NSTableViewDelegate
 
-    func tableView(tableView: NSTableView, heightOfRow row: Int) -> CGFloat {
+    func tableView(_ tableView: NSTableView, heightOfRow row: Int) -> CGFloat {
         return 58
     }
 
-    func tableViewSelectionDidChange(notification: NSNotification) {
+    func tableViewSelectionDidChange(_ notification: Notification) {
         guard tableView.selectedRow >= 0 else {
             return
         }

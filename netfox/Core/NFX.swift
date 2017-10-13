@@ -115,7 +115,7 @@ open class NFX: NSObject
         URLProtocol.unregisterClass(NFXProtocol.self)
     }
     
-    func motionDetected()
+    @objc func motionDetected()
     {
         guard self.started else { return }
         toggleNFX()
@@ -246,7 +246,7 @@ extension NFX {
         navigationController!.navigationBar.isTranslucent = false
         navigationController!.navigationBar.tintColor = UIColor.NFXOrangeColor()
         navigationController!.navigationBar.barTintColor = UIColor.NFXStarkWhiteColor()
-        navigationController!.navigationBar.titleTextAttributes = [NSForegroundColorAttributeName : UIColor.NFXOrangeColor()]
+        navigationController!.navigationBar.titleTextAttributes = [NSAttributedStringKey.foregroundColor : UIColor.NFXOrangeColor()]
         
         presentingViewController?.present(navigationController!, animated: true, completion: nil)
     }
@@ -280,7 +280,7 @@ extension NFX {
         self.nfxMenuItem.target = self
         self.nfxMenuItem.action = #selector(NFX.motionDetected)
         self.nfxMenuItem.keyEquivalent = "n"
-        self.nfxMenuItem.keyEquivalentModifierMask = NSEventModifierFlags(rawValue: UInt(Int(NSEventModifierFlags.command.rawValue | NSEventModifierFlags.shift.rawValue)))
+        self.nfxMenuItem.keyEquivalentModifierMask = NSEvent.ModifierFlags(rawValue: UInt(Int(NSEvent.ModifierFlags.command.rawValue | NSEvent.ModifierFlags.shift.rawValue)))
     }
     
     public func addNetfoxToMainMenu() {
@@ -298,7 +298,7 @@ extension NFX {
     
     public func showNFXFollowingPlatform()  {
         if self.windowController == nil {
-            self.windowController = NFXWindowController(windowNibName: "NetfoxWindow")
+            self.windowController = NFXWindowController(windowNibName: NSNib.Name(rawValue: "NetfoxWindow"))
         }
         self.windowController?.showWindow(nil)
     }

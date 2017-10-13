@@ -82,14 +82,14 @@ class NFXListController_iOS: NFXListController, UITableViewDelegate, UITableView
         reloadTableViewData()
     }
     
-    func settingsButtonPressed()
+    @objc func settingsButtonPressed()
     {
         var settingsController: NFXSettingsController_iOS
         settingsController = NFXSettingsController_iOS()
         self.navigationController?.pushViewController(settingsController, animated: true)
     }
 
-    func closeButtonPressed()
+    @objc func closeButtonPressed()
     {
         NFX.sharedInstance().hide()
     }
@@ -102,7 +102,7 @@ class NFXListController_iOS: NFXListController, UITableViewDelegate, UITableView
         reloadTableViewData()
     }
     
-    func deactivateSearchController()
+    @objc func deactivateSearchController()
     {
         self.searchController.isActive = false
     }
