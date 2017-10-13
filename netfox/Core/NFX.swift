@@ -72,6 +72,7 @@ open class NFX: NSObject
     #if os(OSX)
         self.addNetfoxToMainMenu()
     #endif
+        URLSessionConfiguration.swizzleDefault()
     }
     
     @objc open func stop()

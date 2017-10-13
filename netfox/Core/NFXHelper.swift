@@ -344,3 +344,33 @@ extension String
         }
     }
 }
+
+extension URLSessionConfiguration
+{
+    private static var onceFlag = true
+    
+    static func swizzleDefault() {
+        guard onceFlag else { return }
+        
+        let aClass: AnyClass = object_getClass(self)!
+        
+        let origSelector = #selector(getter: URLSessionConfiguration.default)
+        let newSelector = #selector(getter: URLSessionConfiguration.default_swizzled)
+        let origMethod = class_getClassMethod(aClass, origSelector)!
+        let newMethod = class_getClassMethod(aClass, newSelector)!
+        
+        let didAddMethod = class_addMethod(aClass, origSelector, method_getImplementation(newMethod), method_getTypeEncoding(newMethod))
+        
+        if didAddMethod {
+            class_replaceMethod(aClass, newSelector, method_getImplementation(origMethod), method_getTypeEncoding(origMethod))
+        } else {
+            method_exchangeImplementations(origMethod, newMethod)
+        }
+        
+        onceFlag = false
+    }
+    
+    @objc static var default_swizzled: URLSessionConfiguration {
+        get { return self.default_swizzled }
+    }
+}
