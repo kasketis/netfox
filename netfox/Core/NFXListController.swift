@@ -29,7 +29,7 @@ class NFXListController: NFXGenericController {
         self.filteredTableData = array as! [NFXHTTPModel]
     }
 
-    func reloadTableViewData()
+    @objc func reloadTableViewData()
     {
     }
     

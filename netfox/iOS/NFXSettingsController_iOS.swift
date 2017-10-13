@@ -73,19 +73,19 @@ class NFXSettingsController_iOS: NFXSettingsController, UITableViewDelegate, UIT
         NFX.sharedInstance().cacheFilters(self.filters)
     }
     
-    func nfxURLButtonPressed()
+    @objc func nfxURLButtonPressed()
     {
         UIApplication.shared.openURL(URL(string: nfxURL)!)
     }
     
-    func infoButtonPressed()
+    @objc func infoButtonPressed()
     {
         var infoController: NFXInfoController_iOS
         infoController = NFXInfoController_iOS()
         self.navigationController?.pushViewController(infoController, animated: true)
     }
     
-    func statisticsButtonPressed()
+    @objc func statisticsButtonPressed()
     {
         var statisticsController: NFXStatisticsController_iOS
         statisticsController = NFXStatisticsController_iOS()
@@ -265,7 +265,7 @@ class NFXSettingsController_iOS: NFXSettingsController, UITableViewDelegate, UIT
         
     }
     
-    func nfxEnabledSwitchValueChanged(_ sender: UISwitch)
+    @objc func nfxEnabledSwitchValueChanged(_ sender: UISwitch)
     {
         if sender.isOn {
             NFX.sharedInstance().enable()

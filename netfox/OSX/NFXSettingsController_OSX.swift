@@ -25,7 +25,7 @@ class NFXSettingsController_OSX: NFXSettingsController, NSTableViewDataSource, N
         
         nfxVersionLabel.stringValue = nfxVersionString
         nfxURLButton.title = nfxURL
-        responseTypesTableView.register(NSNib(nibNamed: cellIdentifier, bundle: nil), forIdentifier: cellIdentifier)
+        responseTypesTableView.register(NSNib(nibNamed: NSNib.Name(rawValue: cellIdentifier), bundle: nil), forIdentifier: NSUserInterfaceItemIdentifier(rawValue: cellIdentifier))
         
         reloadTableData()
     }
@@ -38,7 +38,7 @@ class NFXSettingsController_OSX: NFXSettingsController, NSTableViewDataSource, N
     // MARK: Actions
 
     @IBAction func loggingButtonClicked(sender: NSButton) {
-        if sender.state == NSOnState {
+        if sender.state == .on {
             NFX.sharedInstance().enable()
         } else {
             NFX.sharedInstance().disable()
@@ -51,7 +51,7 @@ class NFXSettingsController_OSX: NFXSettingsController, NSTableViewDataSource, N
     }
     
     @IBAction func nfxURLButtonClicked(sender: NSButton) {
-        NSWorkspace.shared().open(NSURL(string: nfxURL)! as URL)
+        NSWorkspace.shared.open(NSURL(string: nfxURL)! as URL)
     }
     
     @IBAction func toggleResponseTypeClicked(sender: NSButton) {
@@ -72,21 +72,21 @@ class NFXSettingsController_OSX: NFXSettingsController, NSTableViewDataSource, N
         return tableData.count
     }
     
-    func tableView(tableView: NSTableView, viewForTableColumn tableColumn: NSTableColumn?, row: Int) -> NSView? {
-        guard let cell = tableView.make(withIdentifier: cellIdentifier, owner: nil) as? NFXResponseTypeCell_OSX else {
+    func tableView(_ tableView: NSTableView, viewFor tableColumn: NSTableColumn?, row: Int) -> NSView? {
+        guard let cell = tableView.makeView(withIdentifier: NSUserInterfaceItemIdentifier(rawValue: cellIdentifier), owner: nil) as? NFXResponseTypeCell_OSX else {
             return nil
         }
         
         let shortType = tableData[row]
         cell.typeLabel.stringValue = shortType.rawValue
-        cell.activeCheckbox.state = filters[row] ? NSOnState : NSOffState
+        cell.activeCheckbox.state = filters[row] ? .on : .off
         cell.activeCheckbox.tag = row
         cell.activeCheckbox.target = self
-        cell.activeCheckbox.action = "toggleResponseTypeClicked:"
+        cell.activeCheckbox.action = #selector(toggleResponseTypeClicked(sender:))
         return cell
     }
     
-    func tableView(tableView: NSTableView, shouldSelectRow: Int) -> Bool {
+    func tableView(_ tableView: NSTableView, shouldSelectRow: Int) -> Bool {
         return false
     }
     

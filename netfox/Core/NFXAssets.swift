@@ -18,7 +18,7 @@ class NFXAssets
 {
     class func getImage(_ image: NFXAssetName) -> Data
     {
-        var base64Image: String = {
+        let base64Image: String = {
             switch image {
             case .settings: return getSettingsImageBase64()
             case .close: return getCloseImageBase64()
