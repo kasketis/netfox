@@ -1,12 +1,11 @@
 //
-//  Loader.m
+//  NFXLoader.m
 //  netfox
 //
-//  Created by Nathan Jangula on 10/13/17.
 //  Copyright © 2017 kasketis. All rights reserved.
 //
 
-#import "Loader.h"
+#import "NFXLoader.h"
 
 #ifdef OSX
     #import <netfox_osx/netfox_osx-Swift.h>
@@ -14,7 +13,7 @@
     #import <netfox_ios/netfox_ios-Swift.h>
 #endif
 
-@implementation Loader
+@implementation NFXLoader
 
 + (void)load
 {
