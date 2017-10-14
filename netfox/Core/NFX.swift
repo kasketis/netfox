@@ -60,7 +60,7 @@ open class NFX: NSObject
     @objc open func start()
     {
         guard !self.started else {
-            showMessage("Alredy started!")
+            showMessage("Already started!")
             return
         }
 
@@ -72,7 +72,6 @@ open class NFX: NSObject
     #if os(OSX)
         self.addNetfoxToMainMenu()
     #endif
-        URLSessionConfiguration.swizzleDefault()
     }
     
     @objc open func stop()

@@ -16,10 +16,7 @@ class ImageViewController: UIViewController {
     var dataTask: URLSessionDataTask?
     
     required init?(coder aDecoder: NSCoder) {
-        let configuration = URLSessionConfiguration.default
-        configuration.protocolClasses?.insert(NFXProtocol.self, at: 0)
-        session = URLSession(configuration: configuration)
-        
+        session = URLSession(configuration: URLSessionConfiguration.default)
         super.init(coder: aDecoder)
     }
     

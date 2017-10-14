@@ -41,7 +41,7 @@ class NFXHTTPModel: NSObject
     
     var randomHash: NSString?
     
-    var shortType: NSString = HTTPModelShortType.OTHER.rawValue as NSString
+    @objc var shortType: NSString = HTTPModelShortType.OTHER.rawValue as NSString
     
     var noResponse: Bool = true
     
