@@ -20,8 +20,8 @@ fileprivate func < <T : Comparable>(lhs: T?, rhs: T?) -> Bool {
 
 class NFXHTTPModel: NSObject
 {
-    var requestURL: String?
-    var requestMethod: String?
+    @objc var requestURL: String?
+    @objc var requestMethod: String?
     var requestCachePolicy: String?
     var requestDate: Date?
     var requestTime: String?
@@ -31,7 +31,7 @@ class NFXHTTPModel: NSObject
     var requestType: String?
     
     var responseStatus: Int?
-    var responseType: String?
+    @objc var responseType: String?
     var responseDate: Date?
     var responseTime: String?
     var responseHeaders: [AnyHashable: Any]?
@@ -41,7 +41,7 @@ class NFXHTTPModel: NSObject
     
     var randomHash: NSString?
     
-    var shortType: NSString = HTTPModelShortType.OTHER.rawValue as NSString
+    @objc var shortType: NSString = HTTPModelShortType.OTHER.rawValue as NSString
     
     var noResponse: Bool = true
     

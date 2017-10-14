@@ -53,6 +53,37 @@
             </objects>
             <point key="canvasLocation" x="-86" y="453"/>
         </scene>
+        <!--Webview-->
+        <scene sceneID="85j-6Y-knu">
+            <objects>
+                <viewController id="dkC-MX-0PU" customClass="WebViewController" customModule="netfox_ios_demo" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="fAb-zb-6qH">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <webView contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="fsS-BG-Gke">
+                                <rect key="frame" x="20" y="40" width="335" height="558"/>
+                                <color key="backgroundColor" red="0.36078431370000003" green="0.38823529410000002" blue="0.4039215686" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                            </webView>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="i9O-34-gHf" firstAttribute="bottom" secondItem="fsS-BG-Gke" secondAttribute="bottom" constant="20" id="9ms-mr-WEF"/>
+                            <constraint firstItem="fsS-BG-Gke" firstAttribute="leading" secondItem="i9O-34-gHf" secondAttribute="leading" constant="20" id="C7M-Sa-23i"/>
+                            <constraint firstItem="i9O-34-gHf" firstAttribute="trailing" secondItem="fsS-BG-Gke" secondAttribute="trailing" constant="20" id="Cpn-j9-hhc"/>
+                            <constraint firstItem="fsS-BG-Gke" firstAttribute="top" secondItem="i9O-34-gHf" secondAttribute="top" constant="20" id="xcH-CD-YUn"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="i9O-34-gHf"/>
+                    </view>
+                    <tabBarItem key="tabBarItem" title="Webview" id="D45-5Y-swl"/>
+                    <connections>
+                        <outlet property="webView" destination="fsS-BG-Gke" id="qGY-wk-db7"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="kJ1-3c-8dD" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-87" y="1129"/>
+        </scene>
         <!--Text-->
         <scene sceneID="JKw-NC-miP">
             <objects>
@@ -111,6 +142,7 @@
                     <connections>
                         <segue destination="Z8x-dK-Opo" kind="relationship" relationship="viewControllers" id="psf-kl-NI0"/>
                         <segue destination="BYZ-38-t0r" kind="relationship" relationship="viewControllers" id="qEX-re-IMg"/>
+                        <segue destination="dkC-MX-0PU" kind="relationship" relationship="viewControllers" id="umB-V9-Ajk"/>
                     </connections>
                 </tabBarController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="OXu-2z-7BU" userLabel="First Responder" sceneMemberID="firstResponder"/>
