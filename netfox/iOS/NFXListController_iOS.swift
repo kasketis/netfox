@@ -49,7 +49,8 @@ class NFXListController_iOS: NFXListController, UITableViewDelegate, UITableView
         self.searchController.dimsBackgroundDuringPresentation = false
         self.searchController.searchBar.autoresizingMask = [.flexibleWidth]
         self.searchController.searchBar.backgroundColor = UIColor.clear
-        self.searchController.searchBar.barTintColor = UIColor.white
+        self.searchController.searchBar.barTintColor = UIColor.NFXOrangeColor()
+        self.searchController.searchBar.tintColor = UIColor.NFXOrangeColor()
         self.searchController.searchBar.searchBarStyle = .minimal
         self.searchController.view.backgroundColor = UIColor.clear
         
