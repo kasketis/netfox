@@ -41,27 +41,32 @@ class NFXListController_iOS: NFXListController, UITableViewDelegate, UITableView
         self.navigationItem.leftBarButtonItem = UIBarButtonItem(image: UIImage.NFXClose(), style: .plain, target: self, action: #selector(NFXListController_iOS.closeButtonPressed))
 
         self.navigationItem.rightBarButtonItem = UIBarButtonItem(image: UIImage.NFXSettings(), style: .plain, target: self, action: #selector(NFXListController_iOS.settingsButtonPressed))
-
-        let searchView = UIView()
-        searchView.frame = CGRect(x: 0, y: 0, width: self.view.frame.width - 60, height: 0)
-        searchView.autoresizingMask = [.flexibleWidth]
-        searchView.autoresizesSubviews = true
-        searchView.backgroundColor = UIColor.clear
         
         self.searchController = UISearchController(searchResultsController: nil)
         self.searchController.searchResultsUpdater = self
         self.searchController.delegate = self
         self.searchController.hidesNavigationBarDuringPresentation = false
         self.searchController.dimsBackgroundDuringPresentation = false
-        searchView.addSubview(self.searchController.searchBar)
         self.searchController.searchBar.autoresizingMask = [.flexibleWidth]
-        self.searchController.searchBar.sizeToFit()
         self.searchController.searchBar.backgroundColor = UIColor.clear
+        self.searchController.searchBar.barTintColor = UIColor.white
         self.searchController.searchBar.searchBarStyle = .minimal
-        searchView.frame = self.searchController.searchBar.frame
         self.searchController.view.backgroundColor = UIColor.clear
         
-        self.navigationItem.titleView = searchView
+        if #available(iOS 11.0, *) {
+            self.navigationItem.searchController = self.searchController
+        } else {
+            let searchView = UIView()
+            searchView.frame = CGRect(x: 0, y: 0, width: self.view.frame.width - 60, height: 0)
+            searchView.autoresizingMask = [.flexibleWidth]
+            searchView.autoresizesSubviews = true
+            searchView.backgroundColor = UIColor.clear
+            searchView.addSubview(self.searchController.searchBar)
+            self.searchController.searchBar.sizeToFit()
+            searchView.frame = self.searchController.searchBar.frame
+
+            self.navigationItem.titleView = searchView
+        }
         
         NotificationCenter.default.addObserver(
             self,
