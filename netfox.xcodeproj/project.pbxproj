@@ -7,10 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		821109CA1F91854800212A01 /* Loader.h in Headers */ = {isa = PBXBuildFile; fileRef = 821109C81F91854800212A01 /* Loader.h */; };
-		821109CB1F91854800212A01 /* Loader.h in Headers */ = {isa = PBXBuildFile; fileRef = 821109C81F91854800212A01 /* Loader.h */; };
-		821109CC1F91854800212A01 /* Loader.m in Sources */ = {isa = PBXBuildFile; fileRef = 821109C91F91854800212A01 /* Loader.m */; };
-		821109CD1F91854800212A01 /* Loader.m in Sources */ = {isa = PBXBuildFile; fileRef = 821109C91F91854800212A01 /* Loader.m */; };
+		821109D01F939C4500212A01 /* NFXLoader.h in Headers */ = {isa = PBXBuildFile; fileRef = 821109CE1F939C4500212A01 /* NFXLoader.h */; };
+		821109D11F939C4500212A01 /* NFXLoader.m in Sources */ = {isa = PBXBuildFile; fileRef = 821109CF1F939C4500212A01 /* NFXLoader.m */; };
 		8229AD651F8FB34300A9D613 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8229AD641F8FB34300A9D613 /* AppDelegate.swift */; };
 		8229AD671F8FB34300A9D613 /* ImageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8229AD661F8FB34300A9D613 /* ImageViewController.swift */; };
 		8229AD6A1F8FB34300A9D613 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 8229AD681F8FB34300A9D613 /* Main.storyboard */; };
@@ -83,8 +81,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		821109C81F91854800212A01 /* Loader.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Loader.h; sourceTree = "<group>"; };
-		821109C91F91854800212A01 /* Loader.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = Loader.m; sourceTree = "<group>"; };
+		821109CE1F939C4500212A01 /* NFXLoader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NFXLoader.h; sourceTree = "<group>"; };
+		821109CF1F939C4500212A01 /* NFXLoader.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NFXLoader.m; sourceTree = "<group>"; };
 		8229AD621F8FB34300A9D613 /* netfox_ios_demo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = netfox_ios_demo.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		8229AD641F8FB34300A9D613 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		8229AD661F8FB34300A9D613 /* ImageViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageViewController.swift; sourceTree = "<group>"; };
@@ -161,8 +159,8 @@
 		821109C71F91852E00212A01 /* Loader */ = {
 			isa = PBXGroup;
 			children = (
-				821109C81F91854800212A01 /* Loader.h */,
-				821109C91F91854800212A01 /* Loader.m */,
+				821109CE1F939C4500212A01 /* NFXLoader.h */,
+				821109CF1F939C4500212A01 /* NFXLoader.m */,
 			);
 			path = Loader;
 			sourceTree = "<group>";
@@ -282,7 +280,7 @@
 			isa = PBXHeadersBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				821109CA1F91854800212A01 /* Loader.h in Headers */,
+				821109D01F939C4500212A01 /* NFXLoader.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -290,7 +288,6 @@
 			isa = PBXHeadersBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				821109CB1F91854800212A01 /* Loader.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -455,8 +452,8 @@
 				B3F8BA941C833ABC00F9FBEA /* NFXImageBodyDetailsController.swift in Sources */,
 				B3F8BA9E1C833ABC00F9FBEA /* NFXSettingsController.swift in Sources */,
 				B3F8BAA21C833ABC00F9FBEA /* NFXWindowController.swift in Sources */,
-				821109CC1F91854800212A01 /* Loader.m in Sources */,
 				B3F8BA841C833ABC00F9FBEA /* NFXAssets.swift in Sources */,
+				821109D11F939C4500212A01 /* NFXLoader.m in Sources */,
 				B3F8BA8C1C833ABC00F9FBEA /* NFXGenericController.swift in Sources */,
 				B3F8BA921C833ABC00F9FBEA /* NFXHTTPModelManager.swift in Sources */,
 				B3F8BA881C833ABC00F9FBEA /* NFXDetailsController.swift in Sources */,
@@ -487,7 +484,6 @@
 				B3F8D6811C833B1700F9FBEA /* NFXResponseTypeCell_OSX.swift in Sources */,
 				B3F8BA951C833ABC00F9FBEA /* NFXImageBodyDetailsController.swift in Sources */,
 				B3F8BA9F1C833ABC00F9FBEA /* NFXSettingsController.swift in Sources */,
-				821109CD1F91854800212A01 /* Loader.m in Sources */,
 				B3F8BAA31C833ABC00F9FBEA /* NFXWindowController.swift in Sources */,
 				B3F8BA851C833ABC00F9FBEA /* NFXAssets.swift in Sources */,
 				B3F8D6841C833B1700F9FBEA /* NFXStatisticsController_OSX.swift in Sources */,

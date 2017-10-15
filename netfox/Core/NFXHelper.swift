@@ -376,7 +376,7 @@ extension String
         method_exchangeImplementations(origMethod, newMethod)
     }
     
-    open var protocolClasses_Swizzled: [AnyClass]? {
+    private var protocolClasses_Swizzled: [AnyClass]? {
         get {
             // Unused, but required for compiler
             return self.protocolClasses_Swizzled
@@ -411,7 +411,7 @@ extension String
         method_exchangeImplementations(origMethod, newMethod)
     }
     
-    open class var default_swizzled: URLSessionConfiguration {
+    private class var default_swizzled: URLSessionConfiguration {
         get {
             let config = URLSessionConfiguration.default_swizzled
             
