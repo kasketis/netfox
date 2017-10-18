@@ -7,17 +7,15 @@
 
 #import "NFXLoader.h"
 
-#ifdef OSX
-    #import <netfox_osx/netfox_osx-Swift.h>
-#else
-    #import <netfox_ios/netfox_ios-Swift.h>
-#endif
-
 @implementation NFXLoader
 
 + (void)load
 {
-    [NSURLSessionConfiguration performSelector:NSSelectorFromString(@"implementNetfox")];
+    SEL implementNetfoxSelector = NSSelectorFromString(@"implementNetfox");
+    if ([NSURLSessionConfiguration respondsToSelector:implementNetfoxSelector])
+    {
+        [NSURLSessionConfiguration performSelector:implementNetfoxSelector];
+    }
 }
 
 @end
