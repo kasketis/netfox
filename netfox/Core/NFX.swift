@@ -233,6 +233,18 @@ open class NFX: NSObject
 
 #if os(iOS)
 
+#if !swift(>=4.0)
+extension NSAttributedStringKey {
+    public class var foregroundColor: String {
+        return NSForegroundColorAttributeName
+    }
+
+    public class var font: String {
+        return NSFontAttributeName
+    }
+}
+#endif
+
 extension NFX {
     fileprivate var presentingViewController: UIViewController?
     {
@@ -251,7 +263,7 @@ extension NFX {
         navigationController!.navigationBar.isTranslucent = false
         navigationController!.navigationBar.tintColor = UIColor.NFXOrangeColor()
         navigationController!.navigationBar.barTintColor = UIColor.NFXStarkWhiteColor()
-        navigationController!.navigationBar.titleTextAttributes = [NSForegroundColorAttributeName: UIColor.NFXOrangeColor()]
+        navigationController!.navigationBar.titleTextAttributes = [NSAttributedStringKey.foregroundColor: UIColor.NFXOrangeColor()]
         
         presentingViewController?.present(navigationController!, animated: true, completion: nil)
     }
