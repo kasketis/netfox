@@ -23,6 +23,33 @@ enum HTTPModelShortType: String
     static let allValues = [JSON, XML, HTML, IMAGE, OTHER]
 }
 
+/**
+ * reading an inputstream into a data object
+ * https://stackoverflow.com/questions/42561020/reading-an-inputstream-into-a-data-object
+ */
+extension Data {
+    /**
+     Consumes the specified input stream, creating a new Data object
+     with its content.
+     - Parameter reading: The input stream to read data from.
+     - Note: Closes the specified stream.
+     */
+    init(reading input: InputStream) {
+        self.init()
+        input.open()
+        
+        let bufferSize = 4096
+        let buffer = UnsafeMutablePointer<UInt8>.allocate(capacity: bufferSize)
+        while input.hasBytesAvailable {
+            let read = input.read(buffer, maxLength: bufferSize)
+            self.append(buffer, count: read)
+        }
+        buffer.deallocate(capacity: bufferSize)
+        
+        input.close()
+    }
+}
+
 extension NFXColor
 {
     convenience init(red: Int, green: Int, blue: Int)
@@ -170,7 +197,12 @@ extension URLRequest
     
     func getNFXBody() -> Data
     {
-        return httpBody ?? URLProtocol.property(forKey: "NFXBodyData", in: self) as? Data ?? Data()
+        if let stream = httpBodyStream {
+            return Data.init(reading: stream)
+        }
+        else {
+            return httpBody ?? URLProtocol.property(forKey: "NFXBodyData", in: self) as? Data ?? Data()
+        }
     }
 }
 
