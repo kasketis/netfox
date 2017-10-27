@@ -24,7 +24,8 @@ class NFXListController_OSX: NFXListController, NSTableViewDelegate, NSTableView
     // MARK: View Life Cycle
 
     override func awakeFromNib() {
-        tableView.register(NSNib(nibNamed: NSNib.Name(rawValue: cellIdentifier), bundle: nil), forIdentifier: NSUserInterfaceItemIdentifier(rawValue: cellIdentifier))
+        let bundle = Bundle(for: type(of: self))
+        tableView.register(NSNib(nibNamed: NSNib.Name(rawValue: cellIdentifier), bundle: bundle), forIdentifier: NSUserInterfaceItemIdentifier(rawValue: cellIdentifier))
         searchField.delegate = self
         
         NotificationCenter.default.addObserver(self, selector: #selector(NFXListController.reloadTableViewData), name: NSNotification.Name(rawValue: "NFXReloadData"), object: nil)

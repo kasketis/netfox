@@ -25,7 +25,8 @@ class NFXSettingsController_OSX: NFXSettingsController, NSTableViewDataSource, N
         
         nfxVersionLabel.stringValue = nfxVersionString
         nfxURLButton.title = nfxURL
-        responseTypesTableView.register(NSNib(nibNamed: NSNib.Name(rawValue: cellIdentifier), bundle: nil), forIdentifier: NSUserInterfaceItemIdentifier(rawValue: cellIdentifier))
+        let bundle = Bundle(for: type(of:self))
+        responseTypesTableView.register(NSNib(nibNamed: NSNib.Name(rawValue: cellIdentifier), bundle: bundle), forIdentifier: NSUserInterfaceItemIdentifier(rawValue: cellIdentifier))
         
         reloadTableData()
     }

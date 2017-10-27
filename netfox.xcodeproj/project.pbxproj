@@ -7,6 +7,10 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		234DBCD61FA33BD90086CB79 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 234DBCD51FA33BD90086CB79 /* AppDelegate.swift */; };
+		234DBCD81FA33BD90086CB79 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 234DBCD71FA33BD90086CB79 /* Assets.xcassets */; };
+		234DBCDB1FA33BD90086CB79 /* MainMenu.xib in Resources */ = {isa = PBXBuildFile; fileRef = 234DBCD91FA33BD90086CB79 /* MainMenu.xib */; };
+		234DBCE11FA33BFE0086CB79 /* netfox_osx.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E20FD2E91C6912D400DCFF61 /* netfox_osx.framework */; };
 		8229AD651F8FB34300A9D613 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8229AD641F8FB34300A9D613 /* AppDelegate.swift */; };
 		8229AD671F8FB34300A9D613 /* ImageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8229AD661F8FB34300A9D613 /* ImageViewController.swift */; };
 		8229AD6A1F8FB34300A9D613 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 8229AD681F8FB34300A9D613 /* Main.storyboard */; };
@@ -71,6 +75,13 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
+		234DBCE21FA33D980086CB79 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = B3BC02061C09CDA000C17F3A /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = E20FD2E81C6912D400DCFF61;
+			remoteInfo = netfox_osx;
+		};
 		8229AD741F8FB37000A9D613 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = B3BC02061C09CDA000C17F3A /* Project object */;
@@ -81,6 +92,12 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		234DBCD31FA33BD90086CB79 /* netfox_mac.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = netfox_mac.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		234DBCD51FA33BD90086CB79 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
+		234DBCD71FA33BD90086CB79 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		234DBCDA1FA33BD90086CB79 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/MainMenu.xib; sourceTree = "<group>"; };
+		234DBCDC1FA33BD90086CB79 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		234DBCDD1FA33BD90086CB79 /* netfox_mac.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = netfox_mac.entitlements; sourceTree = "<group>"; };
 		8229AD621F8FB34300A9D613 /* netfox_ios_demo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = netfox_ios_demo.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		8229AD641F8FB34300A9D613 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		8229AD661F8FB34300A9D613 /* ImageViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageViewController.swift; sourceTree = "<group>"; };
@@ -131,6 +148,14 @@
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
+		234DBCD01FA33BD90086CB79 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				234DBCE11FA33BFE0086CB79 /* netfox_osx.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		8229AD5F1F8FB34300A9D613 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
@@ -156,6 +181,18 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		234DBCD41FA33BD90086CB79 /* netfox_mac */ = {
+			isa = PBXGroup;
+			children = (
+				234DBCD51FA33BD90086CB79 /* AppDelegate.swift */,
+				234DBCD71FA33BD90086CB79 /* Assets.xcassets */,
+				234DBCD91FA33BD90086CB79 /* MainMenu.xib */,
+				234DBCDC1FA33BD90086CB79 /* Info.plist */,
+				234DBCDD1FA33BD90086CB79 /* netfox_mac.entitlements */,
+			);
+			path = netfox_mac;
+			sourceTree = "<group>";
+		};
 		8229AD631F8FB34300A9D613 /* netfox_ios_demo */ = {
 			isa = PBXGroup;
 			children = (
@@ -183,6 +220,7 @@
 			children = (
 				CEFE42B41C0DDBD8001A56E0 /* netfox */,
 				8229AD631F8FB34300A9D613 /* netfox_ios_demo */,
+				234DBCD41FA33BD90086CB79 /* netfox_mac */,
 				B3BC02101C09CDA000C17F3A /* Products */,
 				8229AD761F8FB4B500A9D613 /* Frameworks */,
 			);
@@ -194,6 +232,7 @@
 				B3BC020F1C09CDA000C17F3A /* netfox_ios.framework */,
 				E20FD2E91C6912D400DCFF61 /* netfox_osx.framework */,
 				8229AD621F8FB34300A9D613 /* netfox_ios_demo.app */,
+				234DBCD31FA33BD90086CB79 /* netfox_mac.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -286,6 +325,24 @@
 /* End PBXHeadersBuildPhase section */
 
 /* Begin PBXNativeTarget section */
+		234DBCD21FA33BD90086CB79 /* netfox_mac */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 234DBCE01FA33BD90086CB79 /* Build configuration list for PBXNativeTarget "netfox_mac" */;
+			buildPhases = (
+				234DBCCF1FA33BD90086CB79 /* Sources */,
+				234DBCD01FA33BD90086CB79 /* Frameworks */,
+				234DBCD11FA33BD90086CB79 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				234DBCE31FA33D980086CB79 /* PBXTargetDependency */,
+			);
+			name = netfox_mac;
+			productName = netfox_mac;
+			productReference = 234DBCD31FA33BD90086CB79 /* netfox_mac.app */;
+			productType = "com.apple.product-type.application";
+		};
 		8229AD611F8FB34300A9D613 /* netfox_ios_demo */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = 8229AD711F8FB34300A9D613 /* Build configuration list for PBXNativeTarget "netfox_ios_demo" */;
@@ -346,10 +403,14 @@
 		B3BC02061C09CDA000C17F3A /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
-				LastSwiftUpdateCheck = 0720;
+				LastSwiftUpdateCheck = 0900;
 				LastUpgradeCheck = 0900;
 				ORGANIZATIONNAME = kasketis;
 				TargetAttributes = {
+					234DBCD21FA33BD90086CB79 = {
+						CreatedOnToolsVersion = 9.0.1;
+						ProvisioningStyle = Automatic;
+					};
 					8229AD611F8FB34300A9D613 = {
 						CreatedOnToolsVersion = 9.0;
 						ProvisioningStyle = Automatic;
@@ -380,11 +441,21 @@
 				B3BC020E1C09CDA000C17F3A /* netfox_ios */,
 				E20FD2E81C6912D400DCFF61 /* netfox_osx */,
 				8229AD611F8FB34300A9D613 /* netfox_ios_demo */,
+				234DBCD21FA33BD90086CB79 /* netfox_mac */,
 			);
 		};
 /* End PBXProject section */
 
 /* Begin PBXResourcesBuildPhase section */
+		234DBCD11FA33BD90086CB79 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				234DBCD81FA33BD90086CB79 /* Assets.xcassets in Resources */,
+				234DBCDB1FA33BD90086CB79 /* MainMenu.xib in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		8229AD601F8FB34300A9D613 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -415,6 +486,14 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
+		234DBCCF1FA33BD90086CB79 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				234DBCD61FA33BD90086CB79 /* AppDelegate.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		8229AD5E1F8FB34300A9D613 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -492,6 +571,11 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
+		234DBCE31FA33D980086CB79 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = E20FD2E81C6912D400DCFF61 /* netfox_osx */;
+			targetProxy = 234DBCE21FA33D980086CB79 /* PBXContainerItemProxy */;
+		};
 		8229AD751F8FB37000A9D613 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			target = B3BC020E1C09CDA000C17F3A /* netfox_ios */;
@@ -500,6 +584,14 @@
 /* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
+		234DBCD91FA33BD90086CB79 /* MainMenu.xib */ = {
+			isa = PBXVariantGroup;
+			children = (
+				234DBCDA1FA33BD90086CB79 /* Base */,
+			);
+			name = MainMenu.xib;
+			sourceTree = "<group>";
+		};
 		8229AD681F8FB34300A9D613 /* Main.storyboard */ = {
 			isa = PBXVariantGroup;
 			children = (
@@ -519,6 +611,55 @@
 /* End PBXVariantGroup section */
 
 /* Begin XCBuildConfiguration section */
+		234DBCDE1FA33BD90086CB79 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CODE_SIGN_ENTITLEMENTS = netfox_mac/netfox_mac.entitlements;
+				CODE_SIGN_IDENTITY = "-";
+				CODE_SIGN_STYLE = Automatic;
+				COMBINE_HIDPI_IMAGES = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				INFOPLIST_FILE = netfox_mac/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks";
+				MACOSX_DEPLOYMENT_TARGET = 10.13;
+				PRODUCT_BUNDLE_IDENTIFIER = "com.tapptitude.netfox-mac";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = macosx;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
+				SWIFT_VERSION = 4.0;
+			};
+			name = Debug;
+		};
+		234DBCDF1FA33BD90086CB79 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CODE_SIGN_ENTITLEMENTS = netfox_mac/netfox_mac.entitlements;
+				CODE_SIGN_IDENTITY = "-";
+				CODE_SIGN_STYLE = Automatic;
+				COMBINE_HIDPI_IMAGES = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				INFOPLIST_FILE = netfox_mac/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks";
+				MACOSX_DEPLOYMENT_TARGET = 10.13;
+				PRODUCT_BUNDLE_IDENTIFIER = "com.tapptitude.netfox-mac";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = macosx;
+				SWIFT_VERSION = 4.0;
+			};
+			name = Release;
+		};
 		8229AD721F8FB34300A9D613 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -779,6 +920,15 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
+		234DBCE01FA33BD90086CB79 /* Build configuration list for PBXNativeTarget "netfox_mac" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				234DBCDE1FA33BD90086CB79 /* Debug */,
+				234DBCDF1FA33BD90086CB79 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
 		8229AD711F8FB34300A9D613 /* Build configuration list for PBXNativeTarget "netfox_ios_demo" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
