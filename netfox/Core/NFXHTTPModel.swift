@@ -335,3 +335,59 @@ class NFXHTTPModel: NSObject
     }
 
 }
+
+
+/// allow serialization
+extension NFXHTTPModel {
+    func toJSON() -> [String: Any] {
+        var json: [String: Any] = [:]
+        
+        json["requestURL"] = requestURL
+        json["requestMethod"] = requestMethod
+        
+        json["requestCachePolicy"] = requestCachePolicy
+        json["requestDate"] = requestDate?.timeIntervalSince1970
+        json["requestTime"] = requestTime
+        json["requestTimeout"] = requestTimeout
+        json["requestHeaders"] = requestHeaders
+        json["requestBodyLength"] = requestBodyLength
+        json["requestType"] = requestType
+        json["responseStatus"] = responseStatus
+        json["responseType"] = responseType
+        json["responseDate"] = responseDate?.timeIntervalSince1970
+        
+        json["responseTime"] = responseTime
+        json["responseHeaders"] = responseHeaders
+        json["responseBodyLength"] = responseBodyLength
+        json["timeInterval"] = timeInterval
+        json["randomHash"] = randomHash
+        json["shortType"] = shortType
+        json["noResponse"] = noResponse
+        
+        return json
+    }
+    
+    func fromJSON(json: [String: Any]) {
+        requestURL = json["requestURL"] as? String
+        requestMethod = json["requestMethod"] as? String
+        
+        requestCachePolicy = json["requestCachePolicy"]  as? String
+        requestDate = json["requestDate"].flatMap({ $0 as? TimeInterval }).flatMap({ Date(timeIntervalSince1970: $0) })
+        requestTime = json["requestTime"] as? String
+        requestTimeout = json["requestTimeout"] as? String
+        requestHeaders = json["requestHeaders"] as? [AnyHashable: Any]
+        requestBodyLength = json["requestBodyLength"] as? Int
+        requestType = json["requestType"] as? String
+        responseStatus = json["responseStatus"] as? Int
+        responseType = json["responseType"] as? String
+        responseDate = json["responseDate"].flatMap({ $0 as? TimeInterval }).flatMap({ Date(timeIntervalSince1970: $0) })
+        
+        responseTime = json["responseTime"] as? String
+        responseHeaders = json["responseHeaders"] as? [AnyHashable: Any]
+        responseBodyLength = json["responseBodyLength"] as? Int
+        timeInterval = json["timeInterval"]  as? Float
+        randomHash = json["randomHash"] as? NSString
+        shortType = json["shortType"] as! NSString
+        noResponse = json["noResponse"] as? Bool ?? true
+    }
+}

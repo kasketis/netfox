@@ -8,10 +8,10 @@
 
 import Cocoa
 import netfox_osx
+import Swifter
 
 @NSApplicationMain
 class AppDelegate: NSObject, NSApplicationDelegate {
-
     @IBOutlet weak var window: NSWindow!
 
     func applicationWillFinishLaunching(_ aNotification: Notification) {
@@ -21,13 +21,39 @@ class AppDelegate: NSObject, NSApplicationDelegate {
     func applicationDidFinishLaunching(_ aNotification: Notification) {
         // Insert code here to initialize your application
         NFX.sharedInstance().start()
-        NFX.sharedInstance().show()
+        
+        
+        loadAllRequests()
     }
 
     func applicationWillTerminate(_ aNotification: Notification) {
         // Insert code here to tear down your application
     }
 
+    
+    func loadAllRequests() {
+        let session = URLSession(configuration: URLSessionConfiguration.default)
+        if let url = URL(string: "http://localhos:9999/getAllRequests") {
+            let dataTask = session.dataTask(with: url, completionHandler: { (data, response, error) in
+                if let error = error {
+                    print("Failed \(error)")
+                } else {
+                    guard let data = data else { return }
+                    guard let response = response as? HTTPURLResponse else {  return }
+                    guard response.statusCode >= 200 && response.statusCode < 300 else { return }
+                    
+                    
+                    NFX.sharedInstance().addJSONModels(data)
+                    DispatchQueue.main.async {
+                        NFX.sharedInstance().show()
+                    }
+                }
+            })
+            
+            dataTask.resume()
+        }
+
+    }
 
 }
 
