@@ -38,7 +38,7 @@ class NFXSettingsController_OSX: NFXSettingsController, NSTableViewDataSource, N
     
     // MARK: Actions
 
-    @IBAction func loggingButtonClicked(sender: NSButton) {
+    @IBAction func loggingButtonClicked(_ sender: NSButton) {
         if sender.state == .on {
             NFX.sharedInstance().enable()
         } else {
@@ -46,16 +46,16 @@ class NFXSettingsController_OSX: NFXSettingsController, NSTableViewDataSource, N
         }
     }
     
-    @IBAction func clearDataClicked(sender: AnyObject?) {
+    @IBAction func clearDataClicked(_ sender: AnyObject?) {
         NFX.sharedInstance().clearOldData()
         NotificationCenter.default.post(name: NSNotification.Name(rawValue: "NFXReloadData"), object: nil)
     }
     
-    @IBAction func nfxURLButtonClicked(sender: NSButton) {
+    @IBAction func nfxURLButtonClicked(_ sender: NSButton) {
         NSWorkspace.shared.open(NSURL(string: nfxURL)! as URL)
     }
     
-    @IBAction func toggleResponseTypeClicked(sender: NSButton) {
+    @IBAction func toggleResponseTypeClicked(_ sender: NSButton) {
         filters[sender.tag] = !filters[sender.tag]
         NFX.sharedInstance().cacheFilters(filters)
         NotificationCenter.default.post(name: NSNotification.Name(rawValue: "NFXReloadData"), object: nil)
@@ -69,7 +69,7 @@ class NFXSettingsController_OSX: NFXSettingsController, NSTableViewDataSource, N
     
     // MARK: Table View Delegate and DataSource
     
-    func numberOfRowsInTableView(tableView: NSTableView) -> Int {
+    func numberOfRows(in tableView: NSTableView) -> Int {
         return tableData.count
     }
     
@@ -83,7 +83,7 @@ class NFXSettingsController_OSX: NFXSettingsController, NSTableViewDataSource, N
         cell.activeCheckbox.state = filters[row] ? .on : .off
         cell.activeCheckbox.tag = row
         cell.activeCheckbox.target = self
-        cell.activeCheckbox.action = #selector(toggleResponseTypeClicked(sender:))
+        cell.activeCheckbox.action = #selector(toggleResponseTypeClicked(_:))
         return cell
     }
     

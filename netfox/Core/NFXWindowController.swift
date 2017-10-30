@@ -71,15 +71,15 @@ class NFXWindowController: NSWindowController, NSWindowDelegate, NFXWindowContro
     
     // MARK: Actions
     
-    @IBAction func settingsClicked(sender: AnyObject?) {
+    @IBAction func settingsClicked(_ sender: AnyObject?) {
         settingsPopover.show(relativeTo: NSZeroRect, of: settingsButton, preferredEdge: NSRectEdge.maxY)
     }
     
-    @IBAction func infoClicked(sender: AnyObject?) {
+    @IBAction func infoClicked(_ sender: AnyObject?) {
         infoPopover.show(relativeTo: NSZeroRect, of: infoButton, preferredEdge: NSRectEdge.maxY)
     }
     
-    @IBAction func statisticsClicked(sender: AnyObject?) {
+    @IBAction func statisticsClicked(_ sender: AnyObject?) {
         statisticsPopover.show(relativeTo: NSZeroRect, of: statisticsButton, preferredEdge: NSRectEdge.maxY)
     }
 

@@ -202,17 +202,17 @@
                                                     <rect key="frame" x="10" y="33" width="502" height="350"/>
                                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                     <subviews>
-                                                        <scrollView misplaced="YES" horizontalLineScroll="10" horizontalPageScroll="10" verticalLineScroll="10" verticalPageScroll="10" hasHorizontalScroller="NO" usesPredominantAxisScrolling="NO" translatesAutoresizingMaskIntoConstraints="NO" id="3g6-Xq-UrN">
-                                                            <rect key="frame" x="10" y="110" width="276" height="230"/>
+                                                        <scrollView horizontalLineScroll="10" horizontalPageScroll="10" verticalLineScroll="10" verticalPageScroll="10" hasHorizontalScroller="NO" usesPredominantAxisScrolling="NO" translatesAutoresizingMaskIntoConstraints="NO" id="3g6-Xq-UrN">
+                                                            <rect key="frame" x="10" y="10" width="482" height="330"/>
                                                             <clipView key="contentView" id="L69-QZ-kqb">
-                                                                <rect key="frame" x="1" y="1" width="274" height="228"/>
+                                                                <rect key="frame" x="1" y="1" width="480" height="328"/>
                                                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                                 <subviews>
                                                                     <textView editable="NO" importsGraphics="NO" verticallyResizable="YES" usesFontPanel="YES" findStyle="panel" continuousSpellChecking="YES" allowsUndo="YES" usesRuler="YES" allowsNonContiguousLayout="YES" quoteSubstitution="YES" dashSubstitution="YES" spellingCorrection="YES" smartInsertDelete="YES" id="yXb-Sq-62K">
-                                                                        <rect key="frame" x="0.0" y="0.0" width="274" height="228"/>
+                                                                        <rect key="frame" x="0.0" y="0.0" width="480" height="328"/>
                                                                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                                                        <size key="minSize" width="274" height="228"/>
+                                                                        <size key="minSize" width="480" height="328"/>
                                                                         <size key="maxSize" width="480" height="10000000"/>
                                                                         <color key="insertionPointColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
                                                                     </textView>
@@ -224,7 +224,7 @@
                                                                 <autoresizingMask key="autoresizingMask"/>
                                                             </scroller>
                                                             <scroller key="verticalScroller" verticalHuggingPriority="750" doubleValue="1" horizontal="NO" id="Zhb-iu-gmj">
-                                                                <rect key="frame" x="259" y="1" width="16" height="228"/>
+                                                                <rect key="frame" x="465" y="1" width="16" height="328"/>
                                                                 <autoresizingMask key="autoresizingMask"/>
                                                             </scroller>
                                                         </scrollView>
@@ -429,7 +429,7 @@
                 <outlet property="tableView" destination="jfJ-0b-tAz" id="hdK-b7-8EX"/>
             </connections>
         </viewController>
-        <viewController id="m3Y-f4-6bj" customClass="NFXDetailsController_OSX" customModule="KaraFun">
+        <viewController id="m3Y-f4-6bj" customClass="NFXDetailsController_OSX" customModule="netfox_osx" customModuleProvider="target">
             <connections>
                 <outlet property="textViewBodyRequest" destination="mfT-j8-jzk" id="zSg-7J-mfp"/>
                 <outlet property="textViewBodyResponse" destination="GuL-Y4-zVd" id="Kkk-1u-akd"/>
@@ -471,7 +471,7 @@
                     <rect key="frame" x="0.0" y="108" width="247" height="144"/>
                     <clipView key="contentView" id="dZI-AB-6Mb">
                         <rect key="frame" x="1" y="0.0" width="245" height="143"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <autoresizingMask key="autoresizingMask"/>
                         <subviews>
                             <tableView verticalHuggingPriority="750" allowsExpansionToolTips="YES" columnAutoresizingStyle="lastColumnOnly" columnReordering="NO" columnSelection="YES" columnResizing="NO" multipleSelection="NO" autosaveColumns="NO" rowSizeStyle="automatic" headerView="lve-EN-zin" viewBased="YES" id="Ulh-Eo-vFb">
                                 <rect key="frame" x="0.0" y="0.0" width="245" height="120"/>
@@ -626,7 +626,7 @@
                     <rect key="frame" x="20" y="20" width="250" height="250"/>
                     <clipView key="contentView" id="WAD-aS-nC2">
                         <rect key="frame" x="1" y="1" width="248" height="248"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <autoresizingMask key="autoresizingMask"/>
                         <subviews>
                             <textView editable="NO" importsGraphics="NO" verticallyResizable="YES" usesFontPanel="YES" findStyle="panel" continuousSpellChecking="YES" allowsUndo="YES" usesRuler="YES" allowsNonContiguousLayout="YES" quoteSubstitution="YES" dashSubstitution="YES" spellingCorrection="YES" smartInsertDelete="YES" id="MNB-tj-Xyc" userLabel="Text View - Info">
                                 <rect key="frame" x="0.0" y="0.0" width="248" height="248"/>
@@ -680,7 +680,7 @@
                     <rect key="frame" x="20" y="20" width="250" height="250"/>
                     <clipView key="contentView" id="KhA-eS-wlq">
                         <rect key="frame" x="1" y="1" width="248" height="248"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <autoresizingMask key="autoresizingMask"/>
                         <subviews>
                             <textView editable="NO" importsGraphics="NO" verticallyResizable="YES" usesFontPanel="YES" findStyle="panel" continuousSpellChecking="YES" allowsUndo="YES" usesRuler="YES" allowsNonContiguousLayout="YES" quoteSubstitution="YES" dashSubstitution="YES" spellingCorrection="YES" smartInsertDelete="YES" id="x6g-1e-icD" userLabel="Text View - Statistics">
                                 <rect key="frame" x="0.0" y="0.0" width="248" height="248"/>

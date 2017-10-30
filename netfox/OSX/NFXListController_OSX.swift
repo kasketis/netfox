@@ -65,7 +65,7 @@ class NFXListController_OSX: NFXListController, NSTableViewDelegate, NSTableView
     
     // MARK: UITableViewDataSource
     
-    func numberOfRowsInTableView(tableView: NSTableView) -> Int {
+    func numberOfRows(in tableView: NSTableView) -> Int {
         if (self.isSearchControllerActive) {
             return self.filteredTableData.count
         } else {
