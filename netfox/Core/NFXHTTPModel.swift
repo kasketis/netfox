@@ -364,6 +364,10 @@ extension NFXHTTPModel {
         json["shortType"] = shortType
         json["noResponse"] = noResponse
         
+        
+        json["requestBody"] = getRequestBody()
+        json["responseBody"] = getResponseBody()
+        
         return json
     }
     
@@ -389,5 +393,11 @@ extension NFXHTTPModel {
         randomHash = json["randomHash"] as? NSString
         shortType = json["shortType"] as! NSString
         noResponse = json["noResponse"] as? Bool ?? true
+        
+        let requestBody = json["requestBody"] as? String ?? ""
+        let responseBody = json["responseBody"] as? String ?? ""
+        
+        saveRequestBodyData(requestBody.data(using: .utf8)!)
+        saveResponseBodyData(responseBody.data(using: .utf8)!)
     }
 }

@@ -33,7 +33,7 @@ class AppDelegate: NSObject, NSApplicationDelegate {
     
     func loadAllRequests() {
         let session = URLSession(configuration: URLSessionConfiguration.default)
-        if let url = URL(string: "http://localhos:9999/getAllRequests") {
+        if let url = URL(string: "http://localhost:\(NFXServer.port)/\(NFXServer.allRequests)") {
             let dataTask = session.dataTask(with: url, completionHandler: { (data, response, error) in
                 if let error = error {
                     print("Failed \(error)")

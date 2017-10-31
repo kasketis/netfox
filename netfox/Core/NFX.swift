@@ -15,7 +15,12 @@ import UIKit
 #endif
 
 let nfxVersion = "1.8"
-let serverPort: UInt16 = 9999
+
+public struct NFXServer {
+    public static let port: UInt16 = 9999
+    public static let allRequests = "allRequests"
+    public static let allRequestsHtml = "allRequests.html"
+}
 
 // Notifications posted when NFX opens/closes, for client application that wish to log that information.
 let nfxWillOpenNotification = "NFXWillOpenNotification"
@@ -242,15 +247,15 @@ extension NFX {
         }
         
         let server = HttpServer()
-        server["/allRequests"] = {r in
+        server["/\(NFXServer.allRequests)"] = {r in
             return HttpResponse.raw(200, "OK", ["Content-Type": "application/json"], {
                 let models = NFXHTTPModelManager.sharedInstance.getModels().map({ $0.toJSON() })
-                let jsonData = try! JSONSerialization.data(withJSONObject: models, options: [])
+                let jsonData = try! JSONSerialization.data(withJSONObject: models, options: [.prettyPrinted])
                 try $0.write(jsonData)
             })
         }
         
-        server["/allRequests.html"] = { _ in
+        server["/\(NFXServer.allRequestsHtml)"] = { _ in
             let models = NFXHTTPModelManager.sharedInstance.getModels()
             let stringModels = models.map({ $0.formattedRequestLogEntry() }).joined(separator: "\n")
             return .ok(.html(stringModels))
@@ -259,11 +264,11 @@ extension NFX {
         server["/hello"] = { .ok(.html("You asked for \($0)"))  }
         
         do {
-            try server.start(serverPort)
-            print("Server started on port: \(serverPort) ")
+            try server.start(NFXServer.port)
+            print("Server started on port: \(NFXServer.port) ")
             self.httpServer = server
         } catch (let error) {
-            print("Failed to start server on port: \(serverPort) ", error)
+            print("Failed to start server on port: \(NFXServer.port) ", error)
         }
     }
     
