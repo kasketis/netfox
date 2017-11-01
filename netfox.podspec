@@ -19,4 +19,7 @@ DESC
   s.source_files = "netfox/Core/*.{swift,h,m}"
   s.ios.source_files = "netfox/iOS/*.swift"
   s.osx.source_files = "netfox/OSX/*.{swift,xib}"  
+
+  s.dependency "Swifter"
+
 end

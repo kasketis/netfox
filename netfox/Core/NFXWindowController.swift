@@ -19,6 +19,7 @@ class NFXWindowController: NSWindowController, NSWindowDelegate, NFXWindowContro
     @IBOutlet var infoButton: NSButton!
     @IBOutlet var statisticsButton: NSButton!
 
+    @IBOutlet var popupButton: NSPopUpButton!
     @IBOutlet var listView: NSView!
     @IBOutlet var detailsView: NSView!
     @IBOutlet var listViewController: NFXListController_OSX!
@@ -59,6 +60,8 @@ class NFXWindowController: NSWindowController, NSWindowDelegate, NFXWindowContro
     override func windowDidLoad() {
         super.windowDidLoad()
         self.window?.delegate = self
+        
+        NFXNetService.shared.browseForAvailableNFXServices()
     }
     
     // MARK: NSWindowDelegate
@@ -82,7 +85,14 @@ class NFXWindowController: NSWindowController, NSWindowDelegate, NFXWindowContro
     @IBAction func statisticsClicked(_ sender: AnyObject?) {
         statisticsPopover.show(relativeTo: NSZeroRect, of: statisticsButton, preferredEdge: NSRectEdge.maxY)
     }
-
+    
+    @IBAction func hostClicked(_ sender: Any) {
+        NFXHTTPModelManager.sharedInstance.clear()
+        NotificationCenter.default.post(name: Notification.Name(rawValue: "NFXReloadData"), object: nil)
+        let (service, address) =  NFXNetService.shared.foundServices[popupButton.indexOfSelectedItem]
+        NFXNetService.shared.loadAllRequests(address: address, port: service.port)
+    }
+    
 }
     
 extension NFXWindowController {

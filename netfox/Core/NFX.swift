@@ -6,7 +6,6 @@
 //
 
 import Foundation
-import Swifter
 
 #if os(OSX)
 import Cocoa
@@ -15,12 +14,6 @@ import UIKit
 #endif
 
 let nfxVersion = "1.8"
-
-public struct NFXServer {
-    public static let port: UInt16 = 9999
-    public static let allRequests = "allRequests"
-    public static let allRequestsHtml = "allRequests.html"
-}
 
 // Notifications posted when NFX opens/closes, for client application that wish to log that information.
 let nfxWillOpenNotification = "NFXWillOpenNotification"
@@ -64,7 +57,7 @@ open class NFX: NSObject
     fileprivate var ignoredURLs = [String]()
     fileprivate var filters = [Bool]()
     fileprivate var lastVisitDate: Date = Date()
-    var httpServer: HttpServer?
+    var server: NFXServer?
 
     @objc open func start()
     {
@@ -93,6 +86,20 @@ open class NFX: NSObject
     #if os(OSX)
         self.removeNetfoxFromMainmenu()
     #endif
+    }
+    
+    public func startServer() {
+        if !self.started {
+            self.start()
+        }
+        
+        self.server = NFXServer()
+        self.server?.startServer()
+    }
+    
+    public func stopServer() {
+        self.server?.stopServer()
+        self.server = nil
     }
     
     fileprivate func showMessage(_ msg: String) {
@@ -238,57 +245,6 @@ open class NFX: NSObject
         return self.filters
     }
     
-}
-
-extension NFX {
-    public func startServer() {
-        if !self.started {
-            self.start()
-        }
-        
-        let server = HttpServer()
-        server["/\(NFXServer.allRequests)"] = {r in
-            return HttpResponse.raw(200, "OK", ["Content-Type": "application/json"], {
-                let models = NFXHTTPModelManager.sharedInstance.getModels().map({ $0.toJSON() })
-                let jsonData = try! JSONSerialization.data(withJSONObject: models, options: [.prettyPrinted])
-                try $0.write(jsonData)
-            })
-        }
-        
-        server["/\(NFXServer.allRequestsHtml)"] = { _ in
-            let models = NFXHTTPModelManager.sharedInstance.getModels()
-            let stringModels = models.map({ $0.formattedRequestLogEntry() }).joined(separator: "\n")
-            return .ok(.html(stringModels))
-        }
-        
-        server["/hello"] = { .ok(.html("You asked for \($0)"))  }
-        
-        do {
-            try server.start(NFXServer.port)
-            print("Server started on port: \(NFXServer.port) ")
-            self.httpServer = server
-        } catch (let error) {
-            print("Failed to start server on port: \(NFXServer.port) ", error)
-        }
-    }
-    
-    public func stopServer() {
-        httpServer?.stop()
-    }
-    
-    public func addJSONModels(_ data: Data) {
-        let json = try! JSONSerialization.jsonObject(with: data, options: [])
-        if let jsonModels = json as? [[String: Any]] {
-            let models: [NFXHTTPModel] = jsonModels.flatMap({
-                let model = NFXHTTPModel()
-                model.fromJSON(json: $0)
-                return model
-            })
-            
-            models.forEach({ NFXHTTPModelManager.sharedInstance.add($0) })
-            NotificationCenter.default.post(name: Notification.Name(rawValue: "NFXReloadData"), object: nil)
-        }
-    }
 }
 
 #if os(iOS)
