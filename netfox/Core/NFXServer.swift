@@ -68,7 +68,7 @@ public class NFXServer: NSObject {
     
     func publishHttpService() {
         let bundleIdentifier = Bundle.main.bundleIdentifier ?? ""
-        let netService = NetService(domain: "", type: NFXServer.Options.bonjourServiceType, name: bundleIdentifier, port: Int32(NFXServer.Options.port))
+        let netService = NetService(domain: "", type: NFXServer.Options.bonjourServiceType, name: "", port: Int32(port))
         netService.delegate = self
         netService.publish()
         self.netService = netService

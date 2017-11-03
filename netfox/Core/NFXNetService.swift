@@ -52,7 +52,7 @@ extension NFXNetService: NetServiceBrowserDelegate {
 
 extension NFXNetService: NetServiceDelegate {
     func netServiceDidResolveAddress(_ sender: NetService) {
-        print("Found service \(sender)")
+        print("Found service: \(sender.hostName ?? "") \(sender)")
         
         let addresses = sender.addresses?.flatMap({ (data: Data) -> String? in
             let nsData = data as NSData
