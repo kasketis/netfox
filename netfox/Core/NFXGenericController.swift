@@ -38,7 +38,7 @@ class NFXGenericController: NFXViewController
         var tempMutableString = NSMutableAttributedString()
         tempMutableString = NSMutableAttributedString(string: string)
         
-        let l = string.characters.count
+        let l = string.count
         
         let regexBodyHeaders = try! NSRegularExpression(pattern: "(\\-- Body \\--)|(\\-- Headers \\--)", options: NSRegularExpression.Options.caseInsensitive)
         let matchesBodyHeaders = regexBodyHeaders.matches(in: string, options: NSRegularExpression.MatchingOptions.withoutAnchoringBounds, range: NSMakeRange(0, l)) as Array<NSTextCheckingResult>
