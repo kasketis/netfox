@@ -10,11 +10,18 @@ import Foundation
 
 #if os(OSX)
 class NFXNetService: NSObject {
+    struct ServerService {
+        var inputStream: InputStream
+        var outpuStream: OutputStream
+    }
+    
     static let shared = NFXNetService()
     
     var foundServices: [(service: NetService, address: String)] = []
     var processingServices: [NetService] = []
     let serviceBrowser = NetServiceBrowser()
+    
+    var services: [ServerService] = []
     
     func browseForAvailableNFXServices() {
         windowController?.popupButton.removeAllItems()
@@ -66,6 +73,30 @@ extension NFXNetService: NetServiceDelegate {
         
         if let address = addresses?.first {
             self.foundServer(address: address, service: sender)
+        }
+        
+        var inputStream: InputStream?
+        var outputStream: OutputStream?
+        let didOpen = sender.getInputStream(&inputStream, outputStream: &outputStream)
+        if didOpen {
+            let service = ServerService(inputStream: inputStream!, outpuStream: outputStream!)
+            services.append(service)
+            
+            inputStream?.schedule(in: RunLoop.main, forMode: .defaultRunLoopMode)
+            outputStream?.schedule(in: RunLoop.main, forMode: .defaultRunLoopMode)
+            inputStream?.open()
+            outputStream?.open()
+            
+            let readContent = {
+                let content = try? JSONSerialization.jsonObject(with: inputStream!, options: [])
+                print(content)
+            }
+            
+            DispatchQueue.main.asyncAfter(deadline: .now() + 5, execute: {
+                let content = try! JSONSerialization.jsonObject(with: inputStream!, options: [])
+                print(content)
+            })
+            readContent()
         }
     }
     

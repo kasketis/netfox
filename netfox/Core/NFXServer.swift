@@ -12,15 +12,28 @@ import Swifter
 public class NFXServer: NSObject {
     public struct Options {
         public static let bonjourServiceType = "_NFX._tcp."
-        public static let port: UInt16 = 9999
+        public static let port: UInt16 = 12222
         public static let allRequests = "allRequests"
         public static let allRequestsHtml = "allRequests.html"
+    }
+    
+    public struct Client {
+        let inputStream: InputStream
+        let outputStream: OutputStream
+        
+        func scheduleOnMainRunLoop() {
+            inputStream.open()
+            outputStream.open()
+            inputStream.schedule(in: RunLoop.main, forMode: .commonModes)
+            outputStream.schedule(in: RunLoop.main, forMode: .commonModes)
+        }
     }
     
     var httpServer: HttpServer?
     var netService: NetService?
     var port: UInt16 = Options.port
     var numberOfRetries = 0
+    var connectedClients: [Client] = []
     
     public func startServer() {
         let server = HttpServer()
@@ -68,19 +81,29 @@ public class NFXServer: NSObject {
     
     func publishHttpService() {
         let bundleIdentifier = Bundle.main.bundleIdentifier ?? ""
-        let netService = NetService(domain: "", type: NFXServer.Options.bonjourServiceType, name: "", port: Int32(port))
+        let netService = NetService(domain: "", type: NFXServer.Options.bonjourServiceType, name: "", port: Int32(port + 1))
         netService.delegate = self
-        netService.publish()
+        netService.publish(options: [.listenForConnections])
         self.netService = netService
     }
 }
 
 extension NFXServer: NetServiceDelegate {
     public func netServiceDidPublish(_ sender: NetService) {
+        
     }
     
     public func netService(_ sender: NetService, didNotPublish errorDict: [String : NSNumber]) {
         print("failed to publish http service: \(errorDict)")
+    }
+    
+    public func netService(_ sender: NetService, didAcceptConnectionWith inputStream: InputStream, outputStream: OutputStream) {
+        let client = Client(inputStream: inputStream, outputStream: outputStream)
+        client.scheduleOnMainRunLoop()
+        connectedClients.append(client)
+        
+        let models = NFXHTTPModelManager.sharedInstance.getModels().map({ $0.toJSON() })
+        JSONSerialization.writeJSONObject(models, to: outputStream, options: [], error: nil)
     }
 }
 
