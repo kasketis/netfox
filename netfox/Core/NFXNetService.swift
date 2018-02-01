@@ -21,7 +21,7 @@ class NFXNetService: NSObject {
     var processingServices: [NetService] = []
     let serviceBrowser = NetServiceBrowser()
     
-    var services: [ServerService] = []
+    var clients: [NFXClientConnection] = []
     
     func browseForAvailableNFXServices() {
         windowController?.popupButton.removeAllItems()
@@ -79,24 +79,10 @@ extension NFXNetService: NetServiceDelegate {
         var outputStream: OutputStream?
         let didOpen = sender.getInputStream(&inputStream, outputStream: &outputStream)
         if didOpen {
-            let service = ServerService(inputStream: inputStream!, outpuStream: outputStream!)
-            services.append(service)
-            
-            inputStream?.schedule(in: RunLoop.main, forMode: .defaultRunLoopMode)
-            outputStream?.schedule(in: RunLoop.main, forMode: .defaultRunLoopMode)
-            inputStream?.open()
-            outputStream?.open()
-            
-            let readContent = {
-                let content = try? JSONSerialization.jsonObject(with: inputStream!, options: [])
-                print(content)
-            }
-            
-            DispatchQueue.main.asyncAfter(deadline: .now() + 5, execute: {
-                let content = try! JSONSerialization.jsonObject(with: inputStream!, options: [])
-                print(content)
-            })
-            readContent()
+            let client = NFXClientConnection(inputStream: inputStream!, outputStream: outputStream!)
+            client.scheduleOnMainRunLoop()
+            client.prepareForReadingStream()
+            clients.append(client)
         }
     }
     
@@ -104,8 +90,6 @@ extension NFXNetService: NetServiceDelegate {
         print("failed to resove service \(sender): \(errorDict)")
     }
 }
-
-
 
 extension NFXNetService {
     func loadAllRequests(address: String, port: Int) {
@@ -137,5 +121,7 @@ extension NSData {
         return mem.move()
     }
 }
+    
+
 
 #endif

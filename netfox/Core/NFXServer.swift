@@ -17,23 +17,11 @@ public class NFXServer: NSObject {
         public static let allRequestsHtml = "allRequests.html"
     }
     
-    public struct Client {
-        let inputStream: InputStream
-        let outputStream: OutputStream
-        
-        func scheduleOnMainRunLoop() {
-            inputStream.open()
-            outputStream.open()
-            inputStream.schedule(in: RunLoop.main, forMode: .commonModes)
-            outputStream.schedule(in: RunLoop.main, forMode: .commonModes)
-        }
-    }
-    
     var httpServer: HttpServer?
     var netService: NetService?
     var port: UInt16 = Options.port
     var numberOfRetries = 0
-    var connectedClients: [Client] = []
+    var connectedClients: [NFXClientConnection] = []
     
     public func startServer() {
         let server = HttpServer()
@@ -98,12 +86,10 @@ extension NFXServer: NetServiceDelegate {
     }
     
     public func netService(_ sender: NetService, didAcceptConnectionWith inputStream: InputStream, outputStream: OutputStream) {
-        let client = Client(inputStream: inputStream, outputStream: outputStream)
+        let client = NFXClientConnection(inputStream: inputStream, outputStream: outputStream)
         client.scheduleOnMainRunLoop()
         connectedClients.append(client)
-        
-        let models = NFXHTTPModelManager.sharedInstance.getModels().map({ $0.toJSON() })
-        JSONSerialization.writeJSONObject(models, to: outputStream, options: [], error: nil)
+        client.writeData()
     }
 }
 
