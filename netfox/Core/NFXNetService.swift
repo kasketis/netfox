@@ -49,6 +49,9 @@ class NFXNetService: NSObject {
             client.scheduleOnMainRunLoop()
             client.prepareForReadingStream()
             clients = [client]
+            client.onClose = { [unowned self] in
+                self.clients = []
+            }
         }
     }
 }

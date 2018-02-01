@@ -29,6 +29,8 @@ class NFXClientConnection: NSObject {
         outputStream.open()
     }
     
+    var onClose: (() -> Void)?
+    
     func writeModel(_ model: NFXHTTPModel) {
         let models =  [ model.toJSON() ]
         let jsonData = try! JSONSerialization.data(withJSONObject: models, options: [])
@@ -52,7 +54,8 @@ class NFXClientConnection: NSObject {
         while bytes.count > bytesWritten {
             let count = bytes.count - bytesWritten
             let writeCount = outputStream.write([UInt8](bytes[bytesWritten...bytes.count - 1]), maxLength: count)
-            if bytesWritten < 0 {
+            if writeCount == -1 {
+                onClose?()
                 print("An error occured while writing data")
                 return
             }
@@ -101,7 +104,7 @@ extension NFXClientConnection: StreamDelegate {
             readData()
         case .errorOccurred, .endEncountered:
             print(eventCode)
-            break
+            onClose?()
         case .openCompleted, .hasSpaceAvailable:
             break
         default:

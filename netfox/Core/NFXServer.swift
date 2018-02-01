@@ -17,51 +17,16 @@ public class NFXServer: NSObject {
         public static let allRequestsHtml = "allRequests.html"
     }
     
-    var httpServer: HttpServer?
     var netService: NetService?
     var port: UInt16 = Options.port
     var numberOfRetries = 0
     var connectedClients: [NFXClientConnection] = []
     
     public func startServer() {
-//        let server = HttpServer()
-//        server["/\(NFXServer.Options.allRequests)"] = {r in
-//            return HttpResponse.raw(200, "OK", ["Content-Type": "application/json"], {
-//                let models = NFXHTTPModelManager.sharedInstance.getModels().map({ $0.toJSON() })
-//                let jsonData = try! JSONSerialization.data(withJSONObject: models, options: [.prettyPrinted])
-//                try $0.write(jsonData)
-//            })
-//        }
-//
-//        server["/\(NFXServer.Options.allRequestsHtml)"] = { _ in
-//            let models = NFXHTTPModelManager.sharedInstance.getModels()
-//            let stringModels = models.map({ $0.formattedRequestLogEntry() }).joined(separator: "\n")
-//            return .ok(.html(stringModels))
-//        }
-//
-//        server["/hello"] = { .ok(.html("You asked for \($0)"))  }
-//
-//        do {
-//            try server.start(port)
-//            print("Netfox server started on port: \(port) ")
-//            print("You can find what http calls are made using: GET http://localhost:\(port)/\(Options.allRequests)")
-//            print("Or start netfox mac app!")
-//            self.httpServer = server
-            publishHttpService()
-//        } catch (let error) {
-//            print("Failed to start server on port: \(port) ", error)
-//            if numberOfRetries < 3 {
-//                port += 1 // retry on next port
-//                numberOfRetries += 1
-//                startServer()
-//            }
-//        }
+        publishHttpService()
     }
     
     public func stopServer() {
-        httpServer?.stop()
-        httpServer = nil
-        
         netService?.stop()
         netService = nil
     }
@@ -93,6 +58,11 @@ extension NFXServer: NetServiceDelegate {
         client.scheduleOnMainRunLoop()
         connectedClients.append(client)
         client.writeAllModels()
+        client.onClose = { [unowned self] in
+            if let index = self.connectedClients.index(of: client) {
+                self.connectedClients.remove(at: index)
+            }
+        }
     }
 }
 
