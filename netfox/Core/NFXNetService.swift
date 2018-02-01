@@ -10,10 +10,6 @@ import Foundation
 
 #if os(OSX)
 class NFXNetService: NSObject {
-    struct ServerService {
-        var inputStream: InputStream
-        var outpuStream: OutputStream
-    }
     
     static let shared = NFXNetService()
     
@@ -32,7 +28,8 @@ class NFXNetService: NSObject {
     
     func foundServer(address: String, service: NetService) {
         if foundServices.isEmpty {
-            loadAllRequests(address: address, port: service.port)
+//            loadAllRequests(address: address, port: service.port)
+            fetchServiceContent(service: service)
         }
         
         foundServices.append((service: service, address: address))
@@ -41,6 +38,18 @@ class NFXNetService: NSObject {
     
     var windowController: NFXWindowController? {
         return NFX.sharedInstance().windowController
+    }
+    
+    func fetchServiceContent(service: NetService) {
+        var inputStream: InputStream?
+        var outputStream: OutputStream?
+        let didOpen = service.getInputStream(&inputStream, outputStream: &outputStream)
+        if didOpen {
+            let client = NFXClientConnection(inputStream: inputStream!, outputStream: outputStream!)
+            client.scheduleOnMainRunLoop()
+            client.prepareForReadingStream()
+            clients = [client]
+        }
     }
 }
 
@@ -74,16 +83,6 @@ extension NFXNetService: NetServiceDelegate {
         if let address = addresses?.first {
             self.foundServer(address: address, service: sender)
         }
-        
-        var inputStream: InputStream?
-        var outputStream: OutputStream?
-        let didOpen = sender.getInputStream(&inputStream, outputStream: &outputStream)
-        if didOpen {
-            let client = NFXClientConnection(inputStream: inputStream!, outputStream: outputStream!)
-            client.scheduleOnMainRunLoop()
-            client.prepareForReadingStream()
-            clients.append(client)
-        }
     }
     
     func netService(_ sender: NetService, didNotResolve errorDict: [String : NSNumber]) {
@@ -91,27 +90,27 @@ extension NFXNetService: NetServiceDelegate {
     }
 }
 
-extension NFXNetService {
-    func loadAllRequests(address: String, port: Int) {
-        let session = URLSession(configuration: URLSessionConfiguration.default)
-        if let url = URL(string: "http://\(address):\(port)/\(NFXServer.Options.allRequests)") {
-            let dataTask = session.dataTask(with: url, completionHandler: { (data, response, error) in
-                if let error = error {
-                    print("Failed \(error)")
-                } else {
-                    guard let data = data else { return }
-                    guard let response = response as? HTTPURLResponse else {  return }
-                    guard response.statusCode >= 200 && response.statusCode < 300 else { return }
-                    
-                    
-                    NFX.sharedInstance().addJSONModels(data)
-                }
-            })
-            
-            dataTask.resume()
-        }
-    }
-}
+//extension NFXNetService {
+//    func loadAllRequests(address: String, port: Int) {
+//        let session = URLSession(configuration: URLSessionConfiguration.default)
+//        if let url = URL(string: "http://\(address):\(port)/\(NFXServer.Options.allRequests)") {
+//            let dataTask = session.dataTask(with: url, completionHandler: { (data, response, error) in
+//                if let error = error {
+//                    print("Failed \(error)")
+//                } else {
+//                    guard let data = data else { return }
+//                    guard let response = response as? HTTPURLResponse else {  return }
+//                    guard response.statusCode >= 200 && response.statusCode < 300 else { return }
+//
+//
+//                    NFX.sharedInstance().addJSONModels(data)
+//                }
+//            })
+//
+//            dataTask.resume()
+//        }
+//    }
+//}
 
 
 extension NSData {

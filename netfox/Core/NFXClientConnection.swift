@@ -17,6 +17,11 @@ class NFXClientConnection: NSObject {
         self.outputStream = outputStream
     }
     
+    deinit {
+        inputStream.close()
+        outputStream.close()
+    }
+    
     func scheduleOnMainRunLoop() {
         inputStream.schedule(in: RunLoop.main, forMode: .commonModes)
         outputStream.schedule(in: RunLoop.main, forMode: .commonModes)
@@ -24,23 +29,32 @@ class NFXClientConnection: NSObject {
         outputStream.open()
     }
     
-    func writeData() {
+    func writeModel(_ model: NFXHTTPModel) {
+        let models =  [ model.toJSON() ]
+        let jsonData = try! JSONSerialization.data(withJSONObject: models, options: [])
+        writeData(jsonData)
+    }
+    
+    func writeAllModels() {
         let models = NFXHTTPModelManager.sharedInstance.getModels().map({ $0.toJSON() })
         let jsonData = try! JSONSerialization.data(withJSONObject: models, options: [])
-        
+        writeData(jsonData)
+    }
+    
+    func writeData(_ data: Data) {
         // write size of payload
-        let messageSize = Int32(jsonData.count)
+        let messageSize = Int32(data.count)
         outputStream.write(toByteArrary(value: messageSize), maxLength: MemoryLayout.size(ofValue: messageSize))
         
         // write payload
-        let bytes = [UInt8](jsonData)
+        let bytes = [UInt8](data)
         var bytesWritten = 0
         while bytes.count > bytesWritten {
             let count = bytes.count - bytesWritten
             let writeCount = outputStream.write([UInt8](bytes[bytesWritten...bytes.count - 1]), maxLength: count)
             if bytesWritten < 0 {
                 print("An error occured while writing data")
-                break
+                return
             }
             
             bytesWritten += writeCount
@@ -70,6 +84,7 @@ class NFXClientConnection: NSObject {
         toReadCount -= readCount
         if toReadCount == 0 {
             NFX.sharedInstance().addJSONModels(bufferData)
+            bufferData = Data()
         }
     }
 }
@@ -88,7 +103,6 @@ extension NFXClientConnection: StreamDelegate {
             print(eventCode)
             break
         case .openCompleted, .hasSpaceAvailable:
-            print(eventCode)
             break
         default:
             break

@@ -113,6 +113,7 @@ open class NFXProtocol: URLProtocol
     {
         if (self.model != nil) {
             NFXHTTPModelManager.sharedInstance.add(self.model!)
+            NFX.sharedInstance().server?.broadcastModel(self.model!)
         }
         
         NotificationCenter.default.post(name: Notification.Name(rawValue: "NFXReloadData"), object: nil)
