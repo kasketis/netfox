@@ -8,7 +8,6 @@
 
 import Cocoa
 import netfox_osx
-import Swifter
 
 @NSApplicationMain
 class AppDelegate: NSObject, NSApplicationDelegate {

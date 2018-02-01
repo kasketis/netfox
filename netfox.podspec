@@ -20,6 +20,6 @@ DESC
   s.ios.source_files = "netfox/iOS/*.swift"
   s.osx.source_files = "netfox/OSX/*.{swift,xib}"  
 
-  s.dependency "Swifter"
+  # s.dependency "Swifter"
 
 end

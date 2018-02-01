@@ -7,7 +7,6 @@
 //
 
 import Foundation
-import Swifter
 
 public class NFXServer: NSObject {
     public struct Options {
