@@ -28,12 +28,18 @@ class NFXNetService: NSObject {
     
     func foundServer(address: String, service: NetService) {
         if foundServices.isEmpty {
-//            loadAllRequests(address: address, port: service.port)
             fetchServiceContent(service: service)
         }
         
         foundServices.append((service: service, address: address))
         windowController?.popupButton.addItem(withTitle: service.name + " " + (service.hostName ?? "") )
+    }
+    
+    func removeService(_ service: NetService) {
+        if let index = foundServices.index(where: { $0.service === service }) {
+            foundServices.remove(at: index)
+            windowController?.popupButton.removeItem(at: index)
+        }
     }
     
     var windowController: NFXWindowController? {
@@ -51,6 +57,7 @@ class NFXNetService: NSObject {
             clients = [client]
             client.onClose = { [unowned self] in
                 self.clients = []
+                self.removeService(service)
             }
         }
     }
@@ -93,27 +100,6 @@ extension NFXNetService: NetServiceDelegate {
     }
 }
 
-//extension NFXNetService {
-//    func loadAllRequests(address: String, port: Int) {
-//        let session = URLSession(configuration: URLSessionConfiguration.default)
-//        if let url = URL(string: "http://\(address):\(port)/\(NFXServer.Options.allRequests)") {
-//            let dataTask = session.dataTask(with: url, completionHandler: { (data, response, error) in
-//                if let error = error {
-//                    print("Failed \(error)")
-//                } else {
-//                    guard let data = data else { return }
-//                    guard let response = response as? HTTPURLResponse else {  return }
-//                    guard response.statusCode >= 200 && response.statusCode < 300 else { return }
-//
-//
-//                    NFX.sharedInstance().addJSONModels(data)
-//                }
-//            })
-//
-//            dataTask.resume()
-//        }
-//    }
-//}
 
 
 extension NSData {

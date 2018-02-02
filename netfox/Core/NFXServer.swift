@@ -12,8 +12,6 @@ public class NFXServer: NSObject {
     public struct Options {
         public static let bonjourServiceType = "_NFX._tcp."
         public static let port: UInt16 = 12222
-        public static let allRequests = "allRequests"
-        public static let allRequestsHtml = "allRequests.html"
     }
     
     var netService: NetService?
@@ -23,16 +21,20 @@ public class NFXServer: NSObject {
     
     public func startServer() {
         publishHttpService()
+        #if os(iOS)
+        NotificationCenter.default.addObserver(self, selector: #selector(applicationDidBecomeActive), name: .UIApplicationDidBecomeActive, object: nil)
+        #endif
     }
     
     public func stopServer() {
         netService?.stop()
         netService = nil
+        NotificationCenter.default.removeObserver(self)
     }
     
     func publishHttpService() {
         let bundleIdentifier = Bundle.main.bundleIdentifier ?? ""
-        let netService = NetService(domain: "", type: NFXServer.Options.bonjourServiceType, name: bundleIdentifier, port: Int32(port + 1))
+        let netService = NetService(domain: "", type: NFXServer.Options.bonjourServiceType, name: bundleIdentifier, port: Int32(port))
         netService.delegate = self
         netService.publish(options: [.listenForConnections])
         self.netService = netService
@@ -40,6 +42,18 @@ public class NFXServer: NSObject {
     
     func broadcastModel(_ model: NFXHTTPModel) {
         connectedClients.forEach({ $0.writeModel(model) })
+    }
+    
+    @objc func applicationDidBecomeActive() {
+        DispatchQueue.main.asyncAfter(deadline: .now() + 2) {
+            if self.connectedClients.isEmpty {
+                self.stopServer()
+                
+                DispatchQueue.main.asyncAfter(deadline: .now() + 1.0) {
+                    self.publishHttpService()
+                }
+            }
+        }
     }
 }
 
@@ -65,21 +79,3 @@ extension NFXServer: NetServiceDelegate {
     }
 }
 
-extension NFX {
-    public func addJSONModels(_ data: Data) {
-        guard let json = try? JSONSerialization.jsonObject(with: data, options: []) else {
-            return
-        }
-        
-        if let jsonModels = json as? [[String: Any]] {
-            let models: [NFXHTTPModel] = jsonModels.flatMap({
-                let model = NFXHTTPModel()
-                model.fromJSON(json: $0)
-                return model
-            })
-            
-            models.forEach({ NFXHTTPModelManager.sharedInstance.add($0) })
-            NotificationCenter.default.post(name: Notification.Name(rawValue: "NFXReloadData"), object: nil)
-        }
-    }
-}

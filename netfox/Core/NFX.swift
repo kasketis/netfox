@@ -300,6 +300,10 @@ extension NFX {
     
     public func windowDidClose() {
         self.presented = false
+        
+        if Bundle.main.bundleIdentifier == "com.tapptitude.netfox-mac" {
+            NSApplication.shared.terminate(self)
+        }
     }
     
     private func setupNetfoxMenuItem() {

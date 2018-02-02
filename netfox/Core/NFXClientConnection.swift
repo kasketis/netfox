@@ -12,6 +12,8 @@ class NFXClientConnection: NSObject {
     let inputStream: InputStream
     let outputStream: OutputStream
     
+    private var thread: Thread!
+    
     init (inputStream: InputStream, outputStream: OutputStream) {
         self.inputStream = inputStream
         self.outputStream = outputStream
@@ -23,24 +25,55 @@ class NFXClientConnection: NSObject {
     }
     
     func scheduleOnMainRunLoop() {
-        inputStream.schedule(in: RunLoop.main, forMode: .commonModes)
-        outputStream.schedule(in: RunLoop.main, forMode: .commonModes)
+        let threadName = String(describing: self).components(separatedBy: .punctuationCharacters)[1]
+        thread = Thread(target: self, selector: #selector(runLoop), object: nil)
+        thread.name = "\(threadName)-\(UUID().uuidString)"
+        thread.start()
+        perform(#selector(scheduleOnRunLoop), on: thread, with: nil, waitUntilDone: false)
+    }
+    
+    @objc func runLoop() {
+        while (thread?.isCancelled == false) {
+            RunLoop.current.run(mode: .defaultRunLoopMode, before: .distantPast)
+        }
+        Thread.exit()
+    }
+    
+    @objc func scheduleOnRunLoop() {
+        inputStream.schedule(in: RunLoop.current, forMode: .defaultRunLoopMode)
+        outputStream.schedule(in: RunLoop.current, forMode: .defaultRunLoopMode)
         inputStream.open()
         outputStream.open()
     }
     
-    var onClose: (() -> Void)?
+    var onClose: (() -> Void)? {
+        get { return _onClose }
+        set { _onClose = {[unowned self] in
+                self.thread?.cancel()
+                self.thread = nil
+                self.inputStream.delegate = nil
+                DispatchQueue.main.async {
+                    newValue?()
+                }
+            }
+        }
+    }
+    var _onClose: (() -> Void)?
     
-    func writeModel(_ model: NFXHTTPModel) {
-        let models =  [ model.toJSON() ]
-        let jsonData = try! JSONSerialization.data(withJSONObject: models, options: [])
-        writeData(jsonData)
+    @objc func writeModel(_ model: NFXHTTPModel) {
+        DispatchQueue.global(qos: .background).async {
+            let models =  [ model.toJSON() ]
+            let jsonData = try! JSONSerialization.data(withJSONObject: models, options: [])
+            self.writeData(jsonData)
+        }
     }
     
-    func writeAllModels() {
-        let models = NFXHTTPModelManager.sharedInstance.getModels().map({ $0.toJSON() })
-        let jsonData = try! JSONSerialization.data(withJSONObject: models, options: [])
-        writeData(jsonData)
+    @objc func writeAllModels() {
+        DispatchQueue.global(qos: .background).async {
+            let models = NFXHTTPModelManager.sharedInstance.getModels().map({ $0.toJSON() })
+            let jsonData = try! JSONSerialization.data(withJSONObject: models, options: [])
+            self.writeData(jsonData)
+        }
     }
     
     func writeData(_ data: Data) {
@@ -109,6 +142,28 @@ extension NFXClientConnection: StreamDelegate {
             break
         default:
             break
+        }
+    }
+}
+
+extension NFX {
+    public func addJSONModels(_ data: Data) {
+        guard let json = try? JSONSerialization.jsonObject(with: data, options: []) else {
+            return
+        }
+        
+        if let jsonModels = json as? [[String: Any]] {
+            let models: [NFXHTTPModel] = jsonModels.flatMap({
+                let model = NFXHTTPModel()
+                model.fromJSON(json: $0)
+                return model
+            })
+            
+            models.reversed().forEach({ NFXHTTPModelManager.sharedInstance.add($0) })
+            
+            DispatchQueue.main.async {
+                NotificationCenter.default.post(name: Notification.Name(rawValue: "NFXReloadData"), object: nil)
+            }
         }
     }
 }
