@@ -17,11 +17,13 @@ final class NFXHTTPModelManager: NSObject
     func add(_ obj: NFXHTTPModel)
     {
         self.models.insert(obj, at: 0)
+        NFXPathNodeManager.sharedInstance.add(obj)
     }
     
     func clear()
     {
         self.models.removeAll()
+        NFXPathNodeManager.sharedInstance.clear()
     }
     
     func getModels() -> [NFXHTTPModel]
@@ -44,7 +46,7 @@ final class NFXHTTPModelManager: NSObject
 
         let searchPredicate = NSCompoundPredicate(orPredicateWithSubpredicates: predicates)
         
-        let array = (self.models as NSArray).filtered(using: searchPredicate)
+        let array = (NFXPathNodeManager.sharedInstance.getModels() as NSArray).filtered(using: searchPredicate)
         
         return array as! [NFXHTTPModel]
     }
