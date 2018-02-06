@@ -43,7 +43,7 @@ class NFXPathNodeListController_OSX: NFXListController, NSTableViewDelegate, NST
     
     override func reloadTableViewData() {
         DispatchQueue.main.async {
-            self.pathNodeTableData = self.modelManager.getModels()
+            self.pathNodeTableData = self.modelManager.getTableModels()
             self.tableView.reloadData()
         }
     }
@@ -104,7 +104,7 @@ class NFXPathNodeListController_OSX: NFXListController, NSTableViewDelegate, NST
     // MARK: NSTableViewDelegate
     
     func tableView(_ tableView: NSTableView, heightOfRow row: Int) -> CGFloat {
-        return 58
+        return pathNodeTableData[row].httpModel == nil ? 20 : 58
     }
     
     func tableViewSelectionDidChange(_ notification: Notification) {
@@ -121,8 +121,14 @@ class NFXPathNodeListController_OSX: NFXListController, NSTableViewDelegate, NST
                 delegate?.httpModelSelectedDidChange(model: httpModel)
             } else {
                 let node = pathNodeTableData[tableView.selectedRow]
-                pathNodeTableData.insert(contentsOf: node.children, at: tableView.selectedRow + 1)
-                tableView.reloadData()
+                if !node.isExpanded {
+                    node.isExpanded = true
+                    pathNodeTableData.insert(contentsOf: node.children, at: tableView.selectedRow + 1)
+                    tableView.reloadData()
+                } else {
+                    node.isExpanded = false
+                    reloadTableViewData()
+                }
             }
         }
     }
