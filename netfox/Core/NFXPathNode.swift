@@ -42,7 +42,7 @@ class NFXPathNode {
     }
     
     func printTree(_ level: Int = 0) {
-        print(String(repeating: " ", count: level) + name)
+        print(String(repeating: " ", count: level) + "\(name) -> \(httpModel?.requestURL ?? "")")
         for child in children {
             child.printTree(level + 4)
         }
