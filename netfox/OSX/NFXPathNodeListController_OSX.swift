@@ -23,6 +23,8 @@ class NFXPathNodeListController_OSX: NFXListController, NSTableViewDelegate, NST
     private let cellIdentifier = "NFXPathNodeListCell_OSX"
     
     fileprivate let modelManager = NFXPathNodeManager.sharedInstance
+    fileprivate var pathNodeTableData: [NFXPathNode] = []
+    fileprivate var pathNodeFilteredTableData: [NFXPathNode] = []
     
     // MARK: View Life Cycle
     
@@ -33,12 +35,15 @@ class NFXPathNodeListController_OSX: NFXListController, NSTableViewDelegate, NST
         
         NotificationCenter.default.addObserver(self, selector: #selector(NFXListController.reloadTableViewData), name: NSNotification.Name(rawValue: "NFXReloadData"), object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(NFXPathNodeListController_OSX.deactivateSearchController), name: NSNotification.Name(rawValue: "NFXDeactivateSearch"), object: nil)
+        
+        pathNodeTableData = modelManager.getModels()
     }
     
     // MARK: Notifications
     
     override func reloadTableViewData() {
         DispatchQueue.main.async {
+            self.pathNodeTableData = self.modelManager.getModels()
             self.tableView.reloadData()
         }
     }
@@ -57,7 +62,7 @@ class NFXPathNodeListController_OSX: NFXListController, NSTableViewDelegate, NST
         let searchPredicate = NSCompoundPredicate(orPredicateWithSubpredicates: predicates)
         
         let array = (modelManager.getModels() as NSArray).filtered(using: searchPredicate)
-        filteredTableData = array as! [NFXHTTPModel]
+        pathNodeFilteredTableData = array as! [NFXPathNode]
     }
     
     func updateSearchResultsForSearchController() {
@@ -77,11 +82,7 @@ class NFXPathNodeListController_OSX: NFXListController, NSTableViewDelegate, NST
     // MARK: UITableViewDataSource
     
     func numberOfRows(in tableView: NSTableView) -> Int {
-        if (self.isSearchControllerActive) {
-            return self.filteredTableData.count
-        } else {
-            return modelManager.getModels().count
-        }
+        return isSearchControllerActive ? pathNodeFilteredTableData.count : pathNodeTableData.count
     }
     
     func tableView(_ tableView: NSTableView, viewFor tableColumn: NSTableColumn?, row: Int) -> NSView? {
@@ -89,16 +90,12 @@ class NFXPathNodeListController_OSX: NFXListController, NSTableViewDelegate, NST
             return nil
         }
         
-        if (self.isSearchControllerActive) {
-            if filteredTableData.count > 0 {
-                let obj = filteredTableData[row]
-                cell.configForObject(obj: obj)
-            }
-        } else {
-            if modelManager.getModels().count > 0 {
-                let obj = modelManager.getModels()[row]
-                cell.configForObject(obj: obj)
-            }
+        if isSearchControllerActive && pathNodeFilteredTableData.count > 0 {
+            let obj = pathNodeFilteredTableData[row]
+            cell.configForObject(obj: obj)
+        } else if !isSearchControllerActive && pathNodeTableData.count > 0 {
+            let obj = pathNodeTableData[row]
+            cell.configForObject(obj: obj)
         }
         
         return cell
@@ -115,13 +112,18 @@ class NFXPathNodeListController_OSX: NFXListController, NSTableViewDelegate, NST
             return
         }
         
-        var model: NFXHTTPModel
-        if (isSearchControllerActive) {
-            model = filteredTableData[tableView.selectedRow]
+        if isSearchControllerActive {
+            if let httpModel = pathNodeFilteredTableData[tableView.selectedRow].httpModel {
+                delegate?.httpModelSelectedDidChange(model: httpModel)
+            }
         } else {
-            model = modelManager.getModels()[tableView.selectedRow]
+            if let httpModel = pathNodeTableData[tableView.selectedRow].httpModel {
+                delegate?.httpModelSelectedDidChange(model: httpModel)
+            } else {
+//                let model = modelManager.getModels()
+//                pathNodeTableData.insert(contentsOf: model, at: tableView.selectedRow)
+            }
         }
-        delegate?.httpModelSelectedDidChange(model: model)
     }
 }
     
