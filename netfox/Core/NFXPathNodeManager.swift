@@ -45,4 +45,8 @@ final class NFXPathNodeManager: NSObject {
         rootNode.printTree()
         return rootNode.children
     }
+    
+    func getTableModels() -> [NFXPathNode] {
+        return rootNode.toArray()
+    }
 }

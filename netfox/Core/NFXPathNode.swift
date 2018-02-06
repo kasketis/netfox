@@ -14,6 +14,7 @@ class NFXPathNode {
     var children: [NFXPathNode]
     weak var parent: NFXPathNode?
     var httpModel: NFXHTTPModel?
+    var isExpanded = false
     
     init(name: String) {
         self.name = name
@@ -47,6 +48,14 @@ class NFXPathNode {
         }
         
         return children.map{ $0.findLeaves() }.reduce([], +)
+    }
+    
+    func toArray() -> [NFXPathNode] {
+        if !isExpanded {
+            return [self]
+        }
+        
+        return [self] + children.map{ $0.toArray() }.reduce([], +)
     }
     
     func printTree(_ level: Int = 0) {
