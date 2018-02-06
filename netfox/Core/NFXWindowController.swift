@@ -22,7 +22,7 @@ class NFXWindowController: NSWindowController, NSWindowDelegate, NFXWindowContro
     @IBOutlet var popupButton: NSPopUpButton!
     @IBOutlet var listView: NSView!
     @IBOutlet var detailsView: NSView!
-    @IBOutlet var listViewController: NFXListController_OSX!
+    @IBOutlet var listViewController: NFXPathNodeListController_OSX!
     @IBOutlet var detailsViewController: NFXDetailsController_OSX!
     
     @IBOutlet var settingsPopover: NSPopover!

@@ -28,6 +28,9 @@
 		826C4E9F1F979AB3008B440C /* NFXLoader.m in Sources */ = {isa = PBXBuildFile; fileRef = 826C4E9D1F979AB3008B440C /* NFXLoader.m */; };
 		82F6E1031F8FD81C002B31BD /* TextViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 82F6E1021F8FD81C002B31BD /* TextViewController.swift */; };
 		82F6E1051F8FF55D002B31BD /* WebViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 82F6E1041F8FF55D002B31BD /* WebViewController.swift */; };
+		8F98A4DE202992FE007B2BB1 /* NFXPathNodeListCell_OSX.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8F98A4D9202992A2007B2BB1 /* NFXPathNodeListCell_OSX.swift */; };
+		8F98A4E12029944D007B2BB1 /* NFXPathNodeListCell_OSX.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8F98A4DF20299399007B2BB1 /* NFXPathNodeListCell_OSX.xib */; };
+		8F98A4E3202994CB007B2BB1 /* NFXPathNodeListController_OSX.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8F98A4E2202994CB007B2BB1 /* NFXPathNodeListController_OSX.swift */; };
 		8FBC1A8B2028ACEB00ABDF22 /* NFXPathNodeManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8FBC1A8A2028ACEB00ABDF22 /* NFXPathNodeManager.swift */; };
 		8FBC1A8E2028AF2A00ABDF22 /* NFXPathNodeManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8FBC1A8A2028ACEB00ABDF22 /* NFXPathNodeManager.swift */; };
 		8FD42BA62028A2D20084211A /* NFXPathNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8FD42BA52028A2D20084211A /* NFXPathNode.swift */; };
@@ -130,6 +133,9 @@
 		82F6E1021F8FD81C002B31BD /* TextViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextViewController.swift; sourceTree = "<group>"; };
 		82F6E1041F8FF55D002B31BD /* WebViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WebViewController.swift; sourceTree = "<group>"; };
 		88412B0FEC6E00FC9E7BCDD3 /* Pods_netfox_ios.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_netfox_ios.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		8F98A4D9202992A2007B2BB1 /* NFXPathNodeListCell_OSX.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NFXPathNodeListCell_OSX.swift; sourceTree = "<group>"; };
+		8F98A4DF20299399007B2BB1 /* NFXPathNodeListCell_OSX.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = NFXPathNodeListCell_OSX.xib; sourceTree = "<group>"; };
+		8F98A4E2202994CB007B2BB1 /* NFXPathNodeListController_OSX.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NFXPathNodeListController_OSX.swift; sourceTree = "<group>"; };
 		8FBC1A8A2028ACEB00ABDF22 /* NFXPathNodeManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NFXPathNodeManager.swift; sourceTree = "<group>"; };
 		8FD42BA52028A2D20084211A /* NFXPathNode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NFXPathNode.swift; sourceTree = "<group>"; };
 		9D2DF391029580C261E7189B /* Pods-netfox_mac.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-netfox_mac.release.xcconfig"; path = "Pods/Target Support Files/Pods-netfox_mac/Pods-netfox_mac.release.xcconfig"; sourceTree = "<group>"; };
@@ -342,6 +348,9 @@
 				B3F8D6781C833B1700F9FBEA /* NFXResponseTypeCell_OSX.xib */,
 				B3F8D6791C833B1700F9FBEA /* NFXSettingsController_OSX.swift */,
 				B3F8D67A1C833B1700F9FBEA /* NFXStatisticsController_OSX.swift */,
+				8F98A4D9202992A2007B2BB1 /* NFXPathNodeListCell_OSX.swift */,
+				8F98A4DF20299399007B2BB1 /* NFXPathNodeListCell_OSX.xib */,
+				8F98A4E2202994CB007B2BB1 /* NFXPathNodeListController_OSX.swift */,
 			);
 			path = OSX;
 			sourceTree = "<group>";
@@ -536,6 +545,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				8F98A4E12029944D007B2BB1 /* NFXPathNodeListCell_OSX.xib in Resources */,
 				B3F8D6821C833B1700F9FBEA /* NFXResponseTypeCell_OSX.xib in Resources */,
 				B3F8D67B1C833B1700F9FBEA /* NetfoxWindow.xib in Resources */,
 				B3F8D67F1C833B1700F9FBEA /* NFXListCell_OSX.xib in Resources */,
@@ -740,6 +750,7 @@
 				B3F8BA871C833ABC00F9FBEA /* NFXConstants.swift in Sources */,
 				B3F8BA9B1C833ABC00F9FBEA /* NFXProtocol.swift in Sources */,
 				B3F8D6811C833B1700F9FBEA /* NFXResponseTypeCell_OSX.swift in Sources */,
+				8F98A4E3202994CB007B2BB1 /* NFXPathNodeListController_OSX.swift in Sources */,
 				B3F8BA951C833ABC00F9FBEA /* NFXImageBodyDetailsController.swift in Sources */,
 				B3F8BA9F1C833ABC00F9FBEA /* NFXSettingsController.swift in Sources */,
 				23B61B5A2022FF1F00048320 /* NFXClientConnection.swift in Sources */,
@@ -747,6 +758,7 @@
 				B3F8BA851C833ABC00F9FBEA /* NFXAssets.swift in Sources */,
 				B3F8D6841C833B1700F9FBEA /* NFXStatisticsController_OSX.swift in Sources */,
 				B3F8BA8D1C833ABC00F9FBEA /* NFXGenericController.swift in Sources */,
+				8F98A4DE202992FE007B2BB1 /* NFXPathNodeListCell_OSX.swift in Sources */,
 				B3F8BA931C833ABC00F9FBEA /* NFXHTTPModelManager.swift in Sources */,
 				B3F8BA891C833ABC00F9FBEA /* NFXDetailsController.swift in Sources */,
 				23ABD6D71FA9E08C00CD6186 /* NFXNetService.swift in Sources */,
