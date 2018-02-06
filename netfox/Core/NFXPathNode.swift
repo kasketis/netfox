@@ -33,6 +33,14 @@ class NFXPathNode {
         return children.flatMap{ $0.find(node) }.first
     }
     
+    func depth() -> Int {
+        if parent == nil {
+            return -1
+        }
+        
+        return parent!.depth() + 1
+    }
+    
     func findLeaves() -> [NFXHTTPModel] {
         if children.isEmpty {
             return httpModel != nil ? [httpModel!] : []
