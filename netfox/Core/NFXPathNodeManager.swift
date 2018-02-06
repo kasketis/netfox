@@ -41,8 +41,8 @@ final class NFXPathNodeManager: NSObject {
         rootNode.children = []
     }
     
-    func getModels() -> [NFXHTTPModel] {
+    func getModels() -> [NFXPathNode] {
         rootNode.printTree()
-        return rootNode.findLeaves()
+        return rootNode.children
     }
 }
