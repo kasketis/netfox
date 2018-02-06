@@ -34,7 +34,8 @@ class NFXClientConnection: NSObject {
     
     @objc func runLoop() {
         while (thread?.isCancelled == false) {
-            RunLoop.current.run(mode: .defaultRunLoopMode, before: .distantPast)
+//            RunLoop.current.run(mode: .defaultRunLoopMode, before: .distantPast)
+            RunLoop.current.run()
         }
         Thread.exit()
     }

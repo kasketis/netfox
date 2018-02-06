@@ -8,7 +8,7 @@
 
 import Foundation
 
-final class NFXPathNodeManager: NSObject {
+final class NFXPathNodeManager {
     
     static let sharedInstance = NFXPathNodeManager()
     fileprivate var rootNode = NFXPathNode(name: "root")
