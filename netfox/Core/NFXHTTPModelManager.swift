@@ -46,7 +46,7 @@ final class NFXHTTPModelManager: NSObject
 
         let searchPredicate = NSCompoundPredicate(orPredicateWithSubpredicates: predicates)
         
-        let array = (NFXPathNodeManager.sharedInstance.getModels() as NSArray).filtered(using: searchPredicate)
+        let array = (self.models as NSArray).filtered(using: searchPredicate)
         
         return array as! [NFXHTTPModel]
     }
