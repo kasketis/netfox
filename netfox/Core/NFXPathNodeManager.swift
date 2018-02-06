@@ -13,6 +13,11 @@ final class NFXPathNodeManager: NSObject
     static let sharedInstance = NFXPathNodeManager()
     fileprivate var rootNode = NFXPathNode(name: "root")
     
+    func add(_ arr: [NFXHTTPModel])
+    {
+        arr.forEach{ add($0) }
+    }
+    
     func add(_ obj: NFXHTTPModel)
     {
         guard let nodes = obj.requestURL?.split(separator: "/").dropFirst().map({ NFXPathNode(name: String($0)) }) else {
