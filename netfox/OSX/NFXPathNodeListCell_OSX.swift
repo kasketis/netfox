@@ -52,6 +52,17 @@ class NFXPathNodeListCell_OSX: NSTableCellView
         self.circleView.isHidden = true
     }
     
+    func configForObject(obj: NFXPathNode)
+    {
+        guard let httpModel = obj.httpModel else {
+            setURL(url: obj.name)
+            setStatus(status: 999)
+            return
+        }
+        
+        configForObject(obj: httpModel)
+    }
+    
     func configForObject(obj: NFXHTTPModel)
     {
         setURL(url: obj.requestURL ?? "-")
