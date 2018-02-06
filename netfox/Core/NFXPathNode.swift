@@ -13,6 +13,7 @@ class NFXPathNode {
     var name: String
     var children: [NFXPathNode]
     weak var parent: NFXPathNode?
+    var httpModel: NFXHTTPModel?
     
     init(name: String) {
         self.name = name
@@ -30,6 +31,14 @@ class NFXPathNode {
         }
         
         return children.flatMap{ $0.find(node) }.first
+    }
+    
+    func findLeaves() -> [NFXHTTPModel] {
+        if children.isEmpty {
+            return httpModel != nil ? [httpModel!] : []
+        }
+        
+        return children.map{ $0.findLeaves() }.reduce([], +)
     }
     
     func printTree(_ level: Int = 0) {

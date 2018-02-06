@@ -25,11 +25,13 @@ final class NFXPathNodeManager: NSObject
             if let foundNode = previousNode.find(node) {
                 previousNode = foundNode
             } else {
+                node.httpModel = obj
                 previousNode.insert(node)
                 previousNode = node
             }
         }
         let resourceNode = NFXPathNode(name: nodes.map{ $0.name }.joined(separator: "/"))
+        resourceNode.httpModel = obj
         previousNode.insert(resourceNode)
     }
     
@@ -37,7 +39,8 @@ final class NFXPathNodeManager: NSObject
         rootNode.children = []
     }
     
-    func getModels() {
+    func getModels() -> [NFXHTTPModel] {
         rootNode.printTree()
+        return rootNode.findLeaves()
     }
 }
