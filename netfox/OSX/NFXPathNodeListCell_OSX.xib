@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="13771" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES" customObjectInstantitationMethod="direct">
     <dependencies>
+        <deployment identifier="macosx"/>
         <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="13771"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -115,6 +116,7 @@
             <connections>
                 <outlet property="URLLabel" destination="Nhu-QU-Kel" id="hWw-0a-YVP"/>
                 <outlet property="circleView" destination="xsB-VY-p9m" id="AcO-lR-ZNG"/>
+                <outlet property="leadingConstraint" destination="iXc-dX-cxd" id="vPv-NV-iU0"/>
                 <outlet property="methodLabel" destination="u4F-uF-5zI" id="CvW-Ho-hRD"/>
                 <outlet property="requestTimeLabel" destination="eFv-i3-JKF" id="oNv-0s-JDk"/>
                 <outlet property="statusView" destination="o5A-Xc-gmX" id="2iy-mH-NbV"/>

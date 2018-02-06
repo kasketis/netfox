@@ -10,8 +10,7 @@
     
 import Cocoa
 
-class NFXPathNodeListCell_OSX: NSTableCellView
-{
+class NFXPathNodeListCell_OSX: NSTableCellView {
     
     @IBOutlet var statusView: NSView!
     @IBOutlet var requestTimeLabel: NSTextField!
@@ -22,6 +21,7 @@ class NFXPathNodeListCell_OSX: NSTableCellView
     @IBOutlet var typeLabel: NSTextField!
     
     @IBOutlet var circleView: NSView!
+    @IBOutlet weak var leadingConstraint: NSLayoutConstraint!
     
     let padding: CGFloat = 5
     
@@ -39,32 +39,33 @@ class NFXPathNodeListCell_OSX: NSTableCellView
         self.URLLabel.font = NSFont.NFXFont(size: 12)
         self.methodLabel.font = NSFont.NFXFont(size: 12)
         self.typeLabel.font = NSFont.NFXFont(size: 12)
-        
     }
     
-    func isNew()
-    {
+    func isNew() {
         self.circleView.isHidden = false
     }
     
-    func isOld()
-    {
+    func isOld() {
         self.circleView.isHidden = true
     }
     
-    func configForObject(obj: NFXPathNode)
-    {
+    func configForObject(obj: NFXPathNode) {
+        leadingConstraint.constant = CGFloat(obj.depth()) * 16.0
+        
         guard let httpModel = obj.httpModel else {
             setURL(url: obj.name)
             setStatus(status: 999)
+            setTimeInterval(timeInterval: 999)
+            setRequestTime(requestTime: "")
+            setType(type: "")
+            setMethod(method: "")
             return
         }
         
         configForObject(obj: httpModel)
     }
     
-    func configForObject(obj: NFXHTTPModel)
-    {
+    func configForObject(obj: NFXHTTPModel) {
         setURL(url: obj.requestURL ?? "-")
         setStatus(status: obj.responseStatus ?? 999)
         setTimeInterval(timeInterval: obj.timeInterval ?? 999)
@@ -74,13 +75,11 @@ class NFXPathNodeListCell_OSX: NSTableCellView
         isNewBasedOnDate(responseDate: obj.responseDate as NSDate? ?? NSDate())
     }
     
-    func setURL(url: String)
-    {
+    func setURL(url: String) {
         self.URLLabel.stringValue = url
     }
     
-    func setStatus(status: Int)
-    {
+    func setStatus(status: Int) {
         if status == 999 {
             self.statusView.layer?.backgroundColor = NFXColor.NFXGray44Color().cgColor //gray
             self.timeIntervalLabel.textColor = NFXColor.white
@@ -96,13 +95,11 @@ class NFXPathNodeListCell_OSX: NSTableCellView
         }
     }
     
-    func setRequestTime(requestTime: String)
-    {
+    func setRequestTime(requestTime: String) {
         self.requestTimeLabel.stringValue = requestTime
     }
     
-    func setTimeInterval(timeInterval: Float)
-    {
+    func setTimeInterval(timeInterval: Float) {
         if timeInterval == 999 {
             self.timeIntervalLabel.stringValue = "-"
         } else {
@@ -110,25 +107,21 @@ class NFXPathNodeListCell_OSX: NSTableCellView
         }
     }
     
-    func setType(type: String)
-    {
+    func setType(type: String) {
         self.typeLabel.stringValue = type
     }
     
-    func setMethod(method: String)
-    {
+    func setMethod(method: String) {
         self.methodLabel.stringValue = method
     }
     
-    func isNewBasedOnDate(responseDate: NSDate)
-    {
+    func isNewBasedOnDate(responseDate: NSDate) {
         if responseDate.isGreaterThan(NFX.sharedInstance().getLastVisitDate()) {
             self.isNew()
         } else {
             self.isOld()
         }
     }
-    
 }
     
 #endif
