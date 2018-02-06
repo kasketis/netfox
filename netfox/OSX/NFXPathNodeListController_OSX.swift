@@ -120,8 +120,9 @@ class NFXPathNodeListController_OSX: NFXListController, NSTableViewDelegate, NST
             if let httpModel = pathNodeTableData[tableView.selectedRow].httpModel {
                 delegate?.httpModelSelectedDidChange(model: httpModel)
             } else {
-//                let model = modelManager.getModels()
-//                pathNodeTableData.insert(contentsOf: model, at: tableView.selectedRow)
+                let node = pathNodeTableData[tableView.selectedRow]
+                pathNodeTableData.insert(contentsOf: node.children, at: tableView.selectedRow)
+                tableView.reloadData()
             }
         }
     }
