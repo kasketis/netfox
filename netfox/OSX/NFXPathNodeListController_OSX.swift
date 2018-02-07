@@ -106,7 +106,7 @@ class NFXPathNodeListController_OSX: NFXListController, NSTableViewDelegate, NST
     // MARK: NSTableViewDelegate
     
     func tableView(_ tableView: NSTableView, heightOfRow row: Int) -> CGFloat {
-        return pathNodeTableData[row].httpModel == nil ? 20 : 58
+        return 20 //pathNodeTableData[row].httpModel == nil ? 20 : 58
     }
     
     func tableViewSelectionDidChange(_ notification: Notification) {

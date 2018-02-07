@@ -32,7 +32,7 @@ final class NFXPathNodeManager {
                 previousNode = node
             }
         }
-        let resourceNode = NFXPathNode(name: nodes.map{ $0.name }.joined(separator: "/"))
+        let resourceNode = NFXPathNode(name: nodes.last?.name ?? "-")
         resourceNode.httpModel = obj
         previousNode.insert(resourceNode)
     }

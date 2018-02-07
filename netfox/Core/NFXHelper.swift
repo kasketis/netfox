@@ -224,6 +224,13 @@ extension NFXImage
         return NSImage(data: NFXAssets.getImage(NFXAssetName.statistics))!
     #endif
     }
+    
+    #if os (OSX)
+    class func NFXFolder() -> NFXImage
+    {
+        return NSImage(data: NFXAssets.getImage(NFXAssetName.folder))!
+    }
+    #endif
 }
 
 extension Date
