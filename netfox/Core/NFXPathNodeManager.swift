@@ -8,6 +8,8 @@
 
 import Foundation
 
+#if os(OSX)
+    
 final class NFXPathNodeManager {
     
     static let sharedInstance = NFXPathNodeManager()
@@ -53,3 +55,4 @@ final class NFXPathNodeManager {
         return models
     }
 }
+#endif

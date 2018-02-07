@@ -8,6 +8,8 @@
 
 import Foundation
 
+#if os(OSX)
+    
 class NFXPathNode {
     
     var name: String
@@ -65,3 +67,5 @@ class NFXPathNode {
         }
     }
 }
+
+#endif

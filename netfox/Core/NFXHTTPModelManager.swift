@@ -17,13 +17,18 @@ final class NFXHTTPModelManager: NSObject
     func add(_ obj: NFXHTTPModel)
     {
         self.models.insert(obj, at: 0)
+
+        #if os(OSX)
         NFXPathNodeManager.sharedInstance.add(obj)
+        #endif
     }
     
     func clear()
     {
         self.models.removeAll()
+        #if os(OSX)
         NFXPathNodeManager.sharedInstance.clear()
+        #endif
     }
     
     func getModels() -> [NFXHTTPModel]

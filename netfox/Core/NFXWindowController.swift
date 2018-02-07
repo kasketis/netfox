@@ -91,8 +91,6 @@ class NFXWindowController: NSWindowController, NSWindowDelegate, NFXWindowContro
     }
     
     @IBAction func hostClicked(_ sender: Any) {
-        NFXHTTPModelManager.sharedInstance.clear()
-        NotificationCenter.default.post(name: Notification.Name(rawValue: "NFXReloadData"), object: nil)
         let (service, address) =  NFXNetService.shared.foundServices[popupButton.indexOfSelectedItem]
         NFXNetService.shared.fetchServiceContent(service: service)
     }

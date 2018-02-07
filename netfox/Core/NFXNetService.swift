@@ -47,6 +47,9 @@ class NFXNetService: NSObject {
     }
     
     func fetchServiceContent(service: NetService) {
+        NFXHTTPModelManager.sharedInstance.clear()
+        NotificationCenter.default.post(name: Notification.Name(rawValue: "NFXReloadData"), object: nil)
+        
         var inputStream: InputStream?
         var outputStream: OutputStream?
         let didOpen = service.getInputStream(&inputStream, outputStream: &outputStream)

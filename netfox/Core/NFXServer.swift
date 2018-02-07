@@ -70,6 +70,7 @@ extension NFXServer: NetServiceDelegate {
         let client = NFXClientConnection(inputStream: inputStream, outputStream: outputStream)
         client.scheduleOnBackgroundRunLoop()
         connectedClients.append(client)
+        client.prepareForWritingStream()
         client.writeAllModels()
         client.onClose = { [unowned self] in
             if let index = self.connectedClients.index(of: client) {

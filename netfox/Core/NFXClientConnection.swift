@@ -56,6 +56,8 @@ class NFXClientConnection: NSObject {
         set { _onClose = {[unowned self] in
                 self.inputStream.delegate = nil
                 self.stopRunLoop()
+                self.inputStream.close()
+                self.outputStream.close()
                 DispatchQueue.main.async {
                     newValue?()
                 }
@@ -64,8 +66,9 @@ class NFXClientConnection: NSObject {
     }
     var _onClose: (() -> Void)?
     
+    static let serialQueue = DispatchQueue(label: "NFXClientConnection")
     @objc func writeModel(_ model: NFXHTTPModel) {
-        DispatchQueue.global(qos: .background).async {
+        NFXClientConnection.serialQueue.async {
             let models =  [ model.toJSON() ]
             let jsonData = try! JSONSerialization.data(withJSONObject: models, options: [])
             self.writeData(jsonData)
@@ -73,10 +76,14 @@ class NFXClientConnection: NSObject {
     }
     
     @objc func writeAllModels() {
-        DispatchQueue.global(qos: .background).async {
-            let models = NFXHTTPModelManager.sharedInstance.getModels().map({ $0.toJSON() })
-            let jsonData = try! JSONSerialization.data(withJSONObject: models, options: [])
-            self.writeData(jsonData)
+        NFXClientConnection.serialQueue.async {
+            let models = NFXHTTPModelManager.sharedInstance.getModels()
+            models.reversed().chunked(by: 20).forEach({ items in
+                print(items.count)
+                let models = items.map({ $0.toJSON() })
+                let jsonData = try! JSONSerialization.data(withJSONObject: models, options: [])
+                self.writeData(jsonData)
+            })
         }
     }
     
@@ -93,7 +100,8 @@ class NFXClientConnection: NSObject {
             let writeCount = outputStream.write([UInt8](bytes[bytesWritten...bytes.count - 1]), maxLength: count)
             if writeCount == -1 {
                 onClose?()
-                print("An error occured while writing data")
+                print(outputStream.streamError ?? "")
+                print("Netfox connection - An error occured while writing data")
                 return
             }
             
@@ -103,6 +111,10 @@ class NFXClientConnection: NSObject {
     
     func prepareForReadingStream() {
         inputStream.delegate = self
+    }
+    
+    func prepareForWritingStream() {
+        outputStream.delegate = self
     }
     
     var bufferData: Data = Data()
@@ -192,5 +204,15 @@ extension NSData {
             self.getBytes(&number, length: MemoryLayout<UInt32>.size)
             return number
         }
+    }
+}
+
+
+extension Array {
+    func chunked(by chunkSize:Int) -> [[Element]] {
+        let groups = stride(from: 0, to: self.count, by: chunkSize).map {
+            Array(self[$0..<[$0 + chunkSize, self.count].min()!])
+        }
+        return groups
     }
 }
