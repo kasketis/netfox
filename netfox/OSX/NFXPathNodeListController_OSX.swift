@@ -24,7 +24,6 @@ class NFXPathNodeListController_OSX: NFXListController, NSTableViewDelegate, NST
     
     fileprivate let modelManager = NFXPathNodeManager.sharedInstance
     fileprivate var pathNodeTableData: [NFXPathNode] = []
-    fileprivate var pathNodeFilteredTableData: [NFXPathNode] = []
     
     // MARK: View Life Cycle
     
@@ -43,7 +42,15 @@ class NFXPathNodeListController_OSX: NFXListController, NSTableViewDelegate, NST
     
     override func reloadTableViewData() {
         DispatchQueue.main.async {
-            self.pathNodeTableData = self.modelManager.getTableModels()
+            if self.searchField.stringValue.isEmpty {
+                self.pathNodeTableData = self.modelManager.getTableModels()
+            } else {
+                let filtered = self.filter(models: NFXHTTPModelManager.sharedInstance.getModels(), searchString: self.searchField.stringValue)
+                let model = NFXPathNodeManager()
+                model.add(filtered)
+                self.pathNodeTableData = model.getTableModels()
+            }
+            
             self.tableView.reloadData()
         }
     }
@@ -54,15 +61,15 @@ class NFXPathNodeListController_OSX: NFXListController, NSTableViewDelegate, NST
     
     // MARK: Search
     
-    override func updateSearchResultsForSearchControllerWithString(_ searchString: String) {
+    func filter(models: [NFXHTTPModel], searchString: String) -> [NFXHTTPModel] {
         let predicateURL = NSPredicate(format: "requestURL contains[cd] '\(searchString)'")
         let predicateMethod = NSPredicate(format: "requestMethod contains[cd] '\(searchString)'")
         let predicateType = NSPredicate(format: "responseType contains[cd] '\(searchString)'")
         let predicates = [predicateURL, predicateMethod, predicateType]
         let searchPredicate = NSCompoundPredicate(orPredicateWithSubpredicates: predicates)
         
-        let array = (modelManager.getModels() as NSArray).filtered(using: searchPredicate)
-        pathNodeFilteredTableData = array as! [NFXPathNode]
+        let array = (models as NSArray).filtered(using: searchPredicate)
+        return array as! [NFXHTTPModel]
     }
     
     func updateSearchResultsForSearchController() {
@@ -70,7 +77,7 @@ class NFXPathNodeListController_OSX: NFXListController, NSTableViewDelegate, NST
         reloadTableViewData()
     }
     
-    func controlTextDidChange(obj: NSNotification) {
+    @objc override func controlTextDidChange(_ obj: Notification) {
         guard let searchField = obj.object as? NSSearchField else {
             return
         }
@@ -82,7 +89,7 @@ class NFXPathNodeListController_OSX: NFXListController, NSTableViewDelegate, NST
     // MARK: UITableViewDataSource
     
     func numberOfRows(in tableView: NSTableView) -> Int {
-        return isSearchControllerActive ? pathNodeFilteredTableData.count : pathNodeTableData.count
+        return pathNodeTableData.count
     }
     
     func tableView(_ tableView: NSTableView, viewFor tableColumn: NSTableColumn?, row: Int) -> NSView? {
@@ -90,13 +97,8 @@ class NFXPathNodeListController_OSX: NFXListController, NSTableViewDelegate, NST
             return nil
         }
         
-        if isSearchControllerActive && pathNodeFilteredTableData.count > 0 {
-            let obj = pathNodeFilteredTableData[row]
-            cell.configForObject(obj: obj)
-        } else if !isSearchControllerActive && pathNodeTableData.count > 0 {
-            let obj = pathNodeTableData[row]
-            cell.configForObject(obj: obj)
-        }
+        let obj = pathNodeTableData[row]
+        cell.configForObject(obj: obj)
         
         return cell
     }
@@ -112,23 +114,17 @@ class NFXPathNodeListController_OSX: NFXListController, NSTableViewDelegate, NST
             return
         }
         
-        if isSearchControllerActive {
-            if let httpModel = pathNodeFilteredTableData[tableView.selectedRow].httpModel {
-                delegate?.httpModelSelectedDidChange(model: httpModel)
-            }
+        if let httpModel = pathNodeTableData[tableView.selectedRow].httpModel {
+            delegate?.httpModelSelectedDidChange(model: httpModel)
         } else {
-            if let httpModel = pathNodeTableData[tableView.selectedRow].httpModel {
-                delegate?.httpModelSelectedDidChange(model: httpModel)
+            let node = pathNodeTableData[tableView.selectedRow]
+            if !node.isExpanded {
+                node.isExpanded = true
+                pathNodeTableData.insert(contentsOf: node.children, at: tableView.selectedRow + 1)
+                tableView.reloadData()
             } else {
-                let node = pathNodeTableData[tableView.selectedRow]
-                if !node.isExpanded {
-                    node.isExpanded = true
-                    pathNodeTableData.insert(contentsOf: node.children, at: tableView.selectedRow + 1)
-                    tableView.reloadData()
-                } else {
-                    node.isExpanded = false
-                    reloadTableViewData()
-                }
+                node.isExpanded = false
+                reloadTableViewData()
             }
         }
     }
