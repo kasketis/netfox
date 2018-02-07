@@ -47,6 +47,9 @@ final class NFXPathNodeManager {
     }
     
     func getTableModels() -> [NFXPathNode] {
-        return rootNode.toArray()
+        rootNode.isExpanded = true
+        var models = rootNode.toArray()
+        models.remove(at: 0)
+        return models
     }
 }
