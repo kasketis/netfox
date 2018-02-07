@@ -22,7 +22,9 @@ class NFXWindowController: NSWindowController, NSWindowDelegate, NFXWindowContro
     @IBOutlet var popupButton: NSPopUpButton!
     @IBOutlet var listView: NSView!
     @IBOutlet var detailsView: NSView!
+    @IBOutlet var tableView: NSTableView!
     @IBOutlet var listViewController: NFXPathNodeListController_OSX!
+    @IBOutlet var structuredListViewController: NFXPathNodeListController_OSX!
     @IBOutlet var detailsViewController: NFXDetailsController_OSX!
     
     @IBOutlet var settingsPopover: NSPopover!
@@ -34,6 +36,7 @@ class NFXWindowController: NSWindowController, NSWindowDelegate, NFXWindowContro
 
     @IBOutlet var infoViewController: NFXInfoController_OSX!
     @IBOutlet var infoView: NSView!
+    @IBOutlet var segmentedControl: NSSegmentedControl!
     
     @IBOutlet var statisticsViewController: NFXStatisticsController_OSX!
     @IBOutlet var statisticsView: NSView!
@@ -45,9 +48,10 @@ class NFXWindowController: NSWindowController, NSWindowDelegate, NFXWindowContro
         infoButton.image = NSImage(data: NFXAssets.getImage(.info))
         statisticsButton.image = NSImage(data: NFXAssets.getImage(.statistics))
 
-        listViewController.view = listView
         listViewController.delegate = self
         detailsViewController.view = detailsView
+        
+        structuredListViewController.delegate = self
         
         settingsViewController.view = settingsView
         infoViewController.view = infoView
@@ -90,8 +94,30 @@ class NFXWindowController: NSWindowController, NSWindowDelegate, NFXWindowContro
         NFXHTTPModelManager.sharedInstance.clear()
         NotificationCenter.default.post(name: Notification.Name(rawValue: "NFXReloadData"), object: nil)
         let (service, address) =  NFXNetService.shared.foundServices[popupButton.indexOfSelectedItem]
-//        NFXNetService.shared.loadAllRequests(address: address, port: service.port)
         NFXNetService.shared.fetchServiceContent(service: service)
+    }
+    
+    @IBAction func segmentedAction(_ sender: Any) {
+        print(segmentedControl.selectedSegment)
+        
+        switch segmentedControl.selectedSegment {
+        case 0:
+            listViewController.searchField.delegate = listViewController
+            listViewController.tableView = tableView
+            tableView.delegate = listViewController
+            tableView.dataSource = listViewController
+            tableView.reloadData()
+        case 1:
+            structuredListViewController.searchField.delegate = structuredListViewController
+            structuredListViewController.tableView = tableView
+            tableView.delegate = structuredListViewController
+            tableView.dataSource = structuredListViewController
+            tableView.reloadData()
+        default:
+            abort()
+        }
+        
+        
     }
     
 }

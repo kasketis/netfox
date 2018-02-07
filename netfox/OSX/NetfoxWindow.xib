@@ -17,6 +17,7 @@
                 <outlet property="listView" destination="KBu-Ny-MmK" id="UhK-Pv-T6T"/>
                 <outlet property="listViewController" destination="9sg-fL-85B" id="bcK-iC-AUl"/>
                 <outlet property="popupButton" destination="XYS-nC-DVa" id="ewo-5e-2XS"/>
+                <outlet property="segmentedControl" destination="tHV-mZ-nOe" id="ttA-Fu-sOj"/>
                 <outlet property="settingsButton" destination="8B4-L1-Eyx" id="6G6-cq-nc5"/>
                 <outlet property="settingsPopover" destination="2km-Aw-Tnf" id="JN3-2M-tFy"/>
                 <outlet property="settingsView" destination="Aqt-OX-2RN" id="g64-KY-lf8"/>
@@ -25,6 +26,8 @@
                 <outlet property="statisticsPopover" destination="qC0-2M-a94" id="zX8-MS-t47"/>
                 <outlet property="statisticsView" destination="o2t-Bo-0qK" id="8A5-98-nHV"/>
                 <outlet property="statisticsViewController" destination="DZ0-EN-1Ob" id="3Bh-DL-vfy"/>
+                <outlet property="structuredListViewController" destination="pwl-fh-wud" id="dOj-gH-H8j"/>
+                <outlet property="tableView" destination="jfJ-0b-tAz" id="5kz-hr-8aN"/>
                 <outlet property="window" destination="QvC-M9-y7g" id="ocC-vc-q2K"/>
             </connections>
         </customObject>
@@ -120,14 +123,30 @@
                                     <box verticalHuggingPriority="750" boxType="separator" translatesAutoresizingMaskIntoConstraints="NO" id="N8i-fW-UjS" userLabel="Separator">
                                         <rect key="frame" x="0.0" y="553" width="287" height="5"/>
                                     </box>
+                                    <segmentedControl verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="tHV-mZ-nOe">
+                                        <rect key="frame" x="53" y="528" width="181" height="24"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="21" id="bzS-eA-xfk"/>
+                                        </constraints>
+                                        <segmentedCell key="cell" borderStyle="border" alignment="left" style="rounded" trackingMode="selectOne" id="cEg-rc-Ij8">
+                                            <font key="font" metaFont="system"/>
+                                            <segments>
+                                                <segment label="Sequence" selected="YES"/>
+                                                <segment label="Structured"/>
+                                            </segments>
+                                        </segmentedCell>
+                                        <connections>
+                                            <action selector="segmentedAction:" target="-2" id="5CC-GX-Shh"/>
+                                        </connections>
+                                    </segmentedControl>
                                     <scrollView borderType="none" autohidesScrollers="YES" horizontalLineScroll="19" horizontalPageScroll="10" verticalLineScroll="19" verticalPageScroll="10" usesPredominantAxisScrolling="NO" translatesAutoresizingMaskIntoConstraints="NO" id="fUE-k2-KwP" userLabel="Scroll View - Table View - Requests">
-                                        <rect key="frame" x="0.0" y="22" width="287" height="533"/>
+                                        <rect key="frame" x="0.0" y="22" width="287" height="503"/>
                                         <clipView key="contentView" id="clm-Wo-CWo">
-                                            <rect key="frame" x="0.0" y="0.0" width="287" height="533"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="287" height="503"/>
                                             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                             <subviews>
                                                 <tableView verticalHuggingPriority="750" allowsExpansionToolTips="YES" columnAutoresizingStyle="lastColumnOnly" alternatingRowBackgroundColors="YES" columnReordering="NO" columnSelection="YES" columnResizing="NO" multipleSelection="NO" autosaveColumns="NO" rowSizeStyle="automatic" viewBased="YES" id="jfJ-0b-tAz" userLabel="Table View - Requests">
-                                                    <rect key="frame" x="0.0" y="0.0" width="287" height="533"/>
+                                                    <rect key="frame" x="0.0" y="0.0" width="287" height="503"/>
                                                     <autoresizingMask key="autoresizingMask"/>
                                                     <size key="intercellSpacing" width="3" height="2"/>
                                                     <color key="backgroundColor" name="controlBackgroundColor" catalog="System" colorSpace="catalog"/>
@@ -197,10 +216,12 @@
                                 </subviews>
                                 <constraints>
                                     <constraint firstAttribute="trailing" secondItem="gCb-Cj-45V" secondAttribute="trailing" id="6XJ-vC-ncq"/>
+                                    <constraint firstItem="tHV-mZ-nOe" firstAttribute="centerX" secondItem="KBu-Ny-MmK" secondAttribute="centerX" id="CFD-Ue-KPB"/>
                                     <constraint firstItem="gCb-Cj-45V" firstAttribute="leading" secondItem="KBu-Ny-MmK" secondAttribute="leading" id="Lyp-wY-WEY"/>
                                     <constraint firstAttribute="trailing" secondItem="N8i-fW-UjS" secondAttribute="trailing" id="MaL-ZD-Jto"/>
+                                    <constraint firstItem="fUE-k2-KwP" firstAttribute="top" secondItem="tHV-mZ-nOe" secondAttribute="bottom" constant="5" id="ODP-rU-1Aw"/>
                                     <constraint firstAttribute="bottom" secondItem="gCb-Cj-45V" secondAttribute="bottom" id="Q8T-AS-u4s"/>
-                                    <constraint firstItem="fUE-k2-KwP" firstAttribute="top" secondItem="N8i-fW-UjS" secondAttribute="bottom" id="Xiq-W4-Yes"/>
+                                    <constraint firstItem="tHV-mZ-nOe" firstAttribute="top" secondItem="Xgn-y3-Pre" secondAttribute="bottom" constant="5" id="QxF-V8-ydC"/>
                                     <constraint firstItem="gCb-Cj-45V" firstAttribute="top" secondItem="fUE-k2-KwP" secondAttribute="bottom" id="dZl-sv-biA"/>
                                     <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="100" id="eLM-Ax-OeX"/>
                                     <constraint firstAttribute="trailing" secondItem="fUE-k2-KwP" secondAttribute="trailing" id="kEM-C0-MEJ"/>
@@ -443,12 +464,18 @@
                     <constraint firstAttribute="bottom" secondItem="UMW-gH-1cu" secondAttribute="bottom" id="wUt-WZ-qxI"/>
                 </constraints>
             </view>
-            <point key="canvasLocation" x="268" y="390"/>
+            <point key="canvasLocation" x="268" y="389.5"/>
         </window>
         <viewController id="9sg-fL-85B" customClass="NFXListController_OSX" customModule="netfox_osx" customModuleProvider="target">
             <connections>
                 <outlet property="searchField" destination="gCb-Cj-45V" id="uUx-a0-ceG"/>
-                <outlet property="tableView" destination="jfJ-0b-tAz" id="hdK-b7-8EX"/>
+                <outlet property="tableView" destination="jfJ-0b-tAz" id="GJq-bv-WWA"/>
+            </connections>
+        </viewController>
+        <viewController id="pwl-fh-wud" customClass="NFXPathNodeListController_OSX" customModule="netfox_osx" customModuleProvider="target">
+            <connections>
+                <outlet property="searchField" destination="gCb-Cj-45V" id="tsd-Di-hdm"/>
+                <outlet property="tableView" destination="jfJ-0b-tAz" id="XvH-aC-ScV"/>
             </connections>
         </viewController>
         <viewController id="m3Y-f4-6bj" customClass="NFXDetailsController_OSX" customModule="netfox_osx" customModuleProvider="target">
