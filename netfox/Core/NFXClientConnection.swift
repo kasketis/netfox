@@ -13,6 +13,7 @@ class NFXClientConnection: NSObject {
     let outputStream: OutputStream
     
     private var thread: Thread!
+    private var runLoop: CFRunLoop?
     
     init (inputStream: InputStream, outputStream: OutputStream) {
         self.inputStream = inputStream
@@ -24,20 +25,23 @@ class NFXClientConnection: NSObject {
         outputStream.close()
     }
     
-    func scheduleOnMainRunLoop() {
+    func scheduleOnBackgroundRunLoop() {
         let threadName = String(describing: self).components(separatedBy: .punctuationCharacters)[1]
-        thread = Thread(target: self, selector: #selector(runLoop), object: nil)
+        thread = Thread(target: self, selector: #selector(startRunLoop), object: nil)
         thread.name = "\(threadName)-\(UUID().uuidString)"
         thread.start()
-        perform(#selector(scheduleOnRunLoop), on: thread, with: nil, waitUntilDone: false)
     }
     
-    @objc func runLoop() {
-        while (thread?.isCancelled == false) {
-//            RunLoop.current.run(mode: .defaultRunLoopMode, before: .distantPast)
-            RunLoop.current.run()
-        }
-        Thread.exit()
+    @objc func startRunLoop() {
+        scheduleOnRunLoop()
+        self.runLoop = CFRunLoopGetCurrent()
+        CFRunLoopRun()
+    }
+    
+    @objc func stopRunLoop() {
+        self.thread?.cancel()
+        self.thread = nil
+        CFRunLoopStop(runLoop!)
     }
     
     @objc func scheduleOnRunLoop() {
@@ -50,9 +54,8 @@ class NFXClientConnection: NSObject {
     var onClose: (() -> Void)? {
         get { return _onClose }
         set { _onClose = {[unowned self] in
-                self.thread?.cancel()
-                self.thread = nil
                 self.inputStream.delegate = nil
+                self.stopRunLoop()
                 DispatchQueue.main.async {
                     newValue?()
                 }

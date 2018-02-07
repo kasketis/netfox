@@ -50,7 +50,7 @@ public class NFXServer: NSObject {
                 self.stopServer()
                 
                 DispatchQueue.main.asyncAfter(deadline: .now() + 1.0) {
-                    self.publishHttpService()
+                    self.startServer()
                 }
             }
         }
@@ -68,7 +68,7 @@ extension NFXServer: NetServiceDelegate {
     
     public func netService(_ sender: NetService, didAcceptConnectionWith inputStream: InputStream, outputStream: OutputStream) {
         let client = NFXClientConnection(inputStream: inputStream, outputStream: outputStream)
-        client.scheduleOnMainRunLoop()
+        client.scheduleOnBackgroundRunLoop()
         connectedClients.append(client)
         client.writeAllModels()
         client.onClose = { [unowned self] in

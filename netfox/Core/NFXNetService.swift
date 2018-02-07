@@ -52,8 +52,9 @@ class NFXNetService: NSObject {
         let didOpen = service.getInputStream(&inputStream, outputStream: &outputStream)
         if didOpen {
             let client = NFXClientConnection(inputStream: inputStream!, outputStream: outputStream!)
-            client.scheduleOnMainRunLoop()
+            client.scheduleOnBackgroundRunLoop()
             client.prepareForReadingStream()
+            clients.forEach({ $0.stopRunLoop() })
             clients = [client]
             client.onClose = { [unowned self] in
                 self.clients = []
