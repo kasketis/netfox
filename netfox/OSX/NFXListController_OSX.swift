@@ -54,7 +54,7 @@ class NFXListController_OSX: NFXListController, NSTableViewDelegate, NSTableView
         reloadTableViewData()
     }
 
-    func controlTextDidChange(obj: NSNotification) {
+    @objc override func controlTextDidChange(_ obj: Notification) {
         guard let searchField = obj.object as? NSSearchField else {
             return
         }
