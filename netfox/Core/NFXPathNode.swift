@@ -14,7 +14,7 @@ class NFXPathNode {
     var children: [NFXPathNode]
     weak var parent: NFXPathNode?
     var httpModel: NFXHTTPModel?
-    var isExpanded = false
+    var isExpanded = true
     
     init(name: String) {
         self.name = name
