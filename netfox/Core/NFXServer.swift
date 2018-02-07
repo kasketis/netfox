@@ -45,11 +45,11 @@ public class NFXServer: NSObject {
     }
     
     @objc func applicationDidBecomeActive() {
-        DispatchQueue.main.asyncAfter(deadline: .now() + 2) {
+        DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
             if self.connectedClients.isEmpty {
                 self.stopServer()
                 
-                DispatchQueue.main.asyncAfter(deadline: .now() + 1.0) {
+                DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
                     self.startServer()
                 }
             }
