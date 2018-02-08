@@ -82,8 +82,9 @@ class NFXPathNodeListCell_OSX: NSTableCellView {
             }
         } else if status >= 500 && status < 600 {
             _imageView.image = serverErrorImage
+        } else {
+            _imageView.image = fileDownloadingImage
         }
-        
     }
     
     func isNewBasedOnDate(responseDate: NSDate) {

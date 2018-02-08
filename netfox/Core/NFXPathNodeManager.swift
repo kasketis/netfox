@@ -39,6 +39,15 @@ final class NFXPathNodeManager {
         previousNode.insert(resourceNode)
     }
     
+    func update(_ obj: NFXHTTPModel) {
+        guard let name = obj.requestURL?.split(separator: "/").last else {
+            return
+        }
+        
+        let node = NFXPathNode(name: String(name))
+        rootNode.find(node)?.httpModel = obj
+    }
+    
     func clear() {
         rootNode.children = []
     }
@@ -48,7 +57,6 @@ final class NFXPathNodeManager {
     }
     
     func getTableModels() -> [NFXPathNode] {
-        rootNode.isExpanded = true
         var models = rootNode.toArray()
         models.remove(at: 0)
         return models
