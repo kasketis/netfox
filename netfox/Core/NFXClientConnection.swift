@@ -41,7 +41,9 @@ class NFXClientConnection: NSObject {
     @objc func stopRunLoop() {
         self.thread?.cancel()
         self.thread = nil
-        CFRunLoopStop(runLoop!)
+        if let runLoop = runLoop {
+            CFRunLoopStop(runLoop)
+        }
     }
     
     @objc func scheduleOnRunLoop() {
