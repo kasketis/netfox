@@ -30,7 +30,7 @@ class NFXPathNode {
     }
     
     func find(_ node: NFXPathNode) -> NFXPathNode? {
-        if name == node.name {
+        if name == node.name && httpModel == nil {
             return self
         }
         
