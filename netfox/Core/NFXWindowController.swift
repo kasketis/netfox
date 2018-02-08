@@ -96,8 +96,6 @@ class NFXWindowController: NSWindowController, NSWindowDelegate, NFXWindowContro
     }
     
     @IBAction func segmentedAction(_ sender: Any) {
-        print(segmentedControl.selectedSegment)
-        
         switch segmentedControl.selectedSegment {
         case 0:
             listViewController.searchField.delegate = listViewController
@@ -114,8 +112,6 @@ class NFXWindowController: NSWindowController, NSWindowDelegate, NFXWindowContro
         default:
             abort()
         }
-        
-        
     }
     
 }
