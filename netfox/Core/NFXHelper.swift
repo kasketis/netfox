@@ -226,9 +226,39 @@ extension NFXImage
     }
     
     #if os (OSX)
+    class func NFXCloud() -> NFXImage
+    {
+        return NSImage(data: NFXAssets.getImage(NFXAssetName.cloud))!
+    }
+    
     class func NFXFolder() -> NFXImage
     {
         return NSImage(data: NFXAssets.getImage(NFXAssetName.folder))!
+    }
+    
+    class func NFXFileDownloading() -> NFXImage
+    {
+        return NSImage(data: NFXAssets.getImage(NFXAssetName.fileDownloading))!
+    }
+    
+    class func NFXFileSuccess() -> NFXImage
+    {
+        return NSImage(data: NFXAssets.getImage(NFXAssetName.fileSuccess))!
+    }
+    
+    class func NFXFileWarning() -> NFXImage
+    {
+        return NSImage(data: NFXAssets.getImage(NFXAssetName.fileWarning))!
+    }
+    
+    class func NFXFileUnauthorized() -> NFXImage
+    {
+        return NSImage(data: NFXAssets.getImage(NFXAssetName.fileUnauthorized))!
+    }
+    
+    class func NFXServerError() -> NFXImage
+    {
+        return NSImage(data: NFXAssets.getImage(NFXAssetName.serverError))!
     }
     #endif
 }
