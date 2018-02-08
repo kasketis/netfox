@@ -19,8 +19,8 @@ final class NFXHTTPModelManager: NSObject
         self.models.insert(obj, at: 0)
 
         #if os(OSX)
-//        NFXPathNodeManager.sharedInstance.add(obj)
-        NFXPathNodeManager.sharedInstance.update(obj)
+        NFXPathNodeManager.sharedInstance.add(obj)
+//        NFXPathNodeManager.sharedInstance.update(obj)
         #endif
     }
     
