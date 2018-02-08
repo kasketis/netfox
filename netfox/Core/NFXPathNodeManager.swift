@@ -43,9 +43,8 @@ final class NFXPathNodeManager {
         rootNode.children = []
     }
     
-    func getModels() -> [NFXPathNode] {
-        rootNode.printTree()
-        return rootNode.children
+    func getHttpModels() -> [NFXHTTPModel] {
+        return rootNode.findLeaves()
     }
     
     func getTableModels() -> [NFXPathNode] {
