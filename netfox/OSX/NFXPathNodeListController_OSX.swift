@@ -35,7 +35,7 @@ class NFXPathNodeListController_OSX: NFXListController, NSTableViewDelegate, NST
         NotificationCenter.default.addObserver(self, selector: #selector(NFXListController.reloadTableViewData), name: NSNotification.Name(rawValue: "NFXReloadData"), object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(NFXPathNodeListController_OSX.deactivateSearchController), name: NSNotification.Name(rawValue: "NFXDeactivateSearch"), object: nil)
         
-        pathNodeTableData = modelManager.getModels()
+        pathNodeTableData = modelManager.getTableModels()
     }
     
     // MARK: Notifications
@@ -45,7 +45,7 @@ class NFXPathNodeListController_OSX: NFXListController, NSTableViewDelegate, NST
             if self.searchField.stringValue.isEmpty {
                 self.pathNodeTableData = self.modelManager.getTableModels()
             } else {
-                let filtered = self.filter(models: NFXHTTPModelManager.sharedInstance.getModels(), searchString: self.searchField.stringValue)
+                let filtered = self.filter(models: self.modelManager.getHttpModels(), searchString: self.searchField.stringValue)
                 let model = NFXPathNodeManager()
                 model.add(filtered)
                 self.pathNodeTableData = model.getTableModels()
@@ -121,7 +121,7 @@ class NFXPathNodeListController_OSX: NFXListController, NSTableViewDelegate, NST
             if !node.isExpanded {
                 node.isExpanded = true
                 pathNodeTableData.insert(contentsOf: node.children, at: tableView.selectedRow + 1)
-                tableView.reloadData()
+                reloadTableViewData()
             } else {
                 node.isExpanded = false
                 reloadTableViewData()
