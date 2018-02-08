@@ -16,11 +16,12 @@ class NFXPathNode {
     var children: [NFXPathNode]
     weak var parent: NFXPathNode?
     var httpModel: NFXHTTPModel?
-    var isExpanded = true
+    var isExpanded: Bool
     
     init(name: String) {
         self.name = name
         self.children = []
+        self.isExpanded = true
     }
     
     func insert(_ node: NFXPathNode) {
@@ -38,7 +39,7 @@ class NFXPathNode {
     
     func depth() -> Int {
         if parent == nil {
-            return -1
+            return 0
         }
         
         return parent!.depth() + 1
