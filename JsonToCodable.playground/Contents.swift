@@ -3,13 +3,16 @@
 import Foundation
 import PlaygroundSupport
 
+
+
+
 extension String {
     
     func uppercaseFirstLetter() -> String {
-        if let index = index(where: { CharacterSet.letters.contains($0.unicodeScalars.first!) })?.encodedOffset {
-            return prefix(index) + suffix(count-index).capitalized
-        }
-        return prefix(1).uppercased() + dropFirst()
+        let paranthesisCount = components(separatedBy: "]").count - 1
+        let stringWithoutParanthesis = dropFirst(paranthesisCount)
+        
+        return String(repeating: "[", count: paranthesisCount) + stringWithoutParanthesis.capitalized
     }
     
     func lowercaseFirstLetter() -> String {
@@ -31,6 +34,9 @@ extension String {
         return self
     }
 }
+
+
+
 
 class Parser<T> {
 
@@ -89,6 +95,34 @@ extension Parser where T == [Any] {
     }
 }
 
+
+
+class CodableClass: CustomStringConvertible {
+    
+    var className: String
+    var properties: [(String, String)] = []
+    
+    init(className: String) {
+        self.className = className
+    }
+    
+    func insertProperty(name: String, type: String) {
+        properties.append((name, type))
+    }
+    
+    var description: String {
+        var str = "class \(className.camelCasedString.singular): Codable {\n\n"
+        str += properties.map{ "\tvar \($0.0.camelCasedString.lowercaseFirstLetter()): \($0.1.camelCasedString.singular)" }.joined(separator: "\n")
+        str += "\n\n\tenum CodingKeys: String, CodingKey {\n"
+        str += properties.map{"\t\tcase \($0.0.camelCasedString.lowercaseFirstLetter()) = \"\($0.0)\""}.joined(separator: "\n")
+        str += "\n\t}"
+        str += "\n}\n\n"
+        return str
+    }
+}
+
+
+
 class Json2Codable {
     
     private let intParser = Parser<Int>()
@@ -97,43 +131,42 @@ class Json2Codable {
     private let dictionaryParser = Parser<[String: Any]>()
     private let arrayParser = Parser<[Any]>()
     
-    private var classes: [String: [(String, String)]] = [:]
+    private var codableClasses: [CodableClass] = []
     
     func convertToCodable(name: String, from dictionary: [String: Any]) {
-        classes[name] = []
+        let codableClass = CodableClass(className: name)
+        codableClasses.append(codableClass)
         
         dictionary.keys.forEach { key in
-            let jsonValue = dictionary[key]!
             var property: String = ""
             
-            if intParser.canParse(jsonValue) {
+            if intParser.canParse(dictionary[key]!) {
                 property = intParser.getPropertyType()
-            } else if doubleParser.canParse(jsonValue) {
+            } else if doubleParser.canParse(dictionary[key]!) {
                 property = doubleParser.getPropertyType()
-            } else if stringParser.canParse(jsonValue) {
+            } else if stringParser.canParse(dictionary[key]!) {
                 property = stringParser.getPropertyType()
-            } else if dictionaryParser.canParse(jsonValue){
+            } else if dictionaryParser.canParse(dictionary[key]!){
                 property = dictionaryParser.getPropertyType(name: key)
-                convertToCodable(name: key, from: dictionaryParser.parse(jsonValue))
-            } else if arrayParser.canParse(jsonValue) {
-                property = arrayParser.getPropertyType(name: key, value: arrayParser.parse(jsonValue), json2Codable: self)
+                convertToCodable(name: key, from: dictionaryParser.parse(dictionary[key]!))
+            } else if arrayParser.canParse(dictionary[key]!) {
+                property = arrayParser.getPropertyType(name: key, value: arrayParser.parse(dictionary[key]!), json2Codable: self)
             }
             
-            classes[name]?.append((key, property))
+            codableClass.insertProperty(name: key, type: property)
         }
     }
     
     func printClasses() {
-        for entry in classes {
-            print("class \(entry.key.camelCasedString.singular): Codable {\n")
-            entry.value.forEach{ print("\t var \($0.0.camelCasedString.lowercaseFirstLetter()): \($0.1.camelCasedString.singular)!") }
-            print("}\n")
-        }
+        codableClasses.forEach{ print($0) }
     }
 }
 
+
+
+
 do {
-    let personStr = "{\n  \"greeting\": \"Welcome to quicktype!\",\n  \"instructions\": {\n     \"tests\": [\n        {\"name\": \"Type or paste JSON here\"},\n        {\"name\": \"Or choose a sample above\"},\n        {\"name\": \"quicktype will generate code in your\"},\n        {\"name\": \"chosen language to parse the sample data\"}\n    ]\n  }\n}"
+    let personStr = "{\n  \"greeting_message\": \"Welcome to quicktype!\",\n  \"instructions\": {\n     \"tests\": [\n        {\"name\": \"Type or paste JSON here\"},\n        {\"name\": \"Or choose a sample above\"},\n        {\"name\": \"quicktype will generate code in your\"},\n        {\"name\": \"chosen language to parse the sample data\"}\n    ]\n  }\n}"
     let data = personStr.data(using: .utf8)!
     let dictionary = try JSONSerialization.jsonObject(with: data) as! [String: Any]
     let converter = Json2Codable()
