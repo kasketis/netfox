@@ -65,34 +65,6 @@ extension Parser where T == [Any] {
     func parse(_ value: Any) -> T {
         return value as! T
     }
-    
-    func getPropertyType(name: String, value: T, json2Codable: Json2Codable) -> String {
-        guard let item = value.first else {
-            return "[Any]"
-        }
-        
-        let intParser = Parser<Int>()
-        let stringParser = Parser<String>()
-        let doubleParser = Parser<Double>()
-        let dictionaryParser = Parser<[String: Any]>()
-        
-        var propertyType: String = "Any"
-        
-        if intParser.canParse(item) {
-            propertyType = "Int"
-        } else if doubleParser.canParse(item) {
-            propertyType = "Double"
-        } else if stringParser.canParse(item) {
-            propertyType = "String"
-        } else if dictionaryParser.canParse(item) {
-            propertyType = name
-            json2Codable.convertToCodable(name: name, from: dictionaryParser.parse(item))
-        } else if canParse(item) {
-            propertyType = "\(getPropertyType(name: name, value: parse(item), json2Codable: json2Codable))"
-        }
-        
-        return "[\(propertyType)]"
-    }
 }
 
 
@@ -106,7 +78,7 @@ class CodableClass: CustomStringConvertible {
         self.className = className
     }
     
-    func insertProperty(name: String, type: String) {
+    func addProperty(name: String, type: String) {
         properties.append((name, type))
     }
     
@@ -133,28 +105,47 @@ class Json2Codable {
     
     private var codableClasses: [CodableClass] = []
     
-    func convertToCodable(name: String, from dictionary: [String: Any]) {
-        let codableClass = CodableClass(className: name)
-        codableClasses.append(codableClass)
+    func convertToCodable(name: String, from dictionary: [String: Any]) -> CodableClass {
+        let codableClass = getCodableClass(name: name)
         
         dictionary.keys.forEach { key in
-            var property: String = ""
-            
-            if intParser.canParse(dictionary[key]!) {
-                property = intParser.getPropertyType()
-            } else if doubleParser.canParse(dictionary[key]!) {
-                property = doubleParser.getPropertyType()
-            } else if stringParser.canParse(dictionary[key]!) {
-                property = stringParser.getPropertyType()
-            } else if dictionaryParser.canParse(dictionary[key]!){
-                property = dictionaryParser.getPropertyType(name: key)
-                convertToCodable(name: key, from: dictionaryParser.parse(dictionary[key]!))
-            } else if arrayParser.canParse(dictionary[key]!) {
-                property = arrayParser.getPropertyType(name: key, value: arrayParser.parse(dictionary[key]!), json2Codable: self)
-            }
-            
-            codableClass.insertProperty(name: key, type: property)
+            codableClass.addProperty(
+                name: key,
+                type: convertToProperty(key: key, value: dictionary[key]!)
+            )
         }
+        
+        return codableClass
+    }
+    
+    private func convertToProperty(key: String, value: Any) -> String {
+        if intParser.canParse(value) {
+            return intParser.getPropertyType()
+        } else if doubleParser.canParse(value) {
+            return doubleParser.getPropertyType()
+        } else if stringParser.canParse(value) {
+            return stringParser.getPropertyType()
+        } else if dictionaryParser.canParse(value) {
+            convertToCodable(name: key, from: dictionaryParser.parse(value))
+            return dictionaryParser.getPropertyType(name: key)
+        } else if arrayParser.canParse(value) {
+            return "[\(convertToProperty(key: key, value: arrayParser.parse(value).first!))]"
+        }
+        
+        return ""
+    }
+    
+    private func getCodableClass(name: String) -> CodableClass {
+        var codableClass: CodableClass
+        
+        if let foundClass = codableClasses.first(where: { $0.className == name }) {
+            codableClass = foundClass
+        } else {
+            codableClass = CodableClass(className: name)
+            codableClasses.append(codableClass)
+        }
+        
+        return codableClass
     }
     
     func printClasses() {
@@ -166,11 +157,11 @@ class Json2Codable {
 
 
 do {
-    let personStr = "{\n  \"greeting_message\": \"Welcome to quicktype!\",\n  \"instructions\": {\n     \"tests\": [\n        {\"name\": \"Type or paste JSON here\"},\n        {\"name\": \"Or choose a sample above\"},\n        {\"name\": \"quicktype will generate code in your\"},\n        {\"name\": \"chosen language to parse the sample data\"}\n    ]\n  }\n}"
-    let data = personStr.data(using: .utf8)!
+    let str = "{\n  \"greeting\": \"Welcome to quicktype!\",\n  \"some_url\": \"https://facebook.com\",\n  \"instructions\": {\n     \"tests\": [\n        [\n            {\"name\": \"Type or paste JSON here\"},\n            {\"name\": \"Or choose a sample above\"},\n            {\"name\": \"quicktype will generate code in your\"},\n            {\"name\": \"chosen language to parse the sample data\"}\n        ]\n    ]\n  }\n}"
+    let data = str.data(using: .utf8)!
     let dictionary = try JSONSerialization.jsonObject(with: data) as! [String: Any]
     let converter = Json2Codable()
-    converter.convertToCodable(name: "person", from: dictionary)
+    converter.convertToCodable(name: "welcome", from: dictionary)
     converter.printClasses()
 } catch {
 
