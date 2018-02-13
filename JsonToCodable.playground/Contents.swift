@@ -148,6 +148,19 @@ class Json2Codable {
         return codableClass
     }
     
+    func getResourceName(from url: String?) -> String {
+        guard let url = url else {
+            return "ClassName"
+        }
+        
+        var components = url.split(separator: "/")
+        if let _ = Int(components.last ?? "") {
+           components = Array(components.dropLast())
+        }
+        
+        return String(components.last ?? "").singular
+    }
+    
     func printClasses() {
         codableClasses.forEach{ print($0) }
     }
@@ -161,8 +174,9 @@ do {
     let data = str.data(using: .utf8)!
     let dictionary = try JSONSerialization.jsonObject(with: data) as! [String: Any]
     let converter = Json2Codable()
-    converter.convertToCodable(name: "welcome", from: dictionary)
-    converter.printClasses()
+    print(converter.getResourceName(from: "https://jsonplaceholder.typicode.com/posts/1/comments"))
+//    converter.convertToCodable(name: "welcome", from: dictionary)
+//    converter.printClasses()
 } catch {
 
 }

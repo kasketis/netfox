@@ -151,6 +151,19 @@ public class Json2Codable {
         return codableClass
     }
     
+    func getResourceName(from url: String?) -> String {
+        guard let url = url else {
+            return "ClassName"
+        }
+        
+        var components = url.split(separator: "/")
+        if let _ = Int(components.last ?? "") {
+            components = Array(components.dropLast())
+        }
+        
+        return String(components.last ?? "").singular
+    }
+    
     func printClasses() -> String {
         return codableClasses.map{ $0.description }.reduce("", +)
     }
