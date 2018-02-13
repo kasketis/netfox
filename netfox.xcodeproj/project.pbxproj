@@ -279,9 +279,9 @@
 		8F9DEE92203338F700E76B7E /* Json2Codable */ = {
 			isa = PBXGroup;
 			children = (
+				8F9DEE952033393800E76B7E /* NFXCodableClass.swift */,
 				8FBFFB4C20331DD000DF9319 /* NFXJson2Codable.swift */,
 				8F9DEE932033391800E76B7E /* NFXJsonParser.swift */,
-				8F9DEE952033393800E76B7E /* NFXCodableClass.swift */,
 				8F9DEE972033398500E76B7E /* String+CamelCase.swift */,
 			);
 			path = Json2Codable;

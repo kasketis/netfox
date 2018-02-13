@@ -22,6 +22,7 @@ public class NFXJson2Codable {
         if let item = array.first, dictionaryParser.canParse(item) {
             return convertToCodable(name: name, from: dictionaryParser.parse(item))
         }
+        
         return getCodableClass(name: "[\(convertToProperty(key: name, value: array.first!))]")
     }
     
@@ -69,9 +70,11 @@ public class NFXJson2Codable {
     }
     
     func getResourceName(from url: String?) -> String {
-        guard let url = url else {
+        guard var url = url else {
             return "ClassName"
         }
+        
+        url = String(url.split(separator: "?").first!)
         
         var components = url.split(separator: "/")
         if let _ = Int(components.last ?? "") {
