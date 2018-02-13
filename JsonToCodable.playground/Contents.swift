@@ -84,7 +84,7 @@ class CodableClass: CustomStringConvertible {
     
     var description: String {
         var str = "class \(className.camelCasedString.singular): Codable {\n\n"
-        str += properties.map{ "\tvar \($0.0.camelCasedString.lowercaseFirstLetter()): \($0.1.camelCasedString.singular)" }.joined(separator: "\n")
+        str += properties.map{ "\tvar \($0.0.camelCasedString.lowercaseFirstLetter()): \($0.1.camelCasedString.singular)!" }.joined(separator: "\n")
         str += "\n\n\tenum CodingKeys: String, CodingKey {\n"
         str += properties.map{"\t\tcase \($0.0.camelCasedString.lowercaseFirstLetter()) = \"\($0.0)\""}.joined(separator: "\n")
         str += "\n\t}"
