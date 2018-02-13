@@ -16,6 +16,7 @@ class NFXDetailsController_OSX: NFXDetailsController {
     @IBOutlet var textViewBodyRequest: NSTextView!
     @IBOutlet var textViewResponse: NSTextView!
     @IBOutlet var textViewBodyResponse: NSTextView!
+    @IBOutlet var textViewCodable: NSTextView!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -42,6 +43,22 @@ class NFXDetailsController_OSX: NFXDetailsController {
             bodyResponse = self.formatNFXString(String(model.getResponseBody()))
         }
         self.textViewBodyResponse.textStorage?.setAttributedString(bodyResponse)
+        
+        
+        
+        do {
+            let str = model.getResponseBody() as String
+            let data = str.data(using: .utf8)!
+            if let dictionary = try JSONSerialization.jsonObject(with: data) as? [String: Any] {
+                let converter = Json2Codable()
+                let _ = converter.convertToCodable(name: "welcome", from: dictionary)
+                self.textViewCodable.textStorage?.setAttributedString(NSAttributedString(string: converter.printClasses()))
+            } else {
+                self.textViewCodable.textStorage?.setAttributedString(NSAttributedString(string: "Something went wrong with decoding. :("))
+            }
+        } catch {
+            self.textViewCodable.textStorage?.setAttributedString(NSAttributedString(string: "Something went wrong with decoding. :("))
+        }
     }
     
 }
