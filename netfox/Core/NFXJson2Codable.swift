@@ -108,6 +108,13 @@ public class Json2Codable {
     
     private var codableClasses: [CodableClass] = []
     
+    func convertToCodable(name: String, from array: [Any]) -> CodableClass {
+        if let item = array.first, dictionaryParser.canParse(item) {
+            return convertToCodable(name: name, from: dictionaryParser.parse(item))
+        }
+        return CodableClass(className: "Oops!")
+    }
+    
     func convertToCodable(name: String, from dictionary: [String: Any]) -> CodableClass {
         let codableClass = getCodableClass(name: name)
         

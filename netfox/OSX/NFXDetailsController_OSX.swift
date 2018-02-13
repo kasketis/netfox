@@ -47,15 +47,19 @@ class NFXDetailsController_OSX: NFXDetailsController {
         do {
             let str = model.getResponseBody() as String
             let data = str.data(using: .utf8)!
+            let converter = Json2Codable()
             if let dictionary = try JSONSerialization.jsonObject(with: data) as? [String: Any] {
-                let converter = Json2Codable()
                 let _ = converter.convertToCodable(
                     name: converter.getResourceName(from: model.requestURL),
                     from: dictionary
                 )
                 self.textViewCodable.textStorage?.setAttributedString(NSAttributedString(string: converter.printClasses()))
-            } else {
-                self.textViewCodable.textStorage?.setAttributedString(NSAttributedString(string: "Something went wrong with decoding. :("))
+            } else if let array = try JSONSerialization.jsonObject(with: data) as? [Any] {
+                let _ = converter.convertToCodable(
+                    name: converter.getResourceName(from: model.requestURL),
+                    from: array
+                )
+                self.textViewCodable.textStorage?.setAttributedString(NSAttributedString(string: converter.printClasses()))
             }
         } catch {
             self.textViewCodable.textStorage?.setAttributedString(NSAttributedString(string: "Something went wrong with decoding. :("))
