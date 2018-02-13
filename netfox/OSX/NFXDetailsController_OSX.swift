@@ -47,7 +47,7 @@ class NFXDetailsController_OSX: NFXDetailsController {
         do {
             let str = model.getResponseBody() as String
             let data = str.data(using: .utf8)!
-            let converter = Json2Codable()
+            let converter = NFXJson2Codable()
             if let dictionary = try JSONSerialization.jsonObject(with: data) as? [String: Any] {
                 let _ = converter.convertToCodable(
                     name: converter.getResourceName(from: model.requestURL),
