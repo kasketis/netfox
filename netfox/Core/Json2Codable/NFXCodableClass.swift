@@ -22,6 +22,10 @@ class NFXCodableClass: CustomStringConvertible {
     }
     
     var description: String {
+        if properties.isEmpty {
+            return className
+        }
+        
         var str = "class \(className.camelCasedString.singular): Codable {\n\n"
         str += properties.map{ "\tvar \($0.0.camelCasedString.lowercaseFirstLetter()): \($0.1.camelCasedString.singular)!" }.joined(separator: "\n")
         str += "\n\n\tenum CodingKeys: String, CodingKey {\n"
