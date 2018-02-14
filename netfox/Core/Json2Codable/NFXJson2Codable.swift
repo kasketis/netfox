@@ -42,18 +42,36 @@ public class NFXJson2Codable {
     private func convertToProperty(key: String, value: Any) -> String {
         if intParser.canParse(value) {
             return intParser.getPropertyType()
-        } else if doubleParser.canParse(value) {
-            return doubleParser.getPropertyType()
-        } else if stringParser.canParse(value) {
-            return stringParser.getPropertyType()
-        } else if dictionaryParser.canParse(value) {
-            let _ = convertToCodable(name: key, from: dictionaryParser.parse(value))
-            return dictionaryParser.getPropertyType(name: key)
-        } else if arrayParser.canParse(value) {
-            return "[\(convertToProperty(key: key, value: arrayParser.parse(value).first!))]"
         }
         
-        return "[Any]"
+        if doubleParser.canParse(value) {
+            return doubleParser.getPropertyType()
+        }
+        
+        if stringParser.canParse(value) {
+            return stringParser.getPropertyType()
+        }
+        
+        if dictionaryParser.canParse(value) {
+            let dictionary = dictionaryParser.parse(value)
+            
+            if dictionary.count > 0 {
+                let _ = convertToCodable(name: key, from: dictionary)
+                return dictionaryParser.getPropertyType(name: key)
+            } else {
+                return "Any"
+            }
+        }
+        
+        if arrayParser.canParse(value) {
+            if let first = arrayParser.parse(value).first {
+                return "[\(convertToProperty(key: key, value: first))]"
+            } else {
+                return "[Any]"
+            }
+        }
+        
+        return "Any"
     }
     
     private func getCodableClass(name: String) -> NFXCodableClass {

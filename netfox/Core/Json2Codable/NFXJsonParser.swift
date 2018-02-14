@@ -33,10 +33,6 @@ extension NFXJsonParser where T == [String: Any] {
 
 extension NFXJsonParser where T == [Any] {
     
-    func canParse(_ value: Any) -> Bool {
-        return (value as? T)?.isEmpty == false
-    }
-    
     func parse(_ value: Any) -> T {
         return value as! T
     }
