@@ -53,7 +53,7 @@ public class NFXJson2Codable {
             return "[\(convertToProperty(key: key, value: arrayParser.parse(value).first!))]"
         }
         
-        return ""
+        return "[Any]"
     }
     
     private func getCodableClass(name: String) -> NFXCodableClass {
