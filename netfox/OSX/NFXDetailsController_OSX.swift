@@ -36,7 +36,7 @@ class NFXDetailsController_OSX: NFXDetailsController {
         self.textViewBodyRequest.textStorage?.setAttributedString(bodyRequest)
         
         self.textViewResponse.textStorage?.setAttributedString(self.getResponseStringFromObject(model))
-        let bodyResponse: NSAttributedString
+        var bodyResponse: NSAttributedString
         if model.responseBodyLength == 0 {
             bodyResponse = self.formatNFXString(String(self.getResponseBodyStringFooter(model)))
         } else {
@@ -44,6 +44,12 @@ class NFXDetailsController_OSX: NFXDetailsController {
         }
         self.textViewBodyResponse.textStorage?.setAttributedString(bodyResponse)
         
+        guard model.responseBodyLength != 0 else {
+            bodyResponse = self.formatNFXString(String(self.getResponseBodyStringFooter(model)))
+            self.textViewCodable.textStorage?.setAttributedString(bodyResponse)
+            return
+        }
+
         do {
             let str = model.getResponseBody() as String
             let data = str.data(using: .utf8)!
