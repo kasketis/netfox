@@ -22,7 +22,7 @@ extension String {
     }
     
     var camelCasedString: String {
-        return components(separatedBy: CharacterSet(charactersIn: "_ ")).map{ $0.uppercaseFirstLetter() }.joined()
+        return components(separatedBy: CharacterSet(charactersIn: "_- ")).map{ $0.uppercaseFirstLetter() }.joined()
     }
     
     var singular: String {
