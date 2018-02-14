@@ -14,7 +14,7 @@ extension String {
         let paranthesisCount = components(separatedBy: "]").count - 1
         let stringWithoutParanthesis = dropFirst(paranthesisCount)
         
-        return String(repeating: "[", count: paranthesisCount) + stringWithoutParanthesis.capitalized
+        return String(repeating: "[", count: paranthesisCount) + stringWithoutParanthesis.prefix(1).capitalized + stringWithoutParanthesis.dropFirst()
     }
     
     func lowercaseFirstLetter() -> String {
@@ -22,7 +22,7 @@ extension String {
     }
     
     var camelCasedString: String {
-        return components(separatedBy: CharacterSet(charactersIn: "_ ")).map{ $0.lowercased().uppercaseFirstLetter() }.joined()
+        return components(separatedBy: CharacterSet(charactersIn: "_ ")).map{ $0.uppercaseFirstLetter() }.joined()
     }
     
     var singular: String {
