@@ -99,10 +99,10 @@ public class NFXJson2Codable {
             components = Array(components.dropLast())
         }
         
-        return String(components.last ?? "").singular
+        return String(components.last ?? "")
     }
     
     func printClasses() -> String {
-        return codableClasses.map{ $0.description }.reduce("", +)
+        return codableClasses.map{ $0.description }.joined()
     }
 }

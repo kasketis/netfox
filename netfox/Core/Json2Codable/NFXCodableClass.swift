@@ -21,15 +21,27 @@ class NFXCodableClass: CustomStringConvertible {
         properties.append((name, type))
     }
     
+    fileprivate func getClassName(_ string: String) -> String {
+        return string.camelCasedString.uppercaseFirstLetter().singular
+    }
+    
+    fileprivate func getPropertyName(_ string: String) -> String {
+        return string.camelCasedString
+    }
+    
+    fileprivate func getPropertyType(_ string: String) -> String {
+        return string.camelCasedString.uppercaseFirstLetter().singular
+    }
+    
     var description: String {
         if properties.isEmpty {
             return className
         }
         
-        var str = "class \(className.camelCasedString.singular): Codable {\n\n"
-        str += properties.map{ "\tvar \($0.0.camelCasedString.lowercaseFirstLetter()): \($0.1.camelCasedString.singular)!" }.joined(separator: "\n")
+        var str = "class \(getClassName(className)): Codable {\n\n"
+        str += properties.map{ "\tvar \(getPropertyName($0.0)): \(getPropertyType($0.1))!" }.joined(separator: "\n")
         str += "\n\n\tenum CodingKeys: String, CodingKey {\n"
-        str += properties.map{"\t\tcase \($0.0.camelCasedString.lowercaseFirstLetter()) = \"\($0.0)\""}.joined(separator: "\n")
+        str += properties.map{"\t\tcase \(getPropertyName($0.0)) = \"\($0.0)\""}.joined(separator: "\n")
         str += "\n\t}"
         str += "\n}\n\n"
         return str
