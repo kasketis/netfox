@@ -11,8 +11,9 @@ import Foundation
 public class NFXJson2Codable {
     
     private let intParser = NFXJsonParser<Int>()
-    private let stringParser = NFXJsonParser<String>()
     private let doubleParser = NFXJsonParser<Double>()
+    private let urlParser = NFXJsonParser<URL>()
+    private let stringParser = NFXJsonParser<String>()
     private let dictionaryParser = NFXJsonParser<[String: Any]>()
     private let arrayParser = NFXJsonParser<[Any]>()
     
@@ -49,6 +50,9 @@ public class NFXJson2Codable {
         }
         
         if stringParser.canParse(value) {
+            if urlParser.canParse(stringParser.parse(value)) {
+                return urlParser.getPropertyType()
+            }
             return stringParser.getPropertyType()
         }
         

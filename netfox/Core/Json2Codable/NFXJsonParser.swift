@@ -15,25 +15,25 @@ class NFXJsonParser<T> {
         return value is T
     }
     
+    func parse(_ value: Any) -> T {
+        return value as! T
+    }
+    
     func getPropertyType() -> String {
         return "\(T.self)"
     }
 }
 
-extension NFXJsonParser where T == [String: Any] {
+extension NFXJsonParser where T == URL {
     
-    func parse(_ value: Any) -> T {
-        return value as! T
-    }
-    
-    func getPropertyType(name: String) -> String {
-        return "\(name)"
+    func canParse(_ value: String) -> Bool {
+        return value.hasPrefix("https://") || value.hasPrefix("http://")
     }
 }
 
-extension NFXJsonParser where T == [Any] {
+extension NFXJsonParser where T == [String: Any] {
     
-    func parse(_ value: Any) -> T {
-        return value as! T
+    func getPropertyType(name: String) -> String {
+        return "\(name)"
     }
 }
