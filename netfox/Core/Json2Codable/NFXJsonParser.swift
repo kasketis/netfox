@@ -24,16 +24,55 @@ class NFXJsonParser<T> {
     }
 }
 
-extension NFXJsonParser where T == URL {
-    
-    func canParse(_ value: String) -> Bool {
-        return value.hasPrefix("https://") || value.hasPrefix("http://")
-    }
-}
-
 extension NFXJsonParser where T == [String: Any] {
     
     func getPropertyType(name: String) -> String {
         return "\(name)"
+    }
+}
+
+extension NFXJsonParser where T == URL {
+    
+    func canParse(_ value: Any) -> Bool {
+        let stringValue = value as! String
+        return stringValue.hasPrefix("https://") || stringValue.hasPrefix("http://")
+    }
+}
+
+extension NFXJsonParser where T == Date {
+    
+    private var keys: [String] {
+        return ["_at", "date", "day"]
+    }
+    
+    func canParse(_ value: String) -> Bool {
+        let dateFormats = ["yyyy-MM-dd HH:mm:ss.ZZZZZ", "yyyy-MM-dd HH:mm:ss", "yyyy-MM-dd'T'HH:mm:ssZZZZZZ"]
+        let dateFormatter = DateFormatter()
+
+        dateFormatter.dateFormat = dateFormats.first!
+        let accumulator = dateFormatter.date(from: value) != nil
+        
+        return dateFormats.dropFirst().map{
+            dateFormatter.dateFormat = $0
+            return dateFormatter.date(from: value) != nil
+        }.reduce(accumulator, { $0 || $1 })
+    }
+    
+    func canParse(key: String, value: Int) -> Bool {
+        guard keySuggestsDate(key) else {
+            return false
+        }
+        
+        let data = Data("[\(value)]".utf8)
+        let decoder = JSONDecoder()
+        decoder.dateDecodingStrategy = .secondsSince1970
+        
+        let date = try? decoder.decode([Date].self, from: data).first
+        
+        return date != nil
+    }
+    
+    private func keySuggestsDate(_ key: String) -> Bool {
+        return keys.dropFirst().map{ key.contains($0) }.reduce(key.contains(keys.first!), { $0 || $1 })
     }
 }

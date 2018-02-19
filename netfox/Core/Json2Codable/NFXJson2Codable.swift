@@ -12,10 +12,11 @@ public class NFXJson2Codable {
     
     private let intParser = NFXJsonParser<Int>()
     private let doubleParser = NFXJsonParser<Double>()
-    private let urlParser = NFXJsonParser<URL>()
     private let stringParser = NFXJsonParser<String>()
     private let dictionaryParser = NFXJsonParser<[String: Any]>()
     private let arrayParser = NFXJsonParser<[Any]>()
+    private let urlParser = NFXJsonParser<URL>()
+    private let dateParser = NFXJsonParser<Date>()
     
     private var codableClasses: [NFXCodableClass] = []
     
@@ -42,6 +43,10 @@ public class NFXJson2Codable {
     
     private func convertToProperty(key: String, value: Any) -> String {
         if intParser.canParse(value) {
+            if dateParser.canParse(key: key, value: intParser.parse(value)) {
+                return dateParser.getPropertyType()
+            }
+            
             return intParser.getPropertyType()
         }
         
@@ -50,9 +55,16 @@ public class NFXJson2Codable {
         }
         
         if stringParser.canParse(value) {
-            if urlParser.canParse(stringParser.parse(value)) {
+            let stringValue = stringParser.parse(value)
+            
+            if urlParser.canParse(stringValue) {
                 return urlParser.getPropertyType()
             }
+            
+            if dateParser.canParse(stringValue) {
+                return dateParser.getPropertyType()
+            }
+            
             return stringParser.getPropertyType()
         }
         
