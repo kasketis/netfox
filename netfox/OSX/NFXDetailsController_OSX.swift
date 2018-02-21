@@ -60,7 +60,7 @@ class NFXDetailsController_OSX: NFXDetailsController {
                     from: dictionary
                 )
                 self.textViewCodable.textStorage?.setAttributedString(NSAttributedString(string: converter.printClasses()))
-            } else if let array = try JSONSerialization.jsonObject(with: data) as? [Any] {
+            } else if let array = try JSONSerialization.jsonObject(with: data) as? [Any], !array.isEmpty {
                 let _ = converter.convertToCodable(
                     name: converter.getResourceName(from: model.requestURL),
                     from: array
