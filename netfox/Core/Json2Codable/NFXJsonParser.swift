@@ -59,20 +59,6 @@ extension NFXJsonParser where T == Date {
     }
     
     func canParse(key: String, value: Int) -> Bool {
-        guard keySuggestsDate(key) else {
-            return false
-        }
-        
-        let data = Data("[\(value)]".utf8)
-        let decoder = JSONDecoder()
-        decoder.dateDecodingStrategy = .secondsSince1970
-        
-        let date = try? decoder.decode([Date].self, from: data).first
-        
-        return date != nil
-    }
-    
-    private func keySuggestsDate(_ key: String) -> Bool {
         return keys.dropFirst().map{ key.contains($0) }.reduce(key.contains(keys.first!), { $0 || $1 })
     }
 }
