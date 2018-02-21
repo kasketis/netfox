@@ -99,6 +99,18 @@ to prevent library’s execution on your production app.
 
 You can add the DEBUG symbol with the -DDEBUG entry. Set it in the "Swift Compiler - Custom Flags" section -> "Other Swift Flags" line in project’s "Build Settings"
 
+If you want to use netfox with the netfox_mac application, you should start netfox in the following way:
+
+#### Swift
+<pre>
+NFX.sharedInstance().startServer()
+</pre>
+
+#### Obj-C
+<pre>
+[[NFX sharedInstance] startServer];
+</pre>
+
 ## Usage 
 
 Just shake your device and check what's going right or wrong! 
@@ -154,6 +166,9 @@ Tip: You can use the url of the host (for example "https://www.github.com") to i
 - Clear data within the app
 - Statistics: Check cool things like average response time, total response size and more for your selected types of responses
 - Info: Check your IP address, your app version and build number and other things within the app
+- Live updates between apps running netfox with NFX.sharedInstance.startServer() and netfox_mac application
+- Directory-like structure of requests
+- Conversion from JSON to Codable class
 - More to come.. ;)
 
 ## Other
