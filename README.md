@@ -20,7 +20,7 @@ Feel free to contribute :)
 |---|---|
 
 ### netfox_mac app working in parallel with iOS app
-![](https://d2ffutrenqvap3.cloudfront.net/items/0M0l1U1D242b2d2u3n3h/Screen%20Recording%202018-02-23%20at%2001.09%20PM.gif)
+![](https://d2ffutrenqvap3.cloudfront.net/items/2S0C1j2e3D3A3H2P020E/Screen%20Recording%202018-02-23%20at%2001.45%20PM.gif)
 
 ## Installation
 
