@@ -170,7 +170,7 @@ extension URLRequest
     
     func getNFXBody() -> Data
     {
-        return httpBody ?? URLProtocol.property(forKey: "NFXBodyData", in: self) as? Data ?? Data()
+        return httpBodyStream?.readfully() ?? URLProtocol.property(forKey: "NFXBodyData", in: self) as? Data ?? Data()
     }
 }
 
@@ -261,6 +261,27 @@ extension NFXImage
         return NSImage(data: NFXAssets.getImage(NFXAssetName.serverError))!
     }
     #endif
+}
+
+extension InputStream {
+  func readfully() -> Data {
+    var result = Data()
+    var buffer = [UInt8](repeating: 0, count: 4096)
+    
+    open()
+    
+    var amount = 0
+    repeat {
+      amount = read(&buffer, maxLength: buffer.count)
+      if amount > 0 {
+        result.append(buffer, count: amount)
+      }
+    } while amount > 0
+    
+    close()
+    
+    return result
+  }
 }
 
 extension Date
