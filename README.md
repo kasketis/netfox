@@ -19,6 +19,9 @@ Feel free to contribute :)
 | ![](https://raw.githubusercontent.com/kasketis/netfox/master/assets/overview1_5_3.gif)  | ![](https://cloud.githubusercontent.com/assets/1402212/12893260/78f90916-ce90-11e5-830a-d1a1b91b2ac4.png) |
 |---|---|
 
+### netfox_mac app working in parallel with iOS app
+| ![](https://cl.ly/2C3k0i1s1Y0E) |
+
 ## Installation
 
 ### CocoaPods
