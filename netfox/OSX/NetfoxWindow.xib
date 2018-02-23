@@ -28,7 +28,6 @@
                 <outlet property="statisticsViewController" destination="DZ0-EN-1Ob" id="3Bh-DL-vfy"/>
                 <outlet property="structuredListViewController" destination="pwl-fh-wud" id="dOj-gH-H8j"/>
                 <outlet property="tableView" destination="jfJ-0b-tAz" id="5kz-hr-8aN"/>
-                <outlet property="textViewCodable" destination="Wn8-bw-scW" id="nFQ-I8-xfk"/>
                 <outlet property="window" destination="QvC-M9-y7g" id="ocC-vc-q2K"/>
             </connections>
         </customObject>
