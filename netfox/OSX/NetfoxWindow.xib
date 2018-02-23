@@ -52,10 +52,10 @@
                                     <popUpButton verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="XYS-nC-DVa">
                                         <rect key="frame" x="5" y="555" width="203" height="26"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
-                                        <popUpButtonCell key="cell" type="push" title="Item 1" bezelStyle="rounded" alignment="left" lineBreakMode="truncatingTail" state="on" borderStyle="borderAndBezel" imageScaling="proportionallyDown" inset="2" selectedItem="U5X-tr-lrl" id="2ZZ-KM-hjT">
+                                        <popUpButtonCell key="cell" type="push" title="Item 1" bezelStyle="rounded" alignment="left" lineBreakMode="truncatingTail" state="on" borderStyle="borderAndBezel" imageScaling="proportionallyDown" inset="2" autoenablesItems="NO" selectedItem="U5X-tr-lrl" id="2ZZ-KM-hjT">
                                             <behavior key="behavior" lightByBackground="YES" lightByGray="YES"/>
                                             <font key="font" metaFont="menu"/>
-                                            <menu key="menu" id="39P-wm-DMn">
+                                            <menu key="menu" autoenablesItems="NO" id="39P-wm-DMn">
                                                 <items>
                                                     <menuItem title="Item 1" state="on" id="U5X-tr-lrl"/>
                                                     <menuItem title="Item 2" id="UCD-fq-7Hw"/>
