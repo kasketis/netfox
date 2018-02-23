@@ -91,8 +91,8 @@ class NFXWindowController: NSWindowController, NSWindowDelegate, NFXWindowContro
     }
     
     @IBAction func hostClicked(_ sender: Any) {
-        let (service, address) =  NFXNetService.shared.foundServices[popupButton.indexOfSelectedItem]
-        NFXNetService.shared.fetchServiceContent(service: service)
+        let foundService =  NFXNetService.shared.foundServices[popupButton.indexOfSelectedItem]
+        NFXNetService.shared.fetchServiceContent(service: foundService.service)
     }
     
     @IBAction func segmentedAction(_ sender: Any) {

@@ -12,8 +12,18 @@ import Foundation
 class NFXNetService: NSObject {
     
     static let shared = NFXNetService()
+    class FoundService {
+        var service: NetService
+        var address: String
+        var canConnect = true
+        
+        init(service: NetService, address: String) {
+            self.service = service
+            self.address = address
+        }
+    }
     
-    var foundServices: [(service: NetService, address: String)] = []
+    var foundServices: [FoundService] = []
     var processingServices: [NetService] = []
     let serviceBrowser = NetServiceBrowser()
     
@@ -31,14 +41,28 @@ class NFXNetService: NSObject {
             fetchServiceContent(service: service)
         }
         
-        foundServices.append((service: service, address: address))
-        windowController?.popupButton.addItem(withTitle: service.name + " " + (service.hostName ?? "") )
+        if let index = foundServices.index(where: { $0.address == address }) {
+            foundServices[index] = FoundService(service: service, address: address)
+            let popupItem = windowController?.popupButton.item(at: index)
+            popupItem?.isEnabled = true
+            
+            let isSelected = windowController?.popupButton.indexOfSelectedItem == index
+            if isSelected {
+                fetchServiceContent(service: service)
+            }
+        } else {
+            foundServices.append(FoundService(service: service, address: address))
+            windowController?.popupButton.addItem(withTitle: service.name + " " + (service.hostName ?? "") )
+            print("   ", windowController!.popupButton.itemTitles)
+        }
     }
     
     func removeService(_ service: NetService) {
         if let index = foundServices.index(where: { $0.service === service }) {
-            foundServices.remove(at: index)
-            windowController?.popupButton.removeItem(at: index)
+            let item = foundServices[index]
+            item.canConnect = false
+            let popupItem = windowController?.popupButton.item(at: index)
+            popupItem?.isEnabled = false
         }
     }
     
