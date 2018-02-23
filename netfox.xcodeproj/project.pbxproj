@@ -11,6 +11,7 @@
 		234DBCD81FA33BD90086CB79 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 234DBCD71FA33BD90086CB79 /* Assets.xcassets */; };
 		234DBCDB1FA33BD90086CB79 /* MainMenu.xib in Resources */ = {isa = PBXBuildFile; fileRef = 234DBCD91FA33BD90086CB79 /* MainMenu.xib */; };
 		234DBCE11FA33BFE0086CB79 /* netfox_osx.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E20FD2E91C6912D400DCFF61 /* netfox_osx.framework */; };
+		23580CD120401E400009C40C /* netfox_osx.framework in Copy Netfox framework */ = {isa = PBXBuildFile; fileRef = E20FD2E91C6912D400DCFF61 /* netfox_osx.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		23ABD6D01FA9C40000CD6186 /* NFXServer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 23ABD6CF1FA9C40000CD6186 /* NFXServer.swift */; };
 		23ABD6D11FA9C53F00CD6186 /* NFXServer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 23ABD6CF1FA9C40000CD6186 /* NFXServer.swift */; };
 		23ABD6D61FA9E08C00CD6186 /* NFXNetService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 23ABD6D51FA9E08C00CD6186 /* NFXNetService.swift */; };
@@ -110,6 +111,20 @@
 			remoteInfo = netfox_ios;
 		};
 /* End PBXContainerItemProxy section */
+
+/* Begin PBXCopyFilesBuildPhase section */
+		23580CD020401E2E0009C40C /* Copy Netfox framework */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 10;
+			files = (
+				23580CD120401E400009C40C /* netfox_osx.framework in Copy Netfox framework */,
+			);
+			name = "Copy Netfox framework";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
 		0080FF2CD0DC986CA9C85B89 /* Pods_netfox_mac.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_netfox_mac.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -418,6 +433,7 @@
 				234DBCD11FA33BD90086CB79 /* Resources */,
 				E60DBB29C0B223A4CD7FA321 /* [CP] Embed Pods Frameworks */,
 				6F29FEC6D1E533905FE377B5 /* [CP] Copy Pods Resources */,
+				23580CD020401E2E0009C40C /* Copy Netfox framework */,
 			);
 			buildRules = (
 			);
@@ -857,7 +873,7 @@
 				GCC_C_LANGUAGE_STANDARD = gnu11;
 				INFOPLIST_FILE = netfox_mac/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks";
-				MACOSX_DEPLOYMENT_TARGET = 10.13;
+				MACOSX_DEPLOYMENT_TARGET = 10.11;
 				PRODUCT_BUNDLE_IDENTIFIER = "com.tapptitude.netfox-mac";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = macosx;
@@ -883,7 +899,7 @@
 				GCC_C_LANGUAGE_STANDARD = gnu11;
 				INFOPLIST_FILE = netfox_mac/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks";
-				MACOSX_DEPLOYMENT_TARGET = 10.13;
+				MACOSX_DEPLOYMENT_TARGET = 10.11;
 				PRODUCT_BUNDLE_IDENTIFIER = "com.tapptitude.netfox-mac";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = macosx;
