@@ -12,7 +12,7 @@ It grabs all requests - of course yours, requests from 3rd party libraries (such
 
 Very useful and handy for network related issues and bugs
 
-Implemented in Swift 4 - bridged also for Objective-C
+Supports Swift 3.2 and 4 - bridged also for Objective-C
 
 Feel free to contribute :)
 
