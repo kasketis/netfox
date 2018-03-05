@@ -233,18 +233,6 @@ open class NFX: NSObject
 
 #if os(iOS)
 
-#if !swift(>=4.0)
-extension NSAttributedStringKey {
-    public class var foregroundColor: String {
-        return NSForegroundColorAttributeName
-    }
-
-    public class var font: String {
-        return NSFontAttributeName
-    }
-}
-#endif
-
 extension NFX {
     fileprivate var presentingViewController: UIViewController?
     {
@@ -263,7 +251,11 @@ extension NFX {
         navigationController!.navigationBar.isTranslucent = false
         navigationController!.navigationBar.tintColor = UIColor.NFXOrangeColor()
         navigationController!.navigationBar.barTintColor = UIColor.NFXStarkWhiteColor()
-        navigationController!.navigationBar.titleTextAttributes = [NSAttributedStringKey.foregroundColor: UIColor.NFXOrangeColor()]
+        #if !swift(>=4.0)
+            navigationController!.navigationBar.titleTextAttributes = [NSForegroundColorAttributeName: UIColor.NFXOrangeColor()]
+        #else
+            navigationController!.navigationBar.titleTextAttributes = [NSAttributedStringKey.foregroundColor: UIColor.NFXOrangeColor()]
+        #endif
         
         presentingViewController?.present(navigationController!, animated: true, completion: nil)
     }
@@ -308,7 +300,11 @@ extension NFX {
     
     public func showNFXFollowingPlatform()  {
         if self.windowController == nil {
-            self.windowController = NFXWindowController(windowNibName: NSNib.Name(rawValue: "NetfoxWindow"))
+            #if !swift(>=4.0)
+                self.windowController = NFXWindowController(windowNibName: "NetfoxWindow")
+            #else
+                self.windowController = NFXWindowController(windowNibName: NSNib.Name(rawValue: "NetfoxWindow"))
+            #endif
         }
         self.windowController?.showWindow(nil)
     }

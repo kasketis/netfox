@@ -44,15 +44,24 @@ class NFXGenericController: NFXViewController
         let matchesBodyHeaders = regexBodyHeaders.matches(in: string, options: NSRegularExpression.MatchingOptions.withoutAnchoringBounds, range: NSMakeRange(0, l)) as Array<NSTextCheckingResult>
         
         for match in matchesBodyHeaders {
-            tempMutableString.addAttribute(NSAttributedStringKey.font, value: NFXFont.NFXFontBold(size: 14), range: match.range)
-            tempMutableString.addAttribute(NSAttributedStringKey.foregroundColor, value: NFXColor.NFXOrangeColor(), range: match.range)
+            #if !swift(>=4.0)
+                tempMutableString.addAttribute(NSFontAttributeName, value: NFXFont.NFXFontBold(size: 14), range: match.range)
+                tempMutableString.addAttribute(NSForegroundColorAttributeName, value: NFXColor.NFXOrangeColor(), range: match.range)
+            #else
+                tempMutableString.addAttribute(NSAttributedStringKey.font, value: NFXFont.NFXFontBold(size: 14), range: match.range)
+                tempMutableString.addAttribute(NSAttributedStringKey.foregroundColor, value: NFXColor.NFXOrangeColor(), range: match.range)
+            #endif
         }
         
         let regexKeys = try! NSRegularExpression(pattern: "\\[.+?\\]", options: NSRegularExpression.Options.caseInsensitive)
         let matchesKeys = regexKeys.matches(in: string, options: NSRegularExpression.MatchingOptions.withoutAnchoringBounds, range: NSMakeRange(0, l)) as Array<NSTextCheckingResult>
         
         for match in matchesKeys {
-            tempMutableString.addAttribute(NSAttributedStringKey.foregroundColor, value: NFXColor.NFXBlackColor(), range: match.range)
+            #if !swift(>=4.0)
+                tempMutableString.addAttribute(NSForegroundColorAttributeName, value: NFXColor.NFXBlackColor(), range: match.range)
+            #else
+                tempMutableString.addAttribute(NSAttributedStringKey.foregroundColor, value: NFXColor.NFXBlackColor(), range: match.range)
+            #endif
         }
         
         
