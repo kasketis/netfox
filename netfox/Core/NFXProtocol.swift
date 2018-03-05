@@ -83,7 +83,7 @@ open class NFXProtocol: URLProtocol
             }
             
             if let response = response, let client = self.client {
-                client.urlProtocol(self, didReceive: response, cacheStoragePolicy: .notAllowed)
+                client.urlProtocol(self, didReceive: response, cacheStoragePolicy: NFX.swiftSharedInstance.cacheStoragePolicy)
             }
             
             if let data = data {

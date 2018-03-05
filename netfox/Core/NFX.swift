@@ -56,6 +56,7 @@ open class NFX: NSObject
     fileprivate var ignoredURLs = [String]()
     fileprivate var filters = [Bool]()
     fileprivate var lastVisitDate: Date = Date()
+    internal var cacheStoragePolicy = URLCache.StoragePolicy.notAllowed
 
     @objc open func start()
     {
@@ -119,6 +120,10 @@ open class NFX: NSObject
     {
         guard self.started else { return }
         toggleNFX()
+    }
+    
+    @objc open func setCachePolicy(_ policy: URLCache.StoragePolicy) {
+        cacheStoragePolicy = policy
     }
     
     @objc open func setGesture(_ gesture: ENFXGesture)
