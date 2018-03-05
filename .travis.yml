@@ -6,6 +6,6 @@ os: osx
 osx_image: xcode9
 language: swift
 script:
-- set -o pipefail && xcodebuild -workspace netfox.xcodeproj -scheme netfox_ios -sdk iphonesimulator11.0 ONLY_ACTIVE_ARCH=NO SWIFT_VERSION=4.0 | xcpretty
-- set -o pipefail && xcodebuild -workspace netfox.xcodeproj -scheme netfox_osx -sdk iphonesimulator11.0 ONLY_ACTIVE_ARCH=NO SWIFT_VERSION=4.0 | xcpretty
+- set -o pipefail && xcodebuild -project netfox.xcodeproj -scheme netfox_ios -sdk iphonesimulator11.0 ONLY_ACTIVE_ARCH=NO SWIFT_VERSION=4.0 | xcpretty
+- set -o pipefail && xcodebuild -project netfox.xcodeproj -scheme netfox_osx -sdk iphonesimulator11.0 ONLY_ACTIVE_ARCH=NO SWIFT_VERSION=4.0 | xcpretty
 - pod lib lint
