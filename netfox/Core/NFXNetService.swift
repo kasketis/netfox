@@ -21,6 +21,10 @@ class NFXNetService: NSObject {
             self.service = service
             self.address = address
         }
+        
+        var name: String {
+            return service.name + " " + (service.hostName ?? "")
+        }
     }
     
     var foundServices: [FoundService] = []
@@ -37,12 +41,9 @@ class NFXNetService: NSObject {
     }
     
     func foundServer(address: String, service: NetService) {
-        if foundServices.isEmpty {
-            fetchServiceContent(service: service)
-        }
-        
-        if let index = foundServices.index(where: { $0.address == address }) {
-            foundServices[index] = FoundService(service: service, address: address)
+        let foundService = FoundService(service: service, address: address)
+        if let index = foundServices.index(where: { $0.name == foundService.name }) {
+            foundServices[index] = foundService
             let popupItem = windowController?.popupButton.item(at: index)
             popupItem?.isEnabled = true
             
@@ -51,8 +52,12 @@ class NFXNetService: NSObject {
                 fetchServiceContent(service: service)
             }
         } else {
-            foundServices.append(FoundService(service: service, address: address))
-            windowController?.popupButton.addItem(withTitle: service.name + " " + (service.hostName ?? "") )
+            if foundServices.isEmpty {
+                fetchServiceContent(service: service)
+            }
+            
+            foundServices.append(foundService)
+            windowController?.popupButton.addItem(withTitle: foundService.name )
             print("   ", windowController!.popupButton.itemTitles)
         }
     }

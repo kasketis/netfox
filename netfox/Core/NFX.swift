@@ -39,7 +39,7 @@ open class NFX: NSObject
     }
     
     // the sharedInstance class method can be reached from ObjC
-    open class func sharedInstance() -> NFX
+    @objc open class func sharedInstance() -> NFX
     {
         return NFX.swiftSharedInstance
     }
@@ -88,7 +88,7 @@ open class NFX: NSObject
     #endif
     }
     
-    public func startServer() {
+    @objc public func startServer() {
         if !self.started {
             self.start()
         }
@@ -97,7 +97,7 @@ open class NFX: NSObject
         self.server?.startServer()
     }
     
-    public func stopServer() {
+    @objc public func stopServer() {
         self.server?.stopServer()
         self.server = nil
     }
