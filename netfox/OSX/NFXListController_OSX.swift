@@ -58,7 +58,7 @@ class NFXListController_OSX: NFXListController, NSTableViewDelegate, NSTableView
             return
         }
         
-        isSearchControllerActive = searchField.stringValue.characters.count > 0
+        isSearchControllerActive = searchField.stringValue.count > 0
         updateSearchResultsForSearchController()
     }
     
