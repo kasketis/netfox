@@ -22,7 +22,7 @@ public class NFXJson2Codable {
     
     func convertToCodable(name: String, from array: [Any]) -> NFXCodableClass {
         if let item = array.first, dictionaryParser.canParse(item) {
-            return convertToCodable(name: name, from: dictionaryParser.parse(item))
+            return array.map{ convertToCodable(name: name, from: dictionaryParser.parse($0)) }.first!
         }
         
         return getCodableClass(name: "[\(convertToProperty(key: name, value: array.first!))]")

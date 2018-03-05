@@ -18,7 +18,13 @@ class NFXCodableClass: CustomStringConvertible {
     }
     
     func addProperty(name: String, type: String) {
-        properties.append((name, type))
+        if let index = properties.index(where: { $0.0 == name }) {
+            if properties[index].1 == "Any" && type != "Any" {
+                properties[index].1 = type
+            }
+        } else {
+            properties.append((name, type))
+        }
     }
     
     fileprivate func getClassName(_ string: String) -> String {
