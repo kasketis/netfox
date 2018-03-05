@@ -38,7 +38,7 @@ open class NFX: NSObject
     }
     
     // the sharedInstance class method can be reached from ObjC
-    open class func sharedInstance() -> NFX
+    @objc open class func sharedInstance() -> NFX
     {
         return NFX.swiftSharedInstance
     }
