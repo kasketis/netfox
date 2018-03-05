@@ -23,21 +23,22 @@ class TextViewController: UIViewController {
     @IBAction func tappedLoad(_ sender: Any) {
         dataTask?.cancel()
         
-        if let url = URL(string: "https://api.chucknorris.io/jokes/random") {
-            dataTask = session.dataTask(with: url, completionHandler: { (data, response, error) in
-                if let error = error {
-                    self.handleCompletion(error: error.localizedDescription, data: data)
-                } else {
-                    guard let data = data else { self.handleCompletion(error: "Invalid data", data: nil); return }
-                    guard let response = response as? HTTPURLResponse else { self.handleCompletion(error: "Invalid response", data: data); return }
-                    guard response.statusCode >= 200 && response.statusCode < 300 else { self.handleCompletion(error: "Invalid response code", data: data); return }
-                    
-                    self.handleCompletion(error: error?.localizedDescription, data: data)
-                }
-            })
-            
-            dataTask?.resume()
+        guard let url = URL(string: "https://api.chucknorris.io/jokes/random") else { return }
+        var request = URLRequest(url: url)
+        request.httpBody = "TEST".data(using: .utf8)
+        dataTask = session.dataTask(with: request) { (data, response, error) in
+            if let error = error {
+                self.handleCompletion(error: error.localizedDescription, data: data)
+            } else {
+                guard let data = data else { self.handleCompletion(error: "Invalid data", data: nil); return }
+                guard let response = response as? HTTPURLResponse else { self.handleCompletion(error: "Invalid response", data: data); return }
+                guard response.statusCode >= 200 && response.statusCode < 300 else { self.handleCompletion(error: "Invalid response code", data: data); return }
+                
+                self.handleCompletion(error: error?.localizedDescription, data: data)
+            }
         }
+        
+        dataTask?.resume()
     }
     
     private func handleCompletion(error: String?, data: Data?) {
