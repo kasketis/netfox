@@ -32,7 +32,7 @@ class NFXCodableClass: CustomStringConvertible {
     
     func addProperty(name: String, type: String) {
         if let property = properties.first(where: { $0.name == name }) {
-            if property.type.contains("Any") && type != "Any" {
+            if property.type.contains("Any") && !type.contains("Any") {
                 property.type = type
             } else if type == "Any" {
                 property.isOptional = true
