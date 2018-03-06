@@ -80,7 +80,10 @@ public class NFXJson2Codable {
         }
         
         if arrayParser.canParse(value) {
-            if let first = arrayParser.parse(value).first {
+            let array = arrayParser.parse(value)
+            
+            if let first = array.first {
+                let _ = convertToCodable(name: key, from: array)
                 return "[\(convertToProperty(key: key, value: first))]"
             } else {
                 return "[Any]"
