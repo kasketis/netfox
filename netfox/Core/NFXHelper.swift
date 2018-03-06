@@ -443,3 +443,8 @@ extension String
         }
     }
 }
+
+extension NSNotification.Name {
+    static let NFXDeactivateSearch = Notification.Name("NFXDeactivateSearch")
+    static let NFXReloadData = Notification.Name("NFXReloadData")
+}

@@ -110,7 +110,7 @@ open class NFXProtocol: URLProtocol
             NFXHTTPModelManager.sharedInstance.add(self.model!)
         }
         
-        NotificationCenter.default.post(name: Notification.Name(rawValue: "NFXReloadData"), object: nil)
+        NotificationCenter.default.post(name: Notification.Name.NFXReloadData, object: nil)
     }
 }
 
@@ -134,7 +134,6 @@ extension NFXProtocol : URLSessionDelegate {
     }
     
     public func urlSession(_ session: URLSession, task: URLSessionTask, willPerformHTTPRedirection response: HTTPURLResponse, newRequest request: URLRequest, completionHandler: @escaping (URLRequest?) -> Void) {
-        
         if let mutableRequest = (request as NSURLRequest).mutableCopy() as? NSMutableURLRequest {
             URLProtocol.removeProperty(forKey: "NFXInternal", in: mutableRequest)
             client?.urlProtocol(self, wasRedirectedTo: request, redirectResponse: response)
