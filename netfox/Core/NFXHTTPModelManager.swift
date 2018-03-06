@@ -19,6 +19,7 @@ final class NFXHTTPModelManager: NSObject
     {
         syncQueue.async {
             self.models.insert(obj, at: 0)
+            NotificationCenter.default.post(name: NSNotification.Name.NFXAddedModel, object: obj)
         }
     }
     
@@ -26,6 +27,7 @@ final class NFXHTTPModelManager: NSObject
     {
         syncQueue.async {
             self.models.removeAll()
+            NotificationCenter.default.post(name: NSNotification.Name.NFXClearedModels, object: nil)
         }
     }
     

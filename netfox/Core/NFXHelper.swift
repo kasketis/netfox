@@ -12,7 +12,7 @@ import Cocoa
 import UIKit
 #endif
 
-enum HTTPModelShortType: String
+public enum HTTPModelShortType: String
 {
     case JSON = "JSON"
     case XML = "XML"
@@ -444,7 +444,9 @@ extension String
     }
 }
 
-extension NSNotification.Name {
+public extension NSNotification.Name {
     static let NFXDeactivateSearch = Notification.Name("NFXDeactivateSearch")
     static let NFXReloadData = Notification.Name("NFXReloadData")
+    public static let NFXAddedModel = Notification.Name("NFXAddedModel")
+    public static let NFXClearedModels = Notification.Name("NFXClearedModels")
 }

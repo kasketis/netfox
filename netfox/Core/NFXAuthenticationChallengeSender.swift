@@ -8,7 +8,7 @@
 
 import Foundation
 
-public class NFXAuthenticationChallengeSender : NSObject, URLAuthenticationChallengeSender {
+internal class NFXAuthenticationChallengeSender : NSObject, URLAuthenticationChallengeSender {
     
     typealias NFXAuthenticationChallengeHandler = (URLSession.AuthChallengeDisposition, URLCredential?) -> Void
     
