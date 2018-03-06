@@ -8,22 +8,38 @@
 
 import Foundation
 
+fileprivate class NFXCodableProperty {
+    
+    var name: String
+    var type: String
+    var isOptional: Bool
+    
+    init(name: String, type: String, isOptional: Bool) {
+        self.name = name
+        self.type = type
+        self.isOptional = isOptional
+    }
+}
+
 class NFXCodableClass: CustomStringConvertible {
     
     var className: String
-    var properties: [(String, String)] = []
+    fileprivate var properties: [NFXCodableProperty] = []
     
     init(className: String) {
         self.className = className
     }
     
     func addProperty(name: String, type: String) {
-        if let index = properties.index(where: { $0.0 == name }) {
-            if properties[index].1 == "Any" && type != "Any" {
-                properties[index].1 = type
+        if let property = properties.first(where: { $0.name == name }) {
+            if property.type.contains("Any") && type != "Any" {
+                property.type = type
+            } else if type == "Any" {
+                property.isOptional = true
             }
         } else {
-            properties.append((name, type))
+            let property = NFXCodableProperty(name: name, type: type, isOptional: type == "Any")
+            properties.append(property)
         }
     }
     
@@ -39,15 +55,19 @@ class NFXCodableClass: CustomStringConvertible {
         return string.camelCasedString.uppercaseFirstLetter().singular
     }
     
+    fileprivate func getOptional(_ isOptional: Bool) -> String {
+        return isOptional ? "?" : "!"
+    }
+    
     var description: String {
         if properties.isEmpty {
             return className
         }
         
         var str = "class \(getClassName(className)): Codable {\n\n"
-        str += properties.map{ "\tvar \(getPropertyName($0.0)): \(getPropertyType($0.1))!" }.joined(separator: "\n")
+        str += properties.map{ "\tvar \(getPropertyName($0.name)): \(getPropertyType($0.type))\(getOptional($0.isOptional))" }.joined(separator: "\n")
         str += "\n\n\tenum CodingKeys: String, CodingKey {\n"
-        str += properties.map{"\t\tcase \(getPropertyName($0.0)) = \"\($0.0)\""}.joined(separator: "\n")
+        str += properties.map{"\t\tcase \(getPropertyName($0.name)) = \"\($0.name)\""}.joined(separator: "\n")
         str += "\n\t}"
         str += "\n}\n\n"
         return str
