@@ -32,16 +32,15 @@ open class NFXProtocol: URLProtocol
         }
         
         if let url = request.url {
-            if (!(url.absoluteString.hasPrefix("http")) && !(url.absoluteString.hasPrefix("https"))) {
+            if !(url.absoluteString.hasPrefix("http")) && !(url.absoluteString.hasPrefix("https")) {
                 return false
             }
-
+            
             for ignoredURL in NFX.sharedInstance().getIgnoredURLs() {
                 if url.absoluteString.hasPrefix(ignoredURL) {
                     return false
                 }
             }
-            
         } else {
             return false
         }
@@ -56,15 +55,15 @@ open class NFXProtocol: URLProtocol
     override open func startLoading()
     {
         self.model = NFXHTTPModel()
-                
+        
         var req: NSMutableURLRequest
         req = (NFXProtocol.canonicalRequest(for: request) as NSURLRequest).mutableCopy() as! NSMutableURLRequest
         
         self.model?.saveRequest(req as URLRequest)
-                
+        
         URLProtocol.setProperty("1", forKey: "NFXInternal", in: req)
         
-        if (session == nil) {
+        if session == nil {
             session = URLSession(configuration: URLSessionConfiguration.default, delegate: self, delegateQueue: nil)
         }
         
@@ -93,20 +92,18 @@ open class NFXProtocol: URLProtocol
             if let client = self.client {
                 client.urlProtocolDidFinishLoading(self)
             }
-
         }).resume()
     }
     
     override open func stopLoading()
     {
-        
     }
     
     override open class func canonicalRequest(for request: URLRequest) -> URLRequest
     {
         return request
     }
-        
+    
     func loaded()
     {
         if (self.model != nil) {
@@ -118,17 +115,17 @@ open class NFXProtocol: URLProtocol
 }
 
 extension NFXProtocol : URLSessionDelegate {
-    func urlSession(_ session: URLSession, dataTask: URLSessionDataTask, didReceive data: Data) {
+    public func urlSession(_ session: URLSession, dataTask: URLSessionDataTask, didReceive data: Data) {
         client?.urlProtocol(self, didLoad: data)
     }
     
-    func urlSession(_ session: URLSession, dataTask: URLSessionDataTask, didReceive response: URLResponse, completionHandler: @escaping (URLSession.ResponseDisposition) -> Void) {
+    public func urlSession(_ session: URLSession, dataTask: URLSessionDataTask, didReceive response: URLResponse, completionHandler: @escaping (URLSession.ResponseDisposition) -> Void) {
         let policy = URLCache.StoragePolicy(rawValue: request.cachePolicy.rawValue) ?? .notAllowed
         client?.urlProtocol(self, didReceive: response, cacheStoragePolicy: policy)
         completionHandler(.allow)
     }
     
-    func urlSession(_ session: URLSession, task: URLSessionTask, didCompleteWithError error: Error?) {
+    public func urlSession(_ session: URLSession, task: URLSessionTask, didCompleteWithError error: Error?) {
         if let error = error {
             client?.urlProtocol(self, didFailWithError: error)
         } else {
@@ -136,9 +133,13 @@ extension NFXProtocol : URLSessionDelegate {
         }
     }
     
-    func urlSession(_ session: URLSession, task: URLSessionTask, willPerformHTTPRedirection response: HTTPURLResponse, newRequest request: URLRequest, completionHandler: @escaping (URLRequest?) -> Void) {
-        client?.urlProtocol(self, wasRedirectedTo: request, redirectResponse: response)
-        completionHandler(request)
+    public func urlSession(_ session: URLSession, task: URLSessionTask, willPerformHTTPRedirection response: HTTPURLResponse, newRequest request: URLRequest, completionHandler: @escaping (URLRequest?) -> Void) {
+        
+        if let mutableRequest = (request as NSURLRequest).mutableCopy() as? NSMutableURLRequest {
+            URLProtocol.removeProperty(forKey: "NFXInternal", in: mutableRequest)
+            client?.urlProtocol(self, wasRedirectedTo: request, redirectResponse: response)
+            completionHandler(request)
+        }
     }
     
     public func urlSession(_ session: URLSession, didBecomeInvalidWithError error: Error?) {
