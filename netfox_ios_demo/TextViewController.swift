@@ -12,16 +12,19 @@ import netfox_ios
 class TextViewController: UIViewController {
     
     @IBOutlet weak var textView: UITextView!
-    let session: URLSession!
+    var session: URLSession!
     var dataTask: URLSessionDataTask?
     
     required init?(coder aDecoder: NSCoder) {
-        session = URLSession(configuration: URLSessionConfiguration.default)
         super.init(coder: aDecoder)
     }
     
     @IBAction func tappedLoad(_ sender: Any) {
         dataTask?.cancel()
+        
+        if session == nil {
+            session = URLSession(configuration: URLSessionConfiguration.default, delegate: self, delegateQueue: nil)
+        }
         
         guard let url = URL(string: "https://api.chucknorris.io/jokes/random") else { return }
         var request = URLRequest(url: url)
@@ -61,6 +64,12 @@ class TextViewController: UIViewController {
                 }
             }
         }
+    }
+}
+
+extension TextViewController : URLSessionDelegate {
+    func urlSession(_ session: URLSession, didReceive challenge: URLAuthenticationChallenge, completionHandler: @escaping (URLSession.AuthChallengeDisposition, URLCredential?) -> Void) {
+        completionHandler(URLSession.AuthChallengeDisposition.useCredential, nil)
     }
 }
 

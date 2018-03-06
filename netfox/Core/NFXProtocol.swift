@@ -65,7 +65,7 @@ open class NFXProtocol: URLProtocol
         URLProtocol.setProperty("1", forKey: "NFXInternal", in: req)
         
         if (session == nil) {
-            session = URLSession(configuration: URLSessionConfiguration.default)
+            session = URLSession(configuration: URLSessionConfiguration.default, delegate: self, delegateQueue: nil)
         }
         
         session!.dataTask(with: req as URLRequest, completionHandler: {data, response, error in
@@ -95,8 +95,6 @@ open class NFXProtocol: URLProtocol
             }
 
         }).resume()
-        
-
     }
     
     override open func stopLoading()
@@ -117,5 +115,43 @@ open class NFXProtocol: URLProtocol
         
         NotificationCenter.default.post(name: Notification.Name(rawValue: "NFXReloadData"), object: nil)
     }
+}
+
+extension NFXProtocol : URLSessionDelegate {
+    func urlSession(_ session: URLSession, dataTask: URLSessionDataTask, didReceive data: Data) {
+        client?.urlProtocol(self, didLoad: data)
+    }
     
+    func urlSession(_ session: URLSession, dataTask: URLSessionDataTask, didReceive response: URLResponse, completionHandler: @escaping (URLSession.ResponseDisposition) -> Void) {
+        let policy = URLCache.StoragePolicy(rawValue: request.cachePolicy.rawValue) ?? .notAllowed
+        client?.urlProtocol(self, didReceive: response, cacheStoragePolicy: policy)
+        completionHandler(.allow)
+    }
+    
+    func urlSession(_ session: URLSession, task: URLSessionTask, didCompleteWithError error: Error?) {
+        if let error = error {
+            client?.urlProtocol(self, didFailWithError: error)
+        } else {
+            client?.urlProtocolDidFinishLoading(self)
+        }
+    }
+    
+    func urlSession(_ session: URLSession, task: URLSessionTask, willPerformHTTPRedirection response: HTTPURLResponse, newRequest request: URLRequest, completionHandler: @escaping (URLRequest?) -> Void) {
+        client?.urlProtocol(self, wasRedirectedTo: request, redirectResponse: response)
+        completionHandler(request)
+    }
+    
+    public func urlSession(_ session: URLSession, didBecomeInvalidWithError error: Error?) {
+        guard let error = error else { return }
+        client?.urlProtocol(self, didFailWithError: error)
+    }
+    
+    public func urlSession(_ session: URLSession, didReceive challenge: URLAuthenticationChallenge, completionHandler: @escaping (URLSession.AuthChallengeDisposition, URLCredential?) -> Void) {
+        let wrappedChallenge = URLAuthenticationChallenge(authenticationChallenge: challenge, sender: NFXAuthenticationChallengeSender(handler: completionHandler))
+        client?.urlProtocol(self, didReceive: wrappedChallenge)
+    }
+    
+    public func urlSessionDidFinishEvents(forBackgroundURLSession session: URLSession) {
+        client?.urlProtocolDidFinishLoading(self)
+    }
 }
