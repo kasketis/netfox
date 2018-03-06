@@ -25,7 +25,7 @@ public class NFXJson2Codable {
             return array.map{ convertToCodable(name: name, from: dictionaryParser.parse($0)) }.first!
         }
         
-        return getCodableClass(name: "[\(convertToProperty(key: name, value: array.first!))]")
+        return getCodableClass(name: convertToProperty(key: name, value: array.first!))
     }
     
     func convertToCodable(name: String, from dictionary: [String: Any]) -> NFXCodableClass {
@@ -71,7 +71,7 @@ public class NFXJson2Codable {
         if dictionaryParser.canParse(value) {
             let dictionary = dictionaryParser.parse(value)
             
-            if dictionary.count > 0 {
+            if let _ = dictionary.first {
                 let _ = convertToCodable(name: key, from: dictionary)
                 return dictionaryParser.getPropertyType(name: key)
             } else {
@@ -82,9 +82,9 @@ public class NFXJson2Codable {
         if arrayParser.canParse(value) {
             let array = arrayParser.parse(value)
             
-            if let first = array.first {
-                let _ = convertToCodable(name: key, from: array)
-                return "[\(convertToProperty(key: key, value: first))]"
+            if let _ = array.first {
+                let codableClass = convertToCodable(name: key, from: array)
+                return "[\(codableClass.className)]"
             } else {
                 return "[Any]"
             }
