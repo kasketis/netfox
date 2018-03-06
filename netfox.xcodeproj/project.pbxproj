@@ -8,6 +8,8 @@
 
 /* Begin PBXBuildFile section */
 		8201A39D204E3E3F00AB2C3D /* NFXAuthenticationChallengeSender.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8201A39C204E3E3F00AB2C3D /* NFXAuthenticationChallengeSender.swift */; };
+		8201A39E204E451900AB2C3D /* NFXAuthenticationChallengeSender.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8201A39C204E3E3F00AB2C3D /* NFXAuthenticationChallengeSender.swift */; };
+		8201A39F204E452200AB2C3D /* NFXLoader.m in Sources */ = {isa = PBXBuildFile; fileRef = 826C4E9D1F979AB3008B440C /* NFXLoader.m */; };
 		8229AD651F8FB34300A9D613 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8229AD641F8FB34300A9D613 /* AppDelegate.swift */; };
 		8229AD671F8FB34300A9D613 /* ImageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8229AD661F8FB34300A9D613 /* ImageViewController.swift */; };
 		8229AD6A1F8FB34300A9D613 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 8229AD681F8FB34300A9D613 /* Main.storyboard */; };
@@ -466,6 +468,8 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				8201A39F204E452200AB2C3D /* NFXLoader.m in Sources */,
+				8201A39E204E451900AB2C3D /* NFXAuthenticationChallengeSender.swift in Sources */,
 				B3F8BA831C833ABC00F9FBEA /* NFX.swift in Sources */,
 				B3F8D67E1C833B1700F9FBEA /* NFXListCell_OSX.swift in Sources */,
 				B3F8BA8B1C833ABC00F9FBEA /* NFXGenericBodyDetailsController.swift in Sources */,

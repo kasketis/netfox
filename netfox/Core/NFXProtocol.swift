@@ -151,7 +151,9 @@ extension NFXProtocol : URLSessionDelegate {
         client?.urlProtocol(self, didReceive: wrappedChallenge)
     }
     
+    #if !os(OSX)
     public func urlSessionDidFinishEvents(forBackgroundURLSession session: URLSession) {
         client?.urlProtocolDidFinishLoading(self)
     }
+    #endif
 }
