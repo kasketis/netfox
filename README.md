@@ -1,13 +1,15 @@
-![](https://raw.githubusercontent.com/kasketis/netfox/master/assets/netfox_logo.png)
+![Netfox: A lightweight, one line setup, network debugging library](https://raw.githubusercontent.com/kasketis/netfox/master/netfox-logo.png)
 
-[![Version](https://img.shields.io/badge/version-1.8-green.svg?style=flat-square)]()
-[![CI Status](http://img.shields.io/travis/kasketis/netfox.svg?style=flat)](https://travis-ci.org/kasketis/netfox)
-[![Cocoapods Compatible](https://img.shields.io/cocoapods/v/netfox.svg?style=flat-square)](https://github.com/cocoapods/cocoapods)
-[![Carthage compatible](https://img.shields.io/badge/carthage-compatible-4BC51D.svg?style=flat-square)](https://github.com/Carthage/Carthage)
-[![Platform](https://img.shields.io/cocoapods/p/netfox.svg?style=flat-square)](http://cocoadocs.org/docsets/netfox)
-[![License](https://img.shields.io/badge/license-MIT-orange.svg?style=flat-square)](https://opensource.org/licenses/MIT)
+<p align="center">
+<img alt="Version" src="https://img.shields.io/badge/version-1.8-green.svg?style=flat-square" />
+<a href="https://travis-ci.org/kasketis/netfox"><img alt="CI Status" src="http://img.shields.io/travis/kasketis/netfox.svg?style=flat-square" /></a>
+<a href="https://cocoapods.org/pods/netfox"><img alt="Cocoapods Compatible" src="https://img.shields.io/cocoapods/v/netfox.svg?style=flat-square" /></a>
+<a href="https://github.com/Carthage/Carthage"><img alt="Carthage Compatible" src="https://img.shields.io/badge/carthage-compatible-4BC51D.svg?style=flat-square" /></a>
+<img alt="Platform" src="https://img.shields.io/cocoapods/p/netfox.svg?style=flat-square" />
+<a href="https://opensource.org/licenses/MIT"><img alt="License" src="https://img.shields.io/badge/license-MIT-orange.svg?style=flat-square" /></a>
+</p>
 
-A lightweight, one line setup, network debugging library that provides a quick look on all executed network requests performed by your iOS or OSX app.
+Netfox provides a quick look on all executed network requests performed by your iOS or OSX app.
 It grabs all requests - of course yours, requests from 3rd party libraries (such as AFNetworking, Alamofire or else), UIWebViews, and more
 
 Very useful and handy for network related issues and bugs
