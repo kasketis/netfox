@@ -26,43 +26,20 @@ Feel free to contribute :)
 
 ### CocoaPods
 
-[CocoaPods](http://cocoapods.org) is a dependency manager for Cocoa projects. You can install it with the following command:
-
-<pre>
-$ gem install cocoapods
-</pre>
-
-To integrate netfox into your Xcode project using CocoaPods, specify it in your `Podfile`:
+[CocoaPods](http://cocoapods.org) is a dependency manager for Cocoa projects. To integrate netfox into your Xcode project using CocoaPods, specify it in your `Podfile`:
 
 <pre>
 use_frameworks!
 pod 'netfox'
 </pre>
 
-Then, run the following command:
-
-<pre>
-$ pod install
-</pre>
-
 ### Carthage
 
-[Carthage](https://github.com/Carthage/Carthage) is a decentralized dependency manager that builds your dependencies and provides you with binary frameworks.
-
-You can install Carthage with [Homebrew](http://brew.sh/) using the following command:
-
-<pre>
-$ brew update
-$ brew install carthage
-</pre>
-
-To integrate netfox into your Xcode project using Carthage, specify it in your `Cartfile`:
+[Carthage](https://github.com/Carthage/Carthage) is a decentralized dependency manager that builds your dependencies and provides you with binary frameworks. To integrate netfox into your Xcode project using Carthage, specify it in your `Cartfile`:
 
 <pre>
 github "kasketis/netfox"
 </pre>
-
-and follow [these](https://github.com/Carthage/Carthage#if-youre-building-for-ios) steps
 
 
 ### Manually
@@ -78,26 +55,29 @@ The above folder contains 3 subfolders: Core, iOS and OSX.
 
 ## Start
 
-To start netfox add the following line in didFinishLaunchingWithOptions: method of your AppDelegate
-
 #### Swift
-<pre>
-NFX.sharedInstance().start()
+```swift
+// AppDelegate
+import netfox_ios
+NFX.sharedInstance().start() // in didFinishLaunchingWithOptions:
+```
+
 </pre>
 
-#### Obj-C
-<pre>
-[[NFX sharedInstance] start];
-</pre>
+#### Objective-C
+```objective-c
+// AppDelegate
+[[NFX sharedInstance] start]; // in didFinishLaunchingWithOptions:
+```
 
 Just simple as that!
 
 Note: Please wrap the above line with
-<pre>
+```c
 #if DEBUG
 . . .
 #endif
-</pre>
+```
 to prevent library’s execution on your production app.
 
 You can add the DEBUG symbol with the -DDEBUG entry. Set it in the "Swift Compiler - Custom Flags" section -> "Other Swift Flags" line in project’s "Build Settings"
@@ -111,9 +91,9 @@ Shake again and go back to your app!
 ## Stop
 
 Call
-<pre>
+```swift
 NFX.sharedInstance().stop()
-</pre>
+```
 to stop netfox and clear all saved data. 
 If you stop netfox its view will not be displayed until you call start method again. 
 
@@ -122,25 +102,25 @@ If you want to just enable/disable logging functionality or clear the data pleas
 ## Custom gestures
 
 By default the library registers for shake motion. If you want to open the logs with a different gesture, add the following line after the installation one
-<pre>
+```swift
 NFX.sharedInstance().setGesture(.custom)
-</pre>
+```
 Then you can use
-<pre>
+```swift
 NFX.sharedInstance().show()
-</pre>
+```
 when you want to show the logs and
-<pre>
+```swift
 NFX.sharedInstance().hide()
-</pre>
+```
 when you want to hide them.
 
 ## Prevent logging for specific URLs
 
 Use the following method to prevent requests for specified URL from being logged. You can ignore as many URLs as you want
-<pre>
+```swift
 NFX.sharedInstance().ignoreURL("the_url")
-</pre>
+```
 Tip: You can use the url of the host (for example "https://www.github.com") to ignore all paths of it 
 
 ## Features
