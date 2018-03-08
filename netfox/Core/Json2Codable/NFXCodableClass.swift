@@ -66,9 +66,14 @@ class NFXCodableClass: CustomStringConvertible {
         
         var str = "class \(getClassName(className)): Codable {\n\n"
         str += properties.map{ "\tvar \(getPropertyName($0.name)): \(getPropertyType($0.type))\(getOptional($0.isOptional))" }.joined(separator: "\n")
-        str += "\n\n\tenum CodingKeys: String, CodingKey {\n"
-        str += properties.filter{ getPropertyName($0.name) != $0.name }.map{"\t\tcase \(getPropertyName($0.name)) = \"\($0.name)\""}.joined(separator: "\n")
-        str += "\n\t}"
+        
+        let filteredProperties = properties.filter{ getPropertyName($0.name) != $0.name }
+        if !filteredProperties.isEmpty {
+            str += "\n\n\tenum CodingKeys: String, CodingKey {\n"
+            str += filteredProperties.map{"\t\tcase \(getPropertyName($0.name)) = \"\($0.name)\""}.joined(separator: "\n")
+            str += "\n\t}"
+        }
+        
         str += "\n}\n\n"
         return str
     }
