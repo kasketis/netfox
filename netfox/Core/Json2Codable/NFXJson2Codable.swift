@@ -22,7 +22,9 @@ public class NFXJson2Codable {
     
     func convertToCodable(name: String, from array: [Any]) -> NFXCodableClass {
         if let item = array.first, dictionaryParser.canParse(item) {
-            return array.map{ convertToCodable(name: name, from: dictionaryParser.parse($0)) }.first!
+            let codableClass = array.map{ convertToCodable(name: name, from: dictionaryParser.parse($0)) }.first!
+            codableClass.detectEnums()
+            return codableClass
         }
         
         return getCodableClass(name: convertToProperty(key: name, value: array.first!))
@@ -32,10 +34,12 @@ public class NFXJson2Codable {
         let codableClass = getCodableClass(name: name)
         
         dictionary.keys.forEach { key in
-            codableClass.addProperty(
-                name: key,
-                type: convertToProperty(key: key, value: dictionary[key]!)
-            )
+            let type = convertToProperty(key: key, value: dictionary[key]!)
+            if type == "Int" || type == "String" {
+                codableClass.addProperty(name: key, type: type, value: dictionary[key]! as? AnyHashable)
+            } else {
+                codableClass.addProperty(name: key, type: type)
+            }
         }
         
         return codableClass
