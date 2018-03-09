@@ -172,6 +172,33 @@ extension URLRequest
     {
         return httpBodyStream?.readfully() ?? URLProtocol.property(forKey: "NFXBodyData", in: self) as? Data ?? Data()
     }
+    
+    func getCurl() -> String {
+        guard let url = url else { return "" }
+        var baseCommand = "curl \(url.absoluteString)"
+        
+        if httpMethod == "HEAD" {
+            baseCommand += " --head"
+        }
+        
+        var command = [baseCommand]
+        
+        if let method = httpMethod {
+            command.append("-X \(method)")
+        }
+        
+        if let headers = allHTTPHeaderFields {
+            for (key, value) in headers {
+                command.append("-H \u{22}\(key): \(value)\u{22}")
+            }
+        }
+        
+        if let body = String(data: getNFXBody(), encoding: .utf8) {
+            command.append("-d \u{22}\(body)\u{22}")
+        }
+        
+        return command.joined(separator: " ")
+    }
 }
 
 extension URLResponse

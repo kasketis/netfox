@@ -171,20 +171,31 @@ class NFXDetailsController_iOS: NFXDetailsController, MFMailComposeViewControlle
     
     @objc func actionButtonPressed(_ sender: UIBarButtonItem)
     {
-        let actionSheetController: UIAlertController = UIAlertController(title: "Share", message: nil, preferredStyle: .actionSheet)
+        let actionSheetController: UIAlertController = UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)
         
         let cancelAction: UIAlertAction = UIAlertAction(title: "Cancel", style: .cancel)
         actionSheetController.addAction(cancelAction)
         
-        let simpleLog: UIAlertAction = UIAlertAction(title: "Simple log", style: .default) { [unowned self] action -> Void in
+        let simpleLog: UIAlertAction = UIAlertAction(title: "Send simple log via mail", style: .default) { [unowned self] action -> Void in
             self.sendMailWithBodies(false)
         }
         actionSheetController.addAction(simpleLog)
         
-        let fullLogAction: UIAlertAction = UIAlertAction(title: "Full log", style: .default) { [unowned self] action -> Void in
+        let fullLogAction: UIAlertAction = UIAlertAction(title: "Send full log via mail", style: .default) { [unowned self] action -> Void in
             self.sendMailWithBodies(true)
         }
         actionSheetController.addAction(fullLogAction)
+        
+        if let reqCurl  = self.selectedModel.requestCurl {
+            let curlAction: UIAlertAction = UIAlertAction(title: "Export request as curl", style: .default) { [unowned self] action -> Void in
+                let activityViewController = UIActivityViewController(activityItems: [reqCurl], applicationActivities: nil)
+                activityViewController.popoverPresentationController?.sourceView = self.view
+                self.present(activityViewController, animated: true, completion: nil)
+            }
+            actionSheetController.addAction(curlAction)
+        }
+
+        
         actionSheetController.view.tintColor = UIColor.NFXOrangeColor()
 
         self.present(actionSheetController, animated: true, completion: nil)
