@@ -61,7 +61,6 @@ open class NFXProtocol: URLProtocol
         req = (NFXProtocol.canonicalRequest(for: request) as NSURLRequest).mutableCopy() as! NSMutableURLRequest
         
         self.model?.saveRequest(req as URLRequest)
-//        NFXPathNodeManager.sharedInstance.add(model!)
         
         URLProtocol.setProperty("1", forKey: "NFXInternal", in: req)
         

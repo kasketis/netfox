@@ -65,7 +65,7 @@ class NFXWindowController: NSWindowController, NSWindowDelegate, NFXWindowContro
         super.windowDidLoad()
         self.window?.delegate = self
         
-        NFXNetService.shared.browseForAvailableNFXServices()
+        NFXNetServiceMonitor.shared.browseForAvailableNFXServices()
     }
     
     // MARK: NSWindowDelegate
@@ -91,8 +91,8 @@ class NFXWindowController: NSWindowController, NSWindowDelegate, NFXWindowContro
     }
     
     @IBAction func hostClicked(_ sender: Any) {
-        let foundService =  NFXNetService.shared.foundServices[popupButton.indexOfSelectedItem]
-        NFXNetService.shared.fetchServiceContent(service: foundService.service)
+        let foundService =  NFXNetServiceMonitor.shared.foundServices[popupButton.indexOfSelectedItem]
+        NFXNetServiceMonitor.shared.fetchServiceContent(service: foundService.service)
     }
     
     @IBAction func segmentedAction(_ sender: Any) {

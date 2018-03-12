@@ -20,7 +20,6 @@ final class NFXHTTPModelManager: NSObject
 
         #if os(OSX)
         NFXPathNodeManager.sharedInstance.add(obj)
-//        NFXPathNodeManager.sharedInstance.update(obj)
         #endif
     }
     

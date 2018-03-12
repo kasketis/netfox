@@ -1,5 +1,5 @@
 //
-//  Parser.swift
+//  NFXJsonParser.swift
 //  netfox_osx
 //
 //  Created by Ștefan Suciu on 2/13/18.

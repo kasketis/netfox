@@ -9,9 +9,9 @@
 import Foundation
 
 #if os(OSX)
-class NFXNetService: NSObject {
+class NFXNetServiceMonitor: NSObject {
     
-    static let shared = NFXNetService()
+    static let shared = NFXNetServiceMonitor()
     class FoundService {
         var service: NetService
         var address: String
@@ -97,7 +97,7 @@ class NFXNetService: NSObject {
 }
 
 
-extension NFXNetService: NetServiceBrowserDelegate {
+extension NFXNetServiceMonitor: NetServiceBrowserDelegate {
     func netServiceBrowser(_ browser: NetServiceBrowser, didFind service: NetService, moreComing: Bool) {
         service.delegate = self
         service.resolve(withTimeout: 0)
@@ -109,7 +109,7 @@ extension NFXNetService: NetServiceBrowserDelegate {
     }
 }
 
-extension NFXNetService: NetServiceDelegate {
+extension NFXNetServiceMonitor: NetServiceDelegate {
     func netServiceDidResolveAddress(_ sender: NetService) {
         print("Found service: \(sender.hostName ?? "") \(sender)")
         
