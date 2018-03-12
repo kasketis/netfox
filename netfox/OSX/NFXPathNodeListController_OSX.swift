@@ -32,8 +32,8 @@ class NFXPathNodeListController_OSX: NFXListController, NSTableViewDelegate, NST
         tableView.register(NSNib(nibNamed: NSNib.Name(rawValue: cellIdentifier), bundle: bundle), forIdentifier: NSUserInterfaceItemIdentifier(rawValue: cellIdentifier))
         searchField.delegate = self
         
-        NotificationCenter.default.addObserver(self, selector: #selector(NFXListController.reloadTableViewData), name: NSNotification.Name(rawValue: "NFXReloadData"), object: nil)
-        NotificationCenter.default.addObserver(self, selector: #selector(NFXPathNodeListController_OSX.deactivateSearchController), name: NSNotification.Name(rawValue: "NFXDeactivateSearch"), object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(NFXListController.reloadTableViewData), name: .NFXReloadData, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(NFXPathNodeListController_OSX.deactivateSearchController), name: .NFXDeactivateSearch, object: nil)
         
         pathNodeTableData = modelManager.getTableModels()
     }

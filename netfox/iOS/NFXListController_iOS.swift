@@ -72,13 +72,13 @@ class NFXListController_iOS: NFXListController, UITableViewDelegate, UITableView
         NotificationCenter.default.addObserver(
             self,
             selector: #selector(NFXListController.reloadTableViewData),
-            name: NSNotification.Name(rawValue: "NFXReloadData"),
+            name: NSNotification.Name.NFXReloadData,
             object: nil)
         
         NotificationCenter.default.addObserver(
             self,
             selector: #selector(NFXListController_iOS.deactivateSearchController),
-            name: NSNotification.Name(rawValue: "NFXDeactivateSearch"),
+            name: NSNotification.Name.NFXDeactivateSearch,
             object: nil)        
     }
     

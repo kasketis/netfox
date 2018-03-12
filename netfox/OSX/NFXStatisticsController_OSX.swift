@@ -21,7 +21,7 @@ class NFXStatisticsController_OSX: NFXStatisticsController {
         NotificationCenter.default.addObserver(
             self,
             selector: #selector(NFXGenericController.reloadData),
-            name: NSNotification.Name(rawValue: "NFXReloadData"),
+            name: NSNotification.Name.NFXReloadData,
             object: nil)
     }
     
