@@ -56,6 +56,7 @@ class NFXDetailsController_iOS: NFXDetailsController, MFMailComposeViewControlle
         super.viewDidLoad()
         
         self.title = "Details"
+        self.view.layer.masksToBounds = true
         
         self.navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .action, target: self, action: #selector(NFXDetailsController_iOS.actionButtonPressed(_:)))
 

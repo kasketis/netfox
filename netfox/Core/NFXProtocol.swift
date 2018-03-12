@@ -32,16 +32,15 @@ open class NFXProtocol: URLProtocol
         }
         
         if let url = request.url {
-            if (!(url.absoluteString.hasPrefix("http")) && !(url.absoluteString.hasPrefix("https"))) {
+            if !(url.absoluteString.hasPrefix("http")) && !(url.absoluteString.hasPrefix("https")) {
                 return false
             }
-
+            
             for ignoredURL in NFX.sharedInstance().getIgnoredURLs() {
                 if url.absoluteString.hasPrefix(ignoredURL) {
                     return false
                 }
             }
-            
         } else {
             return false
         }
@@ -56,17 +55,16 @@ open class NFXProtocol: URLProtocol
     override open func startLoading()
     {
         self.model = NFXHTTPModel()
-                
+        
         var req: NSMutableURLRequest
         req = (NFXProtocol.canonicalRequest(for: request) as NSURLRequest).mutableCopy() as! NSMutableURLRequest
         
         self.model?.saveRequest(req as URLRequest)
-//        NFXPathNodeManager.sharedInstance.add(model!)
         
         URLProtocol.setProperty("1", forKey: "NFXInternal", in: req)
         
-        if (session == nil) {
-            session = URLSession(configuration: URLSessionConfiguration.default)
+        if session == nil {
+            session = URLSession(configuration: URLSessionConfiguration.default, delegate: self, delegateQueue: nil)
         }
         
         session!.dataTask(with: req as URLRequest, completionHandler: {data, response, error in
@@ -84,7 +82,7 @@ open class NFXProtocol: URLProtocol
             }
             
             if let response = response, let client = self.client {
-                client.urlProtocol(self, didReceive: response, cacheStoragePolicy: .notAllowed)
+                client.urlProtocol(self, didReceive: response, cacheStoragePolicy: NFX.swiftSharedInstance.cacheStoragePolicy)
             }
             
             if let data = data {
@@ -94,22 +92,18 @@ open class NFXProtocol: URLProtocol
             if let client = self.client {
                 client.urlProtocolDidFinishLoading(self)
             }
-
         }).resume()
-        
-
     }
     
     override open func stopLoading()
     {
-        
     }
     
     override open class func canonicalRequest(for request: URLRequest) -> URLRequest
     {
         return request
     }
-        
+    
     func loaded()
     {
         if (self.model != nil) {
@@ -117,7 +111,50 @@ open class NFXProtocol: URLProtocol
             NFX.sharedInstance().server?.broadcastModel(self.model!)
         }
         
-        NotificationCenter.default.post(name: Notification.Name(rawValue: "NFXReloadData"), object: nil)
+        NotificationCenter.default.post(name: Notification.Name.NFXReloadData, object: nil)
+    }
+}
+
+extension NFXProtocol : URLSessionDelegate {
+    public func urlSession(_ session: URLSession, dataTask: URLSessionDataTask, didReceive data: Data) {
+        client?.urlProtocol(self, didLoad: data)
     }
     
+    public func urlSession(_ session: URLSession, dataTask: URLSessionDataTask, didReceive response: URLResponse, completionHandler: @escaping (URLSession.ResponseDisposition) -> Void) {
+        let policy = URLCache.StoragePolicy(rawValue: request.cachePolicy.rawValue) ?? .notAllowed
+        client?.urlProtocol(self, didReceive: response, cacheStoragePolicy: policy)
+        completionHandler(.allow)
+    }
+    
+    public func urlSession(_ session: URLSession, task: URLSessionTask, didCompleteWithError error: Error?) {
+        if let error = error {
+            client?.urlProtocol(self, didFailWithError: error)
+        } else {
+            client?.urlProtocolDidFinishLoading(self)
+        }
+    }
+    
+    public func urlSession(_ session: URLSession, task: URLSessionTask, willPerformHTTPRedirection response: HTTPURLResponse, newRequest request: URLRequest, completionHandler: @escaping (URLRequest?) -> Void) {
+        if let mutableRequest = (request as NSURLRequest).mutableCopy() as? NSMutableURLRequest {
+            URLProtocol.removeProperty(forKey: "NFXInternal", in: mutableRequest)
+            client?.urlProtocol(self, wasRedirectedTo: request, redirectResponse: response)
+            completionHandler(request)
+        }
+    }
+    
+    public func urlSession(_ session: URLSession, didBecomeInvalidWithError error: Error?) {
+        guard let error = error else { return }
+        client?.urlProtocol(self, didFailWithError: error)
+    }
+    
+    public func urlSession(_ session: URLSession, didReceive challenge: URLAuthenticationChallenge, completionHandler: @escaping (URLSession.AuthChallengeDisposition, URLCredential?) -> Void) {
+        let wrappedChallenge = URLAuthenticationChallenge(authenticationChallenge: challenge, sender: NFXAuthenticationChallengeSender(handler: completionHandler))
+        client?.urlProtocol(self, didReceive: wrappedChallenge)
+    }
+    
+    #if !os(OSX)
+    public func urlSessionDidFinishEvents(forBackgroundURLSession session: URLSession) {
+        client?.urlProtocolDidFinishLoading(self)
+    }
+    #endif
 }

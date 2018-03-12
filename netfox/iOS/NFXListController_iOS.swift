@@ -38,9 +38,9 @@ class NFXListController_iOS: NFXListController, UITableViewDelegate, UITableView
         
         self.tableView.register(NFXListCell.self, forCellReuseIdentifier: NSStringFromClass(NFXListCell.self))
 
-        self.navigationItem.leftBarButtonItem = UIBarButtonItem(image: UIImage.NFXClose(), style: .plain, target: self, action: #selector(NFXListController_iOS.closeButtonPressed))
+        self.navigationItem.leftBarButtonItem = UIBarButtonItem(image: NFXImage.close, style: .plain, target: self, action: #selector(NFXListController_iOS.closeButtonPressed))
 
-        self.navigationItem.rightBarButtonItem = UIBarButtonItem(image: UIImage.NFXSettings(), style: .plain, target: self, action: #selector(NFXListController_iOS.settingsButtonPressed))
+        self.navigationItem.rightBarButtonItem = UIBarButtonItem(image: NFXImage.settings, style: .plain, target: self, action: #selector(NFXListController_iOS.settingsButtonPressed))
         
         self.searchController = UISearchController(searchResultsController: nil)
         self.searchController.searchResultsUpdater = self
@@ -72,13 +72,13 @@ class NFXListController_iOS: NFXListController, UITableViewDelegate, UITableView
         NotificationCenter.default.addObserver(
             self,
             selector: #selector(NFXListController.reloadTableViewData),
-            name: NSNotification.Name(rawValue: "NFXReloadData"),
+            name: NSNotification.Name.NFXReloadData,
             object: nil)
         
         NotificationCenter.default.addObserver(
             self,
             selector: #selector(NFXListController_iOS.deactivateSearchController),
-            name: NSNotification.Name(rawValue: "NFXDeactivateSearch"),
+            name: NSNotification.Name.NFXDeactivateSearch,
             object: nil)        
     }
     

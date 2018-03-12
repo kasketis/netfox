@@ -18,32 +18,32 @@ fileprivate func < <T : Comparable>(lhs: T?, rhs: T?) -> Bool {
 }
 
 
-class NFXHTTPModel: NSObject
+@objc public class NFXHTTPModel: NSObject
 {
-    @objc var requestURL: String?
-    @objc var requestMethod: String?
-    var requestCachePolicy: String?
-    var requestDate: Date?
-    var requestTime: String?
-    var requestTimeout: String?
-    var requestHeaders: [AnyHashable: Any]?
-    var requestBodyLength: Int?
-    var requestType: String?
+    @objc public var requestURL: String?
+    @objc public var requestMethod: String?
+    @objc public var requestCachePolicy: String?
+    @objc public var requestDate: Date?
+    @objc public var requestTime: String?
+    @objc public var requestTimeout: String?
+    @objc public var requestHeaders: [AnyHashable: Any]?
+    public var requestBodyLength: Int?
+    @objc public var requestType: String?
     
-    var responseStatus: Int?
-    @objc var responseType: String?
-    var responseDate: Date?
-    var responseTime: String?
-    var responseHeaders: [AnyHashable: Any]?
-    var responseBodyLength: Int?
+    public var responseStatus: Int?
+    @objc public var responseType: String?
+    @objc public var responseDate: Date?
+    @objc public var responseTime: String?
+    @objc public var responseHeaders: [AnyHashable: Any]?
+    public var responseBodyLength: Int?
     
-    var timeInterval: Float?
+    public var timeInterval: Float?
     
-    var randomHash: NSString?
+    @objc public var randomHash: NSString?
     
-    @objc var shortType: NSString = HTTPModelShortType.OTHER.rawValue as NSString
+    @objc public var shortType: NSString = HTTPModelShortType.OTHER.rawValue as NSString
     
-    var noResponse: Bool = true
+    @objc public var noResponse: Bool = true
     
     func saveRequest(_ request: URLRequest)
     {
@@ -128,7 +128,7 @@ class NFXHTTPModel: NSObject
         return NSString(data: rawData, encoding: String.Encoding.utf8.rawValue) ?? ""
     }
 
-    func getRequestBody() -> NSString
+    @objc public func getRequestBody() -> NSString
     {
         guard let data = readRawData(getRequestBodyFilepath()) else {
             return ""
@@ -136,7 +136,7 @@ class NFXHTTPModel: NSObject
         return prettyOutput(data, contentType: requestType)
     }
     
-    func getResponseBody() -> NSString
+    @objc public func getResponseBody() -> NSString
     {
         guard let data = readRawData(getResponseBodyFilepath()) else {
             return ""
@@ -145,7 +145,7 @@ class NFXHTTPModel: NSObject
         return prettyOutput(data, contentType: responseType)
     }
     
-    func getRandomHash() -> NSString
+    @objc public func getRandomHash() -> NSString
     {
         if !(self.randomHash != nil) {
             self.randomHash = UUID().uuidString as NSString?
@@ -153,34 +153,34 @@ class NFXHTTPModel: NSObject
         return self.randomHash!
     }
     
-    func getRequestBodyFilepath() -> String
+    @objc public func getRequestBodyFilepath() -> String
     {
         let dir = getDocumentsPath() as NSString
         return dir.appendingPathComponent(getRequestBodyFilename())
     }
     
-    func getRequestBodyFilename() -> String
+    @objc public func getRequestBodyFilename() -> String
     {
         return String("nfx_request_body_") + "\(self.requestTime!)_\(getRandomHash() as String)"
     }
     
-    func getResponseBodyFilepath() -> String
+    @objc public func getResponseBodyFilepath() -> String
     {
         let dir = getDocumentsPath() as NSString
         return dir.appendingPathComponent(getResponseBodyFilename())
     }
     
-    func getResponseBodyFilename() -> String
+    @objc public func getResponseBodyFilename() -> String
     {
         return String("nfx_response_body_") + "\(self.requestTime!)_\(getRandomHash() as String)"
     }
     
-    func getDocumentsPath() -> String
+    @objc public func getDocumentsPath() -> String
     {
         return NSSearchPathForDirectoriesInDomains(FileManager.SearchPathDirectory.documentDirectory, FileManager.SearchPathDomainMask.allDomainsMask, true).first!
     }
     
-    func saveData(_ dataString: NSString, toFile: String)
+    @objc public func saveData(_ dataString: NSString, toFile: String)
     {
         do {
             try dataString.write(toFile: toFile, atomically: false, encoding: String.Encoding.utf8.rawValue)
@@ -189,12 +189,12 @@ class NFXHTTPModel: NSObject
         }
     }
     
-    func readRawData(_ fromFile: String) -> Data?
+    @objc public func readRawData(_ fromFile: String) -> Data?
     {
         return (try? Data(contentsOf: URL(fileURLWithPath: fromFile)))
     }
     
-    func getTimeFromDate(_ date: Date) -> String?
+    @objc public func getTimeFromDate(_ date: Date) -> String?
     {
         let calendar = Calendar.current
         let components = (calendar as NSCalendar).components([.hour, .minute], from: date)
@@ -208,7 +208,7 @@ class NFXHTTPModel: NSObject
         }
     }
     
-    func getShortTypeFrom(_ contentType: String) -> HTTPModelShortType
+    public func getShortTypeFrom(_ contentType: String) -> HTTPModelShortType
     {
         if NSPredicate(format: "SELF MATCHES %@",
                                 "^application/(vnd\\.(.*)\\+)?json$").evaluate(with: contentType) {
@@ -230,7 +230,7 @@ class NFXHTTPModel: NSObject
         return .OTHER
     }
     
-    func prettyPrint(_ rawData: Data, type: HTTPModelShortType) -> NSString?
+    public func prettyPrint(_ rawData: Data, type: HTTPModelShortType) -> NSString?
     {
         switch type {
         case .JSON:
@@ -248,7 +248,7 @@ class NFXHTTPModel: NSObject
         }
     }
     
-    func isSuccessful() -> Bool
+    @objc public func isSuccessful() -> Bool
     {
         if (self.responseStatus != nil) && (self.responseStatus < 400) {
             return true
@@ -258,7 +258,7 @@ class NFXHTTPModel: NSObject
     }
     
     
-    func formattedRequestLogEntry() -> String {
+    @objc public func formattedRequestLogEntry() -> String {
         var log = String()
         
         if let requestURL = self.requestURL {
@@ -298,7 +298,7 @@ class NFXHTTPModel: NSObject
         return log;
     }
     
-    func formattedResponseLogEntry() -> String {
+    @objc public func formattedResponseLogEntry() -> String {
         var log = String()
         
         if let requestURL = self.requestURL {

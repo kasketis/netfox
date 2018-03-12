@@ -15,6 +15,8 @@ class NFXClientConnection: NSObject {
     private var thread: Thread!
     private var runLoop: CFRunLoop?
     
+    var _onClose: (() -> Void)?
+    
     init (inputStream: InputStream, outputStream: OutputStream) {
         self.inputStream = inputStream
         self.outputStream = outputStream
@@ -66,7 +68,6 @@ class NFXClientConnection: NSObject {
             }
         }
     }
-    var _onClose: (() -> Void)?
     
     static let serialQueue = DispatchQueue(label: "NFXClientConnection")
     @objc func writeModel(_ model: NFXHTTPModel) {

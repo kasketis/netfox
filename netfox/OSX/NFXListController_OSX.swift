@@ -25,11 +25,15 @@ class NFXListController_OSX: NFXListController, NSTableViewDelegate, NSTableView
 
     override func awakeFromNib() {
         let bundle = Bundle(for: type(of: self))
-        tableView.register(NSNib(nibNamed: NSNib.Name(rawValue: cellIdentifier), bundle: bundle), forIdentifier: NSUserInterfaceItemIdentifier(rawValue: cellIdentifier))
+        #if !swift(>=4.0)
+            tableView.register(NSNib(nibNamed: cellIdentifier, bundle: bundle), forIdentifier: cellIdentifier)
+        #else
+            tableView.register(NSNib(nibNamed: NSNib.Name(rawValue: cellIdentifier), bundle: bundle), forIdentifier: NSUserInterfaceItemIdentifier(rawValue: cellIdentifier))
+        #endif
         searchField.delegate = self
         
-        NotificationCenter.default.addObserver(self, selector: #selector(NFXListController.reloadTableViewData), name: NSNotification.Name(rawValue: "NFXReloadData"), object: nil)
-        NotificationCenter.default.addObserver(self, selector: #selector(NFXListController_OSX.deactivateSearchController), name: NSNotification.Name(rawValue: "NFXDeactivateSearch"), object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(NFXListController.reloadTableViewData), name: NSNotification.Name.NFXReloadData, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(NFXListController_OSX.deactivateSearchController), name: NSNotification.Name.NFXDeactivateSearch, object: nil)
     }
     
     // MARK: Notifications
@@ -75,9 +79,15 @@ class NFXListController_OSX: NFXListController, NSTableViewDelegate, NSTableView
     
     func tableView(_ tableView: NSTableView, viewFor tableColumn: NSTableColumn?, row: Int) -> NSView? {
         
-        guard let cell = tableView.makeView(withIdentifier: NSUserInterfaceItemIdentifier(rawValue: cellIdentifier), owner: nil) as? NFXListCell_OSX else {
+        #if !swift(>=4.0)
+            guard let cell = tableView.make(withIdentifier: cellIdentifier, owner: nil) as? NFXListCell_OSX else {
+                return nil
+            }
+        #else
+            guard let cell = tableView.makeView(withIdentifier: NSUserInterfaceItemIdentifier(rawValue: cellIdentifier), owner: nil) as? NFXListCell_OSX else {
             return nil
-        }
+            }
+        #endif
         
         if (self.isSearchControllerActive) {
             if self.filteredTableData.count > 0 {

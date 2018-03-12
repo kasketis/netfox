@@ -31,7 +31,7 @@ class NFXSettingsController_iOS: NFXSettingsController, UITableViewDelegate, UIT
         self.extendedLayoutIncludesOpaqueBars = false
         self.automaticallyAdjustsScrollViewInsets = false
         
-        self.navigationItem.rightBarButtonItems = [UIBarButtonItem(image: UIImage.NFXStatistics(), style: .plain, target: self, action: #selector(NFXSettingsController_iOS.statisticsButtonPressed)), UIBarButtonItem(image: UIImage.NFXInfo(), style: .plain, target: self, action: #selector(NFXSettingsController_iOS.infoButtonPressed))]
+        self.navigationItem.rightBarButtonItems = [UIBarButtonItem(image: NFXImage.statistics, style: .plain, target: self, action: #selector(NFXSettingsController_iOS.statisticsButtonPressed)), UIBarButtonItem(image: NFXImage.info, style: .plain, target: self, action: #selector(NFXSettingsController_iOS.infoButtonPressed))]
         
         self.tableView.frame = CGRect(x: 0, y: 0, width: self.view.frame.width, height: self.view.frame.height - 60)
         self.tableView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
