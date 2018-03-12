@@ -189,77 +189,66 @@ extension URLResponse
 
 extension NFXImage
 {
-    class func NFXSettings() -> NFXImage
-    {
-    #if os (iOS)
-        return UIImage(data: NFXAssets.getImage(NFXAssetName.settings), scale: 1.7)!
-    #elseif os(OSX)
-        return NSImage(data: NFXAssets.getImage(NFXAssetName.settings))!
-    #endif
-    }
+    static let settings: NFXImage = {
+        #if os (iOS)
+            return UIImage(data: NFXAssets.getImage(NFXAssetName.settings), scale: 1.7)!
+        #elseif os(OSX)
+            return NSImage(data: NFXAssets.getImage(NFXAssetName.settings))!
+        #endif
+    }()
 
-    class func NFXClose() -> NFXImage
-    {
-    #if os (iOS)
-        return UIImage(data: NFXAssets.getImage(NFXAssetName.close), scale: 1.7)!
-    #elseif os(OSX)
-        return NSImage(data: NFXAssets.getImage(NFXAssetName.close))!
-    #endif
-    }
+    static let close: NFXImage = {
+        #if os (iOS)
+            return UIImage(data: NFXAssets.getImage(NFXAssetName.close), scale: 1.7)!
+        #elseif os(OSX)
+            return NSImage(data: NFXAssets.getImage(NFXAssetName.close))!
+        #endif
+    }()
     
-    class func NFXInfo() -> NFXImage
-    {
-    #if os (iOS)
-        return UIImage(data: NFXAssets.getImage(NFXAssetName.info), scale: 1.7)!
-    #elseif os(OSX)
-        return NSImage(data: NFXAssets.getImage(NFXAssetName.info))!
-    #endif
-    }
+    static let info: NFXImage = {
+        #if os (iOS)
+            return UIImage(data: NFXAssets.getImage(NFXAssetName.info), scale: 1.7)!
+        #elseif os(OSX)
+            return NSImage(data: NFXAssets.getImage(NFXAssetName.info))!
+        #endif
+    }()
     
-    class func NFXStatistics() -> NFXImage
-    {
-    #if os (iOS)
-        return UIImage(data: NFXAssets.getImage(NFXAssetName.statistics), scale: 1.7)!
-    #elseif os(OSX)
-        return NSImage(data: NFXAssets.getImage(NFXAssetName.statistics))!
-    #endif
-    }
+    static let statistics: NFXImage = {
+        #if os (iOS)
+            return UIImage(data: NFXAssets.getImage(NFXAssetName.statistics), scale: 1.7)!
+        #elseif os(OSX)
+            return NSImage(data: NFXAssets.getImage(NFXAssetName.statistics))!
+        #endif
+    }()
     
     #if os (OSX)
-    class func NFXCloud() -> NFXImage
-    {
+    static let cloud: NFXImage = {
         return NSImage(data: NFXAssets.getImage(NFXAssetName.cloud))!
-    }
+    }()
     
-    class func NFXFolder() -> NFXImage
-    {
+    static let folder: NFXImage = {
         return NSImage(data: NFXAssets.getImage(NFXAssetName.folder))!
-    }
+    }()
     
-    class func NFXFileDownloading() -> NFXImage
-    {
+    static let fileDownloading: NFXImage = {
         return NSImage(data: NFXAssets.getImage(NFXAssetName.fileDownloading))!
-    }
+    }()
     
-    class func NFXFileSuccess() -> NFXImage
-    {
+    static let fileSuccess: NFXImage = {
         return NSImage(data: NFXAssets.getImage(NFXAssetName.fileSuccess))!
-    }
+    }()
     
-    class func NFXFileWarning() -> NFXImage
-    {
+    static let fileWarning: NFXImage = {
         return NSImage(data: NFXAssets.getImage(NFXAssetName.fileWarning))!
-    }
+    }()
     
-    class func NFXFileUnauthorized() -> NFXImage
-    {
+    static let fileUnauthorized: NFXImage = {
         return NSImage(data: NFXAssets.getImage(NFXAssetName.fileUnauthorized))!
-    }
+    }()
     
-    class func NFXServerError() -> NFXImage
-    {
+    static let serverError: NFXImage = {
         return NSImage(data: NFXAssets.getImage(NFXAssetName.serverError))!
-    }
+    }()
     #endif
 }
 

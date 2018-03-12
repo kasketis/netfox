@@ -10,13 +10,13 @@
     
 import Cocoa
     
-let cloudImage = NFXImage.NFXCloud()
-let folderImage = NFXImage.NFXFolder()
-let fileDownloadingImage = NFXImage.NFXFileDownloading()
-let fileSuccessImage = NFXImage.NFXFileSuccess()
-let fileWarningImage = NFXImage.NFXFileWarning()
-let fileUnauthorizedImage = NFXImage.NFXFileUnauthorized()
-let serverErrorImage = NFXImage.NFXServerError()
+let cloudImage = NFXImage.cloud
+let folderImage = NFXImage.folder
+let fileDownloadingImage = NFXImage.fileDownloading
+let fileSuccessImage = NFXImage.fileSuccess
+let fileWarningImage = NFXImage.fileWarning
+let fileUnauthorizedImage = NFXImage.fileUnauthorized
+let serverErrorImage = NFXImage.serverError
     
 class NFXPathNodeListCell_OSX: NSTableCellView {
     

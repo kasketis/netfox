@@ -38,9 +38,9 @@ class NFXListController_iOS: NFXListController, UITableViewDelegate, UITableView
         
         self.tableView.register(NFXListCell.self, forCellReuseIdentifier: NSStringFromClass(NFXListCell.self))
 
-        self.navigationItem.leftBarButtonItem = UIBarButtonItem(image: UIImage.NFXClose(), style: .plain, target: self, action: #selector(NFXListController_iOS.closeButtonPressed))
+        self.navigationItem.leftBarButtonItem = UIBarButtonItem(image: NFXImage.close, style: .plain, target: self, action: #selector(NFXListController_iOS.closeButtonPressed))
 
-        self.navigationItem.rightBarButtonItem = UIBarButtonItem(image: UIImage.NFXSettings(), style: .plain, target: self, action: #selector(NFXListController_iOS.settingsButtonPressed))
+        self.navigationItem.rightBarButtonItem = UIBarButtonItem(image: NFXImage.settings, style: .plain, target: self, action: #selector(NFXListController_iOS.settingsButtonPressed))
         
         self.searchController = UISearchController(searchResultsController: nil)
         self.searchController.searchResultsUpdater = self
