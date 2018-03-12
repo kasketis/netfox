@@ -11,16 +11,16 @@ import Foundation
 class NFXCodableClass: CustomStringConvertible {
     
     var className: String
-    var properties: [(String, String)] = []
+    var properties: [(name: String, type: String)] = []
     
     init(className: String) {
         self.className = className
     }
     
     func addProperty(name: String, type: String) {
-        if let index = properties.index(where: { $0.0 == name }) {
-            if properties[index].1 == "Any" && type != "Any" {
-                properties[index].1 = type
+        if let index = properties.index(where: { $0.name == name }) {
+            if properties[index].type == "Any" && type != "Any" {
+                properties[index].type = type
             }
         } else {
             properties.append((name, type))
@@ -45,9 +45,9 @@ class NFXCodableClass: CustomStringConvertible {
         }
         
         var str = "class \(getClassName(className)): Codable {\n\n"
-        str += properties.map{ "\tvar \(getPropertyName($0.0)): \(getPropertyType($0.1))!" }.joined(separator: "\n")
+        str += properties.map{ "\tvar \(getPropertyName($0.name)): \(getPropertyType($0.type))!" }.joined(separator: "\n")
         str += "\n\n\tenum CodingKeys: String, CodingKey {\n"
-        str += properties.map{"\t\tcase \(getPropertyName($0.0)) = \"\($0.0)\""}.joined(separator: "\n")
+        str += properties.map{"\t\tcase \(getPropertyName($0.name)) = \"\($0.name)\""}.joined(separator: "\n")
         str += "\n\t}"
         str += "\n}\n\n"
         return str
