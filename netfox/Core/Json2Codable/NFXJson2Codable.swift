@@ -10,6 +10,7 @@ import Foundation
 
 public class NFXJson2Codable {
     
+    private let boolParser = NFXJsonParser<Bool>()
     private let intParser = NFXJsonParser<Int>()
     private let doubleParser = NFXJsonParser<Double>()
     private let stringParser = NFXJsonParser<String>()
@@ -22,9 +23,7 @@ public class NFXJson2Codable {
     
     func convertToCodable(name: String, from array: [Any]) -> NFXCodableClass {
         if let item = array.first, dictionaryParser.canParse(item) {
-            let codableClass = array.map{ convertToCodable(name: name, from: dictionaryParser.parse($0)) }.first!
-            codableClass.detectEnums()
-            return codableClass
+            return array.map{ convertToCodable(name: name, from: dictionaryParser.parse($0)) }.first!
         }
         
         return getCodableClass(name: convertToProperty(key: name, value: array.first!))
@@ -46,6 +45,10 @@ public class NFXJson2Codable {
     }
     
     private func convertToProperty(key: String, value: Any) -> String {
+        if boolParser.canParse(value) {
+            return boolParser.getPropertyType()
+        }
+        
         if intParser.canParse(value) {
             if dateParser.canParse(key: key, value: intParser.parse(value)) {
                 return dateParser.getPropertyType()
