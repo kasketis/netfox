@@ -28,9 +28,6 @@
 		8229AD6F1F8FB34300A9D613 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 8229AD6D1F8FB34300A9D613 /* LaunchScreen.storyboard */; };
 		8229AD771F8FB4B500A9D613 /* netfox_ios.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B3BC020F1C09CDA000C17F3A /* netfox_ios.framework */; };
 		826C4E9E1F979AB3008B440C /* NFXLoader.h in Headers */ = {isa = PBXBuildFile; fileRef = 826C4E9C1F979AB3008B440C /* NFXLoader.h */; };
-		826C4E9F1F979AB3008B440C /* NFXLoader.m in Sources */ = {isa = PBXBuildFile; fileRef = 826C4E9D1F979AB3008B440C /* NFXLoader.m */; };
-		82F6E1031F8FD81C002B31BD /* TextViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 82F6E1021F8FD81C002B31BD /* TextViewController.swift */; };
-		82F6E1051F8FF55D002B31BD /* WebViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 82F6E1041F8FF55D002B31BD /* WebViewController.swift */; };
 		8F98A4DE202992FE007B2BB1 /* NFXPathNodeListCell_OSX.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8F98A4D9202992A2007B2BB1 /* NFXPathNodeListCell_OSX.swift */; };
 		8F98A4E12029944D007B2BB1 /* NFXPathNodeListCell_OSX.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8F98A4DF20299399007B2BB1 /* NFXPathNodeListCell_OSX.xib */; };
 		8F98A4E3202994CB007B2BB1 /* NFXPathNodeListController_OSX.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8F98A4E2202994CB007B2BB1 /* NFXPathNodeListController_OSX.swift */; };
@@ -42,6 +39,9 @@
 		8FBC1A8E2028AF2A00ABDF22 /* NFXPathNodeManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8FBC1A8A2028ACEB00ABDF22 /* NFXPathNodeManager.swift */; };
 		8FD42BA62028A2D20084211A /* NFXPathNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8FD42BA52028A2D20084211A /* NFXPathNode.swift */; };
 		8FD42BA72028A3BB0084211A /* NFXPathNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8FD42BA52028A2D20084211A /* NFXPathNode.swift */; };
+		826C4E9F1F979AB3008B440C /* NFXLoader.m in Sources */ = {isa = PBXBuildFile; fileRef = 826C4E9D1F979AB3008B440C /* NFXLoader.m */; };
+		82F6E1031F8FD81C002B31BD /* TextViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 82F6E1021F8FD81C002B31BD /* TextViewController.swift */; };
+		82F6E1051F8FF55D002B31BD /* WebViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 82F6E1041F8FF55D002B31BD /* WebViewController.swift */; };
 		B3F8BA821C833ABC00F9FBEA /* NFX.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3F8BA711C833ABC00F9FBEA /* NFX.swift */; };
 		B3F8BA831C833ABC00F9FBEA /* NFX.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3F8BA711C833ABC00F9FBEA /* NFX.swift */; };
 		B3F8BA841C833ABC00F9FBEA /* NFXAssets.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3F8BA721C833ABC00F9FBEA /* NFXAssets.swift */; };
@@ -144,10 +144,6 @@
 		8229AD6B1F8FB34300A9D613 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		8229AD6E1F8FB34300A9D613 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		8229AD701F8FB34300A9D613 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		826C4E9C1F979AB3008B440C /* NFXLoader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NFXLoader.h; sourceTree = "<group>"; };
-		826C4E9D1F979AB3008B440C /* NFXLoader.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NFXLoader.m; sourceTree = "<group>"; };
-		82F6E1021F8FD81C002B31BD /* TextViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextViewController.swift; sourceTree = "<group>"; };
-		82F6E1041F8FF55D002B31BD /* WebViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WebViewController.swift; sourceTree = "<group>"; };
 		8F98A4D9202992A2007B2BB1 /* NFXPathNodeListCell_OSX.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NFXPathNodeListCell_OSX.swift; sourceTree = "<group>"; };
 		8F98A4DF20299399007B2BB1 /* NFXPathNodeListCell_OSX.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = NFXPathNodeListCell_OSX.xib; sourceTree = "<group>"; };
 		8F98A4E2202994CB007B2BB1 /* NFXPathNodeListController_OSX.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NFXPathNodeListController_OSX.swift; sourceTree = "<group>"; };
@@ -157,6 +153,10 @@
 		8FBC1A8A2028ACEB00ABDF22 /* NFXPathNodeManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NFXPathNodeManager.swift; sourceTree = "<group>"; };
 		8FBFFB4C20331DD000DF9319 /* NFXJson2Codable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NFXJson2Codable.swift; sourceTree = "<group>"; };
 		8FD42BA52028A2D20084211A /* NFXPathNode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NFXPathNode.swift; sourceTree = "<group>"; };
+		826C4E9C1F979AB3008B440C /* NFXLoader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NFXLoader.h; sourceTree = "<group>"; };
+		826C4E9D1F979AB3008B440C /* NFXLoader.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NFXLoader.m; sourceTree = "<group>"; };
+		82F6E1021F8FD81C002B31BD /* TextViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextViewController.swift; sourceTree = "<group>"; };
+		82F6E1041F8FF55D002B31BD /* WebViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WebViewController.swift; sourceTree = "<group>"; };
 		B3BC020F1C09CDA000C17F3A /* netfox_ios.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = netfox_ios.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		B3F8BA711C833ABC00F9FBEA /* NFX.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NFX.swift; sourceTree = "<group>"; };
 		B3F8BA721C833ABC00F9FBEA /* NFXAssets.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NFXAssets.swift; sourceTree = "<group>"; };
@@ -241,6 +241,17 @@
 			path = netfox_mac;
 			sourceTree = "<group>";
 		};
+		8F9DEE92203338F700E76B7E /* Json2Codable */ = {
+			isa = PBXGroup;
+			children = (
+				8F9DEE952033393800E76B7E /* NFXCodableClass.swift */,
+				8FBFFB4C20331DD000DF9319 /* NFXJson2Codable.swift */,
+				8F9DEE932033391800E76B7E /* NFXJsonParser.swift */,
+				8F9DEE972033398500E76B7E /* String+CamelCase.swift */,
+			);
+			path = Json2Codable;
+			sourceTree = "<group>";
+		};
 		8229AD631F8FB34300A9D613 /* netfox_ios_demo */ = {
 			isa = PBXGroup;
 			children = (
@@ -261,17 +272,6 @@
 			children = (
 			);
 			name = Frameworks;
-			sourceTree = "<group>";
-		};
-		8F9DEE92203338F700E76B7E /* Json2Codable */ = {
-			isa = PBXGroup;
-			children = (
-				8F9DEE952033393800E76B7E /* NFXCodableClass.swift */,
-				8FBFFB4C20331DD000DF9319 /* NFXJson2Codable.swift */,
-				8F9DEE932033391800E76B7E /* NFXJsonParser.swift */,
-				8F9DEE972033398500E76B7E /* String+CamelCase.swift */,
-			);
-			path = Json2Codable;
 			sourceTree = "<group>";
 		};
 		B3BC02051C09CDA000C17F3A = {
@@ -495,7 +495,7 @@
 					};
 				};
 			};
-			buildConfigurationList = B3BC02091C09CDA000C17F3A /* Build configuration list for PBXProject "netfox" */;
+			buildConfigurationList = B3BC02091C09CDA000C17F3A /* Build configuration list for PBXProject "netfox_ios" */;
 			compatibilityVersion = "Xcode 3.2";
 			developmentRegion = English;
 			hasScannedForEncodings = 0;
@@ -1028,7 +1028,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		B3BC02091C09CDA000C17F3A /* Build configuration list for PBXProject "netfox" */ = {
+		B3BC02091C09CDA000C17F3A /* Build configuration list for PBXProject "netfox_ios" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				B3BC02151C09CDA000C17F3A /* Debug */,
