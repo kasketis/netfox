@@ -247,22 +247,17 @@ extension NFX {
 
     fileprivate func showNFXFollowingPlatform()
     {
-        var navigationController: UINavigationController?
-        
-        var listController: NFXListController_iOS
-        listController = NFXListController_iOS()
-        
-        navigationController = UINavigationController(rootViewController: listController)
-        navigationController!.navigationBar.isTranslucent = false
-        navigationController!.navigationBar.tintColor = UIColor.NFXOrangeColor()
-        navigationController!.navigationBar.barTintColor = UIColor.NFXStarkWhiteColor()
+        let navigationController = UINavigationController(rootViewController: NFXListController_iOS())
+        navigationController.navigationBar.isTranslucent = false
+        navigationController.navigationBar.tintColor = UIColor.NFXOrangeColor()
+        navigationController.navigationBar.barTintColor = UIColor.NFXStarkWhiteColor()
         #if !swift(>=4.0)
-            navigationController!.navigationBar.titleTextAttributes = [NSForegroundColorAttributeName: UIColor.NFXOrangeColor()]
+            navigationController.navigationBar.titleTextAttributes = [NSForegroundColorAttributeName: UIColor.NFXOrangeColor()]
         #else
-            navigationController!.navigationBar.titleTextAttributes = [NSAttributedStringKey.foregroundColor: UIColor.NFXOrangeColor()]
+            navigationController.navigationBar.titleTextAttributes = [NSAttributedStringKey.foregroundColor: UIColor.NFXOrangeColor()]
         #endif
         
-        presentingViewController?.present(navigationController!, animated: true, completion: nil)
+        presentingViewController?.present(navigationController, animated: true, completion: nil)
     }
     
     fileprivate func hideNFXFollowingPlatform(_ completion: (() -> Void)?)
