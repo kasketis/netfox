@@ -22,9 +22,6 @@ Feel free to contribute :)
 | ![](https://raw.githubusercontent.com/kasketis/netfox/master/assets/overview1_5_3.gif)  | ![](https://cloud.githubusercontent.com/assets/1402212/12893260/78f90916-ce90-11e5-830a-d1a1b91b2ac4.png) |
 |---|---|
 
-### netfox_mac app working in parallel with iOS app
-![](https://d2ffutrenqvap3.cloudfront.net/items/2S0C1j2e3D3A3H2P020E/Screen%20Recording%202018-02-23%20at%2001.45%20PM.gif)
-
 ## Installation
 
 ### CocoaPods
@@ -85,18 +82,6 @@ to prevent library’s execution on your production app.
 
 You can add the DEBUG symbol with the -DDEBUG entry. Set it in the "Swift Compiler - Custom Flags" section -> "Other Swift Flags" line in project’s "Build Settings"
 
-If you want to use netfox with the netfox_mac application, you should start netfox in the following way:
-
-#### Swift
-<pre>
-NFX.sharedInstance().startServer()
-</pre>
-
-#### Obj-C
-<pre>
-[[NFX sharedInstance] startServer];
-</pre>
-
 ## Usage 
 
 Just shake your device and check what's going right or wrong! 
@@ -138,6 +123,20 @@ NFX.sharedInstance().ignoreURL("the_url")
 ```
 Tip: You can use the url of the host (for example "https://www.github.com") to ignore all paths of it 
 
+## Alternative to Charles - use netfox_mac app
+
+No need to mess around with Charles Proxy, SSL configurations in order to connect to your iPhone or iPad. We have created netfox_mac app which can connect to all apps (iOS or mac) that are running in local network. It will be easier for your QA person / team to know what API calls are made on device or if one of them has failed.
+
+Basically any iOS app that wants to expose it's network data to other netfox_mac app for inspection should start discovery service using:
+
+```swift
+NFX.sharedInstance().startServer()
+```
+After that netfox_mac app can connect using the same UI as in the mac app.
+
+![](https://d2ffutrenqvap3.cloudfront.net/items/2S0C1j2e3D3A3H2P020E/Screen%20Recording%202018-02-23%20at%2001.45%20PM.gif)
+
+
 ## Features
 
 - Search: You can easily search among requests via
@@ -165,6 +164,8 @@ Tip: You can use the url of the host (for example "https://www.github.com") to i
 ## Thanks
 
 Special thanks to [tbaranes](https://github.com/tbaranes) and [vincedev](https://github.com/vincedev) for their contribution on OSX library!
+
+Special thanks to [Tapptitude](https://tapptitude.com) team for their contribution on netfox_mac app!
 
 ## Licence
 
