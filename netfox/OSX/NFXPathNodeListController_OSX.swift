@@ -29,7 +29,13 @@ class NFXPathNodeListController_OSX: NFXListController, NSTableViewDelegate, NST
     
     override func awakeFromNib() {
         let bundle = Bundle(for: type(of: self))
-        tableView.register(NSNib(nibNamed: NSNib.Name(rawValue: cellIdentifier), bundle: bundle), forIdentifier: NSUserInterfaceItemIdentifier(rawValue: cellIdentifier))
+        if Bundle.main.bundleIdentifier == "com.tapptitude.netfox-mac" {
+            #if !swift(>=4.0)
+                tableView.register(NSNib(nibNamed: cellIdentifier, bundle: bundle), forIdentifier: cellIdentifier)
+            #else
+                tableView.register(NSNib(nibNamed: NSNib.Name(rawValue: cellIdentifier), bundle: bundle), forIdentifier: NSUserInterfaceItemIdentifier(rawValue: cellIdentifier))
+            #endif
+        }
         searchField.delegate = self
         
         NotificationCenter.default.addObserver(self, selector: #selector(NFXListController.reloadTableViewData), name: .NFXReloadData, object: nil)
@@ -93,9 +99,13 @@ class NFXPathNodeListController_OSX: NFXListController, NSTableViewDelegate, NST
     }
     
     func tableView(_ tableView: NSTableView, viewFor tableColumn: NSTableColumn?, row: Int) -> NSView? {
-        guard let cell = tableView.makeView(withIdentifier: NSUserInterfaceItemIdentifier(rawValue: cellIdentifier), owner: nil) as? NFXPathNodeListCell_OSX else {
+        #if !swift(>=4.0)
+            guard let cell = tableView.make(withIdentifier: cellIdentifier, owner: nil) as? NFXPathNodeListCell_OSX else {
+                return nil
+            }        #else
+            guard let cell = tableView.makeView(withIdentifier: NSUserInterfaceItemIdentifier(rawValue: cellIdentifier), owner: nil) as? NFXPathNodeListCell_OSX else {
             return nil
-        }
+            }        #endif
         
         let obj = pathNodeTableData[row]
         cell.configForObject(obj: obj)
