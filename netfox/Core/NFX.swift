@@ -189,7 +189,6 @@ open class NFX: NSObject
             return
         }
         
-        NotificationCenter.default.post(name: Notification.Name.NFXDeactivateSearch, object: nil)
         self.hideNFXFollowingPlatform { () -> Void in
             self.presented = false
         }
