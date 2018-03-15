@@ -32,7 +32,6 @@ class NFXListController_OSX: NFXListController, NSTableViewDelegate, NSTableView
         searchField.delegate = self
         
         NotificationCenter.default.addObserver(self, selector: #selector(NFXListController.reloadTableViewData), name: NSNotification.Name.NFXReloadData, object: nil)
-        NotificationCenter.default.addObserver(self, selector: #selector(NFXListController_OSX.deactivateSearchController), name: NSNotification.Name.NFXDeactivateSearch, object: nil)
     }
     
     // MARK: Notifications
@@ -42,11 +41,6 @@ class NFXListController_OSX: NFXListController, NSTableViewDelegate, NSTableView
         DispatchQueue.main.async {
             self.tableView.reloadData()
         }
-    }
-    
-    @objc func deactivateSearchController()
-    {
-        self.isSearchControllerActive = false
     }
     
     // MARK: Search

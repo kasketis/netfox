@@ -445,7 +445,6 @@ extension String
 }
 
 public extension NSNotification.Name {
-    public static let NFXDeactivateSearch = Notification.Name("NFXDeactivateSearch")
     public static let NFXReloadData = Notification.Name("NFXReloadData")
     public static let NFXAddedModel = Notification.Name("NFXAddedModel")
     public static let NFXClearedModels = Notification.Name("NFXClearedModels")
