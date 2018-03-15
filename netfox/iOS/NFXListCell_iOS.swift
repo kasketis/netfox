@@ -177,7 +177,7 @@ class NFXListCell: UITableViewCell
     
     func isNewBasedOnDate(_ responseDate: Date)
     {
-        if responseDate.isGreaterThanDate(NFX.sharedInstance().getLastVisitDate()) {
+        if responseDate.isGreaterThanDate(NFX.sharedInstance().lastVisitDate) {
             self.isNew()
         } else {
             self.isOld()

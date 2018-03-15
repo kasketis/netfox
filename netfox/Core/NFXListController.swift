@@ -8,13 +8,26 @@
 import Foundation
 
 class NFXListController: NFXGenericController {
-
+    
     var tableData = [NFXHTTPModel]()
     var filteredTableData = [NFXHTTPModel]()
-
+    
     override func viewDidLoad() {
         super.viewDidLoad()        
     }
+    
+    #if os(OSX)
+    override func viewDidDisappear() {
+        super.viewDidDisappear()
+        NFX.sharedInstance().lastVisitDate = Date()
+    }
+    #elseif os(iOS)
+    override func viewDidDisappear(_ animated: Bool) {
+        super.viewDidDisappear(animated)
+        NFX.sharedInstance().lastVisitDate = Date()
+    }
+    #endif
+    
     
     
     func updateSearchResultsForSearchControllerWithString(_ searchString: String)
@@ -28,7 +41,7 @@ class NFXListController: NFXGenericController {
         let array = (NFXHTTPModelManager.sharedInstance.getModels() as NSArray).filtered(using: searchPredicate)
         self.filteredTableData = array as! [NFXHTTPModel]
     }
-
+    
     @objc func reloadTableViewData()
     {
     }
