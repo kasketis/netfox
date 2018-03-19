@@ -139,6 +139,11 @@ Tip: You can use the url of the host (for example "https://www.github.com") to i
 - Info: Check your IP address, your app version and build number and other things within the app
 - More to come.. ;)
 
+## Integrations
+
+#[Droar](https://github.com/myriadmobile/netfox-Droar)
+Droar is a modular, single-line installation debugging window.
+
 ## Other
 
 - If you experience any problems with request logging please check [this](https://github.com/kasketis/netfox/blob/master/Workarounds.md). If you don't get your answer please open an [issue](https://github.com/kasketis/netfox/issues)
