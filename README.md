@@ -141,8 +141,8 @@ Tip: You can use the url of the host (for example "https://www.github.com") to i
 
 ## Integrations
 
-#[Droar](https://github.com/myriadmobile/netfox-Droar)
-Droar is a modular, single-line installation debugging window.
+#Droar
+[Droar](https://github.com/myriadmobile/netfox-Droar) is a modular, single-line installation debugging window.
 
 ## Other
 
