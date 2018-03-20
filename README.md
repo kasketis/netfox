@@ -1,7 +1,7 @@
 ![Netfox: A lightweight, one line setup, network debugging library](https://raw.githubusercontent.com/kasketis/netfox/master/netfox-logo.png)
 
 <p align="center">
-<img alt="Version" src="https://img.shields.io/badge/version-1.8-green.svg?style=flat-square" />
+<img alt="Version" src="https://img.shields.io/badge/version-1.11.1-green.svg?style=flat-square" />
 <a href="https://travis-ci.org/kasketis/netfox"><img alt="CI Status" src="http://img.shields.io/travis/kasketis/netfox.svg?style=flat-square" /></a>
 <a href="https://cocoapods.org/pods/netfox"><img alt="Cocoapods Compatible" src="https://img.shields.io/cocoapods/v/netfox.svg?style=flat-square" /></a>
 <a href="https://github.com/Carthage/Carthage"><img alt="Carthage Compatible" src="https://img.shields.io/badge/carthage-compatible-4BC51D.svg?style=flat-square" /></a>
