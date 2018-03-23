@@ -16,9 +16,9 @@ DESC
   s.ios.deployment_target = '8.0'
   s.osx.deployment_target = '10.11'
   s.requires_arc = true
-  s.source_files = "netfox/Core/*.{swift,h,m}"
-  s.ios.source_files = "netfox/iOS/*.swift"
-  s.osx.source_files = "netfox/OSX/*.{swift,xib}"  
+  s.source_files = "netfox/Core/**/*.{swift,h,m}"
+  s.ios.source_files = "netfox/iOS/**/*.swift"
+  s.osx.source_files = "netfox/OSX/**/*.{swift,xib}"  
 
   # s.dependency "Swifter"
 

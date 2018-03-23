@@ -299,7 +299,11 @@ extension NFX {
         self.presented = false
         
         if Bundle.main.bundleIdentifier == "com.tapptitude.netfox-mac" {
-            NSApplication.shared.terminate(self)
+            #if !swift(>=4.0)
+                NSApplication.shared().terminate(self)
+            #else
+                NSApplication.shared.terminate(self)
+            #endif
         }
     }
     
