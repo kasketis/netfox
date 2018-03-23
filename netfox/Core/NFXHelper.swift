@@ -170,7 +170,7 @@ extension URLRequest
     
     func getNFXBody() -> Data
     {
-        return httpBodyStream?.readfully() ?? URLProtocol.property(forKey: "NFXBodyData", in: self) as? Data ?? Data()
+        return httpBody ?? URLProtocol.property(forKey: "NFXBodyData", in: self) as? Data ?? Data()
     }
 }
 
