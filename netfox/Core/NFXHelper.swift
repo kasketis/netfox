@@ -170,7 +170,11 @@ extension URLRequest
     
     func getNFXBody() -> Data
     {
-        return httpBody ?? URLProtocol.property(forKey: "NFXBodyData", in: self) as? Data ?? Data()
+        guard let contentType: String = getNFXHeaders()["Content-Type"] as? String, !contentType.contains("multipart/form-data") else {
+            return httpBody ?? URLProtocol.property(forKey: "NFXBodyData", in: self) as? Data ?? Data()
+        }
+        
+        return httpBodyStream?.readfully() ?? URLProtocol.property(forKey: "NFXBodyData", in: self) as? Data ?? Data()
     }
 }
 
@@ -253,24 +257,25 @@ extension NFXImage
 }
 
 extension InputStream {
-  func readfully() -> Data {
-    var result = Data()
-    var buffer = [UInt8](repeating: 0, count: 4096)
     
-    open()
-    
-    var amount = 0
-    repeat {
-      amount = read(&buffer, maxLength: buffer.count)
-      if amount > 0 {
-        result.append(buffer, count: amount)
-      }
-    } while amount > 0
-    
-    close()
-    
-    return result
-  }
+    func readfully() -> Data {
+        var result = Data()
+        var buffer = [UInt8](repeating: 0, count: 4096)
+
+        open()
+
+        var amount = 0
+        repeat {
+            amount = read(&buffer, maxLength: buffer.count)
+            if amount > 0 {
+                result.append(buffer, count: amount)
+            }
+        } while amount > 0
+
+        close()
+
+        return result
+    }
 }
 
 extension Date
