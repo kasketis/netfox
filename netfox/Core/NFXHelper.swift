@@ -170,10 +170,6 @@ extension URLRequest
     
     func getNFXBody() -> Data
     {
-        guard let contentType: String = getNFXHeaders()["Content-Type"] as? String, !contentType.contains("multipart/form-data") else {
-            return httpBody ?? URLProtocol.property(forKey: "NFXBodyData", in: self) as? Data ?? Data()
-        }
-        
         return httpBodyStream?.readfully() ?? URLProtocol.property(forKey: "NFXBodyData", in: self) as? Data ?? Data()
     }
 }

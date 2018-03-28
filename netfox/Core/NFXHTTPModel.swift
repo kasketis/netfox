@@ -55,9 +55,16 @@ fileprivate func < <T : Comparable>(lhs: T?, rhs: T?) -> Bool {
         self.requestTimeout = request.getNFXTimeout()
         self.requestHeaders = request.getNFXHeaders()
         self.requestType = requestHeaders?["Content-Type"] as! String?
+    }
+    
+    func saveRequestBody(_ request: URLRequest)
+    {
         saveRequestBodyData(request.getNFXBody())
+    }
+    
+    func logRequest(_ request: URLRequest)
+    {
         formattedRequestLogEntry().appendToFile(filePath: NFXPath.SessionLog)
-
     }
     
     func saveErrorResponse()

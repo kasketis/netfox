@@ -69,6 +69,9 @@ open class NFXProtocol: URLProtocol
         
         session!.dataTask(with: req as URLRequest, completionHandler: {data, response, error in
             
+            self.model?.saveRequestBody(req as URLRequest)
+            self.model?.logRequest(req as URLRequest)
+            
             if let error = error {
                 self.model?.saveErrorResponse()
                 self.loaded()
