@@ -62,3 +62,10 @@ extension NFXJsonParser where T == Date {
         return keys.dropFirst().map{ key.contains($0) }.reduce(key.contains(keys.first!), { $0 || $1 })
     }
 }
+
+extension NFXJsonParser where T == Bool {
+    
+    func canParse(_ value: Any) -> Bool {
+        return String(describing: type(of: value)).contains("Boolean")
+    }
+}
