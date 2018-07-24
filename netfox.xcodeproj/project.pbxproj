@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		172B930921070E0A00DF29CF /* NSURLSessionConfiguration+NFX.m in Sources */ = {isa = PBXBuildFile; fileRef = 172B930721070E0900DF29CF /* NSURLSessionConfiguration+NFX.m */; };
+		172B930A21070E0A00DF29CF /* NSURLSessionConfiguration+NFX.h in Headers */ = {isa = PBXBuildFile; fileRef = 172B930821070E0900DF29CF /* NSURLSessionConfiguration+NFX.h */; };
 		8201A39D204E3E3F00AB2C3D /* NFXAuthenticationChallengeSender.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8201A39C204E3E3F00AB2C3D /* NFXAuthenticationChallengeSender.swift */; };
 		8201A39E204E451900AB2C3D /* NFXAuthenticationChallengeSender.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8201A39C204E3E3F00AB2C3D /* NFXAuthenticationChallengeSender.swift */; };
 		8201A39F204E452200AB2C3D /* NFXLoader.m in Sources */ = {isa = PBXBuildFile; fileRef = 826C4E9D1F979AB3008B440C /* NFXLoader.m */; };
@@ -84,6 +86,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		172B930721070E0900DF29CF /* NSURLSessionConfiguration+NFX.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSURLSessionConfiguration+NFX.m"; sourceTree = "<group>"; };
+		172B930821070E0900DF29CF /* NSURLSessionConfiguration+NFX.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSURLSessionConfiguration+NFX.h"; sourceTree = "<group>"; };
 		8201A39C204E3E3F00AB2C3D /* NFXAuthenticationChallengeSender.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NFXAuthenticationChallengeSender.swift; sourceTree = "<group>"; };
 		8229AD621F8FB34300A9D613 /* netfox_ios_demo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = netfox_ios_demo.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		8229AD641F8FB34300A9D613 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -205,6 +209,8 @@
 		B3F8BA701C833ABC00F9FBEA /* Core */ = {
 			isa = PBXGroup;
 			children = (
+				172B930821070E0900DF29CF /* NSURLSessionConfiguration+NFX.h */,
+				172B930721070E0900DF29CF /* NSURLSessionConfiguration+NFX.m */,
 				826C4E9C1F979AB3008B440C /* NFXLoader.h */,
 				826C4E9D1F979AB3008B440C /* NFXLoader.m */,
 				B3F8BA711C833ABC00F9FBEA /* NFX.swift */,
@@ -277,6 +283,7 @@
 			isa = PBXHeadersBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				172B930A21070E0A00DF29CF /* NSURLSessionConfiguration+NFX.h in Headers */,
 				826C4E9E1F979AB3008B440C /* NFXLoader.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -449,6 +456,7 @@
 				B3F8BA9A1C833ABC00F9FBEA /* NFXProtocol.swift in Sources */,
 				B3F8BA941C833ABC00F9FBEA /* NFXImageBodyDetailsController.swift in Sources */,
 				B3F8BA9E1C833ABC00F9FBEA /* NFXSettingsController.swift in Sources */,
+				172B930921070E0A00DF29CF /* NSURLSessionConfiguration+NFX.m in Sources */,
 				B3F8BAA21C833ABC00F9FBEA /* NFXWindowController.swift in Sources */,
 				B3F8BA841C833ABC00F9FBEA /* NFXAssets.swift in Sources */,
 				826C4E9F1F979AB3008B440C /* NFXLoader.m in Sources */,
