@@ -53,7 +53,9 @@ The above folder contains 3 subfolders: Core, iOS and OSX.
 - If you target on iOS keep only Core and iOS folders (remove OSX folder)
 - If you target on OSX keep only Core and OSX folders (remove iOS folder)
 
-## Start
+## Start is done automatically on project launch
+
+- optional (no longer needed)
 
 #### Swift
 ```swift
