@@ -67,7 +67,7 @@ NFX.sharedInstance().start() // in didFinishLaunchingWithOptions:
 #### Objective-C
 ```objective-c
 // AppDelegate
-[[NFX sharedInstance] start]; // in didFinishLaunchingWithOptions:
+[NFX.sharedInstance start]; // in didFinishLaunchingWithOptions:
 ```
 
 Just simple as that!
