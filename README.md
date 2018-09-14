@@ -58,7 +58,7 @@ The above folder contains 3 subfolders: Core, iOS and OSX.
 #### Swift
 ```swift
 // AppDelegate
-import netfox_ios
+import netfox
 NFX.sharedInstance().start() // in didFinishLaunchingWithOptions:
 ```
 
