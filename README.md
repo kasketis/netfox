@@ -33,6 +33,13 @@ use_frameworks!
 pod 'netfox'
 </pre>
 
+To bundle only on some build configurations specify them after pod.
+
+<pre>
+use_frameworks!
+pod 'netfox', :configurations => ['Debug', 'Test']
+</pre>
+
 ### Carthage
 
 [Carthage](https://github.com/Carthage/Carthage) is a decentralized dependency manager that builds your dependencies and provides you with binary frameworks. To integrate netfox into your Xcode project using Carthage, specify it in your `Cartfile`:
@@ -58,7 +65,7 @@ The above folder contains 3 subfolders: Core, iOS and OSX.
 #### Swift
 ```swift
 // AppDelegate
-import netfox_ios
+import netfox
 NFX.sharedInstance().start() // in didFinishLaunchingWithOptions:
 ```
 
@@ -67,7 +74,7 @@ NFX.sharedInstance().start() // in didFinishLaunchingWithOptions:
 #### Objective-C
 ```objective-c
 // AppDelegate
-[[NFX sharedInstance] start]; // in didFinishLaunchingWithOptions:
+[NFX.sharedInstance start]; // in didFinishLaunchingWithOptions:
 ```
 
 Just simple as that!

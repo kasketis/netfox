@@ -173,7 +173,7 @@ class NFXDetailsController_iOS: NFXDetailsController, MFMailComposeViewControlle
     
     @objc func actionButtonPressed(_ sender: UIBarButtonItem)
     {
-        let actionSheetController: UIAlertController = UIAlertController(title: "Share", message: nil, preferredStyle: .actionSheet)
+        let actionSheetController: UIAlertController = UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)
         
         let cancelAction: UIAlertAction = UIAlertAction(title: "Cancel", style: .cancel)
         actionSheetController.addAction(cancelAction)
@@ -187,6 +187,17 @@ class NFXDetailsController_iOS: NFXDetailsController, MFMailComposeViewControlle
             self.shareLog(full: true)
         }
         actionSheetController.addAction(fullLogAction)
+        
+        if let reqCurl  = self.selectedModel.requestCurl {
+            let curlAction: UIAlertAction = UIAlertAction(title: "Export request as curl", style: .default) { [unowned self] action -> Void in
+                let activityViewController = UIActivityViewController(activityItems: [reqCurl], applicationActivities: nil)
+                activityViewController.popoverPresentationController?.sourceView = self.view
+                self.present(activityViewController, animated: true, completion: nil)
+            }
+            actionSheetController.addAction(curlAction)
+        }
+
+        
         actionSheetController.view.tintColor = UIColor.NFXOrangeColor()
 
         self.present(actionSheetController, animated: true, completion: nil)

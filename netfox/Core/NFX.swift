@@ -239,10 +239,12 @@ open class NFX: NSObject
 #if os(iOS)
 
 extension NFX {
-    fileprivate var presentingViewController: UIViewController?
-    {
-        let rootViewController = UIApplication.shared.keyWindow?.rootViewController
-        return rootViewController?.presentedViewController ?? rootViewController
+    fileprivate var presentingViewController: UIViewController? {
+        var rootViewController = UIApplication.shared.keyWindow?.rootViewController
+		while let controller = rootViewController?.presentedViewController {
+			rootViewController = controller
+		}
+        return rootViewController
     }
 
     fileprivate func showNFXFollowingPlatform()

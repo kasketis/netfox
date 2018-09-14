@@ -29,7 +29,8 @@ fileprivate func < <T : Comparable>(lhs: T?, rhs: T?) -> Bool {
     @objc public var requestHeaders: [AnyHashable: Any]?
     public var requestBodyLength: Int?
     @objc public var requestType: String?
-    
+    @objc public var requestCurl: String?
+
     public var responseStatus: Int?
     @objc public var responseType: String?
     @objc public var responseDate: Date?
@@ -55,9 +56,17 @@ fileprivate func < <T : Comparable>(lhs: T?, rhs: T?) -> Bool {
         self.requestTimeout = request.getNFXTimeout()
         self.requestHeaders = request.getNFXHeaders()
         self.requestType = requestHeaders?["Content-Type"] as! String?
+        self.requestCurl = request.getCurl()
+    }
+    
+    func saveRequestBody(_ request: URLRequest)
+    {
         saveRequestBodyData(request.getNFXBody())
+    }
+    
+    func logRequest(_ request: URLRequest)
+    {
         formattedRequestLogEntry().appendToFile(filePath: NFXPath.SessionLog)
-
     }
     
     func saveErrorResponse()
