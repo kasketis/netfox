@@ -51,7 +51,7 @@ class NFXDetailsController_iOS: NFXDetailsController, MFMailComposeViewControlle
         return [self.infoView, self.requestView, self.responseView]
     }()
 
-    private var sharedContent: String?
+    internal var sharedContent: String?
     
     override func viewDidLoad()
     {
