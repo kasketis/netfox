@@ -51,6 +51,8 @@ class NFXDetailsController_iOS: NFXDetailsController, MFMailComposeViewControlle
         return [self.infoView, self.requestView, self.responseView]
     }()
 
+    private var sharedContent: String?
+    
     override func viewDidLoad()
     {
         super.viewDidLoad()
@@ -299,8 +301,24 @@ class NFXDetailsController_iOS: NFXDetailsController, MFMailComposeViewControlle
     }
 
     func displayShareSheet(shareContent: String) {
-        let activityViewController = UIActivityViewController(activityItems: [shareContent as NSString], applicationActivities: nil)
-        present(activityViewController, animated: true, completion: {})
+        self.sharedContent = shareContent
+        let activityViewController = UIActivityViewController(activityItems: [self], applicationActivities: nil)
+        present(activityViewController, animated: true, completion: nil)
+    }
+}
+
+extension NFXDetailsController_iOS: UIActivityItemSource {
+    
+    func activityViewControllerPlaceholderItem(_ activityViewController: UIActivityViewController) -> Any {
+        return "placeholder"
+    }
+    
+    func activityViewController(_ activityViewController: UIActivityViewController, itemForActivityType activityType: UIActivityType?) -> Any? {
+        return sharedContent
+    }
+    
+    func activityViewController(_ activityViewController: UIActivityViewController, subjectForActivityType activityType: UIActivityType?) -> String {
+        return "netfox log - \(self.selectedModel.requestURL!)"
     }
 }
 
