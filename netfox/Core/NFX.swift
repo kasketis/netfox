@@ -12,7 +12,14 @@ import Cocoa
 import UIKit
 #endif
 
-let nfxVersion = "1.8"
+private func podPlist() -> [String: Any]? {
+    let path = Bundle.main.path(forResource: "Info", ofType: "plist", inDirectory: "Frameworks/netfox.framework")
+    guard let filePath = path else { return nil }
+    return NSDictionary(contentsOfFile: filePath) as? [String: Any]
+}
+
+// TODO: Carthage support
+let nfxVersion = (podPlist()?["CFBundleShortVersionString"] as? String) ?? "1.12.1"
 
 // Notifications posted when NFX opens/closes, for client application that wish to log that information.
 let nfxWillOpenNotification = "NFXWillOpenNotification"
