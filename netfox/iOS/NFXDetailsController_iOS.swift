@@ -51,6 +51,8 @@ class NFXDetailsController_iOS: NFXDetailsController, MFMailComposeViewControlle
         return [self.infoView, self.requestView, self.responseView]
     }()
 
+    internal var sharedContent: String?
+    
     override func viewDidLoad()
     {
         super.viewDidLoad()
@@ -171,20 +173,31 @@ class NFXDetailsController_iOS: NFXDetailsController, MFMailComposeViewControlle
     
     @objc func actionButtonPressed(_ sender: UIBarButtonItem)
     {
-        let actionSheetController: UIAlertController = UIAlertController(title: "Share", message: nil, preferredStyle: .actionSheet)
+        let actionSheetController: UIAlertController = UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)
         
         let cancelAction: UIAlertAction = UIAlertAction(title: "Cancel", style: .cancel)
         actionSheetController.addAction(cancelAction)
         
         let simpleLog: UIAlertAction = UIAlertAction(title: "Simple log", style: .default) { [unowned self] action -> Void in
-            self.sendMailWithBodies(false)
+            self.shareLog(full: false)
         }
         actionSheetController.addAction(simpleLog)
         
         let fullLogAction: UIAlertAction = UIAlertAction(title: "Full log", style: .default) { [unowned self] action -> Void in
-            self.sendMailWithBodies(true)
+            self.shareLog(full: true)
         }
         actionSheetController.addAction(fullLogAction)
+        
+        if let reqCurl  = self.selectedModel.requestCurl {
+            let curlAction: UIAlertAction = UIAlertAction(title: "Export request as curl", style: .default) { [unowned self] action -> Void in
+                let activityViewController = UIActivityViewController(activityItems: [reqCurl], applicationActivities: nil)
+                activityViewController.popoverPresentationController?.sourceView = self.view
+                self.present(activityViewController, animated: true, completion: nil)
+            }
+            actionSheetController.addAction(curlAction)
+        }
+
+        
         actionSheetController.view.tintColor = UIColor.NFXOrangeColor()
 
         self.present(actionSheetController, animated: true, completion: nil)
@@ -269,52 +282,55 @@ class NFXDetailsController_iOS: NFXDetailsController, MFMailComposeViewControlle
         return bodyDetailsController
     }
     
-    func sendMailWithBodies(_ bodies: Bool)
+    func shareLog(full: Bool)
     {
-        if (MFMailComposeViewController.canSendMail()) {
-            
-            let mailComposer = MFMailComposeViewController()
-            mailComposer.mailComposeDelegate = self
-            
-            var tempString: String
-            tempString = String()
-            
-            
-            tempString += "** INFO **\n"
-            tempString += "\(getInfoStringFromObject(self.selectedModel).string)\n\n"
-            
-            tempString += "** REQUEST **\n"
-            tempString += "\(getRequestStringFromObject(self.selectedModel).string)\n\n"
-            
-            tempString += "** RESPONSE **\n"
-            tempString += "\(getResponseStringFromObject(self.selectedModel).string)\n\n"
-            
-            tempString += "logged via netfox - [https://github.com/kasketis/netfox]\n"
-            
-            mailComposer.setSubject("netfox log - \(self.selectedModel.requestURL!)")
-            mailComposer.setMessageBody(tempString, isHTML: false)
-            
-            if bodies {
-                let requestFilePath = self.selectedModel.getRequestBodyFilepath()
-                if let requestFileData = try? Data(contentsOf: URL(fileURLWithPath: requestFilePath as String)) {
-                    mailComposer.addAttachmentData(requestFileData, mimeType: "text/plain", fileName: "request-body")
-                }
-                
-                let responseFilePath = self.selectedModel.getResponseBodyFilepath()
-                if let responseFileData = try? Data(contentsOf: URL(fileURLWithPath: responseFilePath as String)) {
-                    mailComposer.addAttachmentData(responseFileData, mimeType: "text/plain", fileName: "response-body")
-                }
+        var tempString = String()
+
+        tempString += "** INFO **\n"
+        tempString += "\(getInfoStringFromObject(self.selectedModel).string)\n\n"
+
+        tempString += "** REQUEST **\n"
+        tempString += "\(getRequestStringFromObject(self.selectedModel).string)\n\n"
+
+        tempString += "** RESPONSE **\n"
+        tempString += "\(getResponseStringFromObject(self.selectedModel).string)\n\n"
+
+        tempString += "logged via netfox - [https://github.com/kasketis/netfox]\n"
+
+        if full {
+            let requestFilePath = self.selectedModel.getRequestBodyFilepath()
+            if let requestFileData = try? String(contentsOf: URL(fileURLWithPath: requestFilePath as String), encoding: .utf8) {
+                tempString += requestFileData
             }
 
-            self.present(mailComposer, animated: true, completion: nil)
+            let responseFilePath = self.selectedModel.getResponseBodyFilepath()
+            if let responseFileData = try? String(contentsOf: URL(fileURLWithPath: responseFilePath as String), encoding: .utf8) {
+                tempString += responseFileData
+            }
         }
+        displayShareSheet(shareContent: tempString)
+    }
+
+    func displayShareSheet(shareContent: String) {
+        self.sharedContent = shareContent
+        let activityViewController = UIActivityViewController(activityItems: [self], applicationActivities: nil)
+        present(activityViewController, animated: true, completion: nil)
+    }
+}
+
+extension NFXDetailsController_iOS: UIActivityItemSource {
+    
+    func activityViewControllerPlaceholderItem(_ activityViewController: UIActivityViewController) -> Any {
+        return "placeholder"
     }
     
-    func mailComposeController(_ controller: MFMailComposeViewController, didFinishWith result: MFMailComposeResult, error: Error?)
-    {
-        self.dismiss(animated: true, completion: nil)
+    func activityViewController(_ activityViewController: UIActivityViewController, itemForActivityType activityType: UIActivityType?) -> Any? {
+        return sharedContent
     }
     
+    func activityViewController(_ activityViewController: UIActivityViewController, subjectForActivityType activityType: UIActivityType?) -> String {
+        return "netfox log - \(self.selectedModel.requestURL!)"
+    }
 }
 
 #endif

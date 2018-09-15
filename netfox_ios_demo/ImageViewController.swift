@@ -7,7 +7,6 @@
 //
 
 import UIKit
-import netfox_ios
 
 class ImageViewController: UIViewController {
 

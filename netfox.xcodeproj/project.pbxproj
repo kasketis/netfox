@@ -18,6 +18,7 @@
 		23ABD6D71FA9E08C00CD6186 /* NFXNetServiceMonitor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 23ABD6D51FA9E08C00CD6186 /* NFXNetServiceMonitor.swift */; };
 		23B61B592022FF1F00048320 /* NFXClientConnection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 23B61B582022FF1F00048320 /* NFXClientConnection.swift */; };
 		23B61B5A2022FF1F00048320 /* NFXClientConnection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 23B61B582022FF1F00048320 /* NFXClientConnection.swift */; };
+		026274D9214C6BC400AE1BDF /* WKWebViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 026274D8214C6BC400AE1BDF /* WKWebViewController.swift */; };
 		8201A39D204E3E3F00AB2C3D /* NFXAuthenticationChallengeSender.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8201A39C204E3E3F00AB2C3D /* NFXAuthenticationChallengeSender.swift */; };
 		8201A39E204E451900AB2C3D /* NFXAuthenticationChallengeSender.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8201A39C204E3E3F00AB2C3D /* NFXAuthenticationChallengeSender.swift */; };
 		8201A39F204E452200AB2C3D /* NFXLoader.m in Sources */ = {isa = PBXBuildFile; fileRef = 826C4E9D1F979AB3008B440C /* NFXLoader.m */; };
@@ -27,7 +28,6 @@
 		8229AD6C1F8FB34300A9D613 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 8229AD6B1F8FB34300A9D613 /* Assets.xcassets */; };
 		8229AD6F1F8FB34300A9D613 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 8229AD6D1F8FB34300A9D613 /* LaunchScreen.storyboard */; };
 		8229AD771F8FB4B500A9D613 /* netfox_ios.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B3BC020F1C09CDA000C17F3A /* netfox_ios.framework */; };
-		826C4E9E1F979AB3008B440C /* NFXLoader.h in Headers */ = {isa = PBXBuildFile; fileRef = 826C4E9C1F979AB3008B440C /* NFXLoader.h */; };
 		8F98A4DE202992FE007B2BB1 /* NFXPathNodeListCell_OSX.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8F98A4D9202992A2007B2BB1 /* NFXPathNodeListCell_OSX.swift */; };
 		8F98A4E12029944D007B2BB1 /* NFXPathNodeListCell_OSX.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8F98A4DF20299399007B2BB1 /* NFXPathNodeListCell_OSX.xib */; };
 		8F98A4E3202994CB007B2BB1 /* NFXPathNodeListController_OSX.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8F98A4E2202994CB007B2BB1 /* NFXPathNodeListController_OSX.swift */; };
@@ -39,6 +39,7 @@
 		8FBC1A8E2028AF2A00ABDF22 /* NFXPathNodeManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8FBC1A8A2028ACEB00ABDF22 /* NFXPathNodeManager.swift */; };
 		8FD42BA62028A2D20084211A /* NFXPathNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8FD42BA52028A2D20084211A /* NFXPathNode.swift */; };
 		8FD42BA72028A3BB0084211A /* NFXPathNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8FD42BA52028A2D20084211A /* NFXPathNode.swift */; };
+		826C4E9E1F979AB3008B440C /* NFXLoader.h in Headers */ = {isa = PBXBuildFile; fileRef = 826C4E9C1F979AB3008B440C /* NFXLoader.h */; };
 		826C4E9F1F979AB3008B440C /* NFXLoader.m in Sources */ = {isa = PBXBuildFile; fileRef = 826C4E9D1F979AB3008B440C /* NFXLoader.m */; };
 		82F6E1031F8FD81C002B31BD /* TextViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 82F6E1021F8FD81C002B31BD /* TextViewController.swift */; };
 		82F6E1051F8FF55D002B31BD /* WebViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 82F6E1041F8FF55D002B31BD /* WebViewController.swift */; };
@@ -136,14 +137,13 @@
 		23ABD6CF1FA9C40000CD6186 /* NFXServer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NFXServer.swift; sourceTree = "<group>"; };
 		23ABD6D51FA9E08C00CD6186 /* NFXNetServiceMonitor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NFXNetServiceMonitor.swift; sourceTree = "<group>"; };
 		23B61B582022FF1F00048320 /* NFXClientConnection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NFXClientConnection.swift; sourceTree = "<group>"; };
+		026274D8214C6BC400AE1BDF /* WKWebViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WKWebViewController.swift; sourceTree = "<group>"; };
 		8201A39C204E3E3F00AB2C3D /* NFXAuthenticationChallengeSender.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NFXAuthenticationChallengeSender.swift; sourceTree = "<group>"; };
 		8229AD621F8FB34300A9D613 /* netfox_ios_demo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = netfox_ios_demo.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		8229AD641F8FB34300A9D613 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		8229AD661F8FB34300A9D613 /* ImageViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageViewController.swift; sourceTree = "<group>"; };
 		8229AD691F8FB34300A9D613 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		8229AD6B1F8FB34300A9D613 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
-		8229AD6E1F8FB34300A9D613 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
-		8229AD701F8FB34300A9D613 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		8F98A4D9202992A2007B2BB1 /* NFXPathNodeListCell_OSX.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NFXPathNodeListCell_OSX.swift; sourceTree = "<group>"; };
 		8F98A4DF20299399007B2BB1 /* NFXPathNodeListCell_OSX.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = NFXPathNodeListCell_OSX.xib; sourceTree = "<group>"; };
 		8F98A4E2202994CB007B2BB1 /* NFXPathNodeListController_OSX.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NFXPathNodeListController_OSX.swift; sourceTree = "<group>"; };
@@ -153,6 +153,8 @@
 		8FBC1A8A2028ACEB00ABDF22 /* NFXPathNodeManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NFXPathNodeManager.swift; sourceTree = "<group>"; };
 		8FBFFB4C20331DD000DF9319 /* NFXJson2Codable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NFXJson2Codable.swift; sourceTree = "<group>"; };
 		8FD42BA52028A2D20084211A /* NFXPathNode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NFXPathNode.swift; sourceTree = "<group>"; };
+		8229AD6E1F8FB34300A9D613 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
+		8229AD701F8FB34300A9D613 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		826C4E9C1F979AB3008B440C /* NFXLoader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NFXLoader.h; sourceTree = "<group>"; };
 		826C4E9D1F979AB3008B440C /* NFXLoader.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NFXLoader.m; sourceTree = "<group>"; };
 		82F6E1021F8FD81C002B31BD /* TextViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextViewController.swift; sourceTree = "<group>"; };
@@ -263,6 +265,7 @@
 				8229AD701F8FB34300A9D613 /* Info.plist */,
 				82F6E1021F8FD81C002B31BD /* TextViewController.swift */,
 				82F6E1041F8FF55D002B31BD /* WebViewController.swift */,
+				026274D8214C6BC400AE1BDF /* WKWebViewController.swift */,
 			);
 			path = netfox_ios_demo;
 			sourceTree = "<group>";
@@ -474,7 +477,7 @@
 			isa = PBXProject;
 			attributes = {
 				LastSwiftUpdateCheck = 0900;
-				LastUpgradeCheck = 0900;
+				LastUpgradeCheck = 0930;
 				ORGANIZATIONNAME = kasketis;
 				TargetAttributes = {
 					234DBCD21FA33BD90086CB79 = {
@@ -569,6 +572,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				026274D9214C6BC400AE1BDF /* WKWebViewController.swift in Sources */,
 				8229AD671F8FB34300A9D613 /* ImageViewController.swift in Sources */,
 				8229AD651F8FB34300A9D613 /* AppDelegate.swift in Sources */,
 				82F6E1031F8FD81C002B31BD /* TextViewController.swift in Sources */,
@@ -769,9 +773,9 @@
 				CODE_SIGN_STYLE = Automatic;
 				GCC_C_LANGUAGE_STANDARD = gnu11;
 				INFOPLIST_FILE = netfox_ios_demo/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = "com.kasketis.netfox-demo-iOS.netfox-ios-demo";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.kasketis.netfox-demo-iOS";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
 				SWIFT_VERSION = 4.0;
@@ -798,9 +802,9 @@
 				CODE_SIGN_STYLE = Automatic;
 				GCC_C_LANGUAGE_STANDARD = gnu11;
 				INFOPLIST_FILE = netfox_ios_demo/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = "com.kasketis.netfox-demo-iOS.netfox-ios-demo";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.kasketis.netfox-demo-iOS";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 4.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -819,12 +823,14 @@
 				CLANG_WARN_BOOL_CONVERSION = YES;
 				CLANG_WARN_COMMA = YES;
 				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
 				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
 				CLANG_WARN_EMPTY_BODY = YES;
 				CLANG_WARN_ENUM_CONVERSION = YES;
 				CLANG_WARN_INFINITE_RECURSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
 				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
 				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
 				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
@@ -875,12 +881,14 @@
 				CLANG_WARN_BOOL_CONVERSION = YES;
 				CLANG_WARN_COMMA = YES;
 				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
 				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
 				CLANG_WARN_EMPTY_BODY = YES;
 				CLANG_WARN_ENUM_CONVERSION = YES;
 				CLANG_WARN_INFINITE_RECURSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
 				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
 				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
 				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;

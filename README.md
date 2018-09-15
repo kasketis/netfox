@@ -1,7 +1,7 @@
 ![Netfox: A lightweight, one line setup, network debugging library](https://raw.githubusercontent.com/kasketis/netfox/master/netfox-logo.png)
 
 <p align="center">
-<img alt="Version" src="https://img.shields.io/badge/version-1.8-green.svg?style=flat-square" />
+<img alt="Version" src="https://img.shields.io/badge/version-1.11-green.svg?style=flat-square" />
 <a href="https://travis-ci.org/kasketis/netfox"><img alt="CI Status" src="http://img.shields.io/travis/kasketis/netfox.svg?style=flat-square" /></a>
 <a href="https://cocoapods.org/pods/netfox"><img alt="Cocoapods Compatible" src="https://img.shields.io/cocoapods/v/netfox.svg?style=flat-square" /></a>
 <a href="https://github.com/Carthage/Carthage"><img alt="Carthage Compatible" src="https://img.shields.io/badge/carthage-compatible-4BC51D.svg?style=flat-square" /></a>
@@ -33,6 +33,13 @@ use_frameworks!
 pod 'netfox'
 </pre>
 
+To bundle only on some build configurations specify them after pod.
+
+<pre>
+use_frameworks!
+pod 'netfox', :configurations => ['Debug', 'Test']
+</pre>
+
 ### Carthage
 
 [Carthage](https://github.com/Carthage/Carthage) is a decentralized dependency manager that builds your dependencies and provides you with binary frameworks. To integrate netfox into your Xcode project using Carthage, specify it in your `Cartfile`:
@@ -58,7 +65,7 @@ The above folder contains 3 subfolders: Core, iOS and OSX.
 #### Swift
 ```swift
 // AppDelegate
-import netfox_ios
+import netfox
 NFX.sharedInstance().start() // in didFinishLaunchingWithOptions:
 ```
 
@@ -67,7 +74,7 @@ NFX.sharedInstance().start() // in didFinishLaunchingWithOptions:
 #### Objective-C
 ```objective-c
 // AppDelegate
-[[NFX sharedInstance] start]; // in didFinishLaunchingWithOptions:
+[NFX.sharedInstance start]; // in didFinishLaunchingWithOptions:
 ```
 
 Just simple as that!
@@ -170,6 +177,10 @@ NFX.sharedInstance().startServer()
 <pre>
 [[NFX sharedInstance] startServer];
 </pre>
+
+## Integrations
+
+[Droar](https://github.com/myriadmobile/netfox-Droar): A modular, single-line installation debugging window.
 
 ## Other
 

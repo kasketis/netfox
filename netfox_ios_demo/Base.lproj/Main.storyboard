@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="13196" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="QMG-Zi-veq">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14113" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="QMG-Zi-veq">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13173"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14088"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -143,11 +143,47 @@
                         <segue destination="Z8x-dK-Opo" kind="relationship" relationship="viewControllers" id="psf-kl-NI0"/>
                         <segue destination="BYZ-38-t0r" kind="relationship" relationship="viewControllers" id="qEX-re-IMg"/>
                         <segue destination="dkC-MX-0PU" kind="relationship" relationship="viewControllers" id="umB-V9-Ajk"/>
+                        <segue destination="a1y-8z-azs" kind="relationship" relationship="viewControllers" id="WSb-qP-xnF"/>
                     </connections>
                 </tabBarController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="OXu-2z-7BU" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="-1090" y="81"/>
+        </scene>
+        <!--WKWebView-->
+        <scene sceneID="X1S-Yx-Tt4">
+            <objects>
+                <viewController id="a1y-8z-azs" customClass="WKWebViewController" customModule="netfox_ios_demo" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="eNA-52-xpU">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <wkWebView contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="zbz-vT-b61">
+                                <rect key="frame" x="20" y="40" width="335" height="558"/>
+                                <color key="backgroundColor" red="0.36078431370000003" green="0.38823529410000002" blue="0.4039215686" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <wkWebViewConfiguration key="configuration">
+                                    <audiovisualMediaTypes key="mediaTypesRequiringUserActionForPlayback" none="YES"/>
+                                    <wkPreferences key="preferences"/>
+                                </wkWebViewConfiguration>
+                            </wkWebView>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="zbz-vT-b61" firstAttribute="leading" secondItem="r8u-1q-H3p" secondAttribute="leading" constant="20" id="CXQ-Bq-zba"/>
+                            <constraint firstItem="r8u-1q-H3p" firstAttribute="bottom" secondItem="zbz-vT-b61" secondAttribute="bottom" constant="20" id="OWm-KP-KxN"/>
+                            <constraint firstItem="r8u-1q-H3p" firstAttribute="trailing" secondItem="zbz-vT-b61" secondAttribute="trailing" constant="20" id="OwW-Bk-uhn"/>
+                            <constraint firstItem="zbz-vT-b61" firstAttribute="top" secondItem="r8u-1q-H3p" secondAttribute="top" constant="20" id="qpc-40-aT7"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="r8u-1q-H3p"/>
+                    </view>
+                    <tabBarItem key="tabBarItem" title="WKWebView" id="sL3-4M-5Zd"/>
+                    <connections>
+                        <outlet property="webView" destination="zbz-vT-b61" id="Gov-nB-ywu"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="cmH-Ou-xIu" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-87" y="1800"/>
         </scene>
     </scenes>
 </document>
