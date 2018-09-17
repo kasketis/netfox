@@ -25,9 +25,12 @@ class NFXListController_iOS: NFXListController, UITableViewDelegate, UITableView
     {
         super.viewDidLoad()
         
+        self.definesPresentationContext = true
+
         self.edgesForExtendedLayout = UIRectEdge()
         self.extendedLayoutIncludesOpaqueBars = false
         self.automaticallyAdjustsScrollViewInsets = false
+        
         
         self.tableView.frame = self.view.frame
         self.tableView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
@@ -69,17 +72,7 @@ class NFXListController_iOS: NFXListController, UITableViewDelegate, UITableView
             self.navigationItem.titleView = searchView
         }
         
-        NotificationCenter.default.addObserver(
-            self,
-            selector: #selector(NFXListController.reloadTableViewData),
-            name: NSNotification.Name.NFXReloadData,
-            object: nil)
-        
-        NotificationCenter.default.addObserver(
-            self,
-            selector: #selector(NFXListController_iOS.deactivateSearchController),
-            name: NSNotification.Name.NFXDeactivateSearch,
-            object: nil)        
+        NotificationCenter.default.addObserver(self, selector: #selector(NFXListController.reloadTableViewData), name: NSNotification.Name.NFXReloadData, object: nil)
     }
     
     override func viewWillAppear(_ animated: Bool)
@@ -106,11 +99,6 @@ class NFXListController_iOS: NFXListController, UITableViewDelegate, UITableView
     {
         self.updateSearchResultsForSearchControllerWithString(searchController.searchBar.text!)
         reloadTableViewData()
-    }
-    
-    @objc func deactivateSearchController()
-    {
-        self.searchController.isActive = false
     }
     
     // MARK: UITableViewDataSource

@@ -110,7 +110,7 @@ class NFXListCell_OSX: NSTableCellView
     
     func isNewBasedOnDate(responseDate: NSDate)
     {
-        if responseDate.isGreaterThan(NFX.sharedInstance().getLastVisitDate()) {
+        if responseDate.isGreaterThan(NFX.sharedInstance().lastVisitDate) {
             self.isNew()
         } else {
             self.isOld()
