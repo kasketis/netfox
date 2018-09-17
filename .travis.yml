@@ -6,8 +6,8 @@ os: osx
 osx_image: xcode10
 language: swift
 script:
-- set -o pipefail && xcodebuild -project netfox.xcodeproj -scheme netfox_ios -sdk iphoneos12 ONLY_ACTIVE_ARCH=NO SWIFT_VERSION=4.0 | xcpretty
-- set -o pipefail && xcodebuild -project netfox.xcodeproj -scheme netfox_ios -sdk iphoneos12 ONLY_ACTIVE_ARCH=NO SWIFT_VERSION=4.2 | xcpretty
+- set -o pipefail && xcodebuild -project netfox.xcodeproj -scheme netfox_ios -sdk iphonesimulator12.0 ONLY_ACTIVE_ARCH=NO SWIFT_VERSION=4.0 | xcpretty
+- set -o pipefail && xcodebuild -project netfox.xcodeproj -scheme netfox_ios -sdk iphonesimulator12.0 ONLY_ACTIVE_ARCH=NO SWIFT_VERSION=4.2 | xcpretty
 - set -o pipefail && xcodebuild -project netfox.xcodeproj -scheme netfox_osx -sdk macosx10.14 ONLY_ACTIVE_ARCH=NO SWIFT_VERSION=4.0 | xcpretty
 - set -o pipefail && xcodebuild -project netfox.xcodeproj -scheme netfox_osx -sdk macosx10.14 ONLY_ACTIVE_ARCH=NO SWIFT_VERSION=4.2 | xcpretty
-- pod lib lint
+- pod lib lint --quick
