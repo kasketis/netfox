@@ -76,11 +76,11 @@ class NFXDetailsController_iOS: NFXDetailsController, MFMailComposeViewControlle
 
         // Swipe gestures
         let lswgr = UISwipeGestureRecognizer(target: self, action: #selector(NFXDetailsController_iOS.handleSwipe(_:)))
-        lswgr.direction = UISwipeGestureRecognizerDirection.left
+        lswgr.direction = .left
         self.view.addGestureRecognizer(lswgr)
 
         let rswgr = UISwipeGestureRecognizer(target: self, action: #selector(NFXDetailsController_iOS.handleSwipe(_:)))
-        rswgr.direction = UISwipeGestureRecognizerDirection.right
+        rswgr.direction = .right
         self.view.addGestureRecognizer(rswgr)
 
         infoButtonPressed()
@@ -93,8 +93,8 @@ class NFXDetailsController_iOS: NFXDetailsController, MFMailComposeViewControlle
         tempButton.frame = CGRect(x: x, y: 0, width: self.view.frame.width / 3, height: 44)
         tempButton.autoresizingMask = [.flexibleLeftMargin, .flexibleRightMargin, .flexibleWidth]
         tempButton.backgroundColor = UIColor.NFXDarkStarkWhiteColor()
-        tempButton.setTitle(title, for: UIControlState())
-        tempButton.setTitleColor(UIColor.init(netHex: 0x6d6d6d), for: UIControlState())
+        tempButton.setTitle(title, for: .init())
+        tempButton.setTitleColor(UIColor.init(netHex: 0x6d6d6d), for: .init())
         tempButton.setTitleColor(UIColor.init(netHex: 0xf3f3f4), for: .selected)
         tempButton.titleLabel?.font = UIFont.NFXFont(size: 15)
         tempButton.addTarget(self, action: selector, for: .touchUpInside)
@@ -153,13 +153,13 @@ class NFXDetailsController_iOS: NFXDetailsController, MFMailComposeViewControlle
         moreButton.backgroundColor = UIColor.NFXGray44Color()
         
         if ((forView == EDetailsView.request) && (self.selectedModel.requestBodyLength > 1024)) {
-            moreButton.setTitle("Show request body", for: UIControlState())
+            moreButton.setTitle("Show request body", for: .init())
             moreButton.addTarget(self, action: #selector(NFXDetailsController_iOS.requestBodyButtonPressed), for: .touchUpInside)
             scrollView.addSubview(moreButton)
             scrollView.contentSize = CGSize(width: textLabel.frame.width, height: moreButton.frame.maxY + 16)
 
         } else if ((forView == EDetailsView.response) && (self.selectedModel.responseBodyLength > 1024)) {
-            moreButton.setTitle("Show response body", for: UIControlState())
+            moreButton.setTitle("Show response body", for: .init())
             moreButton.addTarget(self, action: #selector(NFXDetailsController_iOS.responseBodyButtonPressed), for: .touchUpInside)
             scrollView.addSubview(moreButton)
             scrollView.contentSize = CGSize(width: textLabel.frame.width, height: moreButton.frame.maxY + 16)
@@ -223,10 +223,10 @@ class NFXDetailsController_iOS: NFXDetailsController, MFMailComposeViewControlle
         let numButtons = headerButtons.count
 
         switch gesture.direction {
-            case UISwipeGestureRecognizerDirection.left:
+            case .left:
                 let nextIdx = currentButtonIdx + 1
                 buttonPressed(headerButtons[nextIdx > numButtons - 1 ? 0 : nextIdx])
-            case UISwipeGestureRecognizerDirection.right:
+            case .right:
                 let previousIdx = currentButtonIdx - 1
                 buttonPressed(headerButtons[previousIdx < 0 ? numButtons - 1 : previousIdx])
             default: break
@@ -319,6 +319,7 @@ class NFXDetailsController_iOS: NFXDetailsController, MFMailComposeViewControlle
 }
 
 extension NFXDetailsController_iOS: UIActivityItemSource {
+    public typealias UIActivityType = UIActivity.ActivityType
     
     func activityViewControllerPlaceholderItem(_ activityViewController: UIActivityViewController) -> Any {
         return "placeholder"

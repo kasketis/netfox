@@ -11,6 +11,10 @@ import Foundation
     
 import UIKit
 
+#if swift(>=4.2)
+typealias UITableViewCellStyle = UITableViewCell.CellStyle
+#endif
+
 class NFXListCell: UITableViewCell
 {
     

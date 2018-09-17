@@ -57,9 +57,9 @@ class NFXSettingsController_iOS: NFXSettingsController, UITableViewDelegate, UIT
         nfxURLButton = UIButton(frame: CGRect(x: 10, y: self.view.frame.height - 40, width: self.view.frame.width - 2*10, height: 30))
         nfxURLButton.autoresizingMask = [.flexibleTopMargin, .flexibleWidth]
         nfxURLButton.titleLabel?.font = UIFont.NFXFont(size: 12)
-        nfxURLButton.setTitleColor(UIColor.NFXGray44Color(), for: UIControlState())
+        nfxURLButton.setTitleColor(UIColor.NFXGray44Color(), for: .init())
         nfxURLButton.titleLabel?.textAlignment = .center
-        nfxURLButton.setTitle(nfxURL, for: UIControlState())
+        nfxURLButton.setTitle(nfxURL, for: .init())
         nfxURLButton.addTarget(self, action: #selector(NFXSettingsController_iOS.nfxURLButtonPressed), for: .touchUpInside)
         self.view.addSubview(nfxURLButton)
         
