@@ -164,7 +164,7 @@ After that netfox_mac app can connect using the same UI as in the mac app.
 - More to come.. ;)
 
 ### netfox_mac app working in parallel with iOS app
-![](netfox_mac_demo.gif)
+![netfox Mac app demo](netfox_mac_demo.gif)
 
 If you want to use netfox with the netfox_mac application, you should start netfox in the following way:
 
