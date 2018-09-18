@@ -141,8 +141,6 @@ NFX.sharedInstance().startServer()
 ```
 After that netfox_mac app can connect using the same UI as in the mac app.
 
-![](https://d2ffutrenqvap3.cloudfront.net/items/2S0C1j2e3D3A3H2P020E/Screen%20Recording%202018-02-23%20at%2001.45%20PM.gif)
-
 
 ## Features
 
