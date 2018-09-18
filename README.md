@@ -130,6 +130,18 @@ NFX.sharedInstance().ignoreURL("the_url")
 ```
 Tip: You can use the url of the host (for example "https://www.github.com") to ignore all paths of it 
 
+## Alternative to Charles - use netfox_mac app
+
+No need to mess around with Charles Proxy, SSL configurations in order to connect to your iPhone or iPad. We have created netfox_mac app which can connect to all apps (iOS or mac) that are running in local network. It will be easier for your QA person / team to know what API calls are made on device or if one of them has failed.
+
+Basically any iOS app that wants to expose it's network data to other netfox_mac app for inspection should start discovery service using:
+
+```swift
+NFX.sharedInstance().startServer()
+```
+After that netfox_mac app can connect using the same UI as in the mac app.
+
+
 ## Features
 
 - Search: You can easily search among requests via
@@ -144,7 +156,25 @@ Tip: You can use the url of the host (for example "https://www.github.com") to i
 - Clear data within the app
 - Statistics: Check cool things like average response time, total response size and more for your selected types of responses
 - Info: Check your IP address, your app version and build number and other things within the app
+- Live updates between apps running netfox with NFX.sharedInstance.startServer() and netfox_mac application
+- Directory-like structure of requests
+- Conversion from JSON to Codable class
 - More to come.. ;)
+
+### netfox_mac app working in parallel with iOS app
+![netfox Mac app demo](netfox_mac_demo.gif)
+
+If you want to use netfox with the netfox_mac application, you should start netfox in the following way:
+
+#### Swift
+<pre>
+NFX.sharedInstance().startServer()
+</pre>
+
+#### Obj-C
+<pre>
+[[NFX sharedInstance] startServer];
+</pre>
 
 ## Integrations
 
@@ -158,6 +188,8 @@ Tip: You can use the url of the host (for example "https://www.github.com") to i
 ## Thanks
 
 Special thanks to [tbaranes](https://github.com/tbaranes) and [vincedev](https://github.com/vincedev) for their contribution on OSX library!
+
+Special thanks to [Tapptitude](https://tapptitude.com) team for their contribution on netfox_mac app!
 
 ## Licence
 

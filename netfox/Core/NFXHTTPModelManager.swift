@@ -20,6 +20,10 @@ final class NFXHTTPModelManager: NSObject
         syncQueue.async {
             self.models.insert(obj, at: 0)
             NotificationCenter.default.post(name: NSNotification.Name.NFXAddedModel, object: obj)
+            
+            #if os(OSX)
+                NFXPathNodeManager.sharedInstance.add(obj)
+            #endif
         }
     }
     
@@ -28,6 +32,10 @@ final class NFXHTTPModelManager: NSObject
         syncQueue.async {
             self.models.removeAll()
             NotificationCenter.default.post(name: NSNotification.Name.NFXClearedModels, object: nil)
+            
+            #if os(OSX)
+                NFXPathNodeManager.sharedInstance.clear()
+            #endif
         }
     }
     

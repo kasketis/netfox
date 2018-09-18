@@ -24,10 +24,11 @@ class NFXListController_OSX: NFXListController, NSTableViewDelegate, NSTableView
     // MARK: View Life Cycle
 
     override func awakeFromNib() {
+        let bundle = Bundle(for: type(of: self))
         #if !swift(>=4.0)
-            tableView.register(NSNib(nibNamed: cellIdentifier, bundle: nil), forIdentifier: cellIdentifier)
+            tableView.register(NSNib(nibNamed: cellIdentifier, bundle: bundle), forIdentifier: cellIdentifier)
         #else
-            tableView.register(NSNib(nibNamed: NSNib.Name(rawValue: cellIdentifier), bundle: nil), forIdentifier: NSUserInterfaceItemIdentifier(rawValue: cellIdentifier))
+            tableView.register(NSNib(nibNamed: NSNib.Name(rawValue: cellIdentifier), bundle: bundle), forIdentifier: NSUserInterfaceItemIdentifier(rawValue: cellIdentifier))
         #endif
         searchField.delegate = self
         
@@ -57,7 +58,7 @@ class NFXListController_OSX: NFXListController, NSTableViewDelegate, NSTableView
         reloadTableViewData()
     }
 
-    func controlTextDidChange(obj: NSNotification) {
+    @objc override func controlTextDidChange(_ obj: Notification) {
         guard let searchField = obj.object as? NSSearchField else {
             return
         }
@@ -68,7 +69,7 @@ class NFXListController_OSX: NFXListController, NSTableViewDelegate, NSTableView
     
     // MARK: UITableViewDataSource
     
-    func numberOfRowsInTableView(tableView: NSTableView) -> Int {
+    func numberOfRows(in tableView: NSTableView) -> Int {
         if (self.isSearchControllerActive) {
             return self.filteredTableData.count
         } else {

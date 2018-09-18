@@ -210,62 +210,89 @@ extension URLResponse
 
 extension NFXImage
 {
-    class func NFXSettings() -> NFXImage
-    {
-    #if os (iOS)
-        return UIImage(data: NFXAssets.getImage(NFXAssetName.settings), scale: 1.7)!
-    #elseif os(OSX)
-        return NSImage(data: NFXAssets.getImage(NFXAssetName.settings))!
-    #endif
-    }
+    static let settings: NFXImage = {
+        #if os (iOS)
+            return UIImage(data: NFXAssets.getImage(NFXAssetName.settings), scale: 1.7)!
+        #elseif os(OSX)
+            return NSImage(data: NFXAssets.getImage(NFXAssetName.settings))!
+        #endif
+    }()
 
-    class func NFXClose() -> NFXImage
-    {
-    #if os (iOS)
-        return UIImage(data: NFXAssets.getImage(NFXAssetName.close), scale: 1.7)!
-    #elseif os(OSX)
-        return NSImage(data: NFXAssets.getImage(NFXAssetName.close))!
-    #endif
-    }
+    static let close: NFXImage = {
+        #if os (iOS)
+            return UIImage(data: NFXAssets.getImage(NFXAssetName.close), scale: 1.7)!
+        #elseif os(OSX)
+            return NSImage(data: NFXAssets.getImage(NFXAssetName.close))!
+        #endif
+    }()
     
-    class func NFXInfo() -> NFXImage
-    {
-    #if os (iOS)
-        return UIImage(data: NFXAssets.getImage(NFXAssetName.info), scale: 1.7)!
-    #elseif os(OSX)
-        return NSImage(data: NFXAssets.getImage(NFXAssetName.info))!
-    #endif
-    }
+    static let info: NFXImage = {
+        #if os (iOS)
+            return UIImage(data: NFXAssets.getImage(NFXAssetName.info), scale: 1.7)!
+        #elseif os(OSX)
+            return NSImage(data: NFXAssets.getImage(NFXAssetName.info))!
+        #endif
+    }()
     
-    class func NFXStatistics() -> NFXImage
-    {
-    #if os (iOS)
-        return UIImage(data: NFXAssets.getImage(NFXAssetName.statistics), scale: 1.7)!
-    #elseif os(OSX)
-        return NSImage(data: NFXAssets.getImage(NFXAssetName.statistics))!
+    static let statistics: NFXImage = {
+        #if os (iOS)
+            return UIImage(data: NFXAssets.getImage(NFXAssetName.statistics), scale: 1.7)!
+        #elseif os(OSX)
+            return NSImage(data: NFXAssets.getImage(NFXAssetName.statistics))!
+        #endif
+    }()
+    
+    #if os (OSX)
+    static let cloud: NFXImage = {
+        return NSImage(data: NFXAssets.getImage(NFXAssetName.cloud))!
+    }()
+    
+    static let folder: NFXImage = {
+        return NSImage(data: NFXAssets.getImage(NFXAssetName.folder))!
+    }()
+    
+    static let fileDownloading: NFXImage = {
+        return NSImage(data: NFXAssets.getImage(NFXAssetName.fileDownloading))!
+    }()
+    
+    static let fileSuccess: NFXImage = {
+        return NSImage(data: NFXAssets.getImage(NFXAssetName.fileSuccess))!
+    }()
+    
+    static let fileWarning: NFXImage = {
+        return NSImage(data: NFXAssets.getImage(NFXAssetName.fileWarning))!
+    }()
+    
+    static let fileUnauthorized: NFXImage = {
+        return NSImage(data: NFXAssets.getImage(NFXAssetName.fileUnauthorized))!
+    }()
+    
+    static let serverError: NFXImage = {
+        return NSImage(data: NFXAssets.getImage(NFXAssetName.serverError))!
+    }()
     #endif
-    }
 }
 
 extension InputStream {
-  func readfully() -> Data {
-    var result = Data()
-    var buffer = [UInt8](repeating: 0, count: 4096)
     
-    open()
-    
-    var amount = 0
-    repeat {
-      amount = read(&buffer, maxLength: buffer.count)
-      if amount > 0 {
-        result.append(buffer, count: amount)
-      }
-    } while amount > 0
-    
-    close()
-    
-    return result
-  }
+    func readfully() -> Data {
+        var result = Data()
+        var buffer = [UInt8](repeating: 0, count: 4096)
+
+        open()
+
+        var amount = 0
+        repeat {
+            amount = read(&buffer, maxLength: buffer.count)
+            if amount > 0 {
+                result.append(buffer, count: amount)
+            }
+        } while amount > 0
+
+        close()
+
+        return result
+    }
 }
 
 extension Date
@@ -343,7 +370,12 @@ class NFXDebugInfo
         let session = URLSession.shared
         session.dataTask(with: req as URLRequest, completionHandler: { (data, response, error) in
             do {
-                let rawJsonData = try JSONSerialization.jsonObject(with: data!, options: [.allowFragments])
+                guard let data = data else {
+                    completion("-")
+                    return
+                }
+                
+                let rawJsonData = try JSONSerialization.jsonObject(with: data, options: [.allowFragments])
                 if let ipAddress = (rawJsonData as AnyObject).value(forKey: "ip") {
                     completion(ipAddress as! String)
                 } else {

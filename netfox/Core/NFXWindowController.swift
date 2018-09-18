@@ -19,9 +19,12 @@ class NFXWindowController: NSWindowController, NSWindowDelegate, NFXWindowContro
     @IBOutlet var infoButton: NSButton!
     @IBOutlet var statisticsButton: NSButton!
 
+    @IBOutlet var popupButton: NSPopUpButton!
     @IBOutlet var listView: NSView!
     @IBOutlet var detailsView: NSView!
-    @IBOutlet var listViewController: NFXListController_OSX!
+    @IBOutlet var tableView: NSTableView!
+    @IBOutlet var listViewController: NFXPathNodeListController_OSX!
+    @IBOutlet var structuredListViewController: NFXPathNodeListController_OSX!
     @IBOutlet var detailsViewController: NFXDetailsController_OSX!
     
     @IBOutlet var settingsPopover: NSPopover!
@@ -33,6 +36,7 @@ class NFXWindowController: NSWindowController, NSWindowDelegate, NFXWindowContro
 
     @IBOutlet var infoViewController: NFXInfoController_OSX!
     @IBOutlet var infoView: NSView!
+    @IBOutlet var segmentedControl: NSSegmentedControl!
     
     @IBOutlet var statisticsViewController: NFXStatisticsController_OSX!
     @IBOutlet var statisticsView: NSView!
@@ -44,9 +48,10 @@ class NFXWindowController: NSWindowController, NSWindowDelegate, NFXWindowContro
         infoButton.image = NSImage(data: NFXAssets.getImage(.info))
         statisticsButton.image = NSImage(data: NFXAssets.getImage(.statistics))
 
-        listViewController.view = listView
         listViewController.delegate = self
         detailsViewController.view = detailsView
+        
+        structuredListViewController.delegate = self
         
         settingsViewController.view = settingsView
         infoViewController.view = infoView
@@ -59,6 +64,8 @@ class NFXWindowController: NSWindowController, NSWindowDelegate, NFXWindowContro
     override func windowDidLoad() {
         super.windowDidLoad()
         self.window?.delegate = self
+        
+        NFXNetServiceMonitor.shared.browseForAvailableNFXServices()
     }
     
     // MARK: NSWindowDelegate
@@ -71,18 +78,42 @@ class NFXWindowController: NSWindowController, NSWindowDelegate, NFXWindowContro
     
     // MARK: Actions
     
-    @IBAction func settingsClicked(sender: AnyObject?) {
+    @IBAction func settingsClicked(_ sender: AnyObject?) {
         settingsPopover.show(relativeTo: NSZeroRect, of: settingsButton, preferredEdge: NSRectEdge.maxY)
     }
     
-    @IBAction func infoClicked(sender: AnyObject?) {
+    @IBAction func infoClicked(_ sender: AnyObject?) {
         infoPopover.show(relativeTo: NSZeroRect, of: infoButton, preferredEdge: NSRectEdge.maxY)
     }
     
-    @IBAction func statisticsClicked(sender: AnyObject?) {
+    @IBAction func statisticsClicked(_ sender: AnyObject?) {
         statisticsPopover.show(relativeTo: NSZeroRect, of: statisticsButton, preferredEdge: NSRectEdge.maxY)
     }
-
+    
+    @IBAction func hostClicked(_ sender: Any) {
+        let foundService =  NFXNetServiceMonitor.shared.foundServices[popupButton.indexOfSelectedItem]
+        NFXNetServiceMonitor.shared.fetchServiceContent(service: foundService.service)
+    }
+    
+    @IBAction func segmentedAction(_ sender: Any) {
+        switch segmentedControl.selectedSegment {
+        case 0:
+            listViewController.searchField.delegate = listViewController
+            listViewController.tableView = tableView
+            tableView.delegate = listViewController
+            tableView.dataSource = listViewController
+            tableView.reloadData()
+        case 1:
+            structuredListViewController.searchField.delegate = structuredListViewController
+            structuredListViewController.tableView = tableView
+            tableView.delegate = structuredListViewController
+            tableView.dataSource = structuredListViewController
+            tableView.reloadData()
+        default:
+            abort()
+        }
+    }
+    
 }
     
 extension NFXWindowController {

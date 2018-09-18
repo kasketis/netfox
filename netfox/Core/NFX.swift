@@ -6,6 +6,7 @@
 //
 
 import Foundation
+
 #if os(OSX)
 import Cocoa
 #else
@@ -63,6 +64,7 @@ open class NFX: NSObject
     fileprivate var ignoredURLs = [String]()
     fileprivate var filters = [Bool]()
     fileprivate var lastVisitDate: Date = Date()
+    var server: NFXServer?
     internal var cacheStoragePolicy = URLCache.StoragePolicy.notAllowed
 
     @objc open func start()
@@ -92,6 +94,20 @@ open class NFX: NSObject
     #if os(OSX)
         self.removeNetfoxFromMainmenu()
     #endif
+    }
+    
+    @objc public func startServer() {
+        if !self.started {
+            self.start()
+        }
+        
+        self.server = NFXServer()
+        self.server?.startServer()
+    }
+    
+    @objc public func stopServer() {
+        self.server?.stopServer()
+        self.server = nil
     }
     
     fileprivate func showMessage(_ msg: String) {
@@ -261,7 +277,8 @@ extension NFX {
         navigationController.navigationBar.tintColor = UIColor.NFXOrangeColor()
         navigationController.navigationBar.barTintColor = UIColor.NFXStarkWhiteColor()
         #if !swift(>=4.0)
-            navigationController.navigationBar.titleTextAttributes = [NSForegroundColorAttributeName: UIColor.NFXOrangeColor()]
+        
+        navigationController.navigationBar.titleTextAttributes = [NSForegroundColorAttributeName: UIColor.NFXOrangeColor()]
         #else
             navigationController.navigationBar.titleTextAttributes = [NSAttributedStringKey.foregroundColor: UIColor.NFXOrangeColor()]
         #endif
@@ -285,6 +302,14 @@ extension NFX {
     
     public func windowDidClose() {
         self.presented = false
+        
+        if Bundle.main.bundleIdentifier == "com.tapptitude.netfox-mac" {
+            #if !swift(>=4.0)
+                NSApplication.shared().terminate(self)
+            #else
+                NSApplication.shared.terminate(self)
+            #endif
+        }
     }
     
     private func setupNetfoxMenuItem() {
