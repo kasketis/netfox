@@ -14,7 +14,9 @@ It grabs all requests - of course yours, requests from 3rd party libraries (such
 
 Very useful and handy for network related issues and bugs
 
-Supports Swift 3.2 and 4 - bridged also for Objective-C
+Supports Swift 4 and above - bridged also for Objective-C.
+
+For Swift 3.2 support, use version [1.12.1](https://github.com/kasketis/netfox/releases/tag/1.12.1).
 
 Feel free to contribute :)
 

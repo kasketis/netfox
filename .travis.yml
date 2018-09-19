@@ -3,11 +3,11 @@
 # * https://github.com/supermarin/xcpretty#usage
 
 os: osx
-osx_image: xcode9.2
+osx_image: xcode10
 language: swift
 script:
-- set -o pipefail && xcodebuild -project netfox.xcodeproj -scheme netfox_ios -sdk iphoneos11.2 ONLY_ACTIVE_ARCH=NO SWIFT_VERSION=4.0 | xcpretty
-- set -o pipefail && xcodebuild -project netfox.xcodeproj -scheme netfox_ios -sdk iphoneos11.2 ONLY_ACTIVE_ARCH=NO SWIFT_VERSION=3.2 | xcpretty
-- set -o pipefail && xcodebuild -project netfox.xcodeproj -scheme netfox_osx -sdk macosx10.13 ONLY_ACTIVE_ARCH=NO SWIFT_VERSION=4.0 | xcpretty
-- set -o pipefail && xcodebuild -project netfox.xcodeproj -scheme netfox_osx -sdk macosx10.13 ONLY_ACTIVE_ARCH=NO SWIFT_VERSION=3.2 | xcpretty
-- pod lib lint
+- set -o pipefail && xcodebuild -project netfox.xcodeproj -scheme netfox_ios -sdk iphonesimulator12.0 ONLY_ACTIVE_ARCH=NO SWIFT_VERSION=4.0 | xcpretty
+- set -o pipefail && xcodebuild -project netfox.xcodeproj -scheme netfox_ios -sdk iphonesimulator12.0 ONLY_ACTIVE_ARCH=NO SWIFT_VERSION=4.2 | xcpretty
+- set -o pipefail && xcodebuild -project netfox.xcodeproj -scheme netfox_osx -sdk macosx10.14 ONLY_ACTIVE_ARCH=NO SWIFT_VERSION=4.0 | xcpretty
+- set -o pipefail && xcodebuild -project netfox.xcodeproj -scheme netfox_osx -sdk macosx10.14 ONLY_ACTIVE_ARCH=NO SWIFT_VERSION=4.2 | xcpretty
+- pod lib lint --quick

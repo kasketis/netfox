@@ -24,11 +24,15 @@ class NFXListController_OSX: NFXListController, NSTableViewDelegate, NSTableView
     // MARK: View Life Cycle
 
     override func awakeFromNib() {
-        #if !swift(>=4.0)
-            tableView.register(NSNib(nibNamed: cellIdentifier, bundle: nil), forIdentifier: cellIdentifier)
+        #if swift(>=4.2)
+        let nibName = cellIdentifier
         #else
-            tableView.register(NSNib(nibNamed: NSNib.Name(rawValue: cellIdentifier), bundle: nil), forIdentifier: NSUserInterfaceItemIdentifier(rawValue: cellIdentifier))
+        let nibName = NSNib.Name(rawValue: cellIdentifier)
         #endif
+
+        tableView.register(NSNib(nibNamed: nibName, bundle: nil),
+                           forIdentifier: NSUserInterfaceItemIdentifier(rawValue: cellIdentifier))
+
         searchField.delegate = self
         
         NotificationCenter.default.addObserver(self, selector: #selector(NFXListController.reloadTableViewData), name: NSNotification.Name.NFXReloadData, object: nil)
@@ -55,15 +59,6 @@ class NFXListController_OSX: NFXListController, NSTableViewDelegate, NSTableView
     {
         self.updateSearchResultsForSearchControllerWithString(searchField.stringValue)
         reloadTableViewData()
-    }
-
-    func controlTextDidChange(obj: NSNotification) {
-        guard let searchField = obj.object as? NSSearchField else {
-            return
-        }
-        
-        isSearchControllerActive = searchField.stringValue.count > 0
-        updateSearchResultsForSearchController()
     }
     
     // MARK: UITableViewDataSource
@@ -122,7 +117,30 @@ class NFXListController_OSX: NFXListController, NSTableViewDelegate, NSTableView
         }
         self.delegate?.httpModelSelectedDidChange(model: model)
     }
-    
+
+    fileprivate func handleControlChange(obj: Notification) {
+        guard let searchField = obj.object as? NSSearchField else {
+            return
+        }
+
+        isSearchControllerActive = searchField.stringValue.count > 0
+        updateSearchResultsForSearchController()
+    }
 }
 
+#if swift(>=4.2)
+extension NFXListController_OSX: NSControlTextEditingDelegate {
+    func controlTextDidChange(_ obj: Notification) {
+        handleControlChange(obj: obj)
+    }
+}
+#else
+extension NFXListController_OSX {
+    override func controlTextDidChange(_ obj: Notification) {
+        handleControlChange(obj: obj)
+    }
+}
 #endif
+
+#endif
+

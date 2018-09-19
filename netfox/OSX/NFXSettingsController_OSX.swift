@@ -25,12 +25,15 @@ class NFXSettingsController_OSX: NFXSettingsController, NSTableViewDataSource, N
         
         nfxVersionLabel.stringValue = nfxVersionString
         nfxURLButton.title = nfxURL
-        
-        #if !swift(>=4.0)
-            responseTypesTableView.register(NSNib(nibNamed: cellIdentifier, bundle: nil), forIdentifier: cellIdentifier)
+
+        #if swift(>=4.2)
+        let nibName = cellIdentifier
         #else
-            responseTypesTableView.register(NSNib(nibNamed: NSNib.Name(rawValue: cellIdentifier), bundle: nil), forIdentifier: NSUserInterfaceItemIdentifier(rawValue: cellIdentifier))
+        let nibName = NSNib.Name(rawValue: cellIdentifier)
         #endif
+
+        responseTypesTableView.register(NSNib(nibNamed: nibName, bundle: nil),
+                                        forIdentifier: NSUserInterfaceItemIdentifier(rawValue: cellIdentifier))
         
         reloadTableData()
     }
@@ -63,11 +66,7 @@ class NFXSettingsController_OSX: NFXSettingsController, NSTableViewDataSource, N
     }
     
     @IBAction func nfxURLButtonClicked(sender: NSButton) {
-        #if !swift(>=4.0)
-            NSWorkspace.shared().open(NSURL(string: nfxURL)! as URL)
-        #else
-            NSWorkspace.shared.open(NSURL(string: nfxURL)! as URL)
-        #endif
+        NSWorkspace.shared.open(URL(string: nfxURL)!)
     }
     
     @IBAction func toggleResponseTypeClicked(sender: NSButton) {
