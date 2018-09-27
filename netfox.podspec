@@ -1,6 +1,6 @@
 Pod::Spec.new do |s|
   s.name             = "netfox"
-  s.version          = "1.12.2"
+  s.version          = "1.12.3"
   s.summary          = "A lightweight, one line setup, iOS/OSX network debugging library!"
  
   s.description      = <<-DESC
@@ -11,13 +11,13 @@ DESC
   s.screenshots      = "https://raw.githubusercontent.com/kasketis/netfox/master/assets/overview1_5_3.gif"
   s.license          = 'MIT'
   s.author           = "Christos Kasketis"
-  s.source           = { :git => "https://github.com/kasketis/netfox.git", :tag => "#{s.version}" }
+  s.source           = { :git => "https://github.com/tanpengsccd/netfox.git", :tag => "#{s.version}" }
 
   s.ios.deployment_target = '8.0'
-  s.osx.deployment_target = '10.11'
+  # s.osx.deployment_target = '10.11'
   s.requires_arc = true
   s.source_files = "netfox/Core/*.{swift,h,m}"
   s.ios.source_files = "netfox/iOS/*.swift"
-  s.osx.source_files = "netfox/OSX/*.{swift,xib}" 
-  s.swift_version   = '4.0.3'
+  # s.osx.source_files = "netfox/OSX/*.{swift,xib}" 
+  s.swift_version   = '4.2'
 end
