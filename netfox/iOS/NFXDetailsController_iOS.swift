@@ -179,19 +179,19 @@ class NFXDetailsController_iOS: NFXDetailsController, MFMailComposeViewControlle
         actionSheetController.addAction(cancelAction)
         
         let simpleLog: UIAlertAction = UIAlertAction(title: "Simple log", style: .default) { [unowned self] action -> Void in
-            self.shareLog(full: false)
+            self.shareLog(full: false, sender: sender)
         }
         actionSheetController.addAction(simpleLog)
         
         let fullLogAction: UIAlertAction = UIAlertAction(title: "Full log", style: .default) { [unowned self] action -> Void in
-            self.shareLog(full: true)
+            self.shareLog(full: true, sender: sender)
         }
         actionSheetController.addAction(fullLogAction)
         
         if let reqCurl  = self.selectedModel.requestCurl {
             let curlAction: UIAlertAction = UIAlertAction(title: "Export request as curl", style: .default) { [unowned self] action -> Void in
                 let activityViewController = UIActivityViewController(activityItems: [reqCurl], applicationActivities: nil)
-                activityViewController.popoverPresentationController?.sourceView = self.view
+                activityViewController.popoverPresentationController?.barButtonItem = sender
                 self.present(activityViewController, animated: true, completion: nil)
             }
             actionSheetController.addAction(curlAction)
@@ -199,6 +199,7 @@ class NFXDetailsController_iOS: NFXDetailsController, MFMailComposeViewControlle
 
         
         actionSheetController.view.tintColor = UIColor.NFXOrangeColor()
+        actionSheetController.popoverPresentationController?.barButtonItem = sender
 
         self.present(actionSheetController, animated: true, completion: nil)
     }
@@ -282,7 +283,7 @@ class NFXDetailsController_iOS: NFXDetailsController, MFMailComposeViewControlle
         return bodyDetailsController
     }
     
-    func shareLog(full: Bool)
+    func shareLog(full: Bool, sender: UIBarButtonItem)
     {
         var tempString = String()
 
@@ -308,12 +309,13 @@ class NFXDetailsController_iOS: NFXDetailsController, MFMailComposeViewControlle
                 tempString += responseFileData
             }
         }
-        displayShareSheet(shareContent: tempString)
+        displayShareSheet(shareContent: tempString, sender: sender)
     }
 
-    func displayShareSheet(shareContent: String) {
+    func displayShareSheet(shareContent: String, sender: UIBarButtonItem) {
         self.sharedContent = shareContent
         let activityViewController = UIActivityViewController(activityItems: [self], applicationActivities: nil)
+        activityViewController.popoverPresentationController?.barButtonItem = sender
         present(activityViewController, animated: true, completion: nil)
     }
 }
