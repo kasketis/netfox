@@ -10,7 +10,7 @@
 import UIKit
 import MessageUI
 
-class NFXSettingsController_iOS: NFXSettingsController, UITableViewDelegate, UITableViewDataSource, MFMailComposeViewControllerDelegate {
+class NFXSettingsController_iOS: NFXSettingsController, UITableViewDelegate, UITableViewDataSource, MFMailComposeViewControllerDelegate, DataCleaner {
     
     var tableView: UITableView = UITableView()
     
@@ -276,24 +276,8 @@ class NFXSettingsController_iOS: NFXSettingsController, UITableViewDelegate, UIT
     
     func clearDataButtonPressedOnTableIndex(_ index: IndexPath)
     {
-        let actionSheetController: UIAlertController = UIAlertController(title: "Clear data?", message: "", preferredStyle: .actionSheet)
-        actionSheetController.popoverPresentationController?.sourceView = tableView
-        actionSheetController.popoverPresentationController?.sourceRect = tableView.rectForRow(at: index)
-        
-        let cancelAction: UIAlertAction = UIAlertAction(title: "Cancel", style: .cancel) { action -> Void in
-        }
-        actionSheetController.addAction(cancelAction)
-        
-        let yesAction: UIAlertAction = UIAlertAction(title: "Yes", style: .default) { action -> Void in
-            NFX.sharedInstance().clearOldData()
-        }
-        actionSheetController.addAction(yesAction)
-        
-        let noAction: UIAlertAction = UIAlertAction(title: "No", style: .default) { action -> Void in
-        }
-        actionSheetController.addAction(noAction)
-        
-        self.present(actionSheetController, animated: true, completion: nil)
+
+        clearData(sourceView: tableView, originingIn: tableView.rectForRow(at: index)) { }
     }
 
     func shareSessionLogsPressed()

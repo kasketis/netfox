@@ -12,7 +12,7 @@ import UIKit
 
 
 @available(iOS 8.0, *)
-class NFXListController_iOS: NFXListController, UITableViewDelegate, UITableViewDataSource, UISearchResultsUpdating, UISearchControllerDelegate
+class NFXListController_iOS: NFXListController, UITableViewDelegate, UITableViewDataSource, UISearchResultsUpdating, UISearchControllerDelegate, DataCleaner
 {
     // MARK: Properties
     
@@ -40,8 +40,14 @@ class NFXListController_iOS: NFXListController, UITableViewDelegate, UITableView
 
         self.navigationItem.leftBarButtonItem = UIBarButtonItem(image: UIImage.NFXClose(), style: .plain, target: self, action: #selector(NFXListController_iOS.closeButtonPressed))
 
-        self.navigationItem.rightBarButtonItem = UIBarButtonItem(image: UIImage.NFXSettings(), style: .plain, target: self, action: #selector(NFXListController_iOS.settingsButtonPressed))
-        
+        let rightButtons = [
+            UIBarButtonItem(barButtonSystemItem: .trash, target: self, action: #selector(NFXListController_iOS.trashButtonPressed)),
+            UIBarButtonItem(image: UIImage.NFXSettings(), style: .plain, target: self, action: #selector(NFXListController_iOS.settingsButtonPressed))
+        ]
+
+        self.navigationItem.rightBarButtonItems = rightButtons
+
+
         self.searchController = UISearchController(searchResultsController: nil)
         self.searchController.searchResultsUpdater = self
         self.searchController.delegate = self
@@ -93,6 +99,14 @@ class NFXListController_iOS: NFXListController, UITableViewDelegate, UITableView
         var settingsController: NFXSettingsController_iOS
         settingsController = NFXSettingsController_iOS()
         self.navigationController?.pushViewController(settingsController, animated: true)
+    }
+
+    @objc func trashButtonPressed()
+    {
+        self.clearData(sourceView: tableView, originingIn: nil) {
+
+            self.reloadTableViewData()
+        }
     }
 
     @objc func closeButtonPressed()
