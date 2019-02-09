@@ -387,7 +387,7 @@ extension String
     }
 }
 
-@objc private extension URLSessionConfiguration
+private extension URLSessionConfiguration
 {
     private static var firstOccurrence = true
     
@@ -418,7 +418,7 @@ extension String
         method_exchangeImplementations(origMethod, newMethod)
     }
     
-    private var protocolClasses_Swizzled: [AnyClass]? {
+    @objc private var protocolClasses_Swizzled: [AnyClass]? {
         get {
             // Unused, but required for compiler
             return self.protocolClasses_Swizzled
@@ -453,7 +453,7 @@ extension String
         method_exchangeImplementations(origMethod, newMethod)
     }
     
-    private class var default_swizzled: URLSessionConfiguration {
+    @objc private class var default_swizzled: URLSessionConfiguration {
         get {
             let config = URLSessionConfiguration.default_swizzled
             
