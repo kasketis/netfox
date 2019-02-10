@@ -25,8 +25,8 @@ class NFXListController_iOS: NFXListController, UITableViewDelegate, UITableView
     {
         super.viewDidLoad()
         
-        self.edgesForExtendedLayout = UIRectEdge()
-        self.extendedLayoutIncludesOpaqueBars = false
+        self.edgesForExtendedLayout = UIRectEdge.all
+        self.extendedLayoutIncludesOpaqueBars = true
         self.automaticallyAdjustsScrollViewInsets = false
         
         self.tableView.frame = self.view.frame
@@ -62,6 +62,7 @@ class NFXListController_iOS: NFXListController, UITableViewDelegate, UITableView
         
         if #available(iOS 11.0, *) {
             self.navigationItem.searchController = self.searchController
+            self.definesPresentationContext = true
         } else {
             let searchView = UIView()
             searchView.frame = CGRect(x: 0, y: 0, width: self.view.frame.width - 60, height: 0)

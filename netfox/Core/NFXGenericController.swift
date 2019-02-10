@@ -20,7 +20,7 @@ class NFXGenericController: NFXViewController
     {
         super.viewDidLoad()
     #if os(iOS)
-        self.edgesForExtendedLayout = UIRectEdge()
+        self.edgesForExtendedLayout = UIRectEdge.all
         self.view.backgroundColor = NFXColor.NFXGray95Color()
     #elseif os(OSX)
         self.view.wantsLayer = true
