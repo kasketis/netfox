@@ -37,7 +37,7 @@ open class NFXProtocol: URLProtocol
             }
             
             for ignoredURL in NFX.sharedInstance().getIgnoredURLs() {
-                if url.absoluteString.hasPrefix(ignoredURL) {
+                if url.absoluteString.hasPrefix(ignoredURL) || url.absoluteString.contains(ignoredURL) {
                     return false
                 }
             }
