@@ -220,7 +220,7 @@ class NFXDetailsController_iOS: NFXDetailsController, MFMailComposeViewControlle
     }
 
     @objc func handleSwipe(_ gesture: UISwipeGestureRecognizer) {
-        guard let currentButtonIdx = headerButtons.index(where: { $0.isSelected }) else { return }
+        guard let currentButtonIdx = headerButtons.firstIndex(where: { $0.isSelected }) else { return }
         let numButtons = headerButtons.count
 
         switch gesture.direction {
@@ -236,7 +236,7 @@ class NFXDetailsController_iOS: NFXDetailsController, MFMailComposeViewControlle
     
     func buttonPressed(_ sender: UIButton)
     {
-        guard let selectedButtonIdx = self.headerButtons.index(of: sender) else { return }
+        guard let selectedButtonIdx = self.headerButtons.firstIndex(of: sender) else { return }
         let infoViews = [self.infoView, self.requestView, self.responseView]
 
         UIView.animate(withDuration: 0.4,
