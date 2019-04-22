@@ -114,7 +114,6 @@ class NFXStatisticsController: NFXGenericController
                     self.slowestResponseTime = model.timeInterval!
                 }
             }
-            
         }
     }
     

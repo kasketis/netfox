@@ -39,7 +39,6 @@ class NFXInfoController_iOS: NFXInfoController {
         self.scrollView.contentSize = CGSize(width: scrollView.frame.width, height: self.textLabel.frame.maxY)
         
         generateInfo()
-        
     }
 
     func generateInfo()
@@ -50,7 +49,6 @@ class NFXInfoController_iOS: NFXInfoController {
             }
         }
     }
-
 }
 
 #endif

@@ -10,8 +10,6 @@
 import Foundation
 import UIKit
 
-
-@available(iOS 8.0, *)
 class NFXListController_iOS: NFXListController, UITableViewDelegate, UITableViewDataSource, UISearchResultsUpdating, UISearchControllerDelegate, DataCleaner
 {
     // MARK: Properties

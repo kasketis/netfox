@@ -20,6 +20,5 @@ class NFXGenericBodyDetailsController: NFXGenericController
     override func viewDidLoad()
     {
         super.viewDidLoad()
-        
     }
 }

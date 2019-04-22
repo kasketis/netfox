@@ -55,7 +55,6 @@ class NFXStatisticsController_iOS: NFXStatisticsController {
             self.textLabel.attributedText = self.getReportString()
         }
     }
-
 }
 
 #endif

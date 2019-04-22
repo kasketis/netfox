@@ -25,7 +25,6 @@ class NFXInfoController_OSX: NFXInfoController {
             }
         }
     }
-
 }
 
 #endif

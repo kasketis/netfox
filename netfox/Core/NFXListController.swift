@@ -16,7 +16,6 @@ class NFXListController: NFXGenericController {
         super.viewDidLoad()        
     }
     
-    
     func updateSearchResultsForSearchControllerWithString(_ searchString: String)
     {
         let predicateURL = NSPredicate(format: "requestURL contains[cd] '\(searchString)'")
@@ -32,5 +31,4 @@ class NFXListController: NFXGenericController {
     @objc func reloadTableViewData()
     {
     }
-    
 }

@@ -41,7 +41,6 @@ class NFXRawBodyDetailsController: NFXGenericBodyDetailsController
         }
         
         self.view.addSubview(self.bodyView)
-        
     }
 
     @objc fileprivate func copyLabel(lpgr: UILongPressGestureRecognizer) {

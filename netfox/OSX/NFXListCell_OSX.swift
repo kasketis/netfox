@@ -116,7 +116,6 @@ class NFXListCell_OSX: NSTableCellView
             self.isOld()
         }
     }
-    
 }
 
 #endif

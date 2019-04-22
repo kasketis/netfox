@@ -322,7 +322,6 @@ extension NFX {
             notNilCompletion()
         }
     }
-    
 }
     
 #endif

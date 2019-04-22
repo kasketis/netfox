@@ -109,7 +109,6 @@ class NFXListCell: UITableViewCell
         
         self.leftSeparator.frame = CGRect(x: 0, y: frame.height - 1, width: self.statusView.frame.width, height: 1)
         self.rightSeparator.frame = CGRect(x: self.leftSeparator.frame.maxX, y: frame.height - 1, width: frame.width - self.leftSeparator.frame.maxX, height: 1)
-        
     }
     
     func isNew()
@@ -151,7 +150,6 @@ class NFXListCell: UITableViewCell
         } else {
             self.statusView.backgroundColor = UIColor.NFXRedColor() //red
             self.timeIntervalLabel.textColor = UIColor.NFXDarkRedColor()
-
         }
     }
     

@@ -31,6 +31,4 @@ class NFXInfoController: NFXGenericController
 
         return formatNFXString(tempString)
     }
-    
-
 }

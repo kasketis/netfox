@@ -62,8 +62,6 @@ class NFXSettingsController_iOS: NFXSettingsController, UITableViewDelegate, UIT
         nfxURLButton.setTitle(nfxURL, for: .init())
         nfxURLButton.addTarget(self, action: #selector(NFXSettingsController_iOS.nfxURLButtonPressed), for: .touchUpInside)
         self.view.addSubview(nfxURLButton)
-        
-        
     }
     
     override func viewWillDisappear(_ animated: Bool)
@@ -212,7 +210,6 @@ class NFXSettingsController_iOS: NFXSettingsController, UITableViewDelegate, UIT
         }
         
         tableView.deselectRow(at: indexPath, animated: true)
-        
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat
@@ -262,7 +259,6 @@ class NFXSettingsController_iOS: NFXSettingsController, UITableViewDelegate, UIT
                 cell!.accessoryType = .none
             }
         }
-        
     }
     
     @objc func nfxEnabledSwitchValueChanged(_ sender: UISwitch)
@@ -299,7 +295,6 @@ class NFXSettingsController_iOS: NFXSettingsController, UITableViewDelegate, UIT
     {
         self.dismiss(animated: true, completion: nil)
     }
-    
 }
 
 #endif

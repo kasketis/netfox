@@ -114,7 +114,6 @@ class NFXSettingsController_OSX: NFXSettingsController, NSTableViewDataSource, N
     func tableView(_ tableView: NSTableView, shouldSelectRow: Int) -> Bool {
         return false
     }
-    
 }
 
 #endif

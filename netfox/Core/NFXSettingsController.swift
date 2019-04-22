@@ -15,5 +15,4 @@ class NFXSettingsController: NFXGenericController {
     
     var tableData = [HTTPModelShortType]()
     var filters = [Bool]()
-    
 }

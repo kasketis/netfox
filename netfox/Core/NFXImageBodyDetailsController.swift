@@ -28,7 +28,6 @@ class NFXImageBodyDetailsController: NFXGenericBodyDetailsController
         self.imageView.image = UIImage(data: data!)
 
         self.view.addSubview(self.imageView)
-        
     }
 }
 

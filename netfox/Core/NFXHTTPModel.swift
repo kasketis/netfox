@@ -342,5 +342,4 @@ fileprivate func < <T : Comparable>(lhs: T?, rhs: T?) -> Bool {
         
         return log;
     }
-
 }

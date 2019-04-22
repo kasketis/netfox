@@ -43,7 +43,6 @@ class NFXDetailsController_OSX: NFXDetailsController {
         }
         self.textViewBodyResponse.textStorage?.setAttributedString(bodyResponse)
     }
-    
 }
 
 #endif

@@ -354,7 +354,7 @@ class NFXDebugInfo
                 completion("-")
             }
             
-            }) .resume()
+        }) .resume()
     }
     
 }
