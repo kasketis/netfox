@@ -8,34 +8,34 @@
 
 import Foundation
 
-internal class NFXAuthenticationChallengeSender : NSObject, URLAuthenticationChallengeSender {
+class NFXAuthenticationChallengeSender : NSObject, URLAuthenticationChallengeSender {
     
     typealias NFXAuthenticationChallengeHandler = (URLSession.AuthChallengeDisposition, URLCredential?) -> Void
     
-    fileprivate var handler: NFXAuthenticationChallengeHandler
+    let handler: NFXAuthenticationChallengeHandler
     
     init(handler: @escaping NFXAuthenticationChallengeHandler) {
         self.handler = handler
         super.init()
     }
     
-    public func use(_ credential: URLCredential, for challenge: URLAuthenticationChallenge) {
-        handler(URLSession.AuthChallengeDisposition.useCredential, credential)
+    func use(_ credential: URLCredential, for challenge: URLAuthenticationChallenge) {
+        handler(.useCredential, credential)
     }
     
-    public func continueWithoutCredential(for challenge: URLAuthenticationChallenge) {
-        handler(URLSession.AuthChallengeDisposition.useCredential, nil)
+    func continueWithoutCredential(for challenge: URLAuthenticationChallenge) {
+        handler(.useCredential, nil)
     }
 
-    public func cancel(_ challenge: URLAuthenticationChallenge) {
-        handler(URLSession.AuthChallengeDisposition.cancelAuthenticationChallenge, nil)
+    func cancel(_ challenge: URLAuthenticationChallenge) {
+        handler(.cancelAuthenticationChallenge, nil)
     }
 
-    public func performDefaultHandling(for challenge: URLAuthenticationChallenge) {
-        handler(URLSession.AuthChallengeDisposition.performDefaultHandling, nil)
+    func performDefaultHandling(for challenge: URLAuthenticationChallenge) {
+        handler(.performDefaultHandling, nil)
     }
 
-    public func rejectProtectionSpaceAndContinue(with challenge: URLAuthenticationChallenge) {
-        handler(URLSession.AuthChallengeDisposition.rejectProtectionSpace, nil)
+    func rejectProtectionSpaceAndContinue(with challenge: URLAuthenticationChallenge) {
+        handler(.rejectProtectionSpace, nil)
     }
 }
