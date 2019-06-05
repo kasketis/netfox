@@ -45,7 +45,6 @@ class NFXListController_iOS: NFXListController, UITableViewDelegate, UITableView
 
         self.navigationItem.rightBarButtonItems = rightButtons
 
-
         self.searchController = UISearchController(searchResultsController: nil)
         self.searchController.searchResultsUpdater = self
         self.searchController.delegate = self

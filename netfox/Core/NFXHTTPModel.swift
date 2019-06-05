@@ -54,7 +54,12 @@ fileprivate func < <T : Comparable>(lhs: T?, rhs: T?) -> Bool {
         self.requestTime = getTimeFromDate(self.requestDate!)
         self.requestURL = request.getNFXURL()
         self.requestURLComponents = request.getNFXURLComponents()
-        self.requestURLQueryItems = request.getNFXURLComponents()?.queryItems
+        self.requestURLQueryItems = request.getNFXURLComponents()?.queryItems?.filter {
+            guard $0.name.count > 0, let value = $0.value, value.count > 0 else {
+                return false
+            }
+            return true
+        }
         self.requestMethod = request.getNFXMethod()
         self.requestCachePolicy = request.getNFXCachePolicy()
         self.requestTimeout = request.getNFXTimeout()
