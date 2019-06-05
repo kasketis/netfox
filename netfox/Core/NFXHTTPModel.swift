@@ -21,6 +21,8 @@ fileprivate func < <T : Comparable>(lhs: T?, rhs: T?) -> Bool {
 @objc public class NFXHTTPModel: NSObject
 {
     @objc public var requestURL: String?
+    @objc public var requestURLComponents: URLComponents?
+    @objc public var requestURLQueryItems: [URLQueryItem]?
     @objc public var requestMethod: String?
     @objc public var requestCachePolicy: String?
     @objc public var requestDate: Date?
@@ -51,6 +53,8 @@ fileprivate func < <T : Comparable>(lhs: T?, rhs: T?) -> Bool {
         self.requestDate = Date()
         self.requestTime = getTimeFromDate(self.requestDate!)
         self.requestURL = request.getNFXURL()
+        self.requestURLComponents = request.getNFXURLComponents()
+        self.requestURLQueryItems = request.getNFXURLComponents()?.queryItems
         self.requestMethod = request.getNFXMethod()
         self.requestCachePolicy = request.getNFXCachePolicy()
         self.requestTimeout = request.getNFXTimeout()

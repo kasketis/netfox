@@ -132,6 +132,16 @@ extension URLRequest
         }
     }
     
+    func getNFXURLComponents() -> URLComponents?
+    {
+        guard let url = self.url else {
+            return nil
+        }
+        return URLComponents(string: url.absoluteString)
+        
+        
+    }
+    
     func getNFXMethod() -> String
     {
         if (httpMethod != nil) {
