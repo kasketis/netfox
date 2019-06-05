@@ -18,8 +18,5 @@ DESC
   s.requires_arc = true
   s.source_files = "netfox/Core/*.{swift,h,m}"
   s.ios.source_files = "netfox/iOS/*.swift"
-  s.resource_bundles = { 
-    'netfox_ios' => "netfox/iOS/*.{xib}"
-  }
   s.osx.source_files = "netfox/OSX/*.{swift,xib}"
 end
