@@ -343,6 +343,7 @@ extension NFXDetailsController_iOS: UITextViewDelegate {
         switch URL.absoluteString {
         case "%5BURL%5D":
             let urlDetailsController = NFXURLDetailsController()
+            urlDetailsController.selectedModel = self.selectedModel
             self.navigationController?.pushViewController(urlDetailsController, animated: true)
             return true
         default:

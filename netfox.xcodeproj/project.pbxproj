@@ -9,6 +9,8 @@
 /* Begin PBXBuildFile section */
 		026274D9214C6BC400AE1BDF /* WKWebViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 026274D8214C6BC400AE1BDF /* WKWebViewController.swift */; };
 		37CA535D22A7B9DE00CBB02C /* NFXURLDetailsController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37CA535C22A7B9DE00CBB02C /* NFXURLDetailsController.swift */; };
+		37CA536022A7C86400CBB02C /* NFXURLQueryStringTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37CA535E22A7C86400CBB02C /* NFXURLQueryStringTableViewCell.swift */; };
+		37CA536122A7C86400CBB02C /* NFXURLQueryStringTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 37CA535F22A7C86400CBB02C /* NFXURLQueryStringTableViewCell.xib */; };
 		8201A39D204E3E3F00AB2C3D /* NFXAuthenticationChallengeSender.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8201A39C204E3E3F00AB2C3D /* NFXAuthenticationChallengeSender.swift */; };
 		8201A39E204E451900AB2C3D /* NFXAuthenticationChallengeSender.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8201A39C204E3E3F00AB2C3D /* NFXAuthenticationChallengeSender.swift */; };
 		8201A39F204E452200AB2C3D /* NFXLoader.m in Sources */ = {isa = PBXBuildFile; fileRef = 826C4E9D1F979AB3008B440C /* NFXLoader.m */; };
@@ -88,6 +90,8 @@
 /* Begin PBXFileReference section */
 		026274D8214C6BC400AE1BDF /* WKWebViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WKWebViewController.swift; sourceTree = "<group>"; };
 		37CA535C22A7B9DE00CBB02C /* NFXURLDetailsController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NFXURLDetailsController.swift; sourceTree = "<group>"; };
+		37CA535E22A7C86400CBB02C /* NFXURLQueryStringTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NFXURLQueryStringTableViewCell.swift; sourceTree = "<group>"; };
+		37CA535F22A7C86400CBB02C /* NFXURLQueryStringTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = NFXURLQueryStringTableViewCell.xib; sourceTree = "<group>"; };
 		8201A39C204E3E3F00AB2C3D /* NFXAuthenticationChallengeSender.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NFXAuthenticationChallengeSender.swift; sourceTree = "<group>"; };
 		8229AD621F8FB34300A9D613 /* netfox_ios_demo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = netfox_ios_demo.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		8229AD641F8FB34300A9D613 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -245,6 +249,8 @@
 				B3F8BAA91C833AC700F9FBEA /* NFXListController_iOS.swift */,
 				B3F8BAAA1C833AC700F9FBEA /* NFXSettingsController_iOS.swift */,
 				B3F8BAAB1C833AC700F9FBEA /* NFXStatisticsController_iOS.swift */,
+				37CA535E22A7C86400CBB02C /* NFXURLQueryStringTableViewCell.swift */,
+				37CA535F22A7C86400CBB02C /* NFXURLQueryStringTableViewCell.xib */,
 			);
 			path = iOS;
 			sourceTree = "<group>";
@@ -411,6 +417,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				37CA536122A7C86400CBB02C /* NFXURLQueryStringTableViewCell.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -445,6 +452,7 @@
 			files = (
 				B3F8BA821C833ABC00F9FBEA /* NFX.swift in Sources */,
 				37CA535D22A7B9DE00CBB02C /* NFXURLDetailsController.swift in Sources */,
+				37CA536022A7C86400CBB02C /* NFXURLQueryStringTableViewCell.swift in Sources */,
 				B3F8BA8A1C833ABC00F9FBEA /* NFXGenericBodyDetailsController.swift in Sources */,
 				B3F8BA901C833ABC00F9FBEA /* NFXHTTPModel.swift in Sources */,
 				8201A39D204E3E3F00AB2C3D /* NFXAuthenticationChallengeSender.swift in Sources */,

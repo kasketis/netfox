@@ -22,10 +22,12 @@ class NFXURLDetailsController: NFXDetailsController {
         let tableView: UITableView = UITableView()
         tableView.frame = self.view.bounds
         tableView.dataSource = self
+        tableView.register(UINib(nibName: NFXURLQueryStringTableViewCell.cellName,
+                                 bundle: Bundle(for: self.classForCoder)),
+                           forCellReuseIdentifier: NFXURLQueryStringTableViewCell.cellName)
         tableView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
         self.view.addSubview(tableView)
     }
-    
 }
 
 extension NFXURLDetailsController: UITableViewDataSource {
@@ -35,14 +37,14 @@ extension NFXURLDetailsController: UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        var cell: UITableViewCell!
-        cell = tableView.dequeueReusableCell(withIdentifier: "cell")
-        if cell == nil {
-            cell = UITableViewCell(style: .value1, reuseIdentifier: "cell")
+        guard let cell = tableView.dequeueReusableCell(withIdentifier: NFXURLQueryStringTableViewCell.cellName,
+                                                       for: indexPath) as? NFXURLQueryStringTableViewCell else
+        {
+            return UITableViewCell(style: .value1, reuseIdentifier: "cell")
         }
         if let queryItem = self.selectedModel.requestURLQueryItems?[indexPath.row] {
-            cell.textLabel?.text = queryItem.name
-            cell.detailTextLabel?.text = queryItem.value
+            cell.titleLabel.text = queryItem.name
+            cell.valueLabel.text = queryItem.value
         }
         return cell
     }
