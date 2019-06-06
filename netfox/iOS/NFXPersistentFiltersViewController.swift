@@ -35,6 +35,7 @@ class NFXPersistentFiltersViewController: UIViewController {
         
         self.view.translatesAutoresizingMaskIntoConstraints = true
         self.view.addSubview(tableView)
+        self.title = "Request filters"
         self.tableView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
         self.tableView.frame = self.view.bounds
         self.tableView.dataSource = self

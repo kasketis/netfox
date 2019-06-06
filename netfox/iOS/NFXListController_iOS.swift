@@ -45,13 +45,13 @@ class NFXListController_iOS: NFXListController, UITableViewDelegate, UITableView
             UIBarButtonItem(barButtonSystemItem: .trash,
                             target: self,
                             action: #selector(NFXListController_iOS.trashButtonPressed)),
-            UIBarButtonItem(barButtonSystemItem: .search,
-                            target: self,
-                            action: #selector(NFXListController_iOS.filterButtonPressed)),
             UIBarButtonItem(image: UIImage.NFXSettings(),
                             style: .plain,
                             target: self,
-                            action: #selector(NFXListController_iOS.settingsButtonPressed))
+                            action: #selector(NFXListController_iOS.settingsButtonPressed)),
+            UIBarButtonItem(barButtonSystemItem: .search,
+                            target: self,
+                            action: #selector(NFXListController_iOS.filterButtonPressed)),
         ]
 
         self.navigationItem.rightBarButtonItems = rightButtons
