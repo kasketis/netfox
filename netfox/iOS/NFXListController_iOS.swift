@@ -36,11 +36,22 @@ class NFXListController_iOS: NFXListController, UITableViewDelegate, UITableView
         
         self.tableView.register(NFXListCell.self, forCellReuseIdentifier: NSStringFromClass(NFXListCell.self))
 
-        self.navigationItem.leftBarButtonItem = UIBarButtonItem(image: UIImage.NFXClose(), style: .plain, target: self, action: #selector(NFXListController_iOS.closeButtonPressed))
+        self.navigationItem.leftBarButtonItem = UIBarButtonItem(image: UIImage.NFXClose(),
+                                                                style: .plain,
+                                                                target: self,
+                                                                action: #selector(NFXListController_iOS.closeButtonPressed))
 
         let rightButtons = [
-            UIBarButtonItem(barButtonSystemItem: .trash, target: self, action: #selector(NFXListController_iOS.trashButtonPressed)),
-            UIBarButtonItem(image: UIImage.NFXSettings(), style: .plain, target: self, action: #selector(NFXListController_iOS.settingsButtonPressed))
+            UIBarButtonItem(barButtonSystemItem: .trash,
+                            target: self,
+                            action: #selector(NFXListController_iOS.trashButtonPressed)),
+            UIBarButtonItem(barButtonSystemItem: .search,
+                            target: self,
+                            action: #selector(NFXListController_iOS.filterButtonPressed)),
+            UIBarButtonItem(image: UIImage.NFXSettings(),
+                            style: .plain,
+                            target: self,
+                            action: #selector(NFXListController_iOS.settingsButtonPressed))
         ]
 
         self.navigationItem.rightBarButtonItems = rightButtons
@@ -99,6 +110,14 @@ class NFXListController_iOS: NFXListController, UITableViewDelegate, UITableView
         self.navigationController?.pushViewController(settingsController, animated: true)
     }
 
+    @objc func filterButtonPressed()
+    {
+        let vc = UINavigationController(NFXPersistentFiltersViewController())
+        self.present(vc, animated: true) {
+            self.reloadTableViewData()
+        }
+    }
+    
     @objc func trashButtonPressed()
     {
         self.clearData(sourceView: tableView, originingIn: nil) {

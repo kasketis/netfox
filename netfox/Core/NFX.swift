@@ -255,12 +255,7 @@ extension NFX {
 
     fileprivate func showNFXFollowingPlatform()
     {
-        let navigationController = UINavigationController(rootViewController: NFXListController_iOS())
-        navigationController.navigationBar.isTranslucent = false
-        navigationController.navigationBar.tintColor = UIColor.NFXOrangeColor()
-        navigationController.navigationBar.barTintColor = UIColor.NFXStarkWhiteColor()
-        navigationController.navigationBar.titleTextAttributes = [.foregroundColor: UIColor.NFXOrangeColor()]
-        
+        let navigationController = UINavigationController(NFXListController_iOS())
         presentingViewController?.present(navigationController, animated: true, completion: nil)
     }
     
@@ -272,6 +267,7 @@ extension NFX {
             }
         })
     }
+    
 }
 
 #elseif os(OSX)
