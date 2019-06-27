@@ -128,6 +128,10 @@ open class NFX: NSObject
         toggleNFX()
     }
     
+    @objc open func isStarted() -> Bool {
+        return self.started
+    }
+    
     @objc open func setCachePolicy(_ policy: URLCache.StoragePolicy) {
         cacheStoragePolicy = policy
     }
