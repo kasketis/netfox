@@ -348,6 +348,7 @@ extension NFXDetailsController_iOS: UITextViewDelegate {
                 return false
             }
             let urlDetailsController = NFXURLDetailsController()
+            urlDetailsController.selectedModel = self.selectedModel
             self.navigationController?.pushViewController(urlDetailsController, animated: true)
             return true
         default:
