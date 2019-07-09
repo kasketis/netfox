@@ -134,38 +134,40 @@ class NFXDetailsController_iOS: NFXDetailsController, MFMailComposeViewControlle
         scrollView.autoresizesSubviews = true
         scrollView.backgroundColor = UIColor.clear
         
-        var textLabel: UILabel
-        textLabel = UILabel()
-        textLabel.frame = CGRect(x: 20, y: 20, width: scrollView.frame.width - 40, height: scrollView.frame.height - 20);
-        textLabel.font = UIFont.NFXFont(size: 13)
-        textLabel.textColor = UIColor.NFXGray44Color()
-        textLabel.numberOfLines = 0
-        textLabel.attributedText = content
-        textLabel.sizeToFit()
-        textLabel.isUserInteractionEnabled = true
-        scrollView.addSubview(textLabel)
+        var textView: UITextView
+        textView = UITextView()
+        textView.frame = CGRect(x: 20, y: 20, width: scrollView.frame.width - 40, height: scrollView.frame.height - 20);
+        textView.backgroundColor = UIColor.clear
+        textView.font = UIFont.NFXFont(size: 13)
+        textView.textColor = UIColor.NFXGray44Color()
+        textView.isEditable = false
+        textView.attributedText = content
+        textView.sizeToFit()
+        textView.isUserInteractionEnabled = true
+        textView.delegate = self
+        scrollView.addSubview(textView)
 
         let lpgr = UILongPressGestureRecognizer(target: self, action: #selector(NFXDetailsController_iOS.copyLabel))
-        textLabel.addGestureRecognizer(lpgr)
+        textView.addGestureRecognizer(lpgr)
         
         var moreButton: UIButton
-        moreButton = UIButton.init(frame: CGRect(x: 20, y: textLabel.frame.maxY + 10, width: scrollView.frame.width - 40, height: 40))
+        moreButton = UIButton.init(frame: CGRect(x: 20, y: textView.frame.maxY + 10, width: scrollView.frame.width - 40, height: 40))
         moreButton.backgroundColor = UIColor.NFXGray44Color()
         
         if ((forView == EDetailsView.request) && (self.selectedModel.requestBodyLength > 1024)) {
             moreButton.setTitle("Show request body", for: .init())
             moreButton.addTarget(self, action: #selector(NFXDetailsController_iOS.requestBodyButtonPressed), for: .touchUpInside)
             scrollView.addSubview(moreButton)
-            scrollView.contentSize = CGSize(width: textLabel.frame.width, height: moreButton.frame.maxY + 16)
+            scrollView.contentSize = CGSize(width: textView.frame.width, height: moreButton.frame.maxY + 16)
 
         } else if ((forView == EDetailsView.response) && (self.selectedModel.responseBodyLength > 1024)) {
             moreButton.setTitle("Show response body", for: .init())
             moreButton.addTarget(self, action: #selector(NFXDetailsController_iOS.responseBodyButtonPressed), for: .touchUpInside)
             scrollView.addSubview(moreButton)
-            scrollView.contentSize = CGSize(width: textLabel.frame.width, height: moreButton.frame.maxY + 16)
+            scrollView.contentSize = CGSize(width: textView.frame.width, height: moreButton.frame.maxY + 16)
             
         } else {
-            scrollView.contentSize = CGSize(width: textLabel.frame.width, height: textLabel.frame.maxY + 16)
+            scrollView.contentSize = CGSize(width: textView.frame.width, height: textView.frame.maxY + 16)
         }
         
         return scrollView
@@ -334,6 +336,26 @@ extension NFXDetailsController_iOS: UIActivityItemSource {
     func activityViewController(_ activityViewController: UIActivityViewController, subjectForActivityType activityType: UIActivityType?) -> String {
         return "netfox log - \(self.selectedModel.requestURL!)"
     }
+}
+
+extension NFXDetailsController_iOS: UITextViewDelegate {
+    
+    func textView(_ textView: UITextView, shouldInteractWith URL: URL, in characterRange: NSRange) -> Bool {
+        let decodedURL = URL.absoluteString.removingPercentEncoding
+        switch decodedURL {
+        case "[URL]":
+            guard let queryItems = self.selectedModel.requestURLQueryItems, queryItems.count > 0 else {
+                return false
+            }
+            let urlDetailsController = NFXURLDetailsController()
+            self.navigationController?.pushViewController(urlDetailsController, animated: true)
+            return true
+        default:
+            return false
+        }
+        
+    }
+    
 }
 
 #endif

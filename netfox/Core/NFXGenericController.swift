@@ -53,6 +53,9 @@ class NFXGenericController: NFXViewController
         
         for match in matchesKeys {
             tempMutableString.addAttribute(.foregroundColor, value: NFXColor.NFXBlackColor(), range: match.range)
+            tempMutableString.addAttribute(.link,
+                                           value: (string as NSString).substring(with: match.range),
+                                           range: match.range)
         }
         
         return tempMutableString
