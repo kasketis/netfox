@@ -46,7 +46,7 @@ open class NFXProtocol: URLProtocol
         }
         
         let absoluteString = url.absoluteString
-        guard !NFX.sharedInstance().getIgnoredURLs().contains(where: { absoluteString.hasPrefix($0) }) else {
+        guard !NFX.sharedInstance().getIgnoredURLs().contains(where: { absoluteString.hasPrefix($0) || absoluteString.contains($0) }) else {
             return false
         }
         
