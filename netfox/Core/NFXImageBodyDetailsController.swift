@@ -10,24 +10,28 @@
 import Foundation
 import UIKit
 
-class NFXImageBodyDetailsController: NFXGenericBodyDetailsController
-{
+class NFXImageBodyDetailsController: NFXGenericBodyDetailsController {
     var imageView: UIImageView = UIImageView()
     
-    override func viewDidLoad()
-    {
+    override func viewDidLoad() {
         super.viewDidLoad()
         
-        self.title = "Image preview"
+        let viewFrame = view.frame
         
-        self.imageView.frame = CGRect(x: 10, y: 10, width: self.view.frame.width - 2*10, height: self.view.frame.height - 2*10)
-        self.imageView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
-        self.imageView.contentMode = .scaleAspectFit
-        let data = Data.init(base64Encoded: self.selectedModel.getResponseBody() as String, options: NSData.Base64DecodingOptions.ignoreUnknownCharacters)
+        title = "Image preview"
+        
+        imageView.frame = CGRect(x: 10,
+                                 y: 10,
+                                 width: viewFrame.width - 2*10,
+                                 height: viewFrame.height - 2*10)
+        imageView.autoresizingMask = [.flexibleWidth,
+                                      .flexibleHeight]
+        imageView.contentMode = .scaleAspectFit
+        let data = Data.init(base64Encoded: selectedModel.getResponseBody() as String,
+                             options: NSData.Base64DecodingOptions.ignoreUnknownCharacters)
 
-        self.imageView.image = UIImage(data: data!)
-
-        self.view.addSubview(self.imageView)
+        imageView.image = UIImage(data: data!)
+        view.addSubview(imageView)
     }
 }
 

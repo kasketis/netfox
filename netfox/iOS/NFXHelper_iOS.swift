@@ -14,8 +14,7 @@ public typealias UIEventSubtype = UIEvent.EventSubtype
 #endif
 
 extension UIWindow {
-    override open func motionEnded(_ motion: UIEventSubtype, with event: UIEvent?)
-    {
+    override open func motionEnded(_ motion: UIEventSubtype, with event: UIEvent?) {
         if NFX.sharedInstance().getSelectedGesture() == .shake {
             if (event!.type == .motion && event!.subtype == .motionShake) {
                 NFX.sharedInstance().motionDetected()
@@ -26,11 +25,9 @@ extension UIWindow {
     }
 }
 
-public extension UIDevice
-{
+public extension UIDevice {
     
-    class func getNFXDeviceType() -> String
-    {
+    class func getNFXDeviceType() -> String {
         var systemInfo = utsname()
         uname(&systemInfo)
         
@@ -110,8 +107,7 @@ protocol DataCleaner {
 
 extension DataCleaner where Self: UIViewController {
 
-    func clearData(sourceView: UIView, originingIn sourceRect: CGRect?, then: @escaping () -> ())
-    {
+    func clearData(sourceView: UIView, originingIn sourceRect: CGRect?, then: @escaping () -> ()) {
         let actionSheetController: UIAlertController = UIAlertController(title: "Clear data?", message: "", preferredStyle: .actionSheet)
         actionSheetController.popoverPresentationController?.sourceView = sourceView
         if let sourceRect = sourceRect {
@@ -130,6 +126,6 @@ extension DataCleaner where Self: UIViewController {
         let noAction = UIAlertAction(title: "No", style: .default) { _ in }
         actionSheetController.addAction(noAction)
 
-        self.present(actionSheetController, animated: true, completion: nil)
+        present(actionSheetController, animated: true, completion: nil)
     }
 }
