@@ -22,7 +22,7 @@ class TextViewController: UIViewController {
         dataTask?.cancel()
         
         if session == nil {
-            session = URLSession(configuration: URLSessionConfiguration.default, delegate: self, delegateQueue: nil)
+            session = URLSession(configuration: URLSessionConfiguration.ephemeral, delegate: self, delegateQueue: nil)
         }
         
         guard let url = URL(string: "https://api.chucknorris.io/jokes/random") else { return }

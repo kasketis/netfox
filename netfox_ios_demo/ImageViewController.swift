@@ -15,7 +15,7 @@ class ImageViewController: UIViewController {
     var dataTask: URLSessionDataTask?
     
     required init?(coder aDecoder: NSCoder) {
-        session = URLSession(configuration: URLSessionConfiguration.default)
+        session = URLSession(configuration: URLSessionConfiguration.ephemeral)
         super.init(coder: aDecoder)
     }
     
