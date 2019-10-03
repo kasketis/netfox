@@ -33,7 +33,7 @@ class NFXListCell: UITableViewCell
     override init(style: UITableViewCellStyle, reuseIdentifier: String?)
     {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
-        backgroundColor = UIColor.clear
+        backgroundColor = UIColor.white
         selectionStyle = .none
         
 
