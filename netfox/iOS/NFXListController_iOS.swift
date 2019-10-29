@@ -92,6 +92,12 @@ class NFXListController_iOS: NFXListController, UITableViewDelegate, UITableView
         super.viewWillAppear(animated)
         reloadTableViewData()
     }
+
+    override func viewDidDisappear(_ animated: Bool) {
+        super.viewDidDisappear(animated)
+
+        NFX.sharedInstance().finishPresenting()
+    }
     
     @objc func settingsButtonPressed()
     {
