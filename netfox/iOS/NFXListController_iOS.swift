@@ -27,6 +27,7 @@ class NFXListController_iOS: NFXListController, UITableViewDelegate, UITableView
         self.extendedLayoutIncludesOpaqueBars = true
         self.automaticallyAdjustsScrollViewInsets = false
         
+        self.tableView.backgroundColor = .clear
         self.tableView.frame = self.view.frame
         self.tableView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
         self.tableView.translatesAutoresizingMaskIntoConstraints = true
