@@ -270,7 +270,8 @@ extension NFX {
         navigationController.navigationBar.tintColor = UIColor.NFXOrangeColor()
         navigationController.navigationBar.barTintColor = UIColor.NFXStarkWhiteColor()
         navigationController.navigationBar.titleTextAttributes = [.foregroundColor: UIColor.NFXOrangeColor()]
-        
+        navigationController.modalPresentationStyle = .fullScreen
+
         presentingViewController?.present(navigationController, animated: true, completion: nil)
     }
     
