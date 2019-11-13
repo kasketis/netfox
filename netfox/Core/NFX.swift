@@ -156,8 +156,15 @@ open class NFX: NSObject {
         hideNFX()
     }
 
-    @objc open func toggle() {
-        guard started else { return }
+    @objc internal func finishPresenting()
+    {
+        guard self.started else { return }
+        self.presented = false
+    }
+
+    @objc open func toggle()
+    {
+        guard self.started else { return }
         toggleNFX()
     }
     
