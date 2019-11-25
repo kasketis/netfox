@@ -160,12 +160,6 @@ open class NFX: NSObject
         hideNFX()
     }
 
-    @objc internal func finishPresenting()
-    {
-        guard self.started else { return }
-        self.presented = false
-    }
-
     @objc open func toggle()
     {
         guard self.started else { return }
@@ -270,7 +264,10 @@ extension NFX {
         navigationController.navigationBar.tintColor = UIColor.NFXOrangeColor()
         navigationController.navigationBar.barTintColor = UIColor.NFXStarkWhiteColor()
         navigationController.navigationBar.titleTextAttributes = [.foregroundColor: UIColor.NFXOrangeColor()]
-        navigationController.modalPresentationStyle = .fullScreen
+
+        if #available(iOS 13.0, *) {
+            navigationController.presentationController?.delegate = self
+        }
 
         presentingViewController?.present(navigationController, animated: true, completion: nil)
     }
@@ -282,6 +279,15 @@ extension NFX {
                 notNilCompletion()
             }
         })
+    }
+}
+
+extension NFX: UIAdaptivePresentationControllerDelegate {
+
+    public func presentationControllerDidDismiss(_ presentationController: UIPresentationController)
+    {
+        guard self.started else { return }
+        self.presented = false
     }
 }
 
