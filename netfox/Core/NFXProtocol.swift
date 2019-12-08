@@ -13,7 +13,7 @@ open class NFXProtocol: URLProtocol
     private static let nfxInternalKey = "com.netfox.NFXInternal"
     
     private lazy var session: URLSession = { [unowned self] in
-        return URLSession(configuration: .default, delegate: self, delegateQueue: nil)
+        return URLSession(configuration: .ephemeral, delegate: self, delegateQueue: nil)
     }()
     
     private let model = NFXHTTPModel()
@@ -46,7 +46,7 @@ open class NFXProtocol: URLProtocol
         }
         
         let absoluteString = url.absoluteString
-        guard !NFX.sharedInstance().getIgnoredURLs().contains(where: { absoluteString.hasPrefix($0) }) else {
+        guard !NFX.sharedInstance().getIgnoredURLs().contains(where: { absoluteString.hasPrefix($0) || absoluteString.contains($0) }) else {
             return false
         }
         

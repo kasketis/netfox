@@ -414,7 +414,7 @@ extension String
     }
     
     private static func swizzleProtocolSetter() {
-        let instance = URLSessionConfiguration.default
+        let instance = URLSessionConfiguration.ephemeral
         
         let aClass: AnyClass = object_getClass(instance)!
         
@@ -453,8 +453,8 @@ extension String
     private static func swizzleDefault() {
         let aClass: AnyClass = object_getClass(self)!
         
-        let origSelector = #selector(getter: URLSessionConfiguration.default)
-        let newSelector = #selector(getter: URLSessionConfiguration.default_swizzled)
+        let origSelector = #selector(getter: URLSessionConfiguration.ephemeral)
+        let newSelector = #selector(getter: URLSessionConfiguration.ephemeral_swizzled)
         
         let origMethod = class_getClassMethod(aClass, origSelector)!
         let newMethod = class_getClassMethod(aClass, newSelector)!
@@ -462,9 +462,9 @@ extension String
         method_exchangeImplementations(origMethod, newMethod)
     }
     
-    @objc private class var default_swizzled: URLSessionConfiguration {
+    @objc private class var ephemeral_swizzled: URLSessionConfiguration {
         get {
-            let config = URLSessionConfiguration.default_swizzled
+            let config = URLSessionConfiguration.ephemeral_swizzled
             
             // Let's go ahead and add in NFXProtocol, since it's safe to do so.
             config.protocolClasses?.insert(NFXProtocol.self, at: 0)
