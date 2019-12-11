@@ -192,7 +192,7 @@ fileprivate func < <T : Comparable>(lhs: T?, rhs: T?) -> Bool {
     
     @objc public func getDocumentsPath() -> String
     {
-        return NSSearchPathForDirectoriesInDomains(FileManager.SearchPathDirectory.documentDirectory, FileManager.SearchPathDomainMask.allDomainsMask, true).first!
+        return NFXPath.Documents.absoluteString
     }
     
     @objc public func saveData(_ dataString: NSString, toFile: String)

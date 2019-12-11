@@ -209,7 +209,7 @@ open class NFX: NSObject
     {
         NFXHTTPModelManager.sharedInstance.clear()
         do {
-            let documentsPath = NSSearchPathForDirectoriesInDomains(FileManager.SearchPathDirectory.documentDirectory, FileManager.SearchPathDomainMask.allDomainsMask, true).first!
+            let documentsPath = NFXPath.DocumentsPath
             let filePathsArray = try FileManager.default.subpathsOfDirectory(atPath: documentsPath)
             for filePath in filePathsArray {
                 if filePath.hasPrefix("nfx") {

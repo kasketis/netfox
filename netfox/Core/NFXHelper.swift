@@ -371,6 +371,7 @@ class NFXDebugInfo
 struct NFXPath
 {
     static let Documents = NFX.urlForUniqueTemporaryDirectory()
+    static let DocumentsPath = NFXPath.Documents.absoluteString
     
     static let SessionLog = NFXPath.Documents.appendingPathComponent("session.log");
 }
