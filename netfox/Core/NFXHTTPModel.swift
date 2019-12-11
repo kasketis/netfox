@@ -72,7 +72,7 @@ fileprivate func < <T : Comparable>(lhs: T?, rhs: T?) -> Bool {
     
     func logRequest(_ request: URLRequest)
     {
-        formattedRequestLogEntry().appendToFile(filePath: NFXPath.SessionLog)
+        formattedRequestLogEntry().appendToFile(at: NFXPath.SessionLog)
     }
     
     func saveErrorResponse()
@@ -99,7 +99,7 @@ fileprivate func < <T : Comparable>(lhs: T?, rhs: T?) -> Bool {
         self.timeInterval = Float(self.responseDate!.timeIntervalSince(self.requestDate!))
         
         saveResponseBodyData(data)
-        formattedResponseLogEntry().appendToFile(filePath: NFXPath.SessionLog)
+        formattedResponseLogEntry().appendToFile(at: NFXPath.SessionLog)
     }
     
     
