@@ -208,17 +208,8 @@ open class NFX: NSObject
     internal func clearOldData()
     {
         NFXHTTPModelManager.sharedInstance.clear()
-        do {
-            let documentsPath = NFXPath.DocumentsPath
-            let filePathsArray = try FileManager.default.subpathsOfDirectory(atPath: documentsPath)
-            for filePath in filePathsArray {
-                if filePath.hasPrefix("nfx") {
-                    try FileManager.default.removeItem(atPath: (documentsPath as NSString).appendingPathComponent(filePath))
-                }
-            }
-            
-            try FileManager.default.removeItem(at: NFXPath.SessionLog)
-        } catch {}
+        removeNFXFiles(inside: NFXPath.Documents as String)
+        removeNFXFiles(inside: NFXPath.TemporaryURL.absoluteString)
     }
     
     func getIgnoredURLs() -> [String]
@@ -242,6 +233,19 @@ open class NFX: NSObject
             self.filters = [Bool](repeating: true, count: HTTPModelShortType.allValues.count)
         }
         return self.filters
+    }
+
+    private func removeNFXFiles(inside directory: String) {
+        do {
+            let filePathsArray = try FileManager.default.subpathsOfDirectory(atPath: directory)
+            for filePath in filePathsArray {
+                if filePath.hasPrefix("nfx") {
+                    try FileManager.default.removeItem(atPath: (directory as NSString).appendingPathComponent(filePath))
+                }
+            }
+
+            try FileManager.default.removeItem(atPath: (directory as NSString).appendingPathComponent(NFXPath.SessionLogFileName))
+        } catch {}
     }
     
 }

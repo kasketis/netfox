@@ -370,10 +370,12 @@ class NFXDebugInfo
 
 struct NFXPath
 {
-    static let Documents = NFX.urlForUniqueTemporaryDirectory()
-    static let DocumentsPath = NFXPath.Documents.absoluteString
-    
-    static let SessionLog = NFXPath.Documents.appendingPathComponent("session.log");
+    static let TemporaryURL = NFX.urlForUniqueTemporaryDirectory()
+    @available(*, deprecated, message: "Please use TemporaryURL")
+    static let Documents = NSSearchPathForDirectoriesInDomains(.documentDirectory,
+                                                               .allDomainsMask, true).first! as NSString
+    static let SessionLogFileName = "session.log"
+    static var SessionLogFileURL = NFXPath.TemporaryURL.appendingPathComponent(NFXPath.SessionLogFileName)
 }
 
 

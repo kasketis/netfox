@@ -72,7 +72,7 @@ fileprivate func < <T : Comparable>(lhs: T?, rhs: T?) -> Bool {
     
     func logRequest(_ request: URLRequest)
     {
-        formattedRequestLogEntry().appendToFile(at: NFXPath.SessionLog)
+        formattedRequestLogEntry().appendToFile(at: NFXPath.SessionLogFileURL)
     }
     
     func saveErrorResponse()
@@ -99,7 +99,7 @@ fileprivate func < <T : Comparable>(lhs: T?, rhs: T?) -> Bool {
         self.timeInterval = Float(self.responseDate!.timeIntervalSince(self.requestDate!))
         
         saveResponseBodyData(data)
-        formattedResponseLogEntry().appendToFile(at: NFXPath.SessionLog)
+        formattedResponseLogEntry().appendToFile(at: NFXPath.SessionLogFileURL)
     }
     
     
@@ -192,7 +192,7 @@ fileprivate func < <T : Comparable>(lhs: T?, rhs: T?) -> Bool {
     
     @objc public func getDocumentsPath() -> String
     {
-        return NFXPath.Documents.absoluteString
+        return NFXPath.TemporaryURL.absoluteString
     }
     
     @objc public func saveData(_ dataString: NSString, toFile: String)
