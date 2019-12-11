@@ -486,7 +486,7 @@ public extension NSNotification.Name {
 
 private extension NFX {
     static func urlForUniqueTemporaryDirectory(fileManager: FileManager = .default) -> URL {
-        let directoryName = UUID().uuidString
+        let directoryName = "nfx_directory"
         let temporaryDirectory: URL
         if #available(iOS 10.0, *) {
             temporaryDirectory = fileManager.temporaryDirectory
