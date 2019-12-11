@@ -200,7 +200,7 @@ fileprivate func < <T : Comparable>(lhs: T?, rhs: T?) -> Bool {
         do {
             try dataString.write(toFile: toFile, atomically: false, encoding: String.Encoding.utf8.rawValue)
         } catch {
-            print("catch !!!")
+            fatalError("catch \(error)!!!")
         }
     }
     
