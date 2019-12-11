@@ -108,7 +108,7 @@ fileprivate func < <T : Comparable>(lhs: T?, rhs: T?) -> Bool {
         let tempBodyString = NSString.init(data: data, encoding: String.Encoding.utf8.rawValue)
         self.requestBodyLength = data.count
         if (tempBodyString != nil) {
-            saveData(tempBodyString!, toFile: getRequestBodyFilepath())
+            saveData(data, toFile: getRequestBodyFilepath())
         }
     }
     
@@ -127,7 +127,7 @@ fileprivate func < <T : Comparable>(lhs: T?, rhs: T?) -> Bool {
         
         if (bodyString != nil) {
             self.responseBodyLength = data.count
-            saveData(bodyString!, toFile: getResponseBodyFilepath())
+            saveData(data, toFile: getResponseBodyFilepath())
         }
         
     }
@@ -195,13 +195,9 @@ fileprivate func < <T : Comparable>(lhs: T?, rhs: T?) -> Bool {
         return NFXPath.TemporaryURL.absoluteString
     }
     
-    @objc public func saveData(_ dataString: NSString, toFile: String)
+    @objc public func saveData(_ data: Data, toFile: String)
     {
-        do {
-            try dataString.write(toFile: toFile, atomically: false, encoding: String.Encoding.utf8.rawValue)
-        } catch {
-            fatalError("catch \(error)!!!")
-        }
+        FileManager.default.createFile(atPath: toFile, contents: data)
     }
     
     @objc public func readRawData(_ fromFile: String) -> Data?
