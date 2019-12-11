@@ -496,7 +496,12 @@ private extension NFX {
 
         let subDirectory = temporaryDirectory.appendingPathComponent(directoryName)
 
-        try! fileManager.createDirectory(at: subDirectory, withIntermediateDirectories: false)
+        var isDirectory: ObjCBool = false
+        let exists = fileManager.fileExists(atPath: subDirectory.absoluteString, isDirectory: &isDirectory)
+
+        if !exists {
+            try? fileManager.createDirectory(at: subDirectory, withIntermediateDirectories: false)
+        }
 
         return subDirectory
     }
