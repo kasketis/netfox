@@ -209,7 +209,7 @@ open class NFX: NSObject
     {
         NFXHTTPModelManager.sharedInstance.clear()
         removeNFXFiles(inside: NFXPath.Documents as String)
-        removeNFXFiles(inside: NFXPath.TemporaryURL.absoluteString)
+        removeNFXFiles(inside: NFXPath.TemporaryURL.path)
     }
     
     func getIgnoredURLs() -> [String]

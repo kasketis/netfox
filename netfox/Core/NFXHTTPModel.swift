@@ -192,12 +192,14 @@ fileprivate func < <T : Comparable>(lhs: T?, rhs: T?) -> Bool {
     
     @objc public func getDocumentsPath() -> String
     {
-        return NFXPath.TemporaryURL.absoluteString
+        return NFXPath.TemporaryURL.path
     }
     
     @objc public func saveData(_ data: Data, toFile: String)
     {
-        FileManager.default.createFile(atPath: toFile, contents: data)
+        if !FileManager.default.createFile(atPath: toFile, contents: data) {
+            print("NFX cannot create file: \(toFile)")
+        }
     }
     
     @objc public func readRawData(_ fromFile: String) -> Data?
