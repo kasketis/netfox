@@ -27,7 +27,7 @@ class TextViewController: UIViewController {
         
         guard let url = URL(string: "https://api.chucknorris.io/jokes/random") else { return }
         var request = URLRequest(url: url)
-        request.httpBody = "TEST".data(using: .utf8)
+//        request.httpBody = "TEST".data(using: .utf8)
         dataTask = session.dataTask(with: request) { (data, response, error) in
             if let error = error {
                 self.handleCompletion(error: error.localizedDescription, data: data)
