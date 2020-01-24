@@ -18,7 +18,7 @@ class ImageViewController: UIViewController {
         session = URLSession(configuration: URLSessionConfiguration.default)
         super.init(coder: aDecoder)
     }
-    
+
     @IBAction func tappedLoadImage(_ sender: Any) {
         dataTask?.cancel()
         
