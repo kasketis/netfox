@@ -153,7 +153,7 @@ open class NFX: NSObject
         guard self.started else { return }
         showNFX()
     }
-    
+
     @objc open func hide()
     {
         guard self.started else { return }
@@ -184,7 +184,6 @@ open class NFX: NSObject
         
         self.showNFXFollowingPlatform()
         self.presented = true
-
     }
     
     fileprivate func hideNFX()
@@ -279,6 +278,18 @@ extension NFX {
                 notNilCompletion()
             }
         })
+    }
+
+    public func getNFXViewController() -> UIViewController {
+
+        let navigationController = UINavigationController(rootViewController: NFXListController_iOS())
+//            navigationController.navigationBar.isTranslucent = false
+
+        if #available(iOS 13.0, *) {
+            navigationController.presentationController?.delegate = self
+        }
+
+        return navigationController
     }
 }
 

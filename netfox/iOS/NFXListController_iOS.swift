@@ -110,7 +110,11 @@ class NFXListController_iOS: NFXListController, UITableViewDelegate, UITableView
 
     @objc func closeButtonPressed()
     {
-        NFX.sharedInstance().hide()
+        if self.isBeingPresented == true {
+            NFX.sharedInstance().hide()
+        } else {
+            self.dismiss(animated: true, completion: nil)
+        }
     }
     
     // MARK: UISearchResultsUpdating
