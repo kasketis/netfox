@@ -1,11 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14113" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="QMG-Zi-veq">
-    <device id="retina4_7" orientation="portrait">
-        <adaptation id="fullscreen"/>
-    </device>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="15705" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="QMG-Zi-veq">
+    <device id="retina4_7" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14088"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="15706"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -19,7 +17,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="uaC-es-XyM">
-                                <rect key="frame" x="20" y="40" width="335" height="528"/>
+                                <rect key="frame" x="20" y="20" width="335" height="548"/>
                             </imageView>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="51u-G5-gib">
                                 <rect key="frame" x="0.0" y="568" width="375" height="50"/>
@@ -62,7 +60,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <webView contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="fsS-BG-Gke">
-                                <rect key="frame" x="20" y="40" width="335" height="558"/>
+                                <rect key="frame" x="20" y="20" width="335" height="578"/>
                                 <color key="backgroundColor" red="0.36078431370000003" green="0.38823529410000002" blue="0.4039215686" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                             </webView>
                         </subviews>
@@ -82,7 +80,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="kJ1-3c-8dD" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-87" y="1129"/>
+            <point key="canvasLocation" x="-87" y="1127"/>
         </scene>
         <!--Text-->
         <scene sceneID="JKw-NC-miP">
@@ -103,7 +101,7 @@
                                 </connections>
                             </button>
                             <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" editable="NO" textAlignment="natural" selectable="NO" translatesAutoresizingMaskIntoConstraints="NO" id="0rC-Qf-8Wt">
-                                <rect key="frame" x="20" y="22" width="335" height="546"/>
+                                <rect key="frame" x="20" y="2" width="335" height="566"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
@@ -144,6 +142,7 @@
                         <segue destination="BYZ-38-t0r" kind="relationship" relationship="viewControllers" id="qEX-re-IMg"/>
                         <segue destination="dkC-MX-0PU" kind="relationship" relationship="viewControllers" id="umB-V9-Ajk"/>
                         <segue destination="a1y-8z-azs" kind="relationship" relationship="viewControllers" id="WSb-qP-xnF"/>
+                        <segue destination="HLs-gE-GSC" kind="relationship" relationship="viewControllers" id="Hcc-AS-hWn"/>
                     </connections>
                 </tabBarController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="OXu-2z-7BU" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -159,7 +158,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <wkWebView contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="zbz-vT-b61">
-                                <rect key="frame" x="20" y="40" width="335" height="558"/>
+                                <rect key="frame" x="20" y="20" width="335" height="578"/>
                                 <color key="backgroundColor" red="0.36078431370000003" green="0.38823529410000002" blue="0.4039215686" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <wkWebViewConfiguration key="configuration">
                                     <audiovisualMediaTypes key="mediaTypesRequiringUserActionForPlayback" none="YES"/>
@@ -184,6 +183,39 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="cmH-Ou-xIu" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="-87" y="1800"/>
+        </scene>
+        <!--Modal-->
+        <scene sceneID="oTC-jR-Gts">
+            <objects>
+                <viewController id="HLs-gE-GSC" customClass="ModalViewController" customModule="netfox_ios_demo" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="t0n-5a-f7f">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="4Jo-Xw-2a2">
+                                <rect key="frame" x="0.0" y="568" width="375" height="50"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="50" id="ZtL-fw-iUx"/>
+                                </constraints>
+                                <state key="normal" title="Modal"/>
+                                <connections>
+                                    <action selector="tappedLoad:" destination="HLs-gE-GSC" eventType="touchUpInside" id="W3M-F0-c0d"/>
+                                </connections>
+                            </button>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="4Jo-Xw-2a2" firstAttribute="trailing" secondItem="im2-bB-hm9" secondAttribute="trailing" id="dwq-5Y-gxc"/>
+                            <constraint firstItem="4Jo-Xw-2a2" firstAttribute="leading" secondItem="im2-bB-hm9" secondAttribute="leading" id="kcB-dl-Wlx"/>
+                            <constraint firstItem="4Jo-Xw-2a2" firstAttribute="bottom" secondItem="im2-bB-hm9" secondAttribute="bottom" id="ovm-s1-KwL"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="im2-bB-hm9"/>
+                    </view>
+                    <tabBarItem key="tabBarItem" title="Modal" id="OrV-iQ-EtK"/>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="ies-19-mjd" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-87" y="2496"/>
         </scene>
     </scenes>
 </document>
