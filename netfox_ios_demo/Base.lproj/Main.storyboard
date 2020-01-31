@@ -144,6 +144,7 @@
                         <segue destination="BYZ-38-t0r" kind="relationship" relationship="viewControllers" id="qEX-re-IMg"/>
                         <segue destination="dkC-MX-0PU" kind="relationship" relationship="viewControllers" id="umB-V9-Ajk"/>
                         <segue destination="a1y-8z-azs" kind="relationship" relationship="viewControllers" id="WSb-qP-xnF"/>
+                        <segue destination="dAp-l3-JiE" kind="relationship" relationship="viewControllers" id="Xgx-QJ-e3t"/>
                     </connections>
                 </tabBarController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="OXu-2z-7BU" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -184,6 +185,39 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="cmH-Ou-xIu" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="-87" y="1800"/>
+        </scene>
+        <!--Modal-->
+        <scene sceneID="60K-VY-yIb">
+            <objects>
+                <viewController id="dAp-l3-JiE" customClass="ModalViewController" customModule="netfox_ios_demo" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="qSM-G3-JVM">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="SfB-rD-33S">
+                                <rect key="frame" x="0.0" y="568" width="375" height="50"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="50" id="MTK-cG-MgS"/>
+                                </constraints>
+                                <state key="normal" title="Present ModalViewController"/>
+                                <connections>
+                                    <action selector="tappedButton:" destination="dAp-l3-JiE" eventType="touchUpInside" id="jf9-ej-9jw"/>
+                                </connections>
+                            </button>
+                        </subviews>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                        <constraints>
+                            <constraint firstItem="SfB-rD-33S" firstAttribute="leading" secondItem="t9V-mZ-Lg0" secondAttribute="leading" id="LCc-9n-PnU"/>
+                            <constraint firstItem="t9V-mZ-Lg0" firstAttribute="trailing" secondItem="SfB-rD-33S" secondAttribute="trailing" id="bak-1i-W97"/>
+                            <constraint firstItem="t9V-mZ-Lg0" firstAttribute="bottom" secondItem="SfB-rD-33S" secondAttribute="bottom" id="trl-lj-XlN"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="t9V-mZ-Lg0"/>
+                    </view>
+                    <tabBarItem key="tabBarItem" title="Modal" id="nST-Wr-PeE"/>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="FCr-A7-ZEH" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-87" y="2490"/>
         </scene>
     </scenes>
 </document>

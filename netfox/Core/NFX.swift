@@ -160,6 +160,21 @@ open class NFX: NSObject
         hideNFX()
     }
 
+    @objc open func hideAndDeactivateSearch()
+    {
+        guard self.started else { return }
+        hideNFXandDeactivateSearch()
+    }
+
+    fileprivate func hideNFXandDeactivateSearch()
+    {
+        NotificationCenter.default.post(name: Notification.Name.NFXDeactivateSearch, object: nil)
+        self.hideNFXFollowingPlatform { () -> Void in
+            self.presented = false
+            self.lastVisitDate = Date()
+        }
+    }
+
     @objc open func toggle()
     {
         guard self.started else { return }
@@ -193,11 +208,7 @@ open class NFX: NSObject
             return
         }
         
-        NotificationCenter.default.post(name: Notification.Name.NFXDeactivateSearch, object: nil)
-        self.hideNFXFollowingPlatform { () -> Void in
-            self.presented = false
-            self.lastVisitDate = Date()
-        }
+        hideNFXandDeactivateSearch()
     }
 
     fileprivate func toggleNFX()
@@ -257,8 +268,8 @@ extension NFX {
         return rootViewController
     }
 
-    fileprivate func showNFXFollowingPlatform()
-    {
+    fileprivate func getNFXListViewController() -> UIViewController {
+
         let navigationController = UINavigationController(rootViewController: NFXListController_iOS())
         navigationController.navigationBar.isTranslucent = false
         navigationController.navigationBar.tintColor = UIColor.NFXOrangeColor()
@@ -269,9 +280,19 @@ extension NFX {
             navigationController.presentationController?.delegate = self
         }
 
-        presentingViewController?.present(navigationController, animated: true, completion: nil)
+        return navigationController
     }
-    
+
+    fileprivate func showNFXFollowingPlatform()
+    {
+        presentingViewController?.present(self.getNFXListViewController(), animated: true, completion: nil)
+    }
+
+    public func getMainViewController() -> UIViewController {
+
+        return self.getNFXListViewController()
+    }
+
     fileprivate func hideNFXFollowingPlatform(_ completion: (() -> Void)?)
     {
         presentingViewController?.dismiss(animated: true, completion: { () -> Void in
