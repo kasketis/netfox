@@ -1,0 +1,11 @@
+{
+  "": {
+    "swift-dependencies": "/Users/ehab/Documents/netfox/.build/x86_64-apple-macosx/debug/netfox.build/master.swiftdeps"
+  },
+  "/Users/ehab/Documents/netfox/Sources/netfox/netfox.swift": {
+    "dependencies": "/Users/ehab/Documents/netfox/.build/x86_64-apple-macosx/debug/netfox.build/netfox.d",
+    "object": "/Users/ehab/Documents/netfox/.build/x86_64-apple-macosx/debug/netfox.build/netfox.swift.o",
+    "swiftmodule": "/Users/ehab/Documents/netfox/.build/x86_64-apple-macosx/debug/netfox.build/netfox~partial.swiftmodule",
+    "swift-dependencies": "/Users/ehab/Documents/netfox/.build/x86_64-apple-macosx/debug/netfox.build/netfox.swiftdeps"
+  }
+}

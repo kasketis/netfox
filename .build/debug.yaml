@@ -1,0 +1,65 @@
+client:
+  name: basic
+tools: {}
+targets:
+  "main": ["/Users/ehab/Documents/netfox/.build/x86_64-apple-macosx/debug/netfox.swiftmodule","<netfox-debug.module>"]
+  "test": ["/Users/ehab/Documents/netfox/.build/x86_64-apple-macosx/debug/netfox.swiftmodule","/Users/ehab/Documents/netfox/.build/x86_64-apple-macosx/debug/netfoxPackageTests.xctest/Contents/MacOS/netfoxPackageTests","/Users/ehab/Documents/netfox/.build/x86_64-apple-macosx/debug/netfoxTests.swiftmodule","<netfox-debug.module>","<netfoxPackageTests-debug.test>","<netfoxTests-debug.module>"]
+  "netfox-debug.module": ["/Users/ehab/Documents/netfox/.build/x86_64-apple-macosx/debug/netfox.swiftmodule","<netfox-debug.module>"]
+  "netfoxPackageTests-debug.test": ["/Users/ehab/Documents/netfox/.build/x86_64-apple-macosx/debug/netfoxPackageTests.xctest/Contents/MacOS/netfoxPackageTests","<netfoxPackageTests-debug.test>"]
+  "netfoxTests-debug.module": ["/Users/ehab/Documents/netfox/.build/x86_64-apple-macosx/debug/netfoxTests.swiftmodule","<netfoxTests-debug.module>"]
+default: "main"
+commands: 
+  "<C.netfox-debug.module>":
+    tool: phony
+    inputs: ["/Users/ehab/Documents/netfox/.build/x86_64-apple-macosx/debug/netfox.swiftmodule"]
+    outputs: ["<netfox-debug.module>"]
+
+  "<C.netfoxPackageTests-debug.test>":
+    tool: phony
+    inputs: ["/Users/ehab/Documents/netfox/.build/x86_64-apple-macosx/debug/netfoxPackageTests.xctest/Contents/MacOS/netfoxPackageTests"]
+    outputs: ["<netfoxPackageTests-debug.test>"]
+
+  "<C.netfoxTests-debug.module>":
+    tool: phony
+    inputs: ["/Users/ehab/Documents/netfox/.build/x86_64-apple-macosx/debug/netfoxTests.swiftmodule"]
+    outputs: ["<netfoxTests-debug.module>"]
+
+  "C.netfox-debug.module":
+    tool: swift-compiler
+    executable: "/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/swiftc"
+    module-name: "netfox"
+    module-output-path: "/Users/ehab/Documents/netfox/.build/x86_64-apple-macosx/debug/netfox.swiftmodule"
+    inputs: ["/Users/ehab/Documents/netfox/Sources/netfox/netfox.swift"]
+    outputs: ["/Users/ehab/Documents/netfox/.build/x86_64-apple-macosx/debug/netfox.build/netfox.swift.o","/Users/ehab/Documents/netfox/.build/x86_64-apple-macosx/debug/netfox.swiftmodule"]
+    import-paths: ["/Users/ehab/Documents/netfox/.build/x86_64-apple-macosx/debug"]
+    temps-path: "/Users/ehab/Documents/netfox/.build/x86_64-apple-macosx/debug/netfox.build"
+    objects: ["/Users/ehab/Documents/netfox/.build/x86_64-apple-macosx/debug/netfox.build/netfox.swift.o"]
+    other-args: ["-target","x86_64-apple-macosx10.10","-swift-version","5","-enable-batch-mode","-index-store-path","/Users/ehab/Documents/netfox/.build/x86_64-apple-macosx/debug/index/store","-sdk","/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.15.sdk","-F","/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/Library/Frameworks","-Onone","-g","-enable-testing","-j8","-DSWIFT_PACKAGE","-DDEBUG","-module-cache-path","/Users/ehab/Documents/netfox/.build/x86_64-apple-macosx/debug/ModuleCache","-parseable-output","-Xfrontend","-color-diagnostics"]
+    sources: ["/Users/ehab/Documents/netfox/Sources/netfox/netfox.swift"]
+    is-library: true
+    enable-whole-module-optimization: false
+    num-threads: "8"
+
+  "C.netfoxPackageTests-debug.test":
+    tool: shell
+    description: "Linking ./.build/x86_64-apple-macosx/debug/netfoxPackageTests.xctest/Contents/MacOS/netfoxPackageTests"
+    inputs: ["/Users/ehab/Documents/netfox/.build/x86_64-apple-macosx/debug/netfox.build/netfox.swift.o","/Users/ehab/Documents/netfox/.build/x86_64-apple-macosx/debug/netfoxTests.build/XCTestManifests.swift.o","/Users/ehab/Documents/netfox/.build/x86_64-apple-macosx/debug/netfoxTests.build/netfoxTests.swift.o"]
+    outputs: ["/Users/ehab/Documents/netfox/.build/x86_64-apple-macosx/debug/netfoxPackageTests.xctest/Contents/MacOS/netfoxPackageTests"]
+    args: ["/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/swiftc","-sdk","/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.15.sdk","-F","/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/Library/Frameworks","-g","-L","/Users/ehab/Documents/netfox/.build/x86_64-apple-macosx/debug","-o","/Users/ehab/Documents/netfox/.build/x86_64-apple-macosx/debug/netfoxPackageTests.xctest/Contents/MacOS/netfoxPackageTests","-module-name","netfoxPackageTests","-Xlinker","-bundle","@/Users/ehab/Documents/netfox/.build/x86_64-apple-macosx/debug/netfoxPackageTests.product/Objects.LinkFileList","-Xlinker","-rpath","-Xlinker","/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/swift/macosx","-target","x86_64-apple-macosx10.10","-L","/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib"]
+
+  "C.netfoxTests-debug.module":
+    tool: swift-compiler
+    executable: "/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/swiftc"
+    module-name: "netfoxTests"
+    module-output-path: "/Users/ehab/Documents/netfox/.build/x86_64-apple-macosx/debug/netfoxTests.swiftmodule"
+    inputs: ["/Users/ehab/Documents/netfox/.build/x86_64-apple-macosx/debug/netfox.swiftmodule","/Users/ehab/Documents/netfox/Tests/netfoxTests/XCTestManifests.swift","/Users/ehab/Documents/netfox/Tests/netfoxTests/netfoxTests.swift"]
+    outputs: ["/Users/ehab/Documents/netfox/.build/x86_64-apple-macosx/debug/netfoxTests.build/XCTestManifests.swift.o","/Users/ehab/Documents/netfox/.build/x86_64-apple-macosx/debug/netfoxTests.build/netfoxTests.swift.o","/Users/ehab/Documents/netfox/.build/x86_64-apple-macosx/debug/netfoxTests.swiftmodule"]
+    import-paths: ["/Users/ehab/Documents/netfox/.build/x86_64-apple-macosx/debug"]
+    temps-path: "/Users/ehab/Documents/netfox/.build/x86_64-apple-macosx/debug/netfoxTests.build"
+    objects: ["/Users/ehab/Documents/netfox/.build/x86_64-apple-macosx/debug/netfoxTests.build/XCTestManifests.swift.o","/Users/ehab/Documents/netfox/.build/x86_64-apple-macosx/debug/netfoxTests.build/netfoxTests.swift.o"]
+    other-args: ["-target","x86_64-apple-macosx10.10","-swift-version","5","-enable-batch-mode","-index-store-path","/Users/ehab/Documents/netfox/.build/x86_64-apple-macosx/debug/index/store","-sdk","/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.15.sdk","-F","/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/Library/Frameworks","-Onone","-g","-enable-testing","-j8","-DSWIFT_PACKAGE","-DDEBUG","-module-cache-path","/Users/ehab/Documents/netfox/.build/x86_64-apple-macosx/debug/ModuleCache","-parseable-output","-Xfrontend","-color-diagnostics"]
+    sources: ["/Users/ehab/Documents/netfox/Tests/netfoxTests/XCTestManifests.swift","/Users/ehab/Documents/netfox/Tests/netfoxTests/netfoxTests.swift"]
+    is-library: true
+    enable-whole-module-optimization: false
+    num-threads: "8"
+

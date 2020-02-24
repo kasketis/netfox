@@ -1,0 +1,17 @@
+{
+  "": {
+    "swift-dependencies": "/Users/ehab/Documents/netfox/.build/x86_64-apple-macosx/debug/netfoxTests.build/master.swiftdeps"
+  },
+  "/Users/ehab/Documents/netfox/Tests/netfoxTests/XCTestManifests.swift": {
+    "dependencies": "/Users/ehab/Documents/netfox/.build/x86_64-apple-macosx/debug/netfoxTests.build/XCTestManifests.d",
+    "object": "/Users/ehab/Documents/netfox/.build/x86_64-apple-macosx/debug/netfoxTests.build/XCTestManifests.swift.o",
+    "swiftmodule": "/Users/ehab/Documents/netfox/.build/x86_64-apple-macosx/debug/netfoxTests.build/XCTestManifests~partial.swiftmodule",
+    "swift-dependencies": "/Users/ehab/Documents/netfox/.build/x86_64-apple-macosx/debug/netfoxTests.build/XCTestManifests.swiftdeps"
+  },
+  "/Users/ehab/Documents/netfox/Tests/netfoxTests/netfoxTests.swift": {
+    "dependencies": "/Users/ehab/Documents/netfox/.build/x86_64-apple-macosx/debug/netfoxTests.build/netfoxTests.d",
+    "object": "/Users/ehab/Documents/netfox/.build/x86_64-apple-macosx/debug/netfoxTests.build/netfoxTests.swift.o",
+    "swiftmodule": "/Users/ehab/Documents/netfox/.build/x86_64-apple-macosx/debug/netfoxTests.build/netfoxTests~partial.swiftmodule",
+    "swift-dependencies": "/Users/ehab/Documents/netfox/.build/x86_64-apple-macosx/debug/netfoxTests.build/netfoxTests.swiftdeps"
+  }
+}

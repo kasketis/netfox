@@ -1,0 +1,21 @@
+### Swift dependencies file v0 ###
+provides-top-level:
+- "netfox"
+provides-nominal:
+- "6netfoxAAV"
+provides-member:
+- ["6netfoxAAV", ""]
+provides-dynamic-lookup:
+depends-top-level:
+- "StringLiteralType"
+- "netfox"
+depends-member:
+- ["6netfoxAAV", "init"]
+- ["6netfoxAAV", "text"]
+depends-nominal:
+- "6netfoxAAV"
+depends-dynamic-lookup:
+depends-external:
+- "/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.15.sdk/usr/lib/swift/Swift.swiftmodule/x86_64.swiftinterface"
+- "/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.15.sdk/usr/lib/swift/SwiftOnoneSupport.swiftmodule/x86_64.swiftinterface"
+interface-hash: "98ef27a4686faf65c5678dad353847e6"

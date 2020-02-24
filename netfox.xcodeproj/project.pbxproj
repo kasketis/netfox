@@ -1,846 +1,627 @@
 // !$*UTF8*$!
 {
-	archiveVersion = 1;
-	classes = {
-	};
-	objectVersion = 46;
-	objects = {
-
-/* Begin PBXBuildFile section */
-		026274D9214C6BC400AE1BDF /* WKWebViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 026274D8214C6BC400AE1BDF /* WKWebViewController.swift */; };
-		3708AD5A22D4A9DD0050DB7D /* NFXURLDetailsControllerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3708AD5922D4A9DD0050DB7D /* NFXURLDetailsControllerViewController.swift */; };
-		8201A39D204E3E3F00AB2C3D /* NFXAuthenticationChallengeSender.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8201A39C204E3E3F00AB2C3D /* NFXAuthenticationChallengeSender.swift */; };
-		8201A39E204E451900AB2C3D /* NFXAuthenticationChallengeSender.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8201A39C204E3E3F00AB2C3D /* NFXAuthenticationChallengeSender.swift */; };
-		8201A39F204E452200AB2C3D /* NFXLoader.m in Sources */ = {isa = PBXBuildFile; fileRef = 826C4E9D1F979AB3008B440C /* NFXLoader.m */; };
-		8229AD651F8FB34300A9D613 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8229AD641F8FB34300A9D613 /* AppDelegate.swift */; };
-		8229AD671F8FB34300A9D613 /* ImageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8229AD661F8FB34300A9D613 /* ImageViewController.swift */; };
-		8229AD6A1F8FB34300A9D613 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 8229AD681F8FB34300A9D613 /* Main.storyboard */; };
-		8229AD6C1F8FB34300A9D613 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 8229AD6B1F8FB34300A9D613 /* Assets.xcassets */; };
-		8229AD6F1F8FB34300A9D613 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 8229AD6D1F8FB34300A9D613 /* LaunchScreen.storyboard */; };
-		8229AD771F8FB4B500A9D613 /* netfox_ios.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B3BC020F1C09CDA000C17F3A /* netfox_ios.framework */; };
-		826C4E9E1F979AB3008B440C /* NFXLoader.h in Headers */ = {isa = PBXBuildFile; fileRef = 826C4E9C1F979AB3008B440C /* NFXLoader.h */; };
-		826C4E9F1F979AB3008B440C /* NFXLoader.m in Sources */ = {isa = PBXBuildFile; fileRef = 826C4E9D1F979AB3008B440C /* NFXLoader.m */; };
-		82F6E1031F8FD81C002B31BD /* TextViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 82F6E1021F8FD81C002B31BD /* TextViewController.swift */; };
-		82F6E1051F8FF55D002B31BD /* WebViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 82F6E1041F8FF55D002B31BD /* WebViewController.swift */; };
-		B3F8BA821C833ABC00F9FBEA /* NFX.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3F8BA711C833ABC00F9FBEA /* NFX.swift */; };
-		B3F8BA831C833ABC00F9FBEA /* NFX.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3F8BA711C833ABC00F9FBEA /* NFX.swift */; };
-		B3F8BA841C833ABC00F9FBEA /* NFXAssets.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3F8BA721C833ABC00F9FBEA /* NFXAssets.swift */; };
-		B3F8BA851C833ABC00F9FBEA /* NFXAssets.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3F8BA721C833ABC00F9FBEA /* NFXAssets.swift */; };
-		B3F8BA861C833ABC00F9FBEA /* NFXConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3F8BA731C833ABC00F9FBEA /* NFXConstants.swift */; };
-		B3F8BA871C833ABC00F9FBEA /* NFXConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3F8BA731C833ABC00F9FBEA /* NFXConstants.swift */; };
-		B3F8BA881C833ABC00F9FBEA /* NFXDetailsController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3F8BA741C833ABC00F9FBEA /* NFXDetailsController.swift */; };
-		B3F8BA891C833ABC00F9FBEA /* NFXDetailsController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3F8BA741C833ABC00F9FBEA /* NFXDetailsController.swift */; };
-		B3F8BA8A1C833ABC00F9FBEA /* NFXGenericBodyDetailsController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3F8BA751C833ABC00F9FBEA /* NFXGenericBodyDetailsController.swift */; };
-		B3F8BA8B1C833ABC00F9FBEA /* NFXGenericBodyDetailsController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3F8BA751C833ABC00F9FBEA /* NFXGenericBodyDetailsController.swift */; };
-		B3F8BA8C1C833ABC00F9FBEA /* NFXGenericController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3F8BA761C833ABC00F9FBEA /* NFXGenericController.swift */; };
-		B3F8BA8D1C833ABC00F9FBEA /* NFXGenericController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3F8BA761C833ABC00F9FBEA /* NFXGenericController.swift */; };
-		B3F8BA8E1C833ABC00F9FBEA /* NFXHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3F8BA771C833ABC00F9FBEA /* NFXHelper.swift */; };
-		B3F8BA8F1C833ABC00F9FBEA /* NFXHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3F8BA771C833ABC00F9FBEA /* NFXHelper.swift */; };
-		B3F8BA901C833ABC00F9FBEA /* NFXHTTPModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3F8BA781C833ABC00F9FBEA /* NFXHTTPModel.swift */; };
-		B3F8BA911C833ABC00F9FBEA /* NFXHTTPModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3F8BA781C833ABC00F9FBEA /* NFXHTTPModel.swift */; };
-		B3F8BA921C833ABC00F9FBEA /* NFXHTTPModelManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3F8BA791C833ABC00F9FBEA /* NFXHTTPModelManager.swift */; };
-		B3F8BA931C833ABC00F9FBEA /* NFXHTTPModelManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3F8BA791C833ABC00F9FBEA /* NFXHTTPModelManager.swift */; };
-		B3F8BA941C833ABC00F9FBEA /* NFXImageBodyDetailsController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3F8BA7A1C833ABC00F9FBEA /* NFXImageBodyDetailsController.swift */; };
-		B3F8BA951C833ABC00F9FBEA /* NFXImageBodyDetailsController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3F8BA7A1C833ABC00F9FBEA /* NFXImageBodyDetailsController.swift */; };
-		B3F8BA961C833ABC00F9FBEA /* NFXInfoController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3F8BA7B1C833ABC00F9FBEA /* NFXInfoController.swift */; };
-		B3F8BA971C833ABC00F9FBEA /* NFXInfoController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3F8BA7B1C833ABC00F9FBEA /* NFXInfoController.swift */; };
-		B3F8BA981C833ABC00F9FBEA /* NFXListController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3F8BA7C1C833ABC00F9FBEA /* NFXListController.swift */; };
-		B3F8BA991C833ABC00F9FBEA /* NFXListController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3F8BA7C1C833ABC00F9FBEA /* NFXListController.swift */; };
-		B3F8BA9A1C833ABC00F9FBEA /* NFXProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3F8BA7D1C833ABC00F9FBEA /* NFXProtocol.swift */; };
-		B3F8BA9B1C833ABC00F9FBEA /* NFXProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3F8BA7D1C833ABC00F9FBEA /* NFXProtocol.swift */; };
-		B3F8BA9C1C833ABC00F9FBEA /* NFXRawBodyDetailsController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3F8BA7E1C833ABC00F9FBEA /* NFXRawBodyDetailsController.swift */; };
-		B3F8BA9D1C833ABC00F9FBEA /* NFXRawBodyDetailsController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3F8BA7E1C833ABC00F9FBEA /* NFXRawBodyDetailsController.swift */; };
-		B3F8BA9E1C833ABC00F9FBEA /* NFXSettingsController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3F8BA7F1C833ABC00F9FBEA /* NFXSettingsController.swift */; };
-		B3F8BA9F1C833ABC00F9FBEA /* NFXSettingsController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3F8BA7F1C833ABC00F9FBEA /* NFXSettingsController.swift */; };
-		B3F8BAA01C833ABC00F9FBEA /* NFXStatisticsController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3F8BA801C833ABC00F9FBEA /* NFXStatisticsController.swift */; };
-		B3F8BAA11C833ABC00F9FBEA /* NFXStatisticsController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3F8BA801C833ABC00F9FBEA /* NFXStatisticsController.swift */; };
-		B3F8BAA21C833ABC00F9FBEA /* NFXWindowController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3F8BA811C833ABC00F9FBEA /* NFXWindowController.swift */; };
-		B3F8BAA31C833ABC00F9FBEA /* NFXWindowController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3F8BA811C833ABC00F9FBEA /* NFXWindowController.swift */; };
-		B3F8BAAC1C833AC700F9FBEA /* NFXDetailsController_iOS.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3F8BAA51C833AC700F9FBEA /* NFXDetailsController_iOS.swift */; };
-		B3F8BAAD1C833AC700F9FBEA /* NFXHelper_iOS.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3F8BAA61C833AC700F9FBEA /* NFXHelper_iOS.swift */; };
-		B3F8BAAE1C833AC700F9FBEA /* NFXInfoController_iOS.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3F8BAA71C833AC700F9FBEA /* NFXInfoController_iOS.swift */; };
-		B3F8BAAF1C833AC700F9FBEA /* NFXListCell_iOS.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3F8BAA81C833AC700F9FBEA /* NFXListCell_iOS.swift */; };
-		B3F8BAB01C833AC700F9FBEA /* NFXListController_iOS.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3F8BAA91C833AC700F9FBEA /* NFXListController_iOS.swift */; };
-		B3F8BAB11C833AC700F9FBEA /* NFXSettingsController_iOS.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3F8BAAA1C833AC700F9FBEA /* NFXSettingsController_iOS.swift */; };
-		B3F8BAB21C833AC700F9FBEA /* NFXStatisticsController_iOS.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3F8BAAB1C833AC700F9FBEA /* NFXStatisticsController_iOS.swift */; };
-		B3F8D67B1C833B1700F9FBEA /* NetfoxWindow.xib in Resources */ = {isa = PBXBuildFile; fileRef = B3F8D6711C833B1700F9FBEA /* NetfoxWindow.xib */; };
-		B3F8D67C1C833B1700F9FBEA /* NFXDetailsController_OSX.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3F8D6721C833B1700F9FBEA /* NFXDetailsController_OSX.swift */; };
-		B3F8D67D1C833B1700F9FBEA /* NFXInfoController_OSX.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3F8D6731C833B1700F9FBEA /* NFXInfoController_OSX.swift */; };
-		B3F8D67E1C833B1700F9FBEA /* NFXListCell_OSX.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3F8D6741C833B1700F9FBEA /* NFXListCell_OSX.swift */; };
-		B3F8D67F1C833B1700F9FBEA /* NFXListCell_OSX.xib in Resources */ = {isa = PBXBuildFile; fileRef = B3F8D6751C833B1700F9FBEA /* NFXListCell_OSX.xib */; };
-		B3F8D6801C833B1700F9FBEA /* NFXListController_OSX.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3F8D6761C833B1700F9FBEA /* NFXListController_OSX.swift */; };
-		B3F8D6811C833B1700F9FBEA /* NFXResponseTypeCell_OSX.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3F8D6771C833B1700F9FBEA /* NFXResponseTypeCell_OSX.swift */; };
-		B3F8D6821C833B1700F9FBEA /* NFXResponseTypeCell_OSX.xib in Resources */ = {isa = PBXBuildFile; fileRef = B3F8D6781C833B1700F9FBEA /* NFXResponseTypeCell_OSX.xib */; };
-		B3F8D6831C833B1700F9FBEA /* NFXSettingsController_OSX.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3F8D6791C833B1700F9FBEA /* NFXSettingsController_OSX.swift */; };
-		B3F8D6841C833B1700F9FBEA /* NFXStatisticsController_OSX.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3F8D67A1C833B1700F9FBEA /* NFXStatisticsController_OSX.swift */; };
-/* End PBXBuildFile section */
-
-/* Begin PBXContainerItemProxy section */
-		8229AD741F8FB37000A9D613 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = B3BC02061C09CDA000C17F3A /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = B3BC020E1C09CDA000C17F3A;
-			remoteInfo = netfox_ios;
-		};
-/* End PBXContainerItemProxy section */
-
-/* Begin PBXFileReference section */
-		026274D8214C6BC400AE1BDF /* WKWebViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WKWebViewController.swift; sourceTree = "<group>"; };
-		3708AD5922D4A9DD0050DB7D /* NFXURLDetailsControllerViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NFXURLDetailsControllerViewController.swift; sourceTree = "<group>"; };
-		8201A39C204E3E3F00AB2C3D /* NFXAuthenticationChallengeSender.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NFXAuthenticationChallengeSender.swift; sourceTree = "<group>"; };
-		8229AD621F8FB34300A9D613 /* netfox_ios_demo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = netfox_ios_demo.app; sourceTree = BUILT_PRODUCTS_DIR; };
-		8229AD641F8FB34300A9D613 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		8229AD661F8FB34300A9D613 /* ImageViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageViewController.swift; sourceTree = "<group>"; };
-		8229AD691F8FB34300A9D613 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
-		8229AD6B1F8FB34300A9D613 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
-		8229AD6E1F8FB34300A9D613 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
-		8229AD701F8FB34300A9D613 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		826C4E9C1F979AB3008B440C /* NFXLoader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NFXLoader.h; sourceTree = "<group>"; };
-		826C4E9D1F979AB3008B440C /* NFXLoader.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NFXLoader.m; sourceTree = "<group>"; };
-		82F6E1021F8FD81C002B31BD /* TextViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextViewController.swift; sourceTree = "<group>"; };
-		82F6E1041F8FF55D002B31BD /* WebViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WebViewController.swift; sourceTree = "<group>"; };
-		B3BC020F1C09CDA000C17F3A /* netfox_ios.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = netfox_ios.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		B3F8BA711C833ABC00F9FBEA /* NFX.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NFX.swift; sourceTree = "<group>"; };
-		B3F8BA721C833ABC00F9FBEA /* NFXAssets.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NFXAssets.swift; sourceTree = "<group>"; };
-		B3F8BA731C833ABC00F9FBEA /* NFXConstants.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NFXConstants.swift; sourceTree = "<group>"; };
-		B3F8BA741C833ABC00F9FBEA /* NFXDetailsController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NFXDetailsController.swift; sourceTree = "<group>"; };
-		B3F8BA751C833ABC00F9FBEA /* NFXGenericBodyDetailsController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NFXGenericBodyDetailsController.swift; sourceTree = "<group>"; };
-		B3F8BA761C833ABC00F9FBEA /* NFXGenericController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NFXGenericController.swift; sourceTree = "<group>"; };
-		B3F8BA771C833ABC00F9FBEA /* NFXHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NFXHelper.swift; sourceTree = "<group>"; };
-		B3F8BA781C833ABC00F9FBEA /* NFXHTTPModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NFXHTTPModel.swift; sourceTree = "<group>"; };
-		B3F8BA791C833ABC00F9FBEA /* NFXHTTPModelManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NFXHTTPModelManager.swift; sourceTree = "<group>"; };
-		B3F8BA7A1C833ABC00F9FBEA /* NFXImageBodyDetailsController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NFXImageBodyDetailsController.swift; sourceTree = "<group>"; };
-		B3F8BA7B1C833ABC00F9FBEA /* NFXInfoController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NFXInfoController.swift; sourceTree = "<group>"; };
-		B3F8BA7C1C833ABC00F9FBEA /* NFXListController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NFXListController.swift; sourceTree = "<group>"; };
-		B3F8BA7D1C833ABC00F9FBEA /* NFXProtocol.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NFXProtocol.swift; sourceTree = "<group>"; };
-		B3F8BA7E1C833ABC00F9FBEA /* NFXRawBodyDetailsController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NFXRawBodyDetailsController.swift; sourceTree = "<group>"; };
-		B3F8BA7F1C833ABC00F9FBEA /* NFXSettingsController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NFXSettingsController.swift; sourceTree = "<group>"; };
-		B3F8BA801C833ABC00F9FBEA /* NFXStatisticsController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NFXStatisticsController.swift; sourceTree = "<group>"; };
-		B3F8BA811C833ABC00F9FBEA /* NFXWindowController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NFXWindowController.swift; sourceTree = "<group>"; };
-		B3F8BAA51C833AC700F9FBEA /* NFXDetailsController_iOS.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NFXDetailsController_iOS.swift; sourceTree = "<group>"; };
-		B3F8BAA61C833AC700F9FBEA /* NFXHelper_iOS.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NFXHelper_iOS.swift; sourceTree = "<group>"; };
-		B3F8BAA71C833AC700F9FBEA /* NFXInfoController_iOS.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NFXInfoController_iOS.swift; sourceTree = "<group>"; };
-		B3F8BAA81C833AC700F9FBEA /* NFXListCell_iOS.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NFXListCell_iOS.swift; sourceTree = "<group>"; };
-		B3F8BAA91C833AC700F9FBEA /* NFXListController_iOS.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NFXListController_iOS.swift; sourceTree = "<group>"; };
-		B3F8BAAA1C833AC700F9FBEA /* NFXSettingsController_iOS.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NFXSettingsController_iOS.swift; sourceTree = "<group>"; };
-		B3F8BAAB1C833AC700F9FBEA /* NFXStatisticsController_iOS.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NFXStatisticsController_iOS.swift; sourceTree = "<group>"; };
-		B3F8D6711C833B1700F9FBEA /* NetfoxWindow.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = NetfoxWindow.xib; sourceTree = "<group>"; };
-		B3F8D6721C833B1700F9FBEA /* NFXDetailsController_OSX.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NFXDetailsController_OSX.swift; sourceTree = "<group>"; };
-		B3F8D6731C833B1700F9FBEA /* NFXInfoController_OSX.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NFXInfoController_OSX.swift; sourceTree = "<group>"; };
-		B3F8D6741C833B1700F9FBEA /* NFXListCell_OSX.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NFXListCell_OSX.swift; sourceTree = "<group>"; };
-		B3F8D6751C833B1700F9FBEA /* NFXListCell_OSX.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = NFXListCell_OSX.xib; sourceTree = "<group>"; };
-		B3F8D6761C833B1700F9FBEA /* NFXListController_OSX.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NFXListController_OSX.swift; sourceTree = "<group>"; };
-		B3F8D6771C833B1700F9FBEA /* NFXResponseTypeCell_OSX.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NFXResponseTypeCell_OSX.swift; sourceTree = "<group>"; };
-		B3F8D6781C833B1700F9FBEA /* NFXResponseTypeCell_OSX.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = NFXResponseTypeCell_OSX.xib; sourceTree = "<group>"; };
-		B3F8D6791C833B1700F9FBEA /* NFXSettingsController_OSX.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NFXSettingsController_OSX.swift; sourceTree = "<group>"; };
-		B3F8D67A1C833B1700F9FBEA /* NFXStatisticsController_OSX.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NFXStatisticsController_OSX.swift; sourceTree = "<group>"; };
-		E20FD2E91C6912D400DCFF61 /* netfox_osx.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = netfox_osx.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-/* End PBXFileReference section */
-
-/* Begin PBXFrameworksBuildPhase section */
-		8229AD5F1F8FB34300A9D613 /* Frameworks */ = {
-			isa = PBXFrameworksBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				8229AD771F8FB4B500A9D613 /* netfox_ios.framework in Frameworks */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		B3BC020B1C09CDA000C17F3A /* Frameworks */ = {
-			isa = PBXFrameworksBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		E20FD2E51C6912D400DCFF61 /* Frameworks */ = {
-			isa = PBXFrameworksBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-/* End PBXFrameworksBuildPhase section */
-
-/* Begin PBXGroup section */
-		8229AD631F8FB34300A9D613 /* netfox_ios_demo */ = {
-			isa = PBXGroup;
-			children = (
-				8229AD641F8FB34300A9D613 /* AppDelegate.swift */,
-				8229AD661F8FB34300A9D613 /* ImageViewController.swift */,
-				8229AD681F8FB34300A9D613 /* Main.storyboard */,
-				8229AD6B1F8FB34300A9D613 /* Assets.xcassets */,
-				8229AD6D1F8FB34300A9D613 /* LaunchScreen.storyboard */,
-				8229AD701F8FB34300A9D613 /* Info.plist */,
-				82F6E1021F8FD81C002B31BD /* TextViewController.swift */,
-				82F6E1041F8FF55D002B31BD /* WebViewController.swift */,
-				026274D8214C6BC400AE1BDF /* WKWebViewController.swift */,
-			);
-			path = netfox_ios_demo;
-			sourceTree = "<group>";
-		};
-		8229AD761F8FB4B500A9D613 /* Frameworks */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			name = Frameworks;
-			sourceTree = "<group>";
-		};
-		B3BC02051C09CDA000C17F3A = {
-			isa = PBXGroup;
-			children = (
-				CEFE42B41C0DDBD8001A56E0 /* netfox */,
-				8229AD631F8FB34300A9D613 /* netfox_ios_demo */,
-				B3BC02101C09CDA000C17F3A /* Products */,
-				8229AD761F8FB4B500A9D613 /* Frameworks */,
-			);
-			sourceTree = "<group>";
-		};
-		B3BC02101C09CDA000C17F3A /* Products */ = {
-			isa = PBXGroup;
-			children = (
-				B3BC020F1C09CDA000C17F3A /* netfox_ios.framework */,
-				E20FD2E91C6912D400DCFF61 /* netfox_osx.framework */,
-				8229AD621F8FB34300A9D613 /* netfox_ios_demo.app */,
-			);
-			name = Products;
-			sourceTree = "<group>";
-		};
-		B3F8BA701C833ABC00F9FBEA /* Core */ = {
-			isa = PBXGroup;
-			children = (
-				826C4E9C1F979AB3008B440C /* NFXLoader.h */,
-				826C4E9D1F979AB3008B440C /* NFXLoader.m */,
-				B3F8BA711C833ABC00F9FBEA /* NFX.swift */,
-				B3F8BA721C833ABC00F9FBEA /* NFXAssets.swift */,
-				8201A39C204E3E3F00AB2C3D /* NFXAuthenticationChallengeSender.swift */,
-				B3F8BA731C833ABC00F9FBEA /* NFXConstants.swift */,
-				B3F8BA741C833ABC00F9FBEA /* NFXDetailsController.swift */,
-				B3F8BA751C833ABC00F9FBEA /* NFXGenericBodyDetailsController.swift */,
-				B3F8BA761C833ABC00F9FBEA /* NFXGenericController.swift */,
-				B3F8BA771C833ABC00F9FBEA /* NFXHelper.swift */,
-				B3F8BA781C833ABC00F9FBEA /* NFXHTTPModel.swift */,
-				B3F8BA791C833ABC00F9FBEA /* NFXHTTPModelManager.swift */,
-				B3F8BA7A1C833ABC00F9FBEA /* NFXImageBodyDetailsController.swift */,
-				B3F8BA7B1C833ABC00F9FBEA /* NFXInfoController.swift */,
-				B3F8BA7C1C833ABC00F9FBEA /* NFXListController.swift */,
-				B3F8BA7D1C833ABC00F9FBEA /* NFXProtocol.swift */,
-				B3F8BA7E1C833ABC00F9FBEA /* NFXRawBodyDetailsController.swift */,
-				B3F8BA7F1C833ABC00F9FBEA /* NFXSettingsController.swift */,
-				B3F8BA801C833ABC00F9FBEA /* NFXStatisticsController.swift */,
-				B3F8BA811C833ABC00F9FBEA /* NFXWindowController.swift */,
-			);
-			path = Core;
-			sourceTree = "<group>";
-		};
-		B3F8BAA41C833AC700F9FBEA /* iOS */ = {
-			isa = PBXGroup;
-			children = (
-				3708AD5922D4A9DD0050DB7D /* NFXURLDetailsControllerViewController.swift */,
-				B3F8BAA51C833AC700F9FBEA /* NFXDetailsController_iOS.swift */,
-				B3F8BAA61C833AC700F9FBEA /* NFXHelper_iOS.swift */,
-				B3F8BAA71C833AC700F9FBEA /* NFXInfoController_iOS.swift */,
-				B3F8BAA81C833AC700F9FBEA /* NFXListCell_iOS.swift */,
-				B3F8BAA91C833AC700F9FBEA /* NFXListController_iOS.swift */,
-				B3F8BAAA1C833AC700F9FBEA /* NFXSettingsController_iOS.swift */,
-				B3F8BAAB1C833AC700F9FBEA /* NFXStatisticsController_iOS.swift */,
-			);
-			path = iOS;
-			sourceTree = "<group>";
-		};
-		B3F8D6701C833B1700F9FBEA /* OSX */ = {
-			isa = PBXGroup;
-			children = (
-				B3F8D6711C833B1700F9FBEA /* NetfoxWindow.xib */,
-				B3F8D6721C833B1700F9FBEA /* NFXDetailsController_OSX.swift */,
-				B3F8D6731C833B1700F9FBEA /* NFXInfoController_OSX.swift */,
-				B3F8D6741C833B1700F9FBEA /* NFXListCell_OSX.swift */,
-				B3F8D6751C833B1700F9FBEA /* NFXListCell_OSX.xib */,
-				B3F8D6761C833B1700F9FBEA /* NFXListController_OSX.swift */,
-				B3F8D6771C833B1700F9FBEA /* NFXResponseTypeCell_OSX.swift */,
-				B3F8D6781C833B1700F9FBEA /* NFXResponseTypeCell_OSX.xib */,
-				B3F8D6791C833B1700F9FBEA /* NFXSettingsController_OSX.swift */,
-				B3F8D67A1C833B1700F9FBEA /* NFXStatisticsController_OSX.swift */,
-			);
-			path = OSX;
-			sourceTree = "<group>";
-		};
-		CEFE42B41C0DDBD8001A56E0 /* netfox */ = {
-			isa = PBXGroup;
-			children = (
-				B3F8BA701C833ABC00F9FBEA /* Core */,
-				B3F8BAA41C833AC700F9FBEA /* iOS */,
-				B3F8D6701C833B1700F9FBEA /* OSX */,
-			);
-			path = netfox;
-			sourceTree = "<group>";
-		};
-/* End PBXGroup section */
-
-/* Begin PBXHeadersBuildPhase section */
-		B3BC020C1C09CDA000C17F3A /* Headers */ = {
-			isa = PBXHeadersBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				826C4E9E1F979AB3008B440C /* NFXLoader.h in Headers */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		E20FD2E61C6912D400DCFF61 /* Headers */ = {
-			isa = PBXHeadersBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-/* End PBXHeadersBuildPhase section */
-
-/* Begin PBXNativeTarget section */
-		8229AD611F8FB34300A9D613 /* netfox_ios_demo */ = {
-			isa = PBXNativeTarget;
-			buildConfigurationList = 8229AD711F8FB34300A9D613 /* Build configuration list for PBXNativeTarget "netfox_ios_demo" */;
-			buildPhases = (
-				8229AD5E1F8FB34300A9D613 /* Sources */,
-				8229AD5F1F8FB34300A9D613 /* Frameworks */,
-				8229AD601F8FB34300A9D613 /* Resources */,
-			);
-			buildRules = (
-			);
-			dependencies = (
-				8229AD751F8FB37000A9D613 /* PBXTargetDependency */,
-			);
-			name = netfox_ios_demo;
-			productName = netfox_ios_demo;
-			productReference = 8229AD621F8FB34300A9D613 /* netfox_ios_demo.app */;
-			productType = "com.apple.product-type.application";
-		};
-		B3BC020E1C09CDA000C17F3A /* netfox_ios */ = {
-			isa = PBXNativeTarget;
-			buildConfigurationList = B3BC02171C09CDA000C17F3A /* Build configuration list for PBXNativeTarget "netfox_ios" */;
-			buildPhases = (
-				B3BC020A1C09CDA000C17F3A /* Sources */,
-				B3BC020B1C09CDA000C17F3A /* Frameworks */,
-				B3BC020C1C09CDA000C17F3A /* Headers */,
-				B3BC020D1C09CDA000C17F3A /* Resources */,
-			);
-			buildRules = (
-			);
-			dependencies = (
-			);
-			name = netfox_ios;
-			productName = netfox;
-			productReference = B3BC020F1C09CDA000C17F3A /* netfox_ios.framework */;
-			productType = "com.apple.product-type.framework";
-		};
-		E20FD2E81C6912D400DCFF61 /* netfox_osx */ = {
-			isa = PBXNativeTarget;
-			buildConfigurationList = E20FD2F01C6912D400DCFF61 /* Build configuration list for PBXNativeTarget "netfox_osx" */;
-			buildPhases = (
-				E20FD2E41C6912D400DCFF61 /* Sources */,
-				E20FD2E51C6912D400DCFF61 /* Frameworks */,
-				E20FD2E61C6912D400DCFF61 /* Headers */,
-				E20FD2E71C6912D400DCFF61 /* Resources */,
-			);
-			buildRules = (
-			);
-			dependencies = (
-			);
-			name = netfox_osx;
-			productName = "netfox OS X";
-			productReference = E20FD2E91C6912D400DCFF61 /* netfox_osx.framework */;
-			productType = "com.apple.product-type.framework";
-		};
-/* End PBXNativeTarget section */
-
-/* Begin PBXProject section */
-		B3BC02061C09CDA000C17F3A /* Project object */ = {
-			isa = PBXProject;
-			attributes = {
-				LastSwiftUpdateCheck = 0720;
-				LastUpgradeCheck = 1020;
-				ORGANIZATIONNAME = kasketis;
-				TargetAttributes = {
-					8229AD611F8FB34300A9D613 = {
-						CreatedOnToolsVersion = 9.0;
-						LastSwiftMigration = 1020;
-						ProvisioningStyle = Automatic;
-					};
-					B3BC020E1C09CDA000C17F3A = {
-						CreatedOnToolsVersion = 7.1.1;
-						LastSwiftMigration = 1020;
-					};
-					E20FD2E81C6912D400DCFF61 = {
-						CreatedOnToolsVersion = 7.2.1;
-						LastSwiftMigration = 0900;
-					};
-				};
-			};
-			buildConfigurationList = B3BC02091C09CDA000C17F3A /* Build configuration list for PBXProject "netfox" */;
-			compatibilityVersion = "Xcode 3.2";
-			developmentRegion = en;
-			hasScannedForEncodings = 0;
-			knownRegions = (
-				en,
-				Base,
-			);
-			mainGroup = B3BC02051C09CDA000C17F3A;
-			productRefGroup = B3BC02101C09CDA000C17F3A /* Products */;
-			projectDirPath = "";
-			projectRoot = "";
-			targets = (
-				B3BC020E1C09CDA000C17F3A /* netfox_ios */,
-				E20FD2E81C6912D400DCFF61 /* netfox_osx */,
-				8229AD611F8FB34300A9D613 /* netfox_ios_demo */,
-			);
-		};
-/* End PBXProject section */
-
-/* Begin PBXResourcesBuildPhase section */
-		8229AD601F8FB34300A9D613 /* Resources */ = {
-			isa = PBXResourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				8229AD6F1F8FB34300A9D613 /* LaunchScreen.storyboard in Resources */,
-				8229AD6C1F8FB34300A9D613 /* Assets.xcassets in Resources */,
-				8229AD6A1F8FB34300A9D613 /* Main.storyboard in Resources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		B3BC020D1C09CDA000C17F3A /* Resources */ = {
-			isa = PBXResourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		E20FD2E71C6912D400DCFF61 /* Resources */ = {
-			isa = PBXResourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				B3F8D6821C833B1700F9FBEA /* NFXResponseTypeCell_OSX.xib in Resources */,
-				B3F8D67B1C833B1700F9FBEA /* NetfoxWindow.xib in Resources */,
-				B3F8D67F1C833B1700F9FBEA /* NFXListCell_OSX.xib in Resources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-/* End PBXResourcesBuildPhase section */
-
-/* Begin PBXSourcesBuildPhase section */
-		8229AD5E1F8FB34300A9D613 /* Sources */ = {
-			isa = PBXSourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				026274D9214C6BC400AE1BDF /* WKWebViewController.swift in Sources */,
-				8229AD671F8FB34300A9D613 /* ImageViewController.swift in Sources */,
-				8229AD651F8FB34300A9D613 /* AppDelegate.swift in Sources */,
-				82F6E1031F8FD81C002B31BD /* TextViewController.swift in Sources */,
-				82F6E1051F8FF55D002B31BD /* WebViewController.swift in Sources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		B3BC020A1C09CDA000C17F3A /* Sources */ = {
-			isa = PBXSourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				B3F8BA821C833ABC00F9FBEA /* NFX.swift in Sources */,
-				B3F8BA8A1C833ABC00F9FBEA /* NFXGenericBodyDetailsController.swift in Sources */,
-				B3F8BA901C833ABC00F9FBEA /* NFXHTTPModel.swift in Sources */,
-				8201A39D204E3E3F00AB2C3D /* NFXAuthenticationChallengeSender.swift in Sources */,
-				B3F8BAB21C833AC700F9FBEA /* NFXStatisticsController_iOS.swift in Sources */,
-				B3F8BAA01C833ABC00F9FBEA /* NFXStatisticsController.swift in Sources */,
-				B3F8BAB11C833AC700F9FBEA /* NFXSettingsController_iOS.swift in Sources */,
-				B3F8BAB01C833AC700F9FBEA /* NFXListController_iOS.swift in Sources */,
-				3708AD5A22D4A9DD0050DB7D /* NFXURLDetailsControllerViewController.swift in Sources */,
-				B3F8BA8E1C833ABC00F9FBEA /* NFXHelper.swift in Sources */,
-				B3F8BA861C833ABC00F9FBEA /* NFXConstants.swift in Sources */,
-				B3F8BAAD1C833AC700F9FBEA /* NFXHelper_iOS.swift in Sources */,
-				B3F8BA9A1C833ABC00F9FBEA /* NFXProtocol.swift in Sources */,
-				B3F8BA941C833ABC00F9FBEA /* NFXImageBodyDetailsController.swift in Sources */,
-				B3F8BA9E1C833ABC00F9FBEA /* NFXSettingsController.swift in Sources */,
-				B3F8BAA21C833ABC00F9FBEA /* NFXWindowController.swift in Sources */,
-				B3F8BA841C833ABC00F9FBEA /* NFXAssets.swift in Sources */,
-				826C4E9F1F979AB3008B440C /* NFXLoader.m in Sources */,
-				B3F8BA8C1C833ABC00F9FBEA /* NFXGenericController.swift in Sources */,
-				B3F8BA921C833ABC00F9FBEA /* NFXHTTPModelManager.swift in Sources */,
-				B3F8BA881C833ABC00F9FBEA /* NFXDetailsController.swift in Sources */,
-				B3F8BA981C833ABC00F9FBEA /* NFXListController.swift in Sources */,
-				B3F8BAAE1C833AC700F9FBEA /* NFXInfoController_iOS.swift in Sources */,
-				B3F8BA9C1C833ABC00F9FBEA /* NFXRawBodyDetailsController.swift in Sources */,
-				B3F8BAAF1C833AC700F9FBEA /* NFXListCell_iOS.swift in Sources */,
-				B3F8BA961C833ABC00F9FBEA /* NFXInfoController.swift in Sources */,
-				B3F8BAAC1C833AC700F9FBEA /* NFXDetailsController_iOS.swift in Sources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		E20FD2E41C6912D400DCFF61 /* Sources */ = {
-			isa = PBXSourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				8201A39F204E452200AB2C3D /* NFXLoader.m in Sources */,
-				8201A39E204E451900AB2C3D /* NFXAuthenticationChallengeSender.swift in Sources */,
-				B3F8BA831C833ABC00F9FBEA /* NFX.swift in Sources */,
-				B3F8D67E1C833B1700F9FBEA /* NFXListCell_OSX.swift in Sources */,
-				B3F8BA8B1C833ABC00F9FBEA /* NFXGenericBodyDetailsController.swift in Sources */,
-				B3F8BA911C833ABC00F9FBEA /* NFXHTTPModel.swift in Sources */,
-				B3F8BAA11C833ABC00F9FBEA /* NFXStatisticsController.swift in Sources */,
-				B3F8D67D1C833B1700F9FBEA /* NFXInfoController_OSX.swift in Sources */,
-				B3F8D6831C833B1700F9FBEA /* NFXSettingsController_OSX.swift in Sources */,
-				B3F8D67C1C833B1700F9FBEA /* NFXDetailsController_OSX.swift in Sources */,
-				B3F8BA8F1C833ABC00F9FBEA /* NFXHelper.swift in Sources */,
-				B3F8BA871C833ABC00F9FBEA /* NFXConstants.swift in Sources */,
-				B3F8BA9B1C833ABC00F9FBEA /* NFXProtocol.swift in Sources */,
-				B3F8D6811C833B1700F9FBEA /* NFXResponseTypeCell_OSX.swift in Sources */,
-				B3F8BA951C833ABC00F9FBEA /* NFXImageBodyDetailsController.swift in Sources */,
-				B3F8BA9F1C833ABC00F9FBEA /* NFXSettingsController.swift in Sources */,
-				B3F8BAA31C833ABC00F9FBEA /* NFXWindowController.swift in Sources */,
-				B3F8BA851C833ABC00F9FBEA /* NFXAssets.swift in Sources */,
-				B3F8D6841C833B1700F9FBEA /* NFXStatisticsController_OSX.swift in Sources */,
-				B3F8BA8D1C833ABC00F9FBEA /* NFXGenericController.swift in Sources */,
-				B3F8BA931C833ABC00F9FBEA /* NFXHTTPModelManager.swift in Sources */,
-				B3F8BA891C833ABC00F9FBEA /* NFXDetailsController.swift in Sources */,
-				B3F8BA991C833ABC00F9FBEA /* NFXListController.swift in Sources */,
-				B3F8BA9D1C833ABC00F9FBEA /* NFXRawBodyDetailsController.swift in Sources */,
-				B3F8D6801C833B1700F9FBEA /* NFXListController_OSX.swift in Sources */,
-				B3F8BA971C833ABC00F9FBEA /* NFXInfoController.swift in Sources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-/* End PBXSourcesBuildPhase section */
-
-/* Begin PBXTargetDependency section */
-		8229AD751F8FB37000A9D613 /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			target = B3BC020E1C09CDA000C17F3A /* netfox_ios */;
-			targetProxy = 8229AD741F8FB37000A9D613 /* PBXContainerItemProxy */;
-		};
-/* End PBXTargetDependency section */
-
-/* Begin PBXVariantGroup section */
-		8229AD681F8FB34300A9D613 /* Main.storyboard */ = {
-			isa = PBXVariantGroup;
-			children = (
-				8229AD691F8FB34300A9D613 /* Base */,
-			);
-			name = Main.storyboard;
-			sourceTree = "<group>";
-		};
-		8229AD6D1F8FB34300A9D613 /* LaunchScreen.storyboard */ = {
-			isa = PBXVariantGroup;
-			children = (
-				8229AD6E1F8FB34300A9D613 /* Base */,
-			);
-			name = LaunchScreen.storyboard;
-			sourceTree = "<group>";
-		};
-/* End PBXVariantGroup section */
-
-/* Begin XCBuildConfiguration section */
-		8229AD721F8FB34300A9D613 /* Debug */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				CLANG_ANALYZER_NONNULL = YES;
-				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
-				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
-				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
-				CLANG_WARN_COMMA = YES;
-				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
-				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
-				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
-				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
-				CLANG_WARN_STRICT_PROTOTYPES = YES;
-				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
-				CODE_SIGN_IDENTITY = "iPhone Developer";
-				CODE_SIGN_STYLE = Automatic;
-				GCC_C_LANGUAGE_STANDARD = gnu11;
-				INFOPLIST_FILE = netfox_ios_demo/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = "com.kasketis.netfox-demo-iOS";
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
-				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
-			};
-			name = Debug;
-		};
-		8229AD731F8FB34300A9D613 /* Release */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				CLANG_ANALYZER_NONNULL = YES;
-				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
-				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
-				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
-				CLANG_WARN_COMMA = YES;
-				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
-				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
-				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
-				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
-				CLANG_WARN_STRICT_PROTOTYPES = YES;
-				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
-				CODE_SIGN_IDENTITY = "iPhone Developer";
-				CODE_SIGN_STYLE = Automatic;
-				GCC_C_LANGUAGE_STANDARD = gnu11;
-				INFOPLIST_FILE = netfox_ios_demo/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = "com.kasketis.netfox-demo-iOS";
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
-			};
-			name = Release;
-		};
-		B3BC02151C09CDA000C17F3A /* Debug */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				ALWAYS_SEARCH_USER_PATHS = NO;
-				CLANG_ANALYZER_LOCALIZABILITY_NONLOCALIZED = YES;
-				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
-				CLANG_CXX_LIBRARY = "libc++";
-				CLANG_ENABLE_MODULES = YES;
-				CLANG_ENABLE_OBJC_ARC = YES;
-				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
-				CLANG_WARN_BOOL_CONVERSION = YES;
-				CLANG_WARN_COMMA = YES;
-				CLANG_WARN_CONSTANT_CONVERSION = YES;
-				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
-				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
-				CLANG_WARN_EMPTY_BODY = YES;
-				CLANG_WARN_ENUM_CONVERSION = YES;
-				CLANG_WARN_INFINITE_RECURSION = YES;
-				CLANG_WARN_INT_CONVERSION = YES;
-				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
-				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
-				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
-				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
-				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
-				CLANG_WARN_STRICT_PROTOTYPES = YES;
-				CLANG_WARN_SUSPICIOUS_MOVE = YES;
-				CLANG_WARN_UNREACHABLE_CODE = YES;
-				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
-				COPY_PHASE_STRIP = NO;
-				CURRENT_PROJECT_VERSION = 1;
-				DEBUG_INFORMATION_FORMAT = dwarf;
-				ENABLE_STRICT_OBJC_MSGSEND = YES;
-				ENABLE_TESTABILITY = YES;
-				GCC_C_LANGUAGE_STANDARD = gnu99;
-				GCC_DYNAMIC_NO_PIC = NO;
-				GCC_NO_COMMON_BLOCKS = YES;
-				GCC_OPTIMIZATION_LEVEL = 0;
-				GCC_PREPROCESSOR_DEFINITIONS = (
-					"DEBUG=1",
-					"$(inherited)",
-				);
-				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
-				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
-				GCC_WARN_UNDECLARED_SELECTOR = YES;
-				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
-				GCC_WARN_UNUSED_FUNCTION = YES;
-				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
-				MTL_ENABLE_DEBUG_INFO = YES;
-				ONLY_ACTIVE_ARCH = YES;
-				SDKROOT = iphoneos;
-				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
-				TARGETED_DEVICE_FAMILY = "1,2";
-				VERSIONING_SYSTEM = "apple-generic";
-				VERSION_INFO_PREFIX = "";
-			};
-			name = Debug;
-		};
-		B3BC02161C09CDA000C17F3A /* Release */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				ALWAYS_SEARCH_USER_PATHS = NO;
-				CLANG_ANALYZER_LOCALIZABILITY_NONLOCALIZED = YES;
-				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
-				CLANG_CXX_LIBRARY = "libc++";
-				CLANG_ENABLE_MODULES = YES;
-				CLANG_ENABLE_OBJC_ARC = YES;
-				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
-				CLANG_WARN_BOOL_CONVERSION = YES;
-				CLANG_WARN_COMMA = YES;
-				CLANG_WARN_CONSTANT_CONVERSION = YES;
-				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
-				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
-				CLANG_WARN_EMPTY_BODY = YES;
-				CLANG_WARN_ENUM_CONVERSION = YES;
-				CLANG_WARN_INFINITE_RECURSION = YES;
-				CLANG_WARN_INT_CONVERSION = YES;
-				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
-				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
-				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
-				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
-				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
-				CLANG_WARN_STRICT_PROTOTYPES = YES;
-				CLANG_WARN_SUSPICIOUS_MOVE = YES;
-				CLANG_WARN_UNREACHABLE_CODE = YES;
-				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
-				COPY_PHASE_STRIP = NO;
-				CURRENT_PROJECT_VERSION = 1;
-				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
-				ENABLE_NS_ASSERTIONS = NO;
-				ENABLE_STRICT_OBJC_MSGSEND = YES;
-				GCC_C_LANGUAGE_STANDARD = gnu99;
-				GCC_NO_COMMON_BLOCKS = YES;
-				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
-				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
-				GCC_WARN_UNDECLARED_SELECTOR = YES;
-				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
-				GCC_WARN_UNUSED_FUNCTION = YES;
-				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
-				MTL_ENABLE_DEBUG_INFO = NO;
-				SDKROOT = iphoneos;
-				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
-				TARGETED_DEVICE_FAMILY = "1,2";
-				VALIDATE_PRODUCT = YES;
-				VERSIONING_SYSTEM = "apple-generic";
-				VERSION_INFO_PREFIX = "";
-			};
-			name = Release;
-		};
-		B3BC02181C09CDA000C17F3A /* Debug */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				CLANG_ENABLE_MODULES = YES;
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
-				DEFINES_MODULE = YES;
-				DYLIB_COMPATIBILITY_VERSION = 1;
-				DYLIB_CURRENT_VERSION = 1;
-				DYLIB_INSTALL_NAME_BASE = "@rpath";
-				INFOPLIST_FILE = "netfox-info.plist";
-				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
-				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				MARKETING_VERSION = 1.18.0;
-				PRODUCT_BUNDLE_IDENTIFIER = "com.kasketis.netfox-iOS";
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				SKIP_INSTALL = YES;
-				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
-				SWIFT_VERSION = 5.0;
-			};
-			name = Debug;
-		};
-		B3BC02191C09CDA000C17F3A /* Release */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				CLANG_ENABLE_MODULES = YES;
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
-				DEFINES_MODULE = YES;
-				DYLIB_COMPATIBILITY_VERSION = 1;
-				DYLIB_CURRENT_VERSION = 1;
-				DYLIB_INSTALL_NAME_BASE = "@rpath";
-				INFOPLIST_FILE = "netfox-info.plist";
-				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
-				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				MARKETING_VERSION = 1.18.0;
-				PRODUCT_BUNDLE_IDENTIFIER = "com.kasketis.netfox-iOS";
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				SKIP_INSTALL = YES;
-				SWIFT_VERSION = 5.0;
-			};
-			name = Release;
-		};
-		E20FD2EE1C6912D400DCFF61 /* Debug */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				CLANG_ENABLE_MODULES = YES;
-				CODE_SIGN_IDENTITY = "-";
-				COMBINE_HIDPI_IMAGES = YES;
-				DEFINES_MODULE = YES;
-				DYLIB_COMPATIBILITY_VERSION = 1;
-				DYLIB_CURRENT_VERSION = 1;
-				DYLIB_INSTALL_NAME_BASE = "@rpath";
-				FRAMEWORK_VERSION = A;
-				GCC_PREPROCESSOR_DEFINITIONS = (
-					"DEBUG=1",
-					"$(inherited)",
-					"OSX=YES",
-				);
-				INFOPLIST_FILE = "netfox-info.plist";
-				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @loader_path/Frameworks";
-				MACOSX_DEPLOYMENT_TARGET = 10.11;
-				PRODUCT_BUNDLE_IDENTIFIER = "com.kasketis.netfox-OSX";
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				SDKROOT = macosx;
-				SKIP_INSTALL = YES;
-				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
-				SWIFT_VERSION = 4.0;
-			};
-			name = Debug;
-		};
-		E20FD2EF1C6912D400DCFF61 /* Release */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				CLANG_ENABLE_MODULES = YES;
-				CODE_SIGN_IDENTITY = "-";
-				COMBINE_HIDPI_IMAGES = YES;
-				DEFINES_MODULE = YES;
-				DYLIB_COMPATIBILITY_VERSION = 1;
-				DYLIB_CURRENT_VERSION = 1;
-				DYLIB_INSTALL_NAME_BASE = "@rpath";
-				FRAMEWORK_VERSION = A;
-				GCC_PREPROCESSOR_DEFINITIONS = "OSX=YES";
-				INFOPLIST_FILE = "netfox-info.plist";
-				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @loader_path/Frameworks";
-				MACOSX_DEPLOYMENT_TARGET = 10.11;
-				PRODUCT_BUNDLE_IDENTIFIER = "com.kasketis.netfox-OSX";
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				SDKROOT = macosx;
-				SKIP_INSTALL = YES;
-				SWIFT_VERSION = 4.0;
-			};
-			name = Release;
-		};
-/* End XCBuildConfiguration section */
-
-/* Begin XCConfigurationList section */
-		8229AD711F8FB34300A9D613 /* Build configuration list for PBXNativeTarget "netfox_ios_demo" */ = {
-			isa = XCConfigurationList;
-			buildConfigurations = (
-				8229AD721F8FB34300A9D613 /* Debug */,
-				8229AD731F8FB34300A9D613 /* Release */,
-			);
-			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
-		};
-		B3BC02091C09CDA000C17F3A /* Build configuration list for PBXProject "netfox" */ = {
-			isa = XCConfigurationList;
-			buildConfigurations = (
-				B3BC02151C09CDA000C17F3A /* Debug */,
-				B3BC02161C09CDA000C17F3A /* Release */,
-			);
-			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
-		};
-		B3BC02171C09CDA000C17F3A /* Build configuration list for PBXNativeTarget "netfox_ios" */ = {
-			isa = XCConfigurationList;
-			buildConfigurations = (
-				B3BC02181C09CDA000C17F3A /* Debug */,
-				B3BC02191C09CDA000C17F3A /* Release */,
-			);
-			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
-		};
-		E20FD2F01C6912D400DCFF61 /* Build configuration list for PBXNativeTarget "netfox_osx" */ = {
-			isa = XCConfigurationList;
-			buildConfigurations = (
-				E20FD2EE1C6912D400DCFF61 /* Debug */,
-				E20FD2EF1C6912D400DCFF61 /* Release */,
-			);
-			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
-		};
-/* End XCConfigurationList section */
-	};
-	rootObject = B3BC02061C09CDA000C17F3A /* Project object */;
+   archiveVersion = "1";
+   objectVersion = "46";
+   objects = {
+      "OBJ_1" = {
+         isa = "PBXProject";
+         attributes = {
+            LastSwiftMigration = "9999";
+            LastUpgradeCheck = "9999";
+         };
+         buildConfigurationList = "OBJ_2";
+         compatibilityVersion = "Xcode 3.2";
+         developmentRegion = "en";
+         hasScannedForEncodings = "0";
+         knownRegions = (
+            "en"
+         );
+         mainGroup = "OBJ_5";
+         productRefGroup = "OBJ_14";
+         projectDirPath = ".";
+         targets = (
+            "netfox::netfox",
+            "netfox::SwiftPMPackageDescription",
+            "netfox::netfoxPackageTests::ProductTarget",
+            "netfox::netfoxTests"
+         );
+      };
+      "OBJ_10" = {
+         isa = "PBXGroup";
+         children = (
+            "OBJ_11"
+         );
+         name = "Tests";
+         path = "";
+         sourceTree = "SOURCE_ROOT";
+      };
+      "OBJ_11" = {
+         isa = "PBXGroup";
+         children = (
+            "OBJ_12",
+            "OBJ_13"
+         );
+         name = "netfoxTests";
+         path = "Tests/netfoxTests";
+         sourceTree = "SOURCE_ROOT";
+      };
+      "OBJ_12" = {
+         isa = "PBXFileReference";
+         path = "XCTestManifests.swift";
+         sourceTree = "<group>";
+      };
+      "OBJ_13" = {
+         isa = "PBXFileReference";
+         path = "netfoxTests.swift";
+         sourceTree = "<group>";
+      };
+      "OBJ_14" = {
+         isa = "PBXGroup";
+         children = (
+            "netfox::netfoxTests::Product",
+            "netfox::netfox::Product"
+         );
+         name = "Products";
+         path = "";
+         sourceTree = "BUILT_PRODUCTS_DIR";
+      };
+      "OBJ_17" = {
+         isa = "PBXFileReference";
+         path = "netfox";
+         sourceTree = "SOURCE_ROOT";
+      };
+      "OBJ_18" = {
+         isa = "PBXFileReference";
+         path = "netfox_ios_demo";
+         sourceTree = "SOURCE_ROOT";
+      };
+      "OBJ_19" = {
+         isa = "PBXFileReference";
+         path = "netfox OS X";
+         sourceTree = "SOURCE_ROOT";
+      };
+      "OBJ_2" = {
+         isa = "XCConfigurationList";
+         buildConfigurations = (
+            "OBJ_3",
+            "OBJ_4"
+         );
+         defaultConfigurationIsVisible = "0";
+         defaultConfigurationName = "Release";
+      };
+      "OBJ_20" = {
+         isa = "PBXFileReference";
+         path = "assets";
+         sourceTree = "SOURCE_ROOT";
+      };
+      "OBJ_21" = {
+         isa = "PBXFileReference";
+         path = "LICENSE";
+         sourceTree = "<group>";
+      };
+      "OBJ_22" = {
+         isa = "PBXFileReference";
+         path = "Workarounds.md";
+         sourceTree = "<group>";
+      };
+      "OBJ_23" = {
+         isa = "PBXFileReference";
+         path = "netfox.podspec";
+         sourceTree = "<group>";
+      };
+      "OBJ_24" = {
+         isa = "PBXFileReference";
+         path = "netfox-logo.png";
+         sourceTree = "<group>";
+      };
+      "OBJ_25" = {
+         isa = "PBXFileReference";
+         path = "README.md";
+         sourceTree = "<group>";
+      };
+      "OBJ_26" = {
+         isa = "PBXFileReference";
+         path = "netfox-info.plist";
+         sourceTree = "<group>";
+      };
+      "OBJ_28" = {
+         isa = "XCConfigurationList";
+         buildConfigurations = (
+            "OBJ_29",
+            "OBJ_30"
+         );
+         defaultConfigurationIsVisible = "0";
+         defaultConfigurationName = "Release";
+      };
+      "OBJ_29" = {
+         isa = "XCBuildConfiguration";
+         buildSettings = {
+            ENABLE_TESTABILITY = "YES";
+            FRAMEWORK_SEARCH_PATHS = (
+               "$(inherited)",
+               "$(PLATFORM_DIR)/Developer/Library/Frameworks"
+            );
+            HEADER_SEARCH_PATHS = (
+               "$(inherited)"
+            );
+            INFOPLIST_FILE = "netfox.xcodeproj/netfox_Info.plist";
+            IPHONEOS_DEPLOYMENT_TARGET = "8.0";
+            LD_RUNPATH_SEARCH_PATHS = (
+               "$(inherited)",
+               "$(TOOLCHAIN_DIR)/usr/lib/swift/macosx"
+            );
+            MACOSX_DEPLOYMENT_TARGET = "10.10";
+            OTHER_CFLAGS = (
+               "$(inherited)"
+            );
+            OTHER_LDFLAGS = (
+               "$(inherited)"
+            );
+            OTHER_SWIFT_FLAGS = (
+               "$(inherited)"
+            );
+            PRODUCT_BUNDLE_IDENTIFIER = "netfox";
+            PRODUCT_MODULE_NAME = "$(TARGET_NAME:c99extidentifier)";
+            PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
+            SKIP_INSTALL = "YES";
+            SWIFT_ACTIVE_COMPILATION_CONDITIONS = (
+               "$(inherited)"
+            );
+            SWIFT_VERSION = "5.0";
+            TARGET_NAME = "netfox";
+            TVOS_DEPLOYMENT_TARGET = "9.0";
+            WATCHOS_DEPLOYMENT_TARGET = "2.0";
+         };
+         name = "Debug";
+      };
+      "OBJ_3" = {
+         isa = "XCBuildConfiguration";
+         buildSettings = {
+            CLANG_ENABLE_OBJC_ARC = "YES";
+            COMBINE_HIDPI_IMAGES = "YES";
+            COPY_PHASE_STRIP = "NO";
+            DEBUG_INFORMATION_FORMAT = "dwarf";
+            DYLIB_INSTALL_NAME_BASE = "@rpath";
+            ENABLE_NS_ASSERTIONS = "YES";
+            GCC_OPTIMIZATION_LEVEL = "0";
+            GCC_PREPROCESSOR_DEFINITIONS = (
+               "$(inherited)",
+               "SWIFT_PACKAGE=1",
+               "DEBUG=1"
+            );
+            MACOSX_DEPLOYMENT_TARGET = "10.10";
+            ONLY_ACTIVE_ARCH = "YES";
+            OTHER_SWIFT_FLAGS = (
+               "$(inherited)",
+               "-DXcode"
+            );
+            PRODUCT_NAME = "$(TARGET_NAME)";
+            SDKROOT = "macosx";
+            SUPPORTED_PLATFORMS = (
+               "macosx",
+               "iphoneos",
+               "iphonesimulator",
+               "appletvos",
+               "appletvsimulator",
+               "watchos",
+               "watchsimulator"
+            );
+            SWIFT_ACTIVE_COMPILATION_CONDITIONS = (
+               "$(inherited)",
+               "SWIFT_PACKAGE",
+               "DEBUG"
+            );
+            SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+            USE_HEADERMAP = "NO";
+         };
+         name = "Debug";
+      };
+      "OBJ_30" = {
+         isa = "XCBuildConfiguration";
+         buildSettings = {
+            ENABLE_TESTABILITY = "YES";
+            FRAMEWORK_SEARCH_PATHS = (
+               "$(inherited)",
+               "$(PLATFORM_DIR)/Developer/Library/Frameworks"
+            );
+            HEADER_SEARCH_PATHS = (
+               "$(inherited)"
+            );
+            INFOPLIST_FILE = "netfox.xcodeproj/netfox_Info.plist";
+            IPHONEOS_DEPLOYMENT_TARGET = "8.0";
+            LD_RUNPATH_SEARCH_PATHS = (
+               "$(inherited)",
+               "$(TOOLCHAIN_DIR)/usr/lib/swift/macosx"
+            );
+            MACOSX_DEPLOYMENT_TARGET = "10.10";
+            OTHER_CFLAGS = (
+               "$(inherited)"
+            );
+            OTHER_LDFLAGS = (
+               "$(inherited)"
+            );
+            OTHER_SWIFT_FLAGS = (
+               "$(inherited)"
+            );
+            PRODUCT_BUNDLE_IDENTIFIER = "netfox";
+            PRODUCT_MODULE_NAME = "$(TARGET_NAME:c99extidentifier)";
+            PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
+            SKIP_INSTALL = "YES";
+            SWIFT_ACTIVE_COMPILATION_CONDITIONS = (
+               "$(inherited)"
+            );
+            SWIFT_VERSION = "5.0";
+            TARGET_NAME = "netfox";
+            TVOS_DEPLOYMENT_TARGET = "9.0";
+            WATCHOS_DEPLOYMENT_TARGET = "2.0";
+         };
+         name = "Release";
+      };
+      "OBJ_31" = {
+         isa = "PBXSourcesBuildPhase";
+         files = (
+            "OBJ_32"
+         );
+      };
+      "OBJ_32" = {
+         isa = "PBXBuildFile";
+         fileRef = "OBJ_9";
+      };
+      "OBJ_33" = {
+         isa = "PBXFrameworksBuildPhase";
+         files = (
+         );
+      };
+      "OBJ_35" = {
+         isa = "XCConfigurationList";
+         buildConfigurations = (
+            "OBJ_36",
+            "OBJ_37"
+         );
+         defaultConfigurationIsVisible = "0";
+         defaultConfigurationName = "Release";
+      };
+      "OBJ_36" = {
+         isa = "XCBuildConfiguration";
+         buildSettings = {
+            LD = "/usr/bin/true";
+            OTHER_SWIFT_FLAGS = (
+               "-swift-version",
+               "5",
+               "-I",
+               "$(TOOLCHAIN_DIR)/usr/lib/swift/pm/4_2",
+               "-target",
+               "x86_64-apple-macosx10.10",
+               "-sdk",
+               "/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.15.sdk",
+               "-package-description-version",
+               "5.1"
+            );
+            SWIFT_VERSION = "5.0";
+         };
+         name = "Debug";
+      };
+      "OBJ_37" = {
+         isa = "XCBuildConfiguration";
+         buildSettings = {
+            LD = "/usr/bin/true";
+            OTHER_SWIFT_FLAGS = (
+               "-swift-version",
+               "5",
+               "-I",
+               "$(TOOLCHAIN_DIR)/usr/lib/swift/pm/4_2",
+               "-target",
+               "x86_64-apple-macosx10.10",
+               "-sdk",
+               "/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.15.sdk",
+               "-package-description-version",
+               "5.1"
+            );
+            SWIFT_VERSION = "5.0";
+         };
+         name = "Release";
+      };
+      "OBJ_38" = {
+         isa = "PBXSourcesBuildPhase";
+         files = (
+            "OBJ_39"
+         );
+      };
+      "OBJ_39" = {
+         isa = "PBXBuildFile";
+         fileRef = "OBJ_6";
+      };
+      "OBJ_4" = {
+         isa = "XCBuildConfiguration";
+         buildSettings = {
+            CLANG_ENABLE_OBJC_ARC = "YES";
+            COMBINE_HIDPI_IMAGES = "YES";
+            COPY_PHASE_STRIP = "YES";
+            DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+            DYLIB_INSTALL_NAME_BASE = "@rpath";
+            GCC_OPTIMIZATION_LEVEL = "s";
+            GCC_PREPROCESSOR_DEFINITIONS = (
+               "$(inherited)",
+               "SWIFT_PACKAGE=1"
+            );
+            MACOSX_DEPLOYMENT_TARGET = "10.10";
+            OTHER_SWIFT_FLAGS = (
+               "$(inherited)",
+               "-DXcode"
+            );
+            PRODUCT_NAME = "$(TARGET_NAME)";
+            SDKROOT = "macosx";
+            SUPPORTED_PLATFORMS = (
+               "macosx",
+               "iphoneos",
+               "iphonesimulator",
+               "appletvos",
+               "appletvsimulator",
+               "watchos",
+               "watchsimulator"
+            );
+            SWIFT_ACTIVE_COMPILATION_CONDITIONS = (
+               "$(inherited)",
+               "SWIFT_PACKAGE"
+            );
+            SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
+            USE_HEADERMAP = "NO";
+         };
+         name = "Release";
+      };
+      "OBJ_41" = {
+         isa = "XCConfigurationList";
+         buildConfigurations = (
+            "OBJ_42",
+            "OBJ_43"
+         );
+         defaultConfigurationIsVisible = "0";
+         defaultConfigurationName = "Release";
+      };
+      "OBJ_42" = {
+         isa = "XCBuildConfiguration";
+         buildSettings = {
+         };
+         name = "Debug";
+      };
+      "OBJ_43" = {
+         isa = "XCBuildConfiguration";
+         buildSettings = {
+         };
+         name = "Release";
+      };
+      "OBJ_44" = {
+         isa = "PBXTargetDependency";
+         target = "netfox::netfoxTests";
+      };
+      "OBJ_46" = {
+         isa = "XCConfigurationList";
+         buildConfigurations = (
+            "OBJ_47",
+            "OBJ_48"
+         );
+         defaultConfigurationIsVisible = "0";
+         defaultConfigurationName = "Release";
+      };
+      "OBJ_47" = {
+         isa = "XCBuildConfiguration";
+         buildSettings = {
+            CLANG_ENABLE_MODULES = "YES";
+            EMBEDDED_CONTENT_CONTAINS_SWIFT = "YES";
+            FRAMEWORK_SEARCH_PATHS = (
+               "$(inherited)",
+               "$(PLATFORM_DIR)/Developer/Library/Frameworks"
+            );
+            HEADER_SEARCH_PATHS = (
+               "$(inherited)"
+            );
+            INFOPLIST_FILE = "netfox.xcodeproj/netfoxTests_Info.plist";
+            IPHONEOS_DEPLOYMENT_TARGET = "8.0";
+            LD_RUNPATH_SEARCH_PATHS = (
+               "$(inherited)",
+               "@loader_path/../Frameworks",
+               "@loader_path/Frameworks"
+            );
+            MACOSX_DEPLOYMENT_TARGET = "10.10";
+            OTHER_CFLAGS = (
+               "$(inherited)"
+            );
+            OTHER_LDFLAGS = (
+               "$(inherited)"
+            );
+            OTHER_SWIFT_FLAGS = (
+               "$(inherited)"
+            );
+            SWIFT_ACTIVE_COMPILATION_CONDITIONS = (
+               "$(inherited)"
+            );
+            SWIFT_VERSION = "5.0";
+            TARGET_NAME = "netfoxTests";
+            TVOS_DEPLOYMENT_TARGET = "9.0";
+            WATCHOS_DEPLOYMENT_TARGET = "2.0";
+         };
+         name = "Debug";
+      };
+      "OBJ_48" = {
+         isa = "XCBuildConfiguration";
+         buildSettings = {
+            CLANG_ENABLE_MODULES = "YES";
+            EMBEDDED_CONTENT_CONTAINS_SWIFT = "YES";
+            FRAMEWORK_SEARCH_PATHS = (
+               "$(inherited)",
+               "$(PLATFORM_DIR)/Developer/Library/Frameworks"
+            );
+            HEADER_SEARCH_PATHS = (
+               "$(inherited)"
+            );
+            INFOPLIST_FILE = "netfox.xcodeproj/netfoxTests_Info.plist";
+            IPHONEOS_DEPLOYMENT_TARGET = "8.0";
+            LD_RUNPATH_SEARCH_PATHS = (
+               "$(inherited)",
+               "@loader_path/../Frameworks",
+               "@loader_path/Frameworks"
+            );
+            MACOSX_DEPLOYMENT_TARGET = "10.10";
+            OTHER_CFLAGS = (
+               "$(inherited)"
+            );
+            OTHER_LDFLAGS = (
+               "$(inherited)"
+            );
+            OTHER_SWIFT_FLAGS = (
+               "$(inherited)"
+            );
+            SWIFT_ACTIVE_COMPILATION_CONDITIONS = (
+               "$(inherited)"
+            );
+            SWIFT_VERSION = "5.0";
+            TARGET_NAME = "netfoxTests";
+            TVOS_DEPLOYMENT_TARGET = "9.0";
+            WATCHOS_DEPLOYMENT_TARGET = "2.0";
+         };
+         name = "Release";
+      };
+      "OBJ_49" = {
+         isa = "PBXSourcesBuildPhase";
+         files = (
+            "OBJ_50",
+            "OBJ_51"
+         );
+      };
+      "OBJ_5" = {
+         isa = "PBXGroup";
+         children = (
+            "OBJ_6",
+            "OBJ_7",
+            "OBJ_10",
+            "OBJ_14",
+            "OBJ_17",
+            "OBJ_18",
+            "OBJ_19",
+            "OBJ_20",
+            "OBJ_21",
+            "OBJ_22",
+            "OBJ_23",
+            "OBJ_24",
+            "OBJ_25",
+            "OBJ_26"
+         );
+         path = "";
+         sourceTree = "<group>";
+      };
+      "OBJ_50" = {
+         isa = "PBXBuildFile";
+         fileRef = "OBJ_12";
+      };
+      "OBJ_51" = {
+         isa = "PBXBuildFile";
+         fileRef = "OBJ_13";
+      };
+      "OBJ_52" = {
+         isa = "PBXFrameworksBuildPhase";
+         files = (
+            "OBJ_53"
+         );
+      };
+      "OBJ_53" = {
+         isa = "PBXBuildFile";
+         fileRef = "netfox::netfox::Product";
+      };
+      "OBJ_54" = {
+         isa = "PBXTargetDependency";
+         target = "netfox::netfox";
+      };
+      "OBJ_6" = {
+         isa = "PBXFileReference";
+         explicitFileType = "sourcecode.swift";
+         path = "Package.swift";
+         sourceTree = "<group>";
+      };
+      "OBJ_7" = {
+         isa = "PBXGroup";
+         children = (
+            "OBJ_8"
+         );
+         name = "Sources";
+         path = "";
+         sourceTree = "SOURCE_ROOT";
+      };
+      "OBJ_8" = {
+         isa = "PBXGroup";
+         children = (
+            "OBJ_9"
+         );
+         name = "netfox";
+         path = "Sources/netfox";
+         sourceTree = "SOURCE_ROOT";
+      };
+      "OBJ_9" = {
+         isa = "PBXFileReference";
+         path = "netfox.swift";
+         sourceTree = "<group>";
+      };
+      "netfox::SwiftPMPackageDescription" = {
+         isa = "PBXNativeTarget";
+         buildConfigurationList = "OBJ_35";
+         buildPhases = (
+            "OBJ_38"
+         );
+         dependencies = (
+         );
+         name = "netfoxPackageDescription";
+         productName = "netfoxPackageDescription";
+         productType = "com.apple.product-type.framework";
+      };
+      "netfox::netfox" = {
+         isa = "PBXNativeTarget";
+         buildConfigurationList = "OBJ_28";
+         buildPhases = (
+            "OBJ_31",
+            "OBJ_33"
+         );
+         dependencies = (
+         );
+         name = "netfox";
+         productName = "netfox";
+         productReference = "netfox::netfox::Product";
+         productType = "com.apple.product-type.framework";
+      };
+      "netfox::netfox::Product" = {
+         isa = "PBXFileReference";
+         path = "netfox.framework";
+         sourceTree = "BUILT_PRODUCTS_DIR";
+      };
+      "netfox::netfoxPackageTests::ProductTarget" = {
+         isa = "PBXAggregateTarget";
+         buildConfigurationList = "OBJ_41";
+         buildPhases = (
+         );
+         dependencies = (
+            "OBJ_44"
+         );
+         name = "netfoxPackageTests";
+         productName = "netfoxPackageTests";
+      };
+      "netfox::netfoxTests" = {
+         isa = "PBXNativeTarget";
+         buildConfigurationList = "OBJ_46";
+         buildPhases = (
+            "OBJ_49",
+            "OBJ_52"
+         );
+         dependencies = (
+            "OBJ_54"
+         );
+         name = "netfoxTests";
+         productName = "netfoxTests";
+         productReference = "netfox::netfoxTests::Product";
+         productType = "com.apple.product-type.bundle.unit-test";
+      };
+      "netfox::netfoxTests::Product" = {
+         isa = "PBXFileReference";
+         path = "netfoxTests.xctest";
+         sourceTree = "BUILT_PRODUCTS_DIR";
+      };
+   };
+   rootObject = "OBJ_1";
 }

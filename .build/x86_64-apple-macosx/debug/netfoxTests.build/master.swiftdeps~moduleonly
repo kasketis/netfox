@@ -1,0 +1,6 @@
+version: "Apple Swift version 5.1.3 (swiftlang-1100.0.282.1 clang-1100.0.33.15)"
+options: "9d80d9dab32f5e22eb651c85e98cc580"
+build_time: [1582541146, 373794000]
+inputs:
+  "/Users/ehab/Documents/netfox/Tests/netfoxTests/XCTestManifests.swift": [1582541070, 596529924]
+  "/Users/ehab/Documents/netfox/Tests/netfoxTests/netfoxTests.swift": [1582541070, 596334472]
