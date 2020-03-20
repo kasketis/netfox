@@ -70,11 +70,14 @@ open class NFX: NSObject
             showMessage("Already started!")
             return
         }
-
+        
         self.started = true
         register()
         enable()
         clearOldData()
+    #if os(iOS)
+        NFXLoader.load()
+    #endif
         showMessage("Started!")
     #if os(OSX)
         self.addNetfoxToMainMenu()

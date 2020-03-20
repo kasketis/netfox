@@ -9,6 +9,7 @@
 import UIKit
 
 class NFXLoader {
+
     class func load() {
         let implementNetfoxSelector = NSSelectorFromString("implementNetfox")
         if URLSessionConfiguration.responds(to: implementNetfoxSelector) {
