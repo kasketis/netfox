@@ -7,13 +7,14 @@
 //
 
 import UIKit
+import WebKit
 
 class WebViewController: UIViewController {
     
-    @IBOutlet weak var webView: UIWebView!
+    @IBOutlet weak var webView: WKWebView!
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        webView.loadRequest(URLRequest(url: URL(string: "https://github.com/kasketis/netfox")!))
+        webView.load(URLRequest(url: URL(string: "https://github.com/kasketis/netfox")!))
     }
 }
