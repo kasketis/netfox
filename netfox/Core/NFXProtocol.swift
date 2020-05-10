@@ -59,7 +59,36 @@ open class NFXProtocol: URLProtocol
         
         let mutableRequest = (request as NSURLRequest).mutableCopy() as! NSMutableURLRequest
         URLProtocol.setProperty(true, forKey: NFXProtocol.nfxInternalKey, in: mutableRequest)
+        if let bodyData = captureRequestBody(mutableRequest as URLRequest) {
+            mutableRequest.httpBody = bodyData
+        }
+        
         session.dataTask(with: mutableRequest as URLRequest).resume()
+    }
+    
+    func captureRequestBody(_ request: URLRequest) -> Data? {
+        guard let bodyStream = request.httpBodyStream else {
+            return nil
+        }
+        
+        bodyStream.schedule(in: RunLoop.current, forMode: .default)
+        
+        let data = NSMutableData()
+        var buffer = [UInt8](repeating: 0, count: 1024)
+        bodyStream.open()
+        while bodyStream.hasBytesAvailable {
+            let length = bodyStream.read(&buffer, maxLength: 1024)
+            if length == 0 {
+                break
+            } else {
+                data.append(&buffer, length: length)
+            }
+        }
+        
+        bodyStream.remove(from: RunLoop.current, forMode: .default)
+        bodyStream.close()
+        
+        return data as Data
     }
     
     override open func stopLoading()
