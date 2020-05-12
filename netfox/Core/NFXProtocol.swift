@@ -59,6 +59,7 @@ open class NFXProtocol: URLProtocol
         
         let mutableRequest = (request as NSURLRequest).mutableCopy() as! NSMutableURLRequest
         URLProtocol.setProperty(true, forKey: NFXProtocol.nfxInternalKey, in: mutableRequest)
+        
         if let bodyData = captureRequestBody(mutableRequest as URLRequest) {
             mutableRequest.httpBody = bodyData
         }
@@ -67,6 +68,10 @@ open class NFXProtocol: URLProtocol
     }
     
     func captureRequestBody(_ request: URLRequest) -> Data? {
+        guard let _ = request.httpBody else {
+            return nil
+        }
+        
         guard let bodyStream = request.httpBodyStream else {
             return nil
         }
