@@ -22,7 +22,7 @@ class ImageViewController: UIViewController {
     @IBAction func tappedLoadImage(_ sender: Any) {
         dataTask?.cancel()
         
-        if let url = URL(string: "https://picsum.photos/\(imageView.frame.size.width)/\(imageView.frame.size.height)/?random") {
+        if let url = URL(string: "https://picsum.photos/\(Int(imageView.frame.size.width))/\(Int(imageView.frame.size.height))") {
             dataTask = session.dataTask(with: url, completionHandler: { (data, response, error) in
                 if let error = error {
                     self.handleCompletion(error: error.localizedDescription, data: data)

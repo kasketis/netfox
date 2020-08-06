@@ -102,7 +102,7 @@ class NFXDetailsController_iOS: NFXDetailsController, MFMailComposeViewControlle
     }
 
     @objc fileprivate func copyLabel(lpgr: UILongPressGestureRecognizer) {
-        guard let text = (lpgr.view as? UILabel)?.text,
+        guard let text = (lpgr.view as? UILabel)?.text ?? (lpgr.view as? UITextView)?.text,
               copyAlert == nil else { return }
 
         UIPasteboard.general.string = text
