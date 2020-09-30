@@ -9,11 +9,9 @@
 
 @implementation NFXLoader
 
-+ (void)load
-{
++ (void)load {
     SEL implementNetfoxSelector = NSSelectorFromString(@"implementNetfox");
-    if ([NSURLSessionConfiguration respondsToSelector:implementNetfoxSelector])
-    {
+    if ([NSURLSessionConfiguration respondsToSelector:implementNetfoxSelector]) {
         [NSURLSessionConfiguration performSelector:implementNetfoxSelector];
     }
 }
