@@ -16,7 +16,7 @@ class NFXStatisticsController_OSX: NFXStatisticsController {
     override func awakeFromNib() {
         super.awakeFromNib()
         
-        generateStatics()
+        generateStatistics()
         
         NotificationCenter.default.addObserver(
             self,

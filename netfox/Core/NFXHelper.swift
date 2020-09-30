@@ -295,7 +295,7 @@ class NFXDebugInfo {
     class func getNFXIP(_ completion:@escaping (_ result: String) -> Void) {
         var req: NSMutableURLRequest
         req = NSMutableURLRequest(url: URL(string: "https://api.ipify.org/?format=json")!)
-        URLProtocol.setProperty("1", forKey: "NFXInternal", in: req)
+        URLProtocol.setProperty(true, forKey: NFXProtocol.nfxInternalKey, in: req)
         
         let session = URLSession.shared
         session.dataTask(with: req as URLRequest, completionHandler: { (data, response, error) in
@@ -342,7 +342,7 @@ extension String {
     }
 }
 
-@objc private extension URLSessionConfiguration {
+@objc extension URLSessionConfiguration {
     private static var firstOccurrence = true
     
     static func implementNetfox() {
@@ -380,14 +380,12 @@ extension String {
         }
         set {
             guard let newTypes = newValue else { self.protocolClasses_Swizzled = nil; return }
-            
+
             var types = [AnyClass]()
             
             // de-dup
             for newType in newTypes {
-                if !types.contains(where: { (existingType) -> Bool in
-                    existingType == newType
-                }) {
+                if !types.contains(where: { $0 == newType }) {
                     types.append(newType)
                 }
             }

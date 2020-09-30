@@ -9,7 +9,7 @@ import Foundation
 
 @objc
 open class NFXProtocol: URLProtocol {
-    private static let nfxInternalKey = "com.netfox.NFXInternal"
+    static let nfxInternalKey = "com.netfox.NFXInternal"
     
     private lazy var session: URLSession = { [unowned self] in
         return URLSession(configuration: .default, delegate: self, delegateQueue: nil)
