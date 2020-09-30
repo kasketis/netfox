@@ -29,11 +29,16 @@ fileprivate func > <T : Comparable>(lhs: T?, rhs: T?) -> Bool {
 
 class NFXDetailsController: NFXGenericController {
 
-    enum EDetailsView
-    {
+    enum EDetailsView {
         case info
         case request
         case response
+    }
+    
+    private enum Constants: String {
+        case headersTitle = "-- Headers --\n\n"
+        case bodyTitle = "\n-- Body --\n\n"
+        case tooLongToShowTitle = "Too long to show. If you want to see it, please tap the following button\n"
     }
 
     override func viewDidLoad() {
@@ -41,8 +46,7 @@ class NFXDetailsController: NFXGenericController {
         // Do view setup here.
     }
     
-    func getInfoStringFromObject(_ object: NFXHTTPModel) -> NSAttributedString
-    {
+    func getInfoStringFromObject(_ object: NFXHTTPModel) -> NSAttributedString {
         var tempString: String
         tempString = String()
         
@@ -62,12 +66,11 @@ class NFXDetailsController: NFXGenericController {
         return formatNFXString(tempString)
     }
 
-    func getRequestStringFromObject(_ object: NFXHTTPModel) -> NSAttributedString
-    {
+    func getRequestStringFromObject(_ object: NFXHTTPModel) -> NSAttributedString {
         var tempString: String
         tempString = String()
         
-        tempString += "-- Headers --\n\n"
+        tempString += Constants.headersTitle.rawValue
         
         if object.requestHeaders?.count > 0 {
             for (key, val) in (object.requestHeaders)! {
@@ -84,19 +87,18 @@ class NFXDetailsController: NFXGenericController {
     }
 
     func getRequestBodyStringFooter(_ object: NFXHTTPModel) -> String {
-        var tempString = "\n-- Body --\n\n"
+        var tempString = Constants.bodyTitle.rawValue
         if (object.requestBodyLength == 0) {
             tempString += "Request body is empty\n"
         } else if (object.requestBodyLength > 1024) {
-            tempString += "Too long to show. If you want to see it, please tap the following button\n"
+            tempString += Constants.tooLongToShowTitle.rawValue
         } else {
             tempString += "\(object.getRequestBody())\n"
         }
         return tempString
     }
     
-    func getResponseStringFromObject(_ object: NFXHTTPModel) -> NSAttributedString
-    {
+    func getResponseStringFromObject(_ object: NFXHTTPModel) -> NSAttributedString {
         if (object.noResponse) {
             return NSMutableAttributedString(string: "No response")
         }
@@ -104,7 +106,7 @@ class NFXDetailsController: NFXGenericController {
         var tempString: String
         tempString = String()
         
-        tempString += "-- Headers --\n\n"
+        tempString += Constants.headersTitle.rawValue
         
         if object.responseHeaders?.count > 0 {
             for (key, val) in object.responseHeaders! {
@@ -122,11 +124,11 @@ class NFXDetailsController: NFXGenericController {
     }
     
     func getResponseBodyStringFooter(_ object: NFXHTTPModel) -> String {
-        var tempString = "\n-- Body --\n\n"
+        var tempString = Constants.bodyTitle.rawValue
         if (object.responseBodyLength == 0) {
             tempString += "Response body is empty\n"
         } else if (object.responseBodyLength > 1024) {
-            tempString += "Too long to show. If you want to see it, please tap the following button\n"
+            tempString += Constants.tooLongToShowTitle.rawValue
         } else {
             tempString += "\(object.getResponseBody())\n"
         }

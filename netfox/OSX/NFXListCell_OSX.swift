@@ -9,17 +9,14 @@
     
 import Cocoa
 
-class NFXListCell_OSX: NSTableCellView 
-{
+class NFXListCell_OSX: NSTableCellView {
     
     @IBOutlet var statusView: NSView!
     @IBOutlet var requestTimeLabel: NSTextField!
     @IBOutlet var timeIntervalLabel: NSTextField!
-    
     @IBOutlet var URLLabel: NSTextField!
     @IBOutlet var methodLabel: NSTextField!
     @IBOutlet var typeLabel: NSTextField!
-    
     @IBOutlet var circleView: NSView!
 
     let padding: CGFloat = 5
@@ -29,30 +26,27 @@ class NFXListCell_OSX: NSTableCellView
     override func awakeFromNib() {
         layer?.backgroundColor = NFXColor.clear.cgColor
         
-        self.circleView.layer?.backgroundColor = NSColor.NFXGray44Color().cgColor
-        self.circleView.layer?.cornerRadius = 4
-        self.circleView.alphaValue = 0.2
+        circleView.layer?.backgroundColor = NSColor.NFXGray44Color().cgColor
+        circleView.layer?.cornerRadius = 4
+        circleView.alphaValue = 0.2
         
-        self.requestTimeLabel.font = NSFont.NFXFontBold(size: 13)
-        self.timeIntervalLabel.font = NSFont.NFXFont(size: 12)
-        self.URLLabel.font = NSFont.NFXFont(size: 12)
-        self.methodLabel.font = NSFont.NFXFont(size: 12)
-        self.typeLabel.font = NSFont.NFXFont(size: 12)
+        requestTimeLabel.font = NSFont.NFXFontBold(size: 13)
+        timeIntervalLabel.font = NSFont.NFXFont(size: 12)
+        URLLabel.font = NSFont.NFXFont(size: 12)
+        methodLabel.font = NSFont.NFXFont(size: 12)
+        typeLabel.font = NSFont.NFXFont(size: 12)
         
     }
         
-    func isNew()
-    {
-        self.circleView.isHidden = false
-    }
-    
-    func isOld()
-    {
-        self.circleView.isHidden = true
+    func isNew() {
+        circleView.isHidden = false
     }
     
-    func configForObject(obj: NFXHTTPModel)
-    {
+    func isOld() {
+        circleView.isHidden = true
+    }
+    
+    func configForObject(obj: NFXHTTPModel) {
         setURL(url: obj.requestURL ?? "-")
         setStatus(status: obj.responseStatus ?? 999)
         setTimeInterval(timeInterval: obj.timeInterval ?? 999)
@@ -62,58 +56,51 @@ class NFXListCell_OSX: NSTableCellView
         isNewBasedOnDate(responseDate: obj.responseDate as NSDate? ?? NSDate())
     }
     
-    func setURL(url: String)
-    {
-        self.URLLabel.stringValue = url
+    func setURL(url: String) {
+        URLLabel.stringValue = url
     }
     
-    func setStatus(status: Int)
-    {
+    func setStatus(status: Int) {
         if status == 999 {
-            self.statusView.layer?.backgroundColor = NFXColor.NFXGray44Color().cgColor //gray
-            self.timeIntervalLabel.textColor = NFXColor.white
+            statusView.layer?.backgroundColor = NFXColor.NFXGray44Color().cgColor //gray
+            timeIntervalLabel.textColor = NFXColor.white
             
         } else if status < 400 {
-            self.statusView.layer?.backgroundColor = NFXColor.NFXGreenColor().cgColor //green
-            self.timeIntervalLabel.textColor = NFXColor.NFXDarkGreenColor()
+            statusView.layer?.backgroundColor = NFXColor.NFXGreenColor().cgColor //green
+            timeIntervalLabel.textColor = NFXColor.NFXDarkGreenColor()
             
         } else {
-            self.statusView.layer?.backgroundColor = NFXColor.NFXRedColor().cgColor //red
-            self.timeIntervalLabel.textColor = NFXColor.NFXDarkRedColor()
+            statusView.layer?.backgroundColor = NFXColor.NFXRedColor().cgColor //red
+            timeIntervalLabel.textColor = NFXColor.NFXDarkRedColor()
             
         }
     }
     
-    func setRequestTime(requestTime: String)
-    {
-        self.requestTimeLabel.stringValue = requestTime
+    func setRequestTime(requestTime: String) {
+        requestTimeLabel.stringValue = requestTime
     }
     
-    func setTimeInterval(timeInterval: Float)
-    {
+    func setTimeInterval(timeInterval: Float) {
         if timeInterval == 999 {
-            self.timeIntervalLabel.stringValue = "-"
+            timeIntervalLabel.stringValue = "-"
         } else {
-            self.timeIntervalLabel.stringValue = NSString(format: "%.2f", timeInterval) as String
+            timeIntervalLabel.stringValue = NSString(format: "%.2f", timeInterval) as String
         }
     }
     
-    func setType(type: String)
-    {
-        self.typeLabel.stringValue = type
+    func setType(type: String) {
+        typeLabel.stringValue = type
     }
     
-    func setMethod(method: String)
-    {
-        self.methodLabel.stringValue = method
+    func setMethod(method: String) {
+        methodLabel.stringValue = method
     }
     
-    func isNewBasedOnDate(responseDate: NSDate)
-    {
+    func isNewBasedOnDate(responseDate: NSDate) {
         if responseDate.isGreaterThan(NFX.sharedInstance().getLastVisitDate()) {
-            self.isNew()
+            isNew()
         } else {
-            self.isOld()
+            isOld()
         }
     }
 }

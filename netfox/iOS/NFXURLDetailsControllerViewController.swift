@@ -15,24 +15,20 @@ class NFXURLDetailsController: NFXDetailsController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.title = "URL Query Strings"
-        self.view.layer.masksToBounds = true
-        self.view.translatesAutoresizingMaskIntoConstraints = true
+        title = "URL Query Strings"
+        view.layer.masksToBounds = true
+        view.translatesAutoresizingMaskIntoConstraints = true
         
         let tableView: UITableView = UITableView()
-        tableView.frame = self.view.bounds
+        tableView.frame = view.bounds
         tableView.dataSource = self
         tableView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
-        self.view.addSubview(tableView)
+        view.addSubview(tableView)
     }
     
 }
 
 extension NFXURLDetailsController: UITableViewDataSource {
-    
-    func numberOfSections(in tableView: UITableView) -> Int {
-        return 1
-    }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         var cell: UITableViewCell!
@@ -40,7 +36,7 @@ extension NFXURLDetailsController: UITableViewDataSource {
         if cell == nil {
             cell = UITableViewCell(style: .value1, reuseIdentifier: "cell")
         }
-        if let queryItem = self.selectedModel.requestURLQueryItems?[indexPath.row] {
+        if let queryItem = selectedModel.requestURLQueryItems?[indexPath.row] {
             cell.textLabel?.text = queryItem.name
             cell.detailTextLabel?.text = queryItem.value
         }
@@ -48,13 +44,12 @@ extension NFXURLDetailsController: UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        guard let queryItems = self.selectedModel.requestURLQueryItems else {
+        guard let queryItems = selectedModel.requestURLQueryItems else {
             return 0
         }
         return queryItems.count
     }
     
 }
-
 
 #endif
