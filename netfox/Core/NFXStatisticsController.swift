@@ -43,7 +43,7 @@ class NFXStatisticsController: NFXGenericController {
     
     override func reloadData() {
         clearStatistics()
-        generateStatics()
+        generateStatistics()
     }
     
     func getReportString() -> NSAttributedString {
@@ -85,7 +85,7 @@ class NFXStatisticsController: NFXGenericController {
         return formatNFXString(tempString)
     }
     
-    func generateStatics() {
+    func generateStatistics() {
         let models = NFXHTTPModelManager.sharedInstance.getModels()
         totalModels = models.count
         
