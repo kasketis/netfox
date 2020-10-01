@@ -20,13 +20,15 @@ Steps to reproduce the behavior:
 **Expected behavior**
 A clear and concise description of what you expected to happen.
 
-**Screenshots**
-If applicable, add screenshots to help explain your problem.
+**Screenshots/Video**
+If applicable, add screenshots/video to help explain your problem.
 
 **Enviroment:**
  - Device: [e.g. iPhone 11]
  - OS: [e.g. iOS 13.3]
  - Netfox version: [e.g 1.20.0]
+-  Xcode version: [e.g 11.6]
+-  Swift version: [e.g 5.1]
 
 **Additional context**
 Add any other context about the problem here.
