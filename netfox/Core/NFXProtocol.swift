@@ -44,7 +44,9 @@ open class NFXProtocol: URLProtocol {
             return false
         }
         
-        guard !NFX.sharedInstance().getIgnoredURLsRegex().matches(url.absoluteString) else {
+     let regexMatches = NFX.sharedInstance().getIgnoredURLsRegexes().map({return $0.matches(url.absoluteString)}).reduce(false) {$0 || $1}
+        
+        guard !regexMatches else {
             return false
         }
         
