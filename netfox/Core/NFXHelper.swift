@@ -177,9 +177,22 @@ extension URLRequest
         }
     }
     
+    func getNFXContentTypeHeader() -> String? 
+    {
+        return self.value(forHTTPHeaderField: "Content-Type")
+    }
+
+    
     func getNFXBody() -> Data
     {
-        return httpBodyStream?.readfully() ?? URLProtocol.property(forKey: "NFXBodyData", in: self) as? Data ?? Data()
+        if getNFXContentTypeHeader()?.contains("multipart/form-data;") == true 
+        {
+            return Data()
+        }
+        else
+        {
+            return httpBodyStream?.readfully() ?? URLProtocol.property(forKey: "NFXBodyData", in: self) as? Data ?? Data()
+        }
     }
     
     func getCurl() -> String {
