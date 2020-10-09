@@ -1,5 +1,6 @@
 .DS_Store
 *.xcuserdatad
+.swiftpm
 
 # Created by https://www.gitignore.io/api/xcode,osx
 
