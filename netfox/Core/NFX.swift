@@ -31,6 +31,8 @@ open class NFX: NSObject
         var windowController: NFXWindowController?
         let mainMenu: NSMenu? = NSApp.mainMenu?.items[1].submenu
         var nfxMenuItem: NSMenuItem = NSMenuItem(title: "netfox", action: #selector(NFX.show), keyEquivalent: String.init(describing: (character: NSF9FunctionKey, length: 1)))
+    #elseif os(iOS)
+        public var theme: NFXTheme? = nil
     #endif
     
     // swiftSharedInstance is not accessible from ObjC
@@ -247,6 +249,14 @@ open class NFX: NSObject
 }
 
 #if os(iOS)
+public protocol NFXTheme {
+    var tintColor: UIColor? { get }
+    var barTintColor: UIColor? { get }
+    var titleTextAttributes: [NSAttributedString.Key : Any]? { get }
+}
+#endif
+
+#if os(iOS)
 
 extension NFX {
     fileprivate var presentingViewController: UIViewController? {
@@ -261,9 +271,9 @@ extension NFX {
     {
         let navigationController = UINavigationController(rootViewController: NFXListController_iOS())
         navigationController.navigationBar.isTranslucent = false
-        navigationController.navigationBar.tintColor = UIColor.NFXOrangeColor()
-        navigationController.navigationBar.barTintColor = UIColor.NFXStarkWhiteColor()
-        navigationController.navigationBar.titleTextAttributes = [.foregroundColor: UIColor.NFXOrangeColor()]
+        navigationController.navigationBar.tintColor = theme?.tintColor ?? UIColor.NFXOrangeColor()
+        navigationController.navigationBar.barTintColor = theme?.barTintColor ?? UIColor.NFXStarkWhiteColor()
+        navigationController.navigationBar.titleTextAttributes = theme?.titleTextAttributes ?? [.foregroundColor: UIColor.NFXOrangeColor()]
 
         if #available(iOS 13.0, *) {
             navigationController.presentationController?.delegate = self
