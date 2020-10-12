@@ -72,7 +72,7 @@ fileprivate func < <T : Comparable>(lhs: T?, rhs: T?) -> Bool {
     
     func logRequest(_ request: URLRequest)
     {
-        formattedRequestLogEntry().appendToFile(filePath: NFXPath.SessionLog)
+        formattedRequestLogEntry().appendToFile(at: NFXPath.SessionLogFileURL)
     }
     
     func saveErrorResponse()
@@ -99,7 +99,7 @@ fileprivate func < <T : Comparable>(lhs: T?, rhs: T?) -> Bool {
         self.timeInterval = Float(self.responseDate!.timeIntervalSince(self.requestDate!))
         
         saveResponseBodyData(data)
-        formattedResponseLogEntry().appendToFile(filePath: NFXPath.SessionLog)
+        formattedResponseLogEntry().appendToFile(at: NFXPath.SessionLogFileURL)
     }
     
     
@@ -108,7 +108,7 @@ fileprivate func < <T : Comparable>(lhs: T?, rhs: T?) -> Bool {
         let tempBodyString = NSString.init(data: data, encoding: String.Encoding.utf8.rawValue)
         self.requestBodyLength = data.count
         if (tempBodyString != nil) {
-            saveData(tempBodyString!, toFile: getRequestBodyFilepath())
+            saveData(data, toFile: getRequestBodyFilepath())
         }
     }
     
@@ -127,7 +127,7 @@ fileprivate func < <T : Comparable>(lhs: T?, rhs: T?) -> Bool {
         
         if (bodyString != nil) {
             self.responseBodyLength = data.count
-            saveData(bodyString!, toFile: getResponseBodyFilepath())
+            saveData(data, toFile: getResponseBodyFilepath())
         }
         
     }
@@ -192,15 +192,13 @@ fileprivate func < <T : Comparable>(lhs: T?, rhs: T?) -> Bool {
     
     @objc public func getDocumentsPath() -> String
     {
-        return NSSearchPathForDirectoriesInDomains(FileManager.SearchPathDirectory.documentDirectory, FileManager.SearchPathDomainMask.allDomainsMask, true).first!
+        return NFXPath.TemporaryURL.path
     }
     
-    @objc public func saveData(_ dataString: NSString, toFile: String)
+    @objc public func saveData(_ data: Data, toFile: String)
     {
-        do {
-            try dataString.write(toFile: toFile, atomically: false, encoding: String.Encoding.utf8.rawValue)
-        } catch {
-            print("catch !!!")
+        if !FileManager.default.createFile(atPath: toFile, contents: data) {
+            print("NFX cannot create file: \(toFile)")
         }
     }
     

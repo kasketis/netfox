@@ -370,27 +370,30 @@ class NFXDebugInfo
 
 struct NFXPath
 {
-    static let Documents = NSSearchPathForDirectoriesInDomains(FileManager.SearchPathDirectory.documentDirectory, FileManager.SearchPathDomainMask.allDomainsMask, true).first! as NSString
-    
-    static let SessionLog = NFXPath.Documents.appendingPathComponent("session.log");
+    static let TemporaryURL = NFX.urlForUniqueTemporaryDirectory()
+    @available(*, deprecated, message: "Please use TemporaryURL")
+    static let Documents = NSSearchPathForDirectoriesInDomains(.documentDirectory,
+                                                               .allDomainsMask, true).first! as NSString
+    static let SessionLogFileName = "session.log"
+    static var SessionLogFileURL = NFXPath.TemporaryURL.appendingPathComponent(NFXPath.SessionLogFileName)
 }
 
 
 extension String
 {
-    func appendToFile(filePath: String) {
+    func appendToFile(at url: URL) {
         let contentToAppend = self
         
-        if let fileHandle = FileHandle(forWritingAtPath: filePath) {
+        if let fileHandle = try? FileHandle(forWritingTo: url) {
             /* Append to file */
             fileHandle.seekToEndOfFile()
             fileHandle.write(contentToAppend.data(using: String.Encoding.utf8)!)
         } else {
             /* Create new file */
             do {
-                try contentToAppend.write(toFile: filePath, atomically: true, encoding: String.Encoding.utf8)
+                try contentToAppend.write(to: url, atomically: true, encoding: String.Encoding.utf8)
             } catch {
-                print("Error creating \(filePath)")
+                print("Error creating \(url)")
             }
         }
     }
@@ -503,4 +506,31 @@ public extension NSNotification.Name {
     static let NFXReloadData = Notification.Name("NFXReloadData")
     static let NFXAddedModel = Notification.Name("NFXAddedModel")
     static let NFXClearedModels = Notification.Name("NFXClearedModels")
+}
+
+private extension NFX {
+    static func urlForUniqueTemporaryDirectory(fileManager: FileManager = .default) -> URL {
+        let directoryName = "nfx_directory"
+        let temporaryDirectory: URL
+        if #available(iOS 10.0, *) {
+            temporaryDirectory = fileManager.temporaryDirectory
+        } else {
+            temporaryDirectory = URL(string: NSTemporaryDirectory())!
+        }
+
+        let subDirectory = temporaryDirectory.appendingPathComponent(directoryName)
+
+        var isDirectory: ObjCBool = false
+        let exists = fileManager.fileExists(atPath: subDirectory.path, isDirectory: &isDirectory)
+
+        if !exists {
+            do {
+                try fileManager.createDirectory(at: subDirectory, withIntermediateDirectories: false)
+            } catch {
+                print("error")
+            }
+        }
+
+        return subDirectory
+    }
 }
