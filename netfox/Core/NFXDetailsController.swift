@@ -34,6 +34,7 @@ class NFXDetailsController: NFXGenericController {
         case info
         case request
         case response
+        case encrypted
     }
 
     override func viewDidLoad() {
@@ -122,7 +123,7 @@ class NFXDetailsController: NFXGenericController {
     }
     
     func getResponseBodyStringFooter(_ object: NFXHTTPModel) -> String {
-        var tempString = "\n-- Body --\n\n"
+        var tempString = "-- Body --\n\n"
         if (object.responseBodyLength == 0) {
             tempString += "Response body is empty\n"
         } else if (object.responseBodyLength > 1024) {
@@ -132,5 +133,38 @@ class NFXDetailsController: NFXGenericController {
         }
         return tempString
     }
+    
+    
+    func getEncryptedStringFromObject(_ object: NFXHTTPModel) -> NSAttributedString
+    {
+        var tempString: String
+        tempString = String()
+        
+//        var toEncode: String
+//        var encodedString: String
+//        var decodedString: String
+        
+        tempString += "ENCRYPTED RESPONSE \n\n"
+        let toEncode = object.getResponseBody() as String
+        let encodedString = toEncode.toBase64()
+        tempString += "\(encodedString)\n\n\n\n"
+        
+        let decodedString = encodedString.fromBase64()!
+        tempString += "DECRYPTED RESPONSE \n\n"
+        tempString += "\(decodedString)\n\n"
+        
+        return formatNFXString(tempString)
+    }
+}
 
+
+extension String {
+    func toBase64() -> String {
+        return Data(self.utf8).base64EncodedString()
+    }
+
+    func fromBase64() -> String? {
+        guard let data = Data(base64Encoded: self) else { return nil }
+        return String(data: data, encoding: .utf8)
+    }
 }

@@ -8,6 +8,14 @@
 
 import UIKit
 
+protocol encryptDecrypt {
+    var encryptText: String { get }
+    var decryptText: String { get }
+    
+    func encryptRequest()
+    func decryptRequest()
+}
+
 class TextViewController: UIViewController {
     
     @IBOutlet weak var textView: UITextView!
@@ -27,7 +35,7 @@ class TextViewController: UIViewController {
         
         guard let url = URL(string: "https://api.chucknorris.io/jokes/random") else { return }
         var request = URLRequest(url: url)
-        request.httpBody = "TEST".data(using: .utf8)
+        request.httpBody = "karlakjmlasn  knasdkasd laksdajdwlkwej lkad".data(using: .utf8)
         dataTask = session.dataTask(with: request) { (data, response, error) in
             if let error = error {
                 self.handleCompletion(error: error.localizedDescription, data: data)
