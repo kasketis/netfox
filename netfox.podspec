@@ -12,7 +12,7 @@ DESC
   s.license          = 'MIT'
   s.author           = "Christos Kasketis"
   s.source           = { :git => "https://github.com/kasketis/netfox.git", :tag => "#{s.version}" }
-
+  s.swift_versions   = '5.0'
   s.ios.deployment_target = '9.0'
   s.osx.deployment_target = '10.11'
   s.requires_arc = true
