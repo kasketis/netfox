@@ -147,7 +147,7 @@ class NFXListController_iOS: NFXListController, UITableViewDelegate, UITableView
                 cell.configForObject(obj)
             }
         } else {
-            if NFXHTTPModelManager.sharedInstance.getModels().count > 0 {
+            if NFXHTTPModelManager.sharedInstance.getModels().count > indexPath.row {
                 let obj = NFXHTTPModelManager.sharedInstance.getModels()[(indexPath as NSIndexPath).row]
                 cell.configForObject(obj)
             }

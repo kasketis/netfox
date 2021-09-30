@@ -209,7 +209,12 @@ open class NFX: NSObject
     {
         NFXHTTPModelManager.sharedInstance.clear()
         do {
-            let documentsPath = NSSearchPathForDirectoriesInDomains(FileManager.SearchPathDirectory.documentDirectory, FileManager.SearchPathDomainMask.allDomainsMask, true).first!
+            let documentsPath = NSSearchPathForDirectoriesInDomains(FileManager.SearchPathDirectory.documentDirectory, FileManager.SearchPathDomainMask.allDomainsMask, true).first! + "/nfx"
+            if !FileManager.default.fileExists(atPath: documentsPath) {
+                // Creates that folder if not exists
+                try? FileManager.default.createDirectory(atPath: documentsPath, withIntermediateDirectories: false, attributes: nil)
+            }
+
             let filePathsArray = try FileManager.default.subpathsOfDirectory(atPath: documentsPath)
             for filePath in filePathsArray {
                 if filePath.hasPrefix("nfx") {
@@ -250,7 +255,7 @@ open class NFX: NSObject
 
 extension NFX {
     fileprivate var presentingViewController: UIViewController? {
-        var rootViewController = UIApplication.shared.keyWindow?.rootViewController
+        var rootViewController = UIApplication.shared.windows.first(where: {$0.isKeyWindow })?.rootViewController
 		while let controller = rootViewController?.presentedViewController {
 			rootViewController = controller
 		}

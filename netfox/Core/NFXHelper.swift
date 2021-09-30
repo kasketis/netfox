@@ -372,7 +372,7 @@ struct NFXPath
 {
     static let Documents = NSSearchPathForDirectoriesInDomains(FileManager.SearchPathDirectory.documentDirectory, FileManager.SearchPathDomainMask.allDomainsMask, true).first! as NSString
     
-    static let SessionLog = NFXPath.Documents.appendingPathComponent("session.log");
+    static let SessionLog = NFXPath.Documents.appendingPathComponent("nfx/session.log");
 }
 
 
