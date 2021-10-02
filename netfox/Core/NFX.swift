@@ -49,16 +49,9 @@ open class NFX: NSObject
         return NFX.swiftSharedInstance
     }
     
-    @objc public enum ENFXGesture: Int
-    {
-        case shake
-        case custom
-    }
-    
     fileprivate var started: Bool = false
     fileprivate var presented: Bool = false
     fileprivate var enabled: Bool = false
-    fileprivate var selectedGesture: ENFXGesture = .shake
     fileprivate var ignoredURLs = [String]()
     fileprivate var filters = [Bool]()
     fileprivate var lastVisitDate: Date = Date()
@@ -134,18 +127,6 @@ open class NFX: NSObject
     
     @objc open func setCachePolicy(_ policy: URLCache.StoragePolicy) {
         cacheStoragePolicy = policy
-    }
-    
-    @objc open func setGesture(_ gesture: ENFXGesture)
-    {
-        self.selectedGesture = gesture
-    #if os(OSX)
-        if gesture == .shake {
-            self.addNetfoxToMainMenu()
-        } else {
-            self.removeNetfoxFromMainmenu()
-        }
-    #endif
     }
     
     @objc open func show()
@@ -224,11 +205,6 @@ open class NFX: NSObject
     func getIgnoredURLs() -> [String]
     {
         return self.ignoredURLs
-    }
-    
-    func getSelectedGesture() -> ENFXGesture
-    {
-        return self.selectedGesture
     }
     
     func cacheFilters(_ selectedFilters: [Bool])
