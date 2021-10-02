@@ -9,10 +9,6 @@
 
 import UIKit
 
-#if swift(>=4.2)
-public typealias UIEventSubtype = UIEvent.EventSubtype
-#endif
-
 public extension UIDevice
 {
     

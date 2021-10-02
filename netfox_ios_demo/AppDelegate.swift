@@ -6,8 +6,8 @@
 //  Copyright © 2017 kasketis. All rights reserved.
 //
 
-import UIKit
 import netfox_ios
+import UIKit
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
@@ -16,10 +16,17 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
-        
+
         NFX.sharedInstance().start()
-        
+
         return true
     }
 }
 
+extension UIWindow {
+    override open func motionEnded(_ motion: UIEvent.EventSubtype, with event: UIEvent?) {
+        if event!.type == .motion && event!.subtype == .motionShake {
+            NFX.sharedInstance().toggle()
+        }
+    }
+}
