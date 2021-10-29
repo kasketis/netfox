@@ -1,7 +1,7 @@
 ![Netfox: A lightweight, one line setup, network debugging library](https://raw.githubusercontent.com/kasketis/netfox/master/netfox-logo.png)
 
 <p align="center">
-<img alt="Version" src="https://img.shields.io/badge/version-1.11-green.svg?style=flat-square" />
+<img alt="Version" src="https://img.shields.io/badge/version-1.20.0-green.svg?style=flat-square" />
 <a href="https://travis-ci.org/kasketis/netfox"><img alt="CI Status" src="http://img.shields.io/travis/kasketis/netfox.svg?style=flat-square" /></a>
 <a href="https://cocoapods.org/pods/netfox"><img alt="Cocoapods Compatible" src="https://img.shields.io/cocoapods/v/netfox.svg?style=flat-square" /></a>
 <a href="https://github.com/Carthage/Carthage"><img alt="Carthage Compatible" src="https://img.shields.io/badge/carthage-compatible-4BC51D.svg?style=flat-square" /></a>
@@ -9,12 +9,15 @@
 <a href="https://opensource.org/licenses/MIT"><img alt="License" src="https://img.shields.io/badge/license-MIT-orange.svg?style=flat-square" /></a>
 </p>
 
+
 Netfox provides a quick look on all executed network requests performed by your iOS or OSX app.
 It grabs all requests - of course yours, requests from 3rd party libraries (such as AFNetworking, Alamofire or else), UIWebViews, and more
 
 Very useful and handy for network related issues and bugs
 
-Supports Swift 4 and above - bridged also for Objective-C.
+Supports Swift 5 and above - bridged also for Objective-C.
+
+For Swift 4 support, use version [1.19.0](https://github.com/kasketis/netfox/releases/tag/1.19.0).
 
 For Swift 3.2 support, use version [1.12.1](https://github.com/kasketis/netfox/releases/tag/1.12.1).
 
@@ -25,6 +28,15 @@ Feel free to contribute :)
 |---|---|
 
 ## Installation
+
+### SPM (beta, only iOS)
+
+The [Swift Package Manager](https://swift.org/package-manager/) is a tool for automating the distribution of Swift code and is integrated into the `swift` compiler.
+
+To integrate using Apple's Swift package manager from xcode :
+
+1. File -> Swift Packages -> Add Package Dependency...
+2. Enter package URL: https://github.com/kasketis/netfox, always choose the latest release
 
 ### CocoaPods
 
@@ -49,8 +61,6 @@ pod 'netfox', :configurations => ['Debug', 'Test']
 <pre>
 github "kasketis/netfox"
 </pre>
-
-
 ### Manually
 
 If you prefer not to use dependency managers, you can integrate netfox into your project manually.
