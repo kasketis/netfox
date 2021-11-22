@@ -33,10 +33,9 @@ Feel free to contribute :)
 
 The [Swift Package Manager](https://swift.org/package-manager/) is a tool for automating the distribution of Swift code and is integrated into the `swift` compiler.
 
-To integrate using Apple's Swift package manager from xcode :
+To add `netfox` as a package dependency to your Xcode project, select `File > Add Packages` and enter as repository URL the `https://github.com/kasketis/netfox` (always choose the latest release)
 
-1. File -> Swift Packages -> Add Package Dependency...
-2. Enter package URL: https://github.com/kasketis/netfox, always choose the latest release
+For more info, please check [here](https://developer.apple.com/documentation/swift_packages/adding_package_dependencies_to_your_app)
 
 ### CocoaPods
 
