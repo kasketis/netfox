@@ -37,6 +37,7 @@ open class NFX: NSObject {
     
     fileprivate enum Constants: String {
         case alreadyStartedMessage = "Already started!"
+        case alreadyStoppedMessage = "Already stopped!"
         case startedMessage = "Started!"
         case stoppedMessage = "Stopped!"
         case prefixForCheck = "nfx"
@@ -78,6 +79,7 @@ open class NFX: NSObject {
         }
 
         started = true
+        URLSessionConfiguration.implementNetfox()
         register()
         enable()
         clearOldData()
@@ -88,6 +90,11 @@ open class NFX: NSObject {
     }
     
     @objc open func stop() {
+        guard started else {
+            showMessage(Constants.alreadyStoppedMessage.rawValue)
+            return
+        }
+        
         unregister()
         disable()
         clearOldData()

@@ -21,7 +21,7 @@
 	<key>CFBundleVersion</key>
 	<string>$(CURRENT_PROJECT_VERSION)</string>
 	<key>Copyright (human-readable)</key>
-	<string>Copyright © 2016 netfox. All rights reserved.</string>
+	<string>Copyright © 2016-2021 netfox. All rights reserved.</string>
 	<key>NSPrincipalClass</key>
 	<string></string>
 </dict>

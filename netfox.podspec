@@ -12,11 +12,11 @@ DESC
   s.license          = 'MIT'
   s.author           = "Christos Kasketis"
   s.source           = { :git => "https://github.com/kasketis/netfox.git", :tag => "#{s.version}" }
-  s.swift_versions = ['4.0', '4.2', '5.0']
+  s.swift_versions = '5.0'
   s.ios.deployment_target = '9.0'
   s.osx.deployment_target = '10.11'
   s.requires_arc = true
-  s.source_files = "netfox/Core/*.{swift,h,m}"
+  s.source_files = "netfox/Core/*.{swift}"
   s.ios.source_files = "netfox/iOS/*.swift"
   s.osx.source_files = "netfox/OSX/*.{swift,xib}"
 end
