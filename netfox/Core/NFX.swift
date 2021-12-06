@@ -49,6 +49,7 @@ open class NFX: NSObject {
     fileprivate var enabled: Bool = false
     fileprivate var selectedGesture: ENFXGesture = .shake
     fileprivate var ignoredURLs = [String]()
+    fileprivate var ignoredURLsRegex = [NSRegularExpression]()
     fileprivate var filters = [Bool]()
     fileprivate var lastVisitDate: Date = Date()
     
@@ -173,6 +174,18 @@ open class NFX: NSObject {
         ignoredURLs.append(url)
     }
     
+    @objc open func ignoreURLs(_ urls: [String]) {
+        ignoredURLs.append(contentsOf: urls)
+    }
+    
+    @objc open func ignoreURLsWithRegex(_ regex: String) {
+        ignoredURLsRegex.append(NSRegularExpression(regex))
+    }
+    
+    @objc open func ignoreURLsWithRegexes(_ regexes: [String]) {
+        ignoredURLsRegex.append(contentsOf: regexes.map { NSRegularExpression($0) })
+    }
+    
     internal func getLastVisitDate() -> Date {
         return lastVisitDate
     }
@@ -220,6 +233,10 @@ open class NFX: NSObject {
     
     func getIgnoredURLs() -> [String] {
         return ignoredURLs
+    }
+    
+    func getIgnoredURLsRegexes() -> [NSRegularExpression] {
+        return ignoredURLsRegex
     }
     
     func getSelectedGesture() -> ENFXGesture {

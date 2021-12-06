@@ -44,6 +44,14 @@ open class NFXProtocol: URLProtocol {
             return false
         }
         
+        let regexMatches = NFX.sharedInstance().getIgnoredURLsRegexes()
+            .map({return $0.matches(url.absoluteString)})
+            .reduce(false) {$0 || $1}
+        
+        guard regexMatches == false else {
+            return false
+        }
+        
         return true
     }
     
@@ -63,6 +71,21 @@ open class NFXProtocol: URLProtocol {
     
     override open class func canonicalRequest(for request: URLRequest) -> URLRequest {
         return request
+    }
+}
+
+extension NSRegularExpression {
+    convenience init(_ pattern: String) {
+           do {
+               try self.init(pattern: pattern)
+           } catch {
+               preconditionFailure("Illegal regular expression: \(pattern).")
+           }
+       }
+    
+    func matches(_ string: String) -> Bool {
+        let range = NSRange(location: 0, length: string.count)
+        return firstMatch(in: string, options: [], range: range) != nil
     }
 }
 
