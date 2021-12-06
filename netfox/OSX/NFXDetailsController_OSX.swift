@@ -17,31 +17,27 @@ class NFXDetailsController_OSX: NFXDetailsController {
     @IBOutlet var textViewResponse: NSTextView!
     @IBOutlet var textViewBodyResponse: NSTextView!
     
-    override func viewDidLoad() {
-        super.viewDidLoad()
-    }
-    
     override func selectedModel(_ model: NFXHTTPModel) {
         super.selectedModel(model)
-        self.textViewInfo.textStorage?.setAttributedString(self.getInfoStringFromObject(model))
-        self.textViewRequest.textStorage?.setAttributedString(self.getRequestStringFromObject(model))
+        textViewInfo.textStorage?.setAttributedString(getInfoStringFromObject(model))
+        textViewRequest.textStorage?.setAttributedString(getRequestStringFromObject(model))
 
         let bodyRequest: NSAttributedString
         if model.requestBodyLength == 0 {
-            bodyRequest = self.formatNFXString(String(self.getRequestBodyStringFooter(model)))
+            bodyRequest = formatNFXString(String(getRequestBodyStringFooter(model)))
         } else {
-            bodyRequest = self.formatNFXString(String(model.getRequestBody()))
+            bodyRequest = formatNFXString(String(model.getRequestBody()))
         }
-        self.textViewBodyRequest.textStorage?.setAttributedString(bodyRequest)
+        textViewBodyRequest.textStorage?.setAttributedString(bodyRequest)
         
-        self.textViewResponse.textStorage?.setAttributedString(self.getResponseStringFromObject(model))
+        textViewResponse.textStorage?.setAttributedString(getResponseStringFromObject(model))
         let bodyResponse: NSAttributedString
         if model.responseBodyLength == 0 {
-            bodyResponse = self.formatNFXString(String(self.getResponseBodyStringFooter(model)))
+            bodyResponse = formatNFXString(String(getResponseBodyStringFooter(model)))
         } else {
-            bodyResponse = self.formatNFXString(String(model.getResponseBody()))
+            bodyResponse = formatNFXString(String(model.getResponseBody()))
         }
-        self.textViewBodyResponse.textStorage?.setAttributedString(bodyResponse)
+        textViewBodyResponse.textStorage?.setAttributedString(bodyResponse)
     }
 }
 

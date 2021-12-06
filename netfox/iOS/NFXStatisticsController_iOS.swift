@@ -14,31 +14,30 @@ class NFXStatisticsController_iOS: NFXStatisticsController {
     var scrollView: UIScrollView = UIScrollView()
     var textLabel: UILabel = UILabel()
     
-    override func viewDidLoad()
-    {
+    override func viewDidLoad() {
         super.viewDidLoad()
         
-        self.title = "Statistics"
+        title = "Statistics"
         
-        generateStatics()
+        generateStatistics()
         
-        self.scrollView = UIScrollView()
-        self.scrollView.frame = CGRect(x: 0, y: 0, width: self.view.frame.width, height: self.view.frame.height)
-        self.scrollView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
-        self.scrollView.autoresizesSubviews = true
-        self.scrollView.backgroundColor = UIColor.clear
-        self.view.addSubview(self.scrollView)
+        scrollView = UIScrollView()
+        scrollView.frame = CGRect(x: 0, y: 0, width: view.frame.width, height: view.frame.height)
+        scrollView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
+        scrollView.autoresizesSubviews = true
+        scrollView.backgroundColor = UIColor.clear
+        view.addSubview(scrollView)
         
-        self.textLabel = UILabel()
-        self.textLabel.frame = CGRect(x: 20, y: 20, width: scrollView.frame.width - 40, height: scrollView.frame.height - 20);
-        self.textLabel.font = UIFont.NFXFont(size: 13)
-        self.textLabel.textColor = UIColor.NFXGray44Color()
-        self.textLabel.numberOfLines = 0
-        self.textLabel.attributedText = getReportString()
-        self.textLabel.sizeToFit()
-        self.scrollView.addSubview(self.textLabel)
+        textLabel = UILabel()
+        textLabel.frame = CGRect(x: 20, y: 20, width: scrollView.frame.width - 40, height: scrollView.frame.height - 20);
+        textLabel.font = UIFont.NFXFont(size: 13)
+        textLabel.textColor = UIColor.NFXGray44Color()
+        textLabel.numberOfLines = 0
+        textLabel.attributedText = getReportString()
+        textLabel.sizeToFit()
+        scrollView.addSubview(textLabel)
         
-        self.scrollView.contentSize = CGSize(width: scrollView.frame.width, height: self.textLabel.frame.maxY)
+        scrollView.contentSize = CGSize(width: scrollView.frame.width, height: textLabel.frame.maxY)
         
         NotificationCenter.default.addObserver(
             self,
@@ -48,8 +47,7 @@ class NFXStatisticsController_iOS: NFXStatisticsController {
         
     }
     
-    override func reloadData()
-    {
+    override func reloadData() {
         super.reloadData()
         DispatchQueue.main.async { () -> Void in
             self.textLabel.attributedText = self.getReportString()

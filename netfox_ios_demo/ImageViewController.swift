@@ -11,19 +11,22 @@ import UIKit
 class ImageViewController: UIViewController {
 
     @IBOutlet weak var imageView: UIImageView!
-    let session: URLSession!
+    var session: URLSession?
     var dataTask: URLSessionDataTask?
     
     required init?(coder aDecoder: NSCoder) {
-        session = URLSession(configuration: URLSessionConfiguration.default)
         super.init(coder: aDecoder)
     }
 
     @IBAction func tappedLoadImage(_ sender: Any) {
         dataTask?.cancel()
         
-        if let url = URL(string: "https://picsum.photos/\(imageView.frame.size.width)/\(imageView.frame.size.height)/?random") {
-            dataTask = session.dataTask(with: url, completionHandler: { (data, response, error) in
+        if session == nil {
+            session = URLSession(configuration: URLSessionConfiguration.default)
+        }
+        
+        if let url = URL(string: "https://picsum.photos/\(Int(imageView.frame.size.width))/\(Int(imageView.frame.size.height))") {
+            dataTask = session?.dataTask(with: url, completionHandler: { (data, response, error) in
                 if let error = error {
                     self.handleCompletion(error: error.localizedDescription, data: data)
                 } else {
