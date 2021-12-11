@@ -7,18 +7,11 @@
 
 import Foundation
 
-enum NFXBodyType: Int
-{
+enum NFXBodyType: Int {
     case request  = 0
     case response = 1
 }
 
-class NFXGenericBodyDetailsController: NFXGenericController
-{
+class NFXGenericBodyDetailsController: NFXGenericController {
     var bodyType: NFXBodyType = NFXBodyType.response
-    
-    override func viewDidLoad()
-    {
-        super.viewDidLoad()
-    }
 }

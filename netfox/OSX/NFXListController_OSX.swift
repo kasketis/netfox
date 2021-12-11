@@ -41,31 +41,28 @@ class NFXListController_OSX: NFXListController, NSTableViewDelegate, NSTableView
     
     // MARK: Notifications
 
-    override func reloadTableViewData()
-    {
+    override func reloadTableViewData() {
         DispatchQueue.main.async {
             self.tableView.reloadData()
         }
     }
     
-    @objc func deactivateSearchController()
-    {
+    @objc func deactivateSearchController() {
         self.isSearchControllerActive = false
     }
     
     // MARK: Search
     
-    func updateSearchResultsForSearchController()
-    {
-        self.updateSearchResultsForSearchControllerWithString(searchField.stringValue)
+    func updateSearchResultsForSearchController() {
+        updateSearchResultsForSearchControllerWithString(searchField.stringValue)
         reloadTableViewData()
     }
     
     // MARK: UITableViewDataSource
     
     func numberOfRowsInTableView(tableView: NSTableView) -> Int {
-        if (self.isSearchControllerActive) {
-            return self.filteredTableData.count
+        if isSearchControllerActive {
+            return filteredTableData.count
         } else {
             return NFXHTTPModelManager.sharedInstance.getModels().count
         }
@@ -83,9 +80,9 @@ class NFXListController_OSX: NFXListController, NSTableViewDelegate, NSTableView
             }
         #endif
         
-        if (self.isSearchControllerActive) {
-            if self.filteredTableData.count > 0 {
-                let obj = self.filteredTableData[row]
+        if isSearchControllerActive {
+            if !filteredTableData.isEmpty {
+                let obj = filteredTableData[row]
                 cell.configForObject(obj: obj)
             }
         } else {
@@ -110,12 +107,12 @@ class NFXListController_OSX: NFXListController, NSTableViewDelegate, NSTableView
         }
         
         var model: NFXHTTPModel
-        if (self.isSearchControllerActive) {
-            model = self.filteredTableData[self.tableView.selectedRow]
+        if isSearchControllerActive {
+            model = filteredTableData[tableView.selectedRow]
         } else {
-            model = NFXHTTPModelManager.sharedInstance.getModels()[self.tableView.selectedRow]
+            model = NFXHTTPModelManager.sharedInstance.getModels()[tableView.selectedRow]
         }
-        self.delegate?.httpModelSelectedDidChange(model: model)
+        delegate?.httpModelSelectedDidChange(model: model)
     }
 
     fileprivate func handleControlChange(obj: Notification) {

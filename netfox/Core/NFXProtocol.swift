@@ -8,9 +8,8 @@
 import Foundation
 
 @objc
-open class NFXProtocol: URLProtocol
-{
-    private static let nfxInternalKey = "com.netfox.NFXInternal"
+open class NFXProtocol: URLProtocol {
+    static let nfxInternalKey = "com.netfox.NFXInternal"
     
     private lazy var session: URLSession = { [unowned self] in
         return URLSession(configuration: .default, delegate: self, delegateQueue: nil)
@@ -20,28 +19,23 @@ open class NFXProtocol: URLProtocol
     private var response: URLResponse?
     private var responseData: NSMutableData?
     
-    override open class func canInit(with request: URLRequest) -> Bool
-    {
+    override open class func canInit(with request: URLRequest) -> Bool {
         return canServeRequest(request)
     }
     
-    override open class func canInit(with task: URLSessionTask) -> Bool
-    {
+    override open class func canInit(with task: URLSessionTask) -> Bool {
         guard let request = task.currentRequest else { return false }
         return canServeRequest(request)
     }
     
-    private class func canServeRequest(_ request: URLRequest) -> Bool
-    {
+    private class func canServeRequest(_ request: URLRequest) -> Bool {
         guard NFX.sharedInstance().isEnabled() else {
             return false
         }
         
-        guard
-            URLProtocol.property(forKey: NFXProtocol.nfxInternalKey, in: request) == nil,
+        guard URLProtocol.property(forKey: NFXProtocol.nfxInternalKey, in: request) == nil,
             let url = request.url,
-            (url.absoluteString.hasPrefix("http") || url.absoluteString.hasPrefix("https"))
-        else {
+            (url.absoluteString.hasPrefix("http") || url.absoluteString.hasPrefix("https")) else {
             return false
         }
         
@@ -50,11 +44,18 @@ open class NFXProtocol: URLProtocol
             return false
         }
         
+        let regexMatches = NFX.sharedInstance().getIgnoredURLsRegexes()
+            .map({return $0.matches(url.absoluteString)})
+            .reduce(false) {$0 || $1}
+        
+        guard regexMatches == false else {
+            return false
+        }
+        
         return true
     }
     
-    override open func startLoading()
-    {
+    override open func startLoading() {
         model.saveRequest(request)
         
         let mutableRequest = (request as NSURLRequest).mutableCopy() as! NSMutableURLRequest
@@ -62,16 +63,29 @@ open class NFXProtocol: URLProtocol
         session.dataTask(with: mutableRequest as URLRequest).resume()
     }
     
-    override open func stopLoading()
-    {
+    override open func stopLoading() {
         session.getTasksWithCompletionHandler { dataTasks, _, _ in
             dataTasks.forEach { $0.cancel() }
         }
     }
     
-    override open class func canonicalRequest(for request: URLRequest) -> URLRequest
-    {
+    override open class func canonicalRequest(for request: URLRequest) -> URLRequest {
         return request
+    }
+}
+
+extension NSRegularExpression {
+    convenience init(_ pattern: String) {
+           do {
+               try self.init(pattern: pattern)
+           } catch {
+               preconditionFailure("Illegal regular expression: \(pattern).")
+           }
+       }
+    
+    func matches(_ string: String) -> Bool {
+        let range = NSRange(location: 0, length: string.count)
+        return firstMatch(in: string, options: [], range: range) != nil
     }
 }
 
@@ -84,7 +98,7 @@ extension NFXProtocol: URLSessionDataDelegate {
     
     public func urlSession(_ session: URLSession, dataTask: URLSessionDataTask, didReceive response: URLResponse, completionHandler: @escaping (URLSession.ResponseDisposition) -> Void) {
         self.response = response
-        self.responseData = NSMutableData()
+        responseData = NSMutableData()
         
         client?.urlProtocol(self, didReceive: response, cacheStoragePolicy: NFX.swiftSharedInstance.cacheStoragePolicy)
         completionHandler(.allow)

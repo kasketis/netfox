@@ -16,102 +16,92 @@ class NFXSettingsController_iOS: NFXSettingsController, UITableViewDelegate, UIT
     
     // MARK: View Life Cycle
     
-    override func viewDidLoad()
-    {
+    override func viewDidLoad() {
         super.viewDidLoad()
         
         nfxURL = "https://github.com/kasketis/netfox"
         
-        self.title = "Settings"
+        title = "Settings"
         
-        self.tableData = HTTPModelShortType.allValues
-        self.filters =  NFX.sharedInstance().getCachedFilters()
+        tableData = HTTPModelShortType.allValues
+        filters =  NFX.sharedInstance().getCachedFilters()
         
-        self.edgesForExtendedLayout = UIRectEdge()
-        self.extendedLayoutIncludesOpaqueBars = false
-        self.automaticallyAdjustsScrollViewInsets = false
+        edgesForExtendedLayout = UIRectEdge()
+        extendedLayoutIncludesOpaqueBars = false
+        automaticallyAdjustsScrollViewInsets = false
         
-        self.navigationItem.rightBarButtonItems = [UIBarButtonItem(image: UIImage.NFXStatistics(), style: .plain, target: self, action: #selector(NFXSettingsController_iOS.statisticsButtonPressed)), UIBarButtonItem(image: UIImage.NFXInfo(), style: .plain, target: self, action: #selector(NFXSettingsController_iOS.infoButtonPressed))]
+        navigationItem.rightBarButtonItems = [UIBarButtonItem(image: UIImage.NFXStatistics(), style: .plain, target: self, action: #selector(NFXSettingsController_iOS.statisticsButtonPressed)), UIBarButtonItem(image: UIImage.NFXInfo(), style: .plain, target: self, action: #selector(NFXSettingsController_iOS.infoButtonPressed))]
         
-        self.tableView.frame = CGRect(x: 0, y: 0, width: self.view.frame.width, height: self.view.frame.height - 60)
-        self.tableView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
-        self.tableView.translatesAutoresizingMaskIntoConstraints = true
-        self.tableView.delegate = self
-        self.tableView.dataSource = self
-        self.tableView.alwaysBounceVertical = false
-        self.tableView.backgroundColor = UIColor.clear
-        self.tableView.tableFooterView = UIView(frame: CGRect.zero)
-        self.tableView.tableFooterView?.isHidden = true
-        self.view.addSubview(self.tableView)
+        tableView.frame = CGRect(x: 0, y: 0, width: view.frame.width, height: view.frame.height - 60)
+        tableView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
+        tableView.translatesAutoresizingMaskIntoConstraints = true
+        tableView.delegate = self
+        tableView.dataSource = self
+        tableView.alwaysBounceVertical = false
+        tableView.backgroundColor = UIColor.clear
+        tableView.tableFooterView = UIView(frame: CGRect.zero)
+        tableView.tableFooterView?.isHidden = true
+        view.addSubview(tableView)
         
         var nfxVersionLabel: UILabel
-        nfxVersionLabel = UILabel(frame: CGRect(x: 10, y: self.view.frame.height - 60, width: self.view.frame.width - 2*10, height: 30))
+        nfxVersionLabel = UILabel(frame: CGRect(x: 10, y: view.frame.height - 60, width: view.frame.width - 2*10, height: 30))
         nfxVersionLabel.autoresizingMask = [.flexibleTopMargin, .flexibleWidth]
         nfxVersionLabel.font = UIFont.NFXFont(size: 14)
         nfxVersionLabel.textColor = UIColor.NFXOrangeColor()
         nfxVersionLabel.textAlignment = .center
         nfxVersionLabel.text = nfxVersionString
-        self.view.addSubview(nfxVersionLabel)
+        view.addSubview(nfxVersionLabel)
         
         var nfxURLButton: UIButton
-        nfxURLButton = UIButton(frame: CGRect(x: 10, y: self.view.frame.height - 40, width: self.view.frame.width - 2*10, height: 30))
+        nfxURLButton = UIButton(frame: CGRect(x: 10, y: view.frame.height - 40, width: view.frame.width - 2*10, height: 30))
         nfxURLButton.autoresizingMask = [.flexibleTopMargin, .flexibleWidth]
         nfxURLButton.titleLabel?.font = UIFont.NFXFont(size: 12)
         nfxURLButton.setTitleColor(UIColor.NFXGray44Color(), for: .init())
         nfxURLButton.titleLabel?.textAlignment = .center
         nfxURLButton.setTitle(nfxURL, for: .init())
         nfxURLButton.addTarget(self, action: #selector(NFXSettingsController_iOS.nfxURLButtonPressed), for: .touchUpInside)
-        self.view.addSubview(nfxURLButton)
+        view.addSubview(nfxURLButton)
     }
     
-    override func viewWillDisappear(_ animated: Bool)
-    {
+    override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
-        
         NFX.sharedInstance().cacheFilters(self.filters)
     }
     
-    @objc func nfxURLButtonPressed()
-    {
+    @objc func nfxURLButtonPressed() {
         UIApplication.shared.openURL(URL(string: nfxURL)!)
     }
     
-    @objc func infoButtonPressed()
-    {
+    @objc func infoButtonPressed() {
         var infoController: NFXInfoController_iOS
         infoController = NFXInfoController_iOS()
-        self.navigationController?.pushViewController(infoController, animated: true)
+        navigationController?.pushViewController(infoController, animated: true)
     }
     
-    @objc func statisticsButtonPressed()
-    {
+    @objc func statisticsButtonPressed() {
         var statisticsController: NFXStatisticsController_iOS
         statisticsController = NFXStatisticsController_iOS()
-        self.navigationController?.pushViewController(statisticsController, animated: true)
+        navigationController?.pushViewController(statisticsController, animated: true)
     }
     
     // MARK: UITableViewDataSource
     
-    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int
-    {
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         switch section {
         case 0: return 1
         case 1: return self.tableData.count
         case 2: return 1
         case 3: return 1
-
         default: return 0
         }
     }
     
-    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell
-    {
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = UITableViewCell()
         cell.textLabel?.font = UIFont.NFXFont(size: 14)
         cell.tintColor = UIColor.NFXOrangeColor()
         
-        switch (indexPath as NSIndexPath).section
-        {
+        switch (indexPath as NSIndexPath).section {
         case 0:
             cell.textLabel?.text = "Logging"
             let nfxEnabledSwitch: UISwitch
@@ -148,21 +138,18 @@ class NFXSettingsController_iOS: NFXSettingsController, UITableViewDelegate, UIT
         
     }
     
-    func reloadTableData()
-    {
+    func reloadTableData() {
         DispatchQueue.main.async { () -> Void in
             self.tableView.reloadData()
             self.tableView.setNeedsDisplay()
         }
     }
     
-    func numberOfSections(in tableView: UITableView) -> Int
-    {
+    func numberOfSections(in tableView: UITableView) -> Int {
         return 4
     }
     
-    func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView?
-    {
+    func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
         let headerView = UIView()
         headerView.backgroundColor = UIColor.NFXGray95Color()
         
@@ -188,10 +175,8 @@ class NFXSettingsController_iOS: NFXSettingsController, UITableViewDelegate, UIT
         
     }
     
-    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath)
-    {
-        switch (indexPath as NSIndexPath).section
-        {
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        switch (indexPath as NSIndexPath).section {
         case 1:
             let cell = tableView.cellForRow(at: indexPath)
             self.filters[(indexPath as NSIndexPath).row] = !self.filters[(indexPath as NSIndexPath).row]
@@ -212,19 +197,16 @@ class NFXSettingsController_iOS: NFXSettingsController, UITableViewDelegate, UIT
         tableView.deselectRow(at: indexPath, animated: true)
     }
     
-    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat
-    {
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         switch (indexPath as NSIndexPath).section {
         case 0: return 44
         case 1: return 33
         case 2,3: return 44
-
         default: return 0
         }
     }
     
-    func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat
-    {        
+    func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
         let iPhone4s = (UIScreen.main.bounds.height == 480)
         switch section {
         case 0:
@@ -250,10 +232,9 @@ class NFXSettingsController_iOS: NFXSettingsController, UITableViewDelegate, UIT
         }
     }
     
-    func configureCell(_ cell: UITableViewCell?, indexPath: IndexPath)
-    {
-        if (cell != nil) {
-            if self.filters[(indexPath as NSIndexPath).row] {
+    func configureCell(_ cell: UITableViewCell?, indexPath: IndexPath) {
+        if cell != nil {
+            if filters[(indexPath as NSIndexPath).row] {
                 cell!.accessoryType = .checkmark
             } else {
                 cell!.accessoryType = .none
@@ -261,8 +242,7 @@ class NFXSettingsController_iOS: NFXSettingsController, UITableViewDelegate, UIT
         }
     }
     
-    @objc func nfxEnabledSwitchValueChanged(_ sender: UISwitch)
-    {
+    @objc func nfxEnabledSwitchValueChanged(_ sender: UISwitch) {
         if sender.isOn {
             NFX.sharedInstance().enable()
         } else {
@@ -270,14 +250,12 @@ class NFXSettingsController_iOS: NFXSettingsController, UITableViewDelegate, UIT
         }
     }
     
-    func clearDataButtonPressedOnTableIndex(_ index: IndexPath)
-    {
+    func clearDataButtonPressedOnTableIndex(_ index: IndexPath) {
 
         clearData(sourceView: tableView, originingIn: tableView.rectForRow(at: index)) { }
     }
 
-    func shareSessionLogsPressed()
-    {
+    func shareSessionLogsPressed() {
         if (MFMailComposeViewController.canSendMail()) {
             let mailComposer = MFMailComposeViewController()
             mailComposer.mailComposeDelegate = self
@@ -287,13 +265,12 @@ class NFXSettingsController_iOS: NFXSettingsController, UITableViewDelegate, UIT
                 mailComposer.addAttachmentData(sessionLogData as Data, mimeType: "text/plain", fileName: "session.log")
             }
             
-            self.present(mailComposer, animated: true, completion: nil)
+            present(mailComposer, animated: true, completion: nil)
         }
     }
     
-    func mailComposeController(_ controller: MFMailComposeViewController, didFinishWith result: MFMailComposeResult, error: Error?)
-    {
-        self.dismiss(animated: true, completion: nil)
+    func mailComposeController(_ controller: MFMailComposeViewController, didFinishWith result: MFMailComposeResult, error: Error?) {
+        dismiss(animated: true, completion: nil)
     }
 }
 

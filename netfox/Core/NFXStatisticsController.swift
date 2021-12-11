@@ -27,8 +27,7 @@ fileprivate func > <T : Comparable>(lhs: T?, rhs: T?) -> Bool {
 }
 
 
-class NFXStatisticsController: NFXGenericController
-{
+class NFXStatisticsController: NFXGenericController {
     var totalModels: Int = 0
 
     var successfulRequests: Int = 0
@@ -42,48 +41,51 @@ class NFXStatisticsController: NFXGenericController
     var fastestResponseTime: Float = 999
     var slowestResponseTime: Float = 0
     
-    func getReportString() -> NSAttributedString
-    {
+    override func reloadData() {
+        clearStatistics()
+        generateStatistics()
+    }
+    
+    func getReportString() -> NSAttributedString {
         var tempString: String
         tempString = String()
         
-        tempString += "[Total requests] \n\(self.totalModels)\n\n"
+        tempString += "[Total requests] \n\(totalModels)\n\n"
         
-        tempString += "[Successful requests] \n\(self.successfulRequests)\n\n"
-        tempString += "[Failed requests] \n\(self.failedRequests)\n\n"
+        tempString += "[Successful requests] \n\(successfulRequests)\n\n"
+        tempString += "[Failed requests] \n\(failedRequests)\n\n"
         
-        tempString += "[Total request size] \n\(Float(self.totalRequestSize/1024)) KB\n\n"
-        if self.totalModels == 0 {
+        tempString += "[Total request size] \n\(Float(totalRequestSize/1024)) KB\n\n"
+        if totalModels == 0 {
             tempString += "[Avg request size] \n0.0 KB\n\n"
         } else {
-            tempString += "[Avg request size] \n\(Float((self.totalRequestSize/self.totalModels)/1024)) KB\n\n"
+            tempString += "[Avg request size] \n\(Float((totalRequestSize/totalModels)/1024)) KB\n\n"
         }
         
-        tempString += "[Total response size] \n\(Float(self.totalResponseSize/1024)) KB\n\n"
-        if self.totalModels == 0 {
+        tempString += "[Total response size] \n\(Float(totalResponseSize/1024)) KB\n\n"
+        if totalModels == 0 {
             tempString += "[Avg response size] \n0.0 KB\n\n"
         } else {
-            tempString += "[Avg response size] \n\(Float((self.totalResponseSize/self.totalModels)/1024)) KB\n\n"
+            tempString += "[Avg response size] \n\(Float((totalResponseSize/totalModels)/1024)) KB\n\n"
         }
 
         if self.totalModels == 0 {
             tempString += "[Avg response time] \n0.0s\n\n"
             tempString += "[Fastest response time] \n0.0s\n\n"
         } else {
-            tempString += "[Avg response time] \n\(Float(self.totalResponseTime/Float(self.totalModels)))s\n\n"
-            if self.fastestResponseTime == 999 {
+            tempString += "[Avg response time] \n\(Float(totalResponseTime/Float(totalModels)))s\n\n"
+            if fastestResponseTime == 999 {
                 tempString += "[Fastest response time] \n0.0s\n\n"
             } else {
-                tempString += "[Fastest response time] \n\(self.fastestResponseTime)s\n\n"
+                tempString += "[Fastest response time] \n\(fastestResponseTime)s\n\n"
             }
         }
-        tempString += "[Slowest response time] \n\(self.slowestResponseTime)s\n\n"
+        tempString += "[Slowest response time] \n\(slowestResponseTime)s\n\n"
 
         return formatNFXString(tempString)
     }
     
-    func generateStatics()
-    {
+    func generateStatistics() {
         let models = NFXHTTPModelManager.sharedInstance.getModels()
         totalModels = models.count
         
@@ -106,32 +108,25 @@ class NFXStatisticsController: NFXGenericController
             if (model.timeInterval != nil) {
                 totalResponseTime += model.timeInterval!
                 
-                if model.timeInterval < self.fastestResponseTime {
-                    self.fastestResponseTime = model.timeInterval!
+                if model.timeInterval < fastestResponseTime {
+                    fastestResponseTime = model.timeInterval!
                 }
                 
-                if model.timeInterval > self.slowestResponseTime {
-                    self.slowestResponseTime = model.timeInterval!
+                if model.timeInterval > slowestResponseTime {
+                    slowestResponseTime = model.timeInterval!
                 }
             }
         }
     }
     
-    func clearStatistics()
-    {
-        self.totalModels = 0
-        self.successfulRequests = 0
-        self.failedRequests = 0
-        self.totalRequestSize = 0
-        self.totalResponseSize = 0
-        self.totalResponseTime = 0
-        self.fastestResponseTime = 999
-        self.slowestResponseTime = 0
-    }
-    
-    override func reloadData()
-    {
-        clearStatistics()
-        generateStatics()
+    func clearStatistics() {
+        totalModels = 0
+        successfulRequests = 0
+        failedRequests = 0
+        totalRequestSize = 0
+        totalResponseSize = 0
+        totalResponseTime = 0
+        fastestResponseTime = 999
+        slowestResponseTime = 0
     }
 }
