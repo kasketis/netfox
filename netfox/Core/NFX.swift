@@ -174,6 +174,15 @@ open class NFX: NSObject {
         ignoredURLs.append(url)
     }
     
+    @objc open func getSessionLog() -> Data? {
+        var data: Data? = nil
+        if let sessionLogData = try? Data(contentsOf: URL(fileURLWithPath: NFXPath.SessionLog)) {
+            data = sessionLogData
+        }
+        
+        return data
+    }
+    
     @objc open func ignoreURLs(_ urls: [String]) {
         ignoredURLs.append(contentsOf: urls)
     }
