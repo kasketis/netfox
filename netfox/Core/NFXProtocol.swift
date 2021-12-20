@@ -66,6 +66,7 @@ open class NFXProtocol: URLProtocol {
     override open func stopLoading() {
         session.getTasksWithCompletionHandler { dataTasks, _, _ in
             dataTasks.forEach { $0.cancel() }
+            self.session.invalidateAndCancel()
         }
     }
     
