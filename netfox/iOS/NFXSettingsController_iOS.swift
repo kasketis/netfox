@@ -23,7 +23,7 @@ class NFXSettingsController_iOS: NFXSettingsController, UITableViewDelegate, UIT
         
         title = "Settings"
         
-        tableData = HTTPModelShortType.allValues
+        tableData = HTTPModelShortType.allCases
         filters =  NFX.sharedInstance().getCachedFilters()
         
         edgesForExtendedLayout = UIRectEdge()
@@ -261,7 +261,7 @@ class NFXSettingsController_iOS: NFXSettingsController, UITableViewDelegate, UIT
             mailComposer.mailComposeDelegate = self
             
             mailComposer.setSubject("netfox log - Session Log \(NSDate())")
-            if let sessionLogData = NSData(contentsOfFile: NFXPath.SessionLog as String) {
+            if let sessionLogData = try? Data(contentsOf: NFXPath.sessionLogURL) {
                 mailComposer.addAttachmentData(sessionLogData as Data, mimeType: "text/plain", fileName: "session.log")
             }
             
