@@ -82,9 +82,7 @@ open class NFX: NSObject {
         URLSessionConfiguration.implementNetfox()
         register()
         enable()
-        clearOldData()
-        NFXPath.deleteOldNFXLogs()
-        NFXPath.createNFXDirIfNotExist()
+        fileStorageInit()
         showMessage(Constants.startedMessage.rawValue)
         #if os(OSX)
         addNetfoxToMainMenu()
@@ -219,6 +217,12 @@ open class NFX: NSObject {
 
     fileprivate func toggleNFX() {
         presented ? hideNFX() : showNFX()
+    }
+    
+    private func fileStorageInit() {
+        clearOldData()
+        NFXPath.deleteOldNFXLogs()
+        NFXPath.createNFXDirIfNotExist()
     }
     
     internal func clearOldData() {

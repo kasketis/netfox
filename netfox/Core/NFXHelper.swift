@@ -335,9 +335,10 @@ class NFXDebugInfo {
 
 struct NFXPath {
     
+    static let sessionLogName = "session.log"
     static let tmpDirURL = URL(fileURLWithPath: NSTemporaryDirectory())
     static let nfxDirURL = tmpDirURL.appendingPathComponent("NFX", isDirectory: true)
-    static let sessionLogURL = tmpDirURL.appendingPathComponent("session.log")
+    static let sessionLogURL = nfxDirURL.appendingPathComponent(sessionLogName)
     
     static func createNFXDirIfNotExist() {
         do {
@@ -358,12 +359,14 @@ struct NFXPath {
     }
     
     static func deleteOldNFXLogs() {
+        let oldSessionLogName = "session.log"
+        let oldRequestPrefixName = "nfx_re"
         let fileManager = FileManager.default
         guard let documentsDir = fileManager.urls(for: .documentDirectory, in: .userDomainMask).first,
               let fileEnumarator = fileManager.enumerator(at: documentsDir, includingPropertiesForKeys: nil, options: [.skipsSubdirectoryDescendants], errorHandler: nil) else { return }
         
         for case let fileURL as URL in fileEnumarator {
-            if fileURL.lastPathComponent == "session.log" || fileURL.lastPathComponent.hasPrefix("nfx_re") {
+            if fileURL.lastPathComponent == oldSessionLogName || fileURL.lastPathComponent.hasPrefix(oldRequestPrefixName) {
                 try? fileManager.removeItem(at: fileURL)
             }
         }

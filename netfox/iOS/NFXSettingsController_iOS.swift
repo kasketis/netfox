@@ -262,7 +262,7 @@ class NFXSettingsController_iOS: NFXSettingsController, UITableViewDelegate, UIT
             
             mailComposer.setSubject("netfox log - Session Log \(NSDate())")
             if let sessionLogData = try? Data(contentsOf: NFXPath.sessionLogURL) {
-                mailComposer.addAttachmentData(sessionLogData as Data, mimeType: "text/plain", fileName: "session.log")
+                mailComposer.addAttachmentData(sessionLogData as Data, mimeType: "text/plain", fileName: NFXPath.sessionLogName)
             }
             
             present(mailComposer, animated: true, completion: nil)
