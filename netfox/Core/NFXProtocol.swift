@@ -128,8 +128,7 @@ extension NFXProtocol: URLSessionDataDelegate {
             model.saveResponse(response, data: data)
         }
         
-        NFXHTTPModelManager.sharedInstance.add(model)
-        NotificationCenter.default.post(name: .NFXReloadData, object: nil)
+        NFXHTTPModelManager.shared.add(model)
     }
     
     public func urlSession(_ session: URLSession, task: URLSessionTask, willPerformHTTPRedirection response: HTTPURLResponse, newRequest request: URLRequest, completionHandler: @escaping (URLRequest?) -> Void) {

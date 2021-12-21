@@ -11,10 +11,6 @@ import Foundation
     
 import UIKit
 
-#if swift(>=4.2)
-typealias UITableViewCellStyle = UITableViewCell.CellStyle
-#endif
-
 class NFXListCell: UITableViewCell {
     
     let padding: CGFloat = 5
@@ -29,7 +25,7 @@ class NFXListCell: UITableViewCell {
     var circleView: UIView!
 
     
-    override init(style: UITableViewCellStyle, reuseIdentifier: String?) {
+    override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         backgroundColor = UIColor.white
         selectionStyle = .none

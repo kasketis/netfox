@@ -41,10 +41,19 @@ class NFXStatisticsController: NFXGenericController {
     var fastestResponseTime: Float = 999
     var slowestResponseTime: Float = 0
     
-    override func reloadData() {
-        clearStatistics()
-        generateStatistics()
+    private lazy var dataSubscription = Subscription<[NFXHTTPModel]> { [weak self] in self?.reloadData(with: $0) }
+    
+    deinit {
+        dataSubscription.cancel()
     }
+    
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        
+        NFXHTTPModelManager.shared.publisher.subscribe(dataSubscription)
+        reloadData(with: NFXHTTPModelManager.shared.filteredModels)
+    }
+    
     
     func getReportString() -> NSAttributedString {
         var tempString: String
@@ -85,8 +94,13 @@ class NFXStatisticsController: NFXGenericController {
         return formatNFXString(tempString)
     }
     
-    func generateStatistics() {
-        let models = NFXHTTPModelManager.sharedInstance.getModels()
+    private func reloadData(with models: [NFXHTTPModel]) {
+        clearStatistics()
+        generateStatistics(models)
+        reloadData()
+    }
+    
+    private func generateStatistics(_ models: [NFXHTTPModel]) {
         totalModels = models.count
         
         for model in models {
@@ -119,7 +133,7 @@ class NFXStatisticsController: NFXGenericController {
         }
     }
     
-    func clearStatistics() {
+    private func clearStatistics() {
         totalModels = 0
         successfulRequests = 0
         failedRequests = 0
@@ -129,4 +143,5 @@ class NFXStatisticsController: NFXGenericController {
         fastestResponseTime = 999
         slowestResponseTime = 0
     }
+    
 }
