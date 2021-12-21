@@ -389,7 +389,7 @@ extension String {
 
         let data = data(using: .utf8)!
         
-        if #available(iOS 13.4, *) {
+        if #available(iOS 13.4, macOS 10.15.4, *) {
             do {
                 try fileHandle.seekToEnd()
                 try fileHandle.write(contentsOf: data)
