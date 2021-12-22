@@ -137,12 +137,12 @@ class NFXListController_iOS: NFXListController, UITableViewDelegate, UITableView
         
         if searchController.isActive {
             if !filteredTableData.isEmpty {
-                let obj = filteredTableData[(indexPath as NSIndexPath).row]
+                let obj = filteredTableData[indexPath.row]
                 cell.configForObject(obj)
             }
         } else {
             if NFXHTTPModelManager.sharedInstance.getModels().count > 0 {
-                let obj = NFXHTTPModelManager.sharedInstance.getModels()[(indexPath as NSIndexPath).row]
+                let obj = NFXHTTPModelManager.sharedInstance.getModels()[indexPath.row]
                 cell.configForObject(obj)
             }
         }
@@ -151,7 +151,7 @@ class NFXListController_iOS: NFXListController, UITableViewDelegate, UITableView
     }
     
     func tableView(_ tableView: UITableView, viewForFooterInSection section: Int) -> UIView? {
-        return UIView.init(frame: CGRect.zero)
+        return UIView(frame: CGRect.zero)
     }
     
     func numberOfSections(in tableView: UITableView) -> Int {
@@ -163,13 +163,12 @@ class NFXListController_iOS: NFXListController, UITableViewDelegate, UITableView
         detailsController = NFXDetailsController_iOS()
         var model: NFXHTTPModel
         if searchController.isActive {
-            model = filteredTableData[(indexPath as NSIndexPath).row]
+            model = filteredTableData[indexPath.row]
         } else {
-            model = NFXHTTPModelManager.sharedInstance.getModels()[(indexPath as NSIndexPath).row]
+            model = NFXHTTPModelManager.sharedInstance.getModels()[indexPath.row]
         }
         detailsController.selectedModel(model)
         navigationController?.pushViewController(detailsController, animated: true)
-        
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {

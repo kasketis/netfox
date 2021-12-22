@@ -40,7 +40,6 @@ open class NFX: NSObject {
         case alreadyStoppedMessage = "Already stopped!"
         case startedMessage = "Started!"
         case stoppedMessage = "Stopped!"
-        case prefixForCheck = "nfx"
         case nibName = "NetfoxWindow"
     }
     
@@ -83,7 +82,7 @@ open class NFX: NSObject {
         URLSessionConfiguration.implementNetfox()
         register()
         enable()
-        clearOldData()
+        fileStorageInit()
         showMessage(Constants.startedMessage.rawValue)
         #if os(OSX)
         addNetfoxToMainMenu()
@@ -175,12 +174,7 @@ open class NFX: NSObject {
     }
     
     @objc open func getSessionLog() -> Data? {
-        var data: Data? = nil
-        if let sessionLogData = try? Data(contentsOf: URL(fileURLWithPath: NFXPath.SessionLog)) {
-            data = sessionLogData
-        }
-        
-        return data
+        return try? Data(contentsOf: NFXPath.sessionLogURL)
     }
     
     @objc open func ignoreURLs(_ urls: [String]) {
@@ -225,19 +219,16 @@ open class NFX: NSObject {
         presented ? hideNFX() : showNFX()
     }
     
+    private func fileStorageInit() {
+        clearOldData()
+        NFXPath.deleteOldNFXLogs()
+        NFXPath.createNFXDirIfNotExist()
+    }
+    
     internal func clearOldData() {
         NFXHTTPModelManager.sharedInstance.clear()
-        do {
-            let documentsPath = NSSearchPathForDirectoriesInDomains(FileManager.SearchPathDirectory.documentDirectory, FileManager.SearchPathDomainMask.allDomainsMask, true).first!
-            let filePathsArray = try FileManager.default.subpathsOfDirectory(atPath: documentsPath)
-            for filePath in filePathsArray {
-                if filePath.hasPrefix(Constants.prefixForCheck.rawValue) {
-                    try FileManager.default.removeItem(atPath: (documentsPath as NSString).appendingPathComponent(filePath))
-                }
-            }
-            
-            try FileManager.default.removeItem(atPath: NFXPath.SessionLog)
-        } catch {}
+        
+        NFXPath.deleteNFXDir()
     }
     
     func getIgnoredURLs() -> [String] {
@@ -258,9 +249,15 @@ open class NFX: NSObject {
     
     func getCachedFilters() -> [Bool] {
         if filters.isEmpty {
-            filters = [Bool](repeating: true, count: HTTPModelShortType.allValues.count)
+            filters = [Bool](repeating: true, count: HTTPModelShortType.allCases.count)
         }
         return filters
+    }
+    
+    func getCachedFilterTypes() -> [HTTPModelShortType] {
+        return getCachedFilters()
+            .enumerated()
+            .compactMap { $1 ? HTTPModelShortType.allCases[$0] : nil }
     }
     
 }
@@ -269,7 +266,7 @@ open class NFX: NSObject {
 
 extension NFX {
     fileprivate var presentingViewController: UIViewController? {
-        var rootViewController = UIApplication.shared.keyWindow?.rootViewController
+        var rootViewController = UIWindow.keyWindow?.rootViewController
 		while let controller = rootViewController?.presentedViewController {
 			rootViewController = controller
 		}

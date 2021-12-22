@@ -20,7 +20,7 @@ class NFXSettingsController_OSX: NFXSettingsController, NSTableViewDataSource, N
     // MARK: Lifecycle
     
     override func awakeFromNib() {
-        tableData = HTTPModelShortType.allValues
+        tableData = HTTPModelShortType.allCases
         filters =  NFX.sharedInstance().getCachedFilters()
         
         nfxVersionLabel.stringValue = nfxVersionString

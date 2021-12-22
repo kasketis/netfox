@@ -41,11 +41,11 @@ fileprivate func < <T : Comparable>(lhs: T?, rhs: T?) -> Bool {
     
     public var timeInterval: Float?
     
-    @objc public var randomHash: NSString?
-    @objc public var shortType: NSString = HTTPModelShortType.OTHER.rawValue as NSString
-    @objc public var noResponse: Bool = true
+    @objc public lazy var randomHash = UUID().uuidString
+    public var shortType = HTTPModelShortType.OTHER
+    @objc public var shortTypeString: String { return shortType.rawValue }
     
-    
+    @objc public var noResponse = true
     
     func saveRequest(_ request: URLRequest) {
         requestDate = Date()
@@ -66,7 +66,7 @@ fileprivate func < <T : Comparable>(lhs: T?, rhs: T?) -> Bool {
     }
     
     func logRequest(_ request: URLRequest) {
-        formattedRequestLogEntry().appendToFile(filePath: NFXPath.SessionLog)
+        formattedRequestLogEntry().appendToFileURL(NFXPath.sessionLogURL)
     }
     
     func saveErrorResponse() {
@@ -83,108 +83,100 @@ fileprivate func < <T : Comparable>(lhs: T?, rhs: T?) -> Bool {
         let headers = response.getNFXHeaders()
         
         if let contentType = headers["Content-Type"] as? String {
-            responseType = contentType.components(separatedBy: ";")[0]
-            shortType = getShortTypeFrom(responseType!).rawValue as NSString
+            let responseType = contentType.components(separatedBy: ";")[0]
+            shortType = HTTPModelShortType(contentType: responseType)
+            self.responseType = responseType
         }
         
         timeInterval = Float(responseDate!.timeIntervalSince(requestDate!))
         
         saveResponseBodyData(data)
-        formattedResponseLogEntry().appendToFile(filePath: NFXPath.SessionLog)
+        formattedResponseLogEntry().appendToFileURL(NFXPath.sessionLogURL)
     }
     
-    
     func saveRequestBodyData(_ data: Data) {
-        let tempBodyString = NSString.init(data: data, encoding: String.Encoding.utf8.rawValue)
+        let tempBodyString = String.init(data: data, encoding: String.Encoding.utf8)
         self.requestBodyLength = data.count
         if (tempBodyString != nil) {
-            saveData(tempBodyString!, toFile: getRequestBodyFilepath())
+            saveData(tempBodyString!, to: getRequestBodyFileURL())
         }
     }
     
     func saveResponseBodyData(_ data: Data) {
-        var bodyString: NSString?
+        var bodyString: String?
         
-        if shortType as String == HTTPModelShortType.IMAGE.rawValue {
-            bodyString = data.base64EncodedString(options: .endLineWithLineFeed) as NSString?
+        if shortType == .IMAGE {
+            bodyString = data.base64EncodedString(options: .endLineWithLineFeed)
 
         } else {
-            if let tempBodyString = NSString.init(data: data, encoding: String.Encoding.utf8.rawValue) {
+            if let tempBodyString = String(data: data, encoding: String.Encoding.utf8) {
                 bodyString = tempBodyString
             }
         }
         
-        if bodyString != nil {
+        if let bodyString = bodyString {
             responseBodyLength = data.count
-            saveData(bodyString!, toFile: getResponseBodyFilepath())
+            saveData(bodyString, to: getResponseBodyFileURL())
         }
         
     }
     
-    fileprivate func prettyOutput(_ rawData: Data, contentType: String? = nil) -> NSString {
-        if let contentType = contentType {
-            let shortType = getShortTypeFrom(contentType)
-            if let output = prettyPrint(rawData, type: shortType) {
-                return output as NSString
-            }
+    fileprivate func prettyOutput(_ rawData: Data, contentType: String? = nil) -> String {
+        guard let contentType = contentType,
+              let output = prettyPrint(rawData, type: .init(contentType: contentType))
+        else {
+            return String(data: rawData, encoding: String.Encoding.utf8) ?? ""
         }
-        return NSString(data: rawData, encoding: String.Encoding.utf8.rawValue) ?? ""
+        
+        return output
     }
 
-    @objc public func getRequestBody() -> NSString {
-        guard let data = readRawData(getRequestBodyFilepath()) else {
+    @objc public func getRequestBody() -> String {
+        guard let data = readRawData(from: getRequestBodyFileURL()) else {
             return ""
         }
         return prettyOutput(data, contentType: requestType)
     }
     
-    @objc public func getResponseBody() -> NSString {
-        guard let data = readRawData(getResponseBodyFilepath()) else {
+    @objc public func getResponseBody() -> String {
+        guard let data = readRawData(from: getResponseBodyFileURL()) else {
             return ""
         }
         
         return prettyOutput(data, contentType: responseType)
     }
     
-    @objc public func getRandomHash() -> NSString {
-        if !(randomHash != nil) {
-            randomHash = UUID().uuidString as NSString?
-        }
-        return randomHash!
-    }
-    
-    @objc public func getRequestBodyFilepath() -> String {
-        let dir = getDocumentsPath() as NSString
-        return dir.appendingPathComponent(getRequestBodyFilename())
+    @objc public func getRequestBodyFileURL() -> URL {
+        return NFXPath.pathURLToFile(getRequestBodyFilename())
     }
     
     @objc public func getRequestBodyFilename() -> String {
-        return String("nfx_request_body_") + "\(requestTime!)_\(getRandomHash() as String)"
+        return "request_body_\(requestTime!)_\(randomHash)"
     }
     
-    @objc public func getResponseBodyFilepath() -> String {
-        let dir = getDocumentsPath() as NSString
-        return dir.appendingPathComponent(getResponseBodyFilename())
+    @objc public func getResponseBodyFileURL() -> URL {
+        return NFXPath.pathURLToFile(getResponseBodyFilename())
     }
     
     @objc public func getResponseBodyFilename() -> String {
-        return String("nfx_response_body_") + "\(requestTime!)_\(getRandomHash() as String)"
+        return "response_body_\(requestTime!)_\(randomHash)"
     }
     
-    @objc public func getDocumentsPath() -> String {
-        return NSSearchPathForDirectoriesInDomains(FileManager.SearchPathDirectory.documentDirectory, FileManager.SearchPathDomainMask.allDomainsMask, true).first!
-    }
-    
-    @objc public func saveData(_ dataString: NSString, toFile: String) {
+    @objc public func saveData(_ dataString: String, to fileURL: URL) {
         do {
-            try dataString.write(toFile: toFile, atomically: false, encoding: String.Encoding.utf8.rawValue)
-        } catch {
-            print("catch !!!")
+            try dataString.write(to: fileURL, atomically: true, encoding: .utf8)
+        } catch let error {
+            print("[NFX]: Failed to save data to [\(fileURL)] - \(error.localizedDescription)")
         }
     }
     
-    @objc public func readRawData(_ fromFile: String) -> Data? {
-        return (try? Data(contentsOf: URL(fileURLWithPath: fromFile)))
+    @objc public func readRawData(from fileURL: URL) -> Data? {
+        do {
+            return try Data(contentsOf: fileURL)
+        } catch let error {
+            print("[NFX]: Failed to load data from [\(fileURL)] - \(error.localizedDescription)")
+            return nil
+        }
     }
     
     @objc public func getTimeFromDate(_ date: Date) -> String? {
@@ -200,41 +192,18 @@ fileprivate func < <T : Comparable>(lhs: T?, rhs: T?) -> Bool {
         }
     }
     
-    public func getShortTypeFrom(_ contentType: String) -> HTTPModelShortType {
-        if NSPredicate(format: "SELF MATCHES %@",
-                                "^application/(vnd\\.(.*)\\+)?json$").evaluate(with: contentType) {
-            return .JSON
-        }
-        
-        if (contentType == "application/xml") || (contentType == "text/xml")  {
-            return .XML
-        }
-        
-        if contentType == "text/html" {
-            return .HTML
-        }
-        
-        if contentType.hasPrefix("image/") {
-            return .IMAGE
-        }
-        
-        return .OTHER
-    }
-    
-    public func prettyPrint(_ rawData: Data, type: HTTPModelShortType) -> NSString? {
+    public func prettyPrint(_ rawData: Data, type: HTTPModelShortType) -> String? {
         switch type {
         case .JSON:
             do {
                 let rawJsonData = try JSONSerialization.jsonObject(with: rawData, options: [])
                 let prettyPrintedString = try JSONSerialization.data(withJSONObject: rawJsonData, options: [.prettyPrinted])
-                return NSString(data: prettyPrintedString, encoding: String.Encoding.utf8.rawValue)
+                return String(data: prettyPrintedString, encoding: String.Encoding.utf8)
             } catch {
                 return nil
             }
-        
         default:
             return nil
-            
         }
     }
     
