@@ -172,7 +172,7 @@ extension URLRequest {
     
     func getCurl() -> String {
         guard let url = url else { return "" }
-        let baseCommand = "curl \(url.absoluteString)"
+        let baseCommand = "curl \"\(url.absoluteString)\""
         
         var command = [baseCommand]
         
