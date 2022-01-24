@@ -513,13 +513,6 @@ extension String {
     }
 }
 
-public extension NSNotification.Name {
-    static let NFXDeactivateSearch = Notification.Name("NFXDeactivateSearch")
-    static let NFXReloadData = Notification.Name("NFXReloadData")
-    static let NFXAddedModel = Notification.Name("NFXAddedModel")
-    static let NFXClearedModels = Notification.Name("NFXClearedModels")
-}
-
 #if os(iOS)
 extension UIWindow {
     static var keyWindow: UIWindow? {
@@ -548,3 +541,76 @@ private extension UIScene.ActivationState {
     }
 }
 #endif
+
+
+class Publisher<T> {
+    
+    private var subscriptions = Set<Subscription<T>>()
+    
+    var hasSubscribers: Bool { subscriptions.isEmpty == false }
+    
+    init() where T == Void { }
+    
+    init() { }
+    
+    func subscribe(_ subscription: Subscription<T>) {
+        subscriptions.insert(subscription)
+    }
+    
+    @discardableResult func subscribe(_ callback: @escaping (T) -> Void) -> Subscription<T> {
+        let subscription = Subscription(callback)
+        subscriptions.insert(subscription)
+        return subscription
+    }
+    
+    func trigger(_ obj: T) {
+        subscriptions.forEach {
+            if $0.isCancelled {
+                unsubscribe($0)
+            } else {
+                $0.callback(obj)
+            }
+        }
+    }
+    
+    func unsubscribe(_ subscription: Subscription<T>) {
+        subscriptions.remove(subscription)
+    }
+    
+    func unsubscribeAll() {
+        subscriptions.removeAll()
+    }
+    
+    func callAsFunction(_ value: T) {
+        trigger(value)
+    }
+    
+    func callAsFunction() where T == Void {
+        trigger(())
+    }
+    
+}
+
+class Subscription<T>: Equatable, Hashable {
+    
+    let id = UUID()
+    private(set) var isCancelled = false
+    fileprivate let callback: (T) -> Void
+    
+    init(_ callback: @escaping (T) -> Void) {
+        self.callback = callback
+    }
+    
+    func cancel() {
+        isCancelled = true
+    }
+    
+    static func == (lhs: Subscription<T>, rhs: Subscription<T>) -> Bool {
+        lhs.id == rhs.id
+    }
+    
+    func hash(into hasher: inout Hasher) {
+        hasher.combine(id)
+    }
+    
+}

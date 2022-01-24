@@ -10,10 +10,11 @@
 import Foundation
 import UIKit
 
+
 class NFXListController_iOS: NFXListController, UITableViewDelegate, UITableViewDataSource, UISearchResultsUpdating, UISearchControllerDelegate, DataCleaner {
     // MARK: Properties
     
-    var tableView: UITableView = UITableView()
+    var tableView = UITableView()
     var searchController: UISearchController!
     
     // MARK: View Life Cycle
@@ -30,6 +31,7 @@ class NFXListController_iOS: NFXListController, UITableViewDelegate, UITableView
         tableView.delegate = self
         tableView.dataSource = self
         view.addSubview(self.tableView)
+        
         tableView.register(NFXListCell.self, forCellReuseIdentifier: NSStringFromClass(NFXListCell.self))
 
         navigationItem.leftBarButtonItem = UIBarButtonItem(image: UIImage.NFXClose(), style: .plain, target: self, action: #selector(NFXListController_iOS.closeButtonPressed))
@@ -40,7 +42,6 @@ class NFXListController_iOS: NFXListController, UITableViewDelegate, UITableView
         ]
 
         self.navigationItem.rightBarButtonItems = rightButtons
-
 
         searchController = UISearchController(searchResultsController: nil)
         searchController.searchResultsUpdater = self
@@ -68,31 +69,17 @@ class NFXListController_iOS: NFXListController, UITableViewDelegate, UITableView
             searchView.frame = searchController.searchBar.frame
 
             navigationItem.titleView = searchView
-        }
-        
-        NotificationCenter.default.addObserver(
-            self,
-            selector: #selector(NFXListController.reloadTableViewData),
-            name: NSNotification.Name.NFXReloadData,
-            object: nil)
-        
-        NotificationCenter.default.addObserver(
-            self,
-            selector: #selector(NFXListController_iOS.deactivateSearchController),
-            name: NSNotification.Name.NFXDeactivateSearch,
-            object: nil)        
+        }     
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        reloadTableViewData()
+        
+        reloadData()
     }
     
-    override func reloadTableViewData() {
-        DispatchQueue.main.async {
-            self.tableView.reloadData()
-            self.tableView.setNeedsDisplay()
-        }
+    override func reloadData() {
+        self.tableView.reloadData()
     }
     
     @objc func settingsButtonPressed() {
@@ -102,8 +89,8 @@ class NFXListController_iOS: NFXListController, UITableViewDelegate, UITableView
     }
 
     @objc func trashButtonPressed() {
-        clearData(sourceView: tableView, originingIn: nil) {
-            self.reloadTableViewData()
+        clearData(sourceView: tableView, originingIn: nil) { [weak self] in
+            self?.reloadData()
         }
     }
 
@@ -114,60 +101,33 @@ class NFXListController_iOS: NFXListController, UITableViewDelegate, UITableView
     // MARK: UISearchResultsUpdating
     
     func updateSearchResults(for searchController: UISearchController) {
-        updateSearchResultsForSearchControllerWithString(searchController.searchBar.text!)
-        reloadTableViewData()
-    }
-    
-    @objc func deactivateSearchController() {
-        searchController.isActive = false
+        filter = searchController.searchBar.text
     }
     
     // MARK: UITableViewDataSource
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        if searchController.isActive {
-            return filteredTableData.count
-        } else {
-            return NFXHTTPModelManager.sharedInstance.getModels().count
-        }
+        return tableData.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: NSStringFromClass(NFXListCell.self), for: indexPath) as! NFXListCell
         
-        if searchController.isActive {
-            if !filteredTableData.isEmpty {
-                let obj = filteredTableData[indexPath.row]
-                cell.configForObject(obj)
-            }
-        } else {
-            if NFXHTTPModelManager.sharedInstance.getModels().count > 0 {
-                let obj = NFXHTTPModelManager.sharedInstance.getModels()[indexPath.row]
-                cell.configForObject(obj)
-            }
-        }
+        cell.configForObject(tableData[indexPath.row])
         
         return cell
     }
     
     func tableView(_ tableView: UITableView, viewForFooterInSection section: Int) -> UIView? {
-        return UIView(frame: CGRect.zero)
-    }
-    
-    func numberOfSections(in tableView: UITableView) -> Int {
-        return 1
+        return UIView(frame: .zero)
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        var detailsController : NFXDetailsController_iOS
-        detailsController = NFXDetailsController_iOS()
-        var model: NFXHTTPModel
-        if searchController.isActive {
-            model = filteredTableData[indexPath.row]
-        } else {
-            model = NFXHTTPModelManager.sharedInstance.getModels()[indexPath.row]
-        }
+        let detailsController = NFXDetailsController_iOS()
+        let model = tableData[indexPath.row]
+
         detailsController.selectedModel(model)
+
         navigationController?.pushViewController(detailsController, animated: true)
     }
     
@@ -178,3 +138,4 @@ class NFXListController_iOS: NFXListController, UITableViewDelegate, UITableView
 }
 
 #endif
+
