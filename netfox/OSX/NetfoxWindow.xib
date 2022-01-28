@@ -154,11 +154,11 @@
                                                 </tableView>
                                             </subviews>
                                         </clipView>
-                                        <scroller key="horizontalScroller" hidden="YES" verticalHuggingPriority="750" horizontal="YES" id="yOp-XJ-VEZ">
+                                        <scroller key="horizontalScroller" hidden="YES" wantsLayer="YES" verticalHuggingPriority="750" horizontal="YES" id="yOp-XJ-VEZ">
                                             <rect key="frame" x="1" y="7" width="0.0" height="16"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                         </scroller>
-                                        <scroller key="verticalScroller" hidden="YES" verticalHuggingPriority="750" horizontal="NO" id="X3x-Ae-X1t">
+                                        <scroller key="verticalScroller" hidden="YES" wantsLayer="YES" verticalHuggingPriority="750" horizontal="NO" id="X3x-Ae-X1t">
                                             <rect key="frame" x="224" y="17" width="15" height="102"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                         </scroller>
@@ -218,7 +218,7 @@
                                                                     </textView>
                                                                 </subviews>
                                                             </clipView>
-                                                            <scroller key="horizontalScroller" hidden="YES" verticalHuggingPriority="750" doubleValue="1" horizontal="YES" id="EAa-Kn-sQw">
+                                                            <scroller key="horizontalScroller" hidden="YES" wantsLayer="YES" verticalHuggingPriority="750" doubleValue="1" horizontal="YES" id="EAa-Kn-sQw">
                                                                 <rect key="frame" x="-100" y="-100" width="87" height="18"/>
                                                                 <autoresizingMask key="autoresizingMask"/>
                                                             </scroller>
@@ -258,11 +258,11 @@
                                                                     </textView>
                                                                 </subviews>
                                                             </clipView>
-                                                            <scroller key="horizontalScroller" hidden="YES" verticalHuggingPriority="750" doubleValue="1" horizontal="YES" id="8dk-Ox-ZtJ">
+                                                            <scroller key="horizontalScroller" hidden="YES" wantsLayer="YES" verticalHuggingPriority="750" doubleValue="1" horizontal="YES" id="8dk-Ox-ZtJ">
                                                                 <rect key="frame" x="-100" y="-100" width="87" height="18"/>
                                                                 <autoresizingMask key="autoresizingMask"/>
                                                             </scroller>
-                                                            <scroller key="verticalScroller" verticalHuggingPriority="750" doubleValue="1" horizontal="NO" id="1vA-Uu-d6q">
+                                                            <scroller key="verticalScroller" wantsLayer="YES" verticalHuggingPriority="750" doubleValue="1" horizontal="NO" id="1vA-Uu-d6q">
                                                                 <rect key="frame" x="281" y="1" width="15" height="228"/>
                                                                 <autoresizingMask key="autoresizingMask"/>
                                                             </scroller>
@@ -298,11 +298,11 @@
                                                                     </textView>
                                                                 </subviews>
                                                             </clipView>
-                                                            <scroller key="horizontalScroller" hidden="YES" verticalHuggingPriority="750" doubleValue="1" horizontal="YES" id="mfi-Mx-WwV">
+                                                            <scroller key="horizontalScroller" hidden="YES" wantsLayer="YES" verticalHuggingPriority="750" doubleValue="1" horizontal="YES" id="mfi-Mx-WwV">
                                                                 <rect key="frame" x="-100" y="-100" width="87" height="18"/>
                                                                 <autoresizingMask key="autoresizingMask"/>
                                                             </scroller>
-                                                            <scroller key="verticalScroller" verticalHuggingPriority="750" doubleValue="1" horizontal="NO" id="xVE-bp-Yt9">
+                                                            <scroller key="verticalScroller" wantsLayer="YES" verticalHuggingPriority="750" doubleValue="1" horizontal="NO" id="xVE-bp-Yt9">
                                                                 <rect key="frame" x="466" y="1" width="15" height="328"/>
                                                                 <autoresizingMask key="autoresizingMask"/>
                                                             </scroller>
@@ -338,11 +338,11 @@
                                                                     </textView>
                                                                 </subviews>
                                                             </clipView>
-                                                            <scroller key="horizontalScroller" hidden="YES" verticalHuggingPriority="750" doubleValue="1" horizontal="YES" id="Q5U-dM-FMB">
+                                                            <scroller key="horizontalScroller" hidden="YES" wantsLayer="YES" verticalHuggingPriority="750" doubleValue="1" horizontal="YES" id="Q5U-dM-FMB">
                                                                 <rect key="frame" x="-100" y="-100" width="87" height="18"/>
                                                                 <autoresizingMask key="autoresizingMask"/>
                                                             </scroller>
-                                                            <scroller key="verticalScroller" verticalHuggingPriority="750" doubleValue="1" horizontal="NO" id="0rI-qV-O0B">
+                                                            <scroller key="verticalScroller" wantsLayer="YES" verticalHuggingPriority="750" doubleValue="1" horizontal="NO" id="0rI-qV-O0B">
                                                                 <rect key="frame" x="260" y="1" width="15" height="228"/>
                                                                 <autoresizingMask key="autoresizingMask"/>
                                                             </scroller>
@@ -378,11 +378,11 @@
                                                                     </textView>
                                                                 </subviews>
                                                             </clipView>
-                                                            <scroller key="horizontalScroller" hidden="YES" verticalHuggingPriority="750" doubleValue="1" horizontal="YES" id="s5H-DE-qRZ">
+                                                            <scroller key="horizontalScroller" hidden="YES" wantsLayer="YES" verticalHuggingPriority="750" doubleValue="1" horizontal="YES" id="s5H-DE-qRZ">
                                                                 <rect key="frame" x="-100" y="-100" width="87" height="18"/>
                                                                 <autoresizingMask key="autoresizingMask"/>
                                                             </scroller>
-                                                            <scroller key="verticalScroller" verticalHuggingPriority="750" doubleValue="1" horizontal="NO" id="58D-aT-X9b">
+                                                            <scroller key="verticalScroller" wantsLayer="YES" verticalHuggingPriority="750" doubleValue="1" horizontal="NO" id="58D-aT-X9b">
                                                                 <rect key="frame" x="466" y="1" width="15" height="328"/>
                                                                 <autoresizingMask key="autoresizingMask"/>
                                                             </scroller>
@@ -522,11 +522,11 @@
                     <constraints>
                         <constraint firstAttribute="height" constant="144" id="ycu-zB-eWM"/>
                     </constraints>
-                    <scroller key="horizontalScroller" hidden="YES" verticalHuggingPriority="750" horizontal="YES" id="aeX-Hc-ElD">
+                    <scroller key="horizontalScroller" hidden="YES" wantsLayer="YES" verticalHuggingPriority="750" horizontal="YES" id="aeX-Hc-ElD">
                         <rect key="frame" x="1" y="124" width="212" height="16"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </scroller>
-                    <scroller key="verticalScroller" hidden="YES" verticalHuggingPriority="750" horizontal="NO" id="85c-W9-JQS">
+                    <scroller key="verticalScroller" hidden="YES" wantsLayer="YES" verticalHuggingPriority="750" horizontal="NO" id="85c-W9-JQS">
                         <rect key="frame" x="224" y="17" width="15" height="102"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </scroller>
@@ -641,11 +641,11 @@
                         <constraint firstAttribute="width" constant="250" id="bkt-rY-H6b"/>
                         <constraint firstAttribute="height" constant="250" id="wgY-uM-uZr"/>
                     </constraints>
-                    <scroller key="horizontalScroller" hidden="YES" verticalHuggingPriority="750" doubleValue="1" horizontal="YES" id="B3w-qf-zqN">
+                    <scroller key="horizontalScroller" hidden="YES" wantsLayer="YES" verticalHuggingPriority="750" doubleValue="1" horizontal="YES" id="B3w-qf-zqN">
                         <rect key="frame" x="-100" y="-100" width="87" height="18"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </scroller>
-                    <scroller key="verticalScroller" verticalHuggingPriority="750" doubleValue="1" horizontal="NO" id="eqr-u6-Tlv">
+                    <scroller key="verticalScroller" wantsLayer="YES" verticalHuggingPriority="750" doubleValue="1" horizontal="NO" id="eqr-u6-Tlv">
                         <rect key="frame" x="234" y="1" width="15" height="248"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </scroller>
@@ -695,11 +695,11 @@
                         <constraint firstAttribute="width" constant="250" id="QkS-pD-nsl"/>
                         <constraint firstAttribute="height" constant="250" id="VVg-Q3-hYa"/>
                     </constraints>
-                    <scroller key="horizontalScroller" hidden="YES" verticalHuggingPriority="750" doubleValue="1" horizontal="YES" id="fTo-XG-tQx">
+                    <scroller key="horizontalScroller" hidden="YES" wantsLayer="YES" verticalHuggingPriority="750" doubleValue="1" horizontal="YES" id="fTo-XG-tQx">
                         <rect key="frame" x="-100" y="-100" width="87" height="18"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </scroller>
-                    <scroller key="verticalScroller" verticalHuggingPriority="750" doubleValue="1" horizontal="NO" id="1oO-uN-Zik">
+                    <scroller key="verticalScroller" wantsLayer="YES" verticalHuggingPriority="750" doubleValue="1" horizontal="NO" id="1oO-uN-Zik">
                         <rect key="frame" x="234" y="1" width="15" height="248"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </scroller>

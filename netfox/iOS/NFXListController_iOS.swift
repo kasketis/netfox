@@ -12,15 +12,18 @@ import UIKit
 
 
 class NFXListController_iOS: NFXListController, UITableViewDelegate, UITableViewDataSource, UISearchResultsUpdating, UISearchControllerDelegate, DataCleaner {
+    
     // MARK: Properties
     
-    var tableView = UITableView()
+    var tableView = UITableView(frame: .zero, style: .grouped)
     var searchController: UISearchController!
     
     // MARK: View Life Cycle
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        title = "Requests"
         
         edgesForExtendedLayout = UIRectEdge.all
         extendedLayoutIncludesOpaqueBars = true
@@ -30,6 +33,8 @@ class NFXListController_iOS: NFXListController, UITableViewDelegate, UITableView
         tableView.translatesAutoresizingMaskIntoConstraints = true
         tableView.delegate = self
         tableView.dataSource = self
+        tableView.backgroundColor = .white
+        tableView.separatorInset = .zero
         view.addSubview(self.tableView)
         
         tableView.register(NFXListCell.self, forCellReuseIdentifier: NSStringFromClass(NFXListCell.self))

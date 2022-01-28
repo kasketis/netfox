@@ -12,7 +12,7 @@ import MessageUI
 
 class NFXSettingsController_iOS: NFXSettingsController, UITableViewDelegate, UITableViewDataSource, MFMailComposeViewControllerDelegate, DataCleaner {
     
-    var tableView: UITableView = UITableView()
+    var tableView: UITableView = UITableView(frame: .zero, style: .grouped)
     
     // MARK: View Life Cycle
     
@@ -38,6 +38,8 @@ class NFXSettingsController_iOS: NFXSettingsController, UITableViewDelegate, UIT
         tableView.dataSource = self
         tableView.alwaysBounceVertical = false
         tableView.backgroundColor = UIColor.clear
+        tableView.separatorInset = .zero
+        
         tableView.tableFooterView = UIView(frame: CGRect.zero)
         tableView.tableFooterView?.isHidden = true
         view.addSubview(tableView)
@@ -99,7 +101,9 @@ class NFXSettingsController_iOS: NFXSettingsController, UITableViewDelegate, UIT
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = UITableViewCell()
         cell.textLabel?.font = UIFont.NFXFont(size: 14)
+        cell.textLabel?.textColor = .black
         cell.tintColor = UIColor.NFXOrangeColor()
+        cell.backgroundColor = .white
         
         switch indexPath.section {
         case 0:
@@ -135,7 +139,6 @@ class NFXSettingsController_iOS: NFXSettingsController, UITableViewDelegate, UIT
         default: return UITableViewCell()
 
         }
-        
     }
     
     func numberOfSections(in tableView: UITableView) -> Int {
