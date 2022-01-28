@@ -47,7 +47,6 @@
 		B3F8BA9A1C833ABC00F9FBEA /* NFXProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3F8BA7D1C833ABC00F9FBEA /* NFXProtocol.swift */; };
 		B3F8BA9B1C833ABC00F9FBEA /* NFXProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3F8BA7D1C833ABC00F9FBEA /* NFXProtocol.swift */; };
 		B3F8BA9C1C833ABC00F9FBEA /* NFXRawBodyDetailsController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3F8BA7E1C833ABC00F9FBEA /* NFXRawBodyDetailsController.swift */; };
-		B3F8BA9D1C833ABC00F9FBEA /* NFXRawBodyDetailsController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3F8BA7E1C833ABC00F9FBEA /* NFXRawBodyDetailsController.swift */; };
 		B3F8BA9E1C833ABC00F9FBEA /* NFXSettingsController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3F8BA7F1C833ABC00F9FBEA /* NFXSettingsController.swift */; };
 		B3F8BA9F1C833ABC00F9FBEA /* NFXSettingsController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3F8BA7F1C833ABC00F9FBEA /* NFXSettingsController.swift */; };
 		B3F8BAA01C833ABC00F9FBEA /* NFXStatisticsController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3F8BA801C833ABC00F9FBEA /* NFXStatisticsController.swift */; };
@@ -234,7 +233,6 @@
 				B3F8BA7B1C833ABC00F9FBEA /* NFXInfoController.swift */,
 				B3F8BA7C1C833ABC00F9FBEA /* NFXListController.swift */,
 				B3F8BA7D1C833ABC00F9FBEA /* NFXProtocol.swift */,
-				B3F8BA7E1C833ABC00F9FBEA /* NFXRawBodyDetailsController.swift */,
 				B3F8BA7F1C833ABC00F9FBEA /* NFXSettingsController.swift */,
 				B3F8BA801C833ABC00F9FBEA /* NFXStatisticsController.swift */,
 				B3F8BA811C833ABC00F9FBEA /* NFXWindowController.swift */,
@@ -246,6 +244,7 @@
 			isa = PBXGroup;
 			children = (
 				3708AD5922D4A9DD0050DB7D /* NFXURLDetailsControllerViewController.swift */,
+				B3F8BA7E1C833ABC00F9FBEA /* NFXRawBodyDetailsController.swift */,
 				B3F8BAA51C833AC700F9FBEA /* NFXDetailsController_iOS.swift */,
 				B3F8BAA61C833AC700F9FBEA /* NFXHelper_iOS.swift */,
 				B3F8BAA71C833AC700F9FBEA /* NFXInfoController_iOS.swift */,
@@ -506,7 +505,6 @@
 				B3F8BA931C833ABC00F9FBEA /* NFXHTTPModelManager.swift in Sources */,
 				B3F8BA891C833ABC00F9FBEA /* NFXDetailsController.swift in Sources */,
 				B3F8BA991C833ABC00F9FBEA /* NFXListController.swift in Sources */,
-				B3F8BA9D1C833ABC00F9FBEA /* NFXRawBodyDetailsController.swift in Sources */,
 				B3F8D6801C833B1700F9FBEA /* NFXListController_OSX.swift in Sources */,
 				B3F8BA971C833ABC00F9FBEA /* NFXInfoController.swift in Sources */,
 			);
