@@ -24,6 +24,10 @@ let nfxVersion = podPlistVersion() ?? "0"
 let nfxWillOpenNotification = "NFXWillOpenNotification"
 let nfxWillCloseNotification = "NFXWillCloseNotification"
 
+public protocol NFXDelegate: NSObjectProtocol {
+    func nfxWillAdd(_ obj: NFXHTTPModel) -> NFXHTTPModel
+}
+
 @objc
 open class NFX: NSObject {
     
@@ -54,6 +58,12 @@ open class NFX: NSObject {
     fileprivate var lastVisitDate: Date = Date()
     
     internal var cacheStoragePolicy = URLCache.StoragePolicy.notAllowed
+    
+    public weak var delegate: NFXDelegate? {
+        didSet {
+            NFXHTTPModelManager.sharedInstance.delegate = self
+        }
+    }
     
     // swiftSharedInstance is not accessible from ObjC
     class var swiftSharedInstance: NFX {
@@ -254,6 +264,14 @@ open class NFX: NSObject {
         return filters
     }
     
+}
+
+// MARK: - NFXHTTPModelManagerDelegate
+
+extension NFX: NFXHTTPModelManagerDelegate {
+    func nfxHTTPModelManager(_ manager: NFXHTTPModelManager, willAdd obj: NFXHTTPModel) -> NFXHTTPModel {
+        return delegate?.nfxWillAdd(obj) ?? obj
+    }
 }
 
 #if os(iOS)

@@ -9,14 +9,19 @@ import Foundation
 
 private let _sharedInstance = NFXHTTPModelManager()
 
+protocol NFXHTTPModelManagerDelegate: AnyObject {
+    func nfxHTTPModelManager(_ manager: NFXHTTPModelManager, willAdd obj: NFXHTTPModel) -> NFXHTTPModel
+}
+
 final class NFXHTTPModelManager: NSObject {
     static let sharedInstance = NFXHTTPModelManager()
     fileprivate var models = [NFXHTTPModel]()
     private let syncQueue = DispatchQueue(label: "NFXSyncQueue")
+    weak var delegate: NFXHTTPModelManagerDelegate?
     
     func add(_ obj: NFXHTTPModel) {
         syncQueue.async {
-            self.models.insert(obj, at: 0)
+            self.models.insert(self.delegate?.nfxHTTPModelManager(self, willAdd: obj) ?? obj, at: 0)
             NotificationCenter.default.post(name: NSNotification.Name.NFXAddedModel, object: obj)
         }
     }
