@@ -24,6 +24,12 @@ open class NFXProtocol: URLProtocol {
     }
     
     override open class func canInit(with task: URLSessionTask) -> Bool {
+        if #available(iOS 13.0, *) {
+            if task is URLSessionWebSocketTask {
+                return false
+            }
+        }
+        
         guard let request = task.currentRequest else { return false }
         return canServeRequest(request)
     }
@@ -66,6 +72,7 @@ open class NFXProtocol: URLProtocol {
     override open func stopLoading() {
         session.getTasksWithCompletionHandler { dataTasks, _, _ in
             dataTasks.forEach { $0.cancel() }
+            self.session.invalidateAndCancel()
         }
     }
     
@@ -127,8 +134,7 @@ extension NFXProtocol: URLSessionDataDelegate {
             model.saveResponse(response, data: data)
         }
         
-        NFXHTTPModelManager.sharedInstance.add(model)
-        NotificationCenter.default.post(name: .NFXReloadData, object: nil)
+        NFXHTTPModelManager.shared.add(model)
     }
     
     public func urlSession(_ session: URLSession, task: URLSessionTask, willPerformHTTPRedirection response: HTTPURLResponse, newRequest request: URLRequest, completionHandler: @escaping (URLRequest?) -> Void) {

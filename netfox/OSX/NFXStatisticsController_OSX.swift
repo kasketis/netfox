@@ -11,25 +11,12 @@ import Cocoa
     
 class NFXStatisticsController_OSX: NFXStatisticsController {
  
-    @IBOutlet var textView: NSTextView!
-    
-    override func awakeFromNib() {
-        super.awakeFromNib()
-        
-        generateStatistics()
-        
-        NotificationCenter.default.addObserver(
-            self,
-            selector: #selector(NFXGenericController.reloadData),
-            name: NSNotification.Name.NFXReloadData,
-            object: nil)
-    }
-    
+    @IBOutlet private var textView: NSTextView!
+
     override func reloadData() {
         super.reloadData()
-        DispatchQueue.main.async {
-            self.textView.textStorage?.setAttributedString(self.getReportString())
-        }
+        
+        textView.textStorage?.setAttributedString(getReportString())
     }
 }
 

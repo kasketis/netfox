@@ -12,7 +12,7 @@ import MessageUI
 
 class NFXSettingsController_iOS: NFXSettingsController, UITableViewDelegate, UITableViewDataSource, MFMailComposeViewControllerDelegate, DataCleaner {
     
-    var tableView: UITableView = UITableView()
+    var tableView: UITableView = UITableView(frame: .zero, style: .grouped)
     
     // MARK: View Life Cycle
     
@@ -23,8 +23,7 @@ class NFXSettingsController_iOS: NFXSettingsController, UITableViewDelegate, UIT
         
         title = "Settings"
         
-        tableData = HTTPModelShortType.allValues
-        filters =  NFX.sharedInstance().getCachedFilters()
+        tableData = HTTPModelShortType.allCases
         
         edgesForExtendedLayout = UIRectEdge()
         extendedLayoutIncludesOpaqueBars = false
@@ -39,6 +38,8 @@ class NFXSettingsController_iOS: NFXSettingsController, UITableViewDelegate, UIT
         tableView.dataSource = self
         tableView.alwaysBounceVertical = false
         tableView.backgroundColor = UIColor.clear
+        tableView.separatorInset = .zero
+        
         tableView.tableFooterView = UIView(frame: CGRect.zero)
         tableView.tableFooterView?.isHidden = true
         view.addSubview(tableView)
@@ -65,7 +66,8 @@ class NFXSettingsController_iOS: NFXSettingsController, UITableViewDelegate, UIT
     
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
-        NFX.sharedInstance().cacheFilters(self.filters)
+        
+        NFXHTTPModelManager.shared.filters = filters
     }
     
     @objc func nfxURLButtonPressed() {
@@ -99,9 +101,11 @@ class NFXSettingsController_iOS: NFXSettingsController, UITableViewDelegate, UIT
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = UITableViewCell()
         cell.textLabel?.font = UIFont.NFXFont(size: 14)
+        cell.textLabel?.textColor = .black
         cell.tintColor = UIColor.NFXOrangeColor()
+        cell.backgroundColor = .white
         
-        switch (indexPath as NSIndexPath).section {
+        switch indexPath.section {
         case 0:
             cell.textLabel?.text = "Logging"
             let nfxEnabledSwitch: UISwitch
@@ -112,7 +116,7 @@ class NFXSettingsController_iOS: NFXSettingsController, UITableViewDelegate, UIT
             return cell
             
         case 1:
-            let shortType = tableData[(indexPath as NSIndexPath).row]
+            let shortType = tableData[indexPath.row]
             cell.textLabel?.text = shortType.rawValue
             configureCell(cell, indexPath: indexPath)
             return cell
@@ -133,15 +137,7 @@ class NFXSettingsController_iOS: NFXSettingsController, UITableViewDelegate, UIT
             return cell
             
         default: return UITableViewCell()
-            
-        }
-        
-    }
-    
-    func reloadTableData() {
-        DispatchQueue.main.async { () -> Void in
-            self.tableView.reloadData()
-            self.tableView.setNeedsDisplay()
+
         }
     }
     
@@ -172,33 +168,27 @@ class NFXSettingsController_iOS: NFXSettingsController, UITableViewDelegate, UIT
         }
         
         return headerView
-        
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        switch (indexPath as NSIndexPath).section {
+        switch indexPath.section {
         case 1:
             let cell = tableView.cellForRow(at: indexPath)
-            self.filters[(indexPath as NSIndexPath).row] = !self.filters[(indexPath as NSIndexPath).row]
+            self.filters[indexPath.row] = !self.filters[indexPath.row]
             configureCell(cell, indexPath: indexPath)
-            break
-            
         case 2:
             shareSessionLogsPressed()
-            break
-            
         case 3:
             clearDataButtonPressedOnTableIndex(indexPath)
+        default:
             break
-            
-        default: break
         }
         
         tableView.deselectRow(at: indexPath, animated: true)
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        switch (indexPath as NSIndexPath).section {
+        switch indexPath.section {
         case 0: return 44
         case 1: return 33
         case 2,3: return 44
@@ -233,13 +223,7 @@ class NFXSettingsController_iOS: NFXSettingsController, UITableViewDelegate, UIT
     }
     
     func configureCell(_ cell: UITableViewCell?, indexPath: IndexPath) {
-        if cell != nil {
-            if filters[(indexPath as NSIndexPath).row] {
-                cell!.accessoryType = .checkmark
-            } else {
-                cell!.accessoryType = .none
-            }
-        }
+        cell?.accessoryType = filters[indexPath.row] ? .checkmark : .none
     }
     
     @objc func nfxEnabledSwitchValueChanged(_ sender: UISwitch) {
@@ -251,7 +235,6 @@ class NFXSettingsController_iOS: NFXSettingsController, UITableViewDelegate, UIT
     }
     
     func clearDataButtonPressedOnTableIndex(_ index: IndexPath) {
-
         clearData(sourceView: tableView, originingIn: tableView.rectForRow(at: index)) { }
     }
 
@@ -261,8 +244,8 @@ class NFXSettingsController_iOS: NFXSettingsController, UITableViewDelegate, UIT
             mailComposer.mailComposeDelegate = self
             
             mailComposer.setSubject("netfox log - Session Log \(NSDate())")
-            if let sessionLogData = NSData(contentsOfFile: NFXPath.SessionLog as String) {
-                mailComposer.addAttachmentData(sessionLogData as Data, mimeType: "text/plain", fileName: "session.log")
+            if let sessionLogData = try? Data(contentsOf: NFXPath.sessionLogURL) {
+                mailComposer.addAttachmentData(sessionLogData as Data, mimeType: "text/plain", fileName: NFXPath.sessionLogName)
             }
             
             present(mailComposer, animated: true, completion: nil)

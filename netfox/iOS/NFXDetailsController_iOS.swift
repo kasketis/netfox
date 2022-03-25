@@ -10,6 +10,7 @@
 import Foundation
 import UIKit
 import MessageUI
+
 fileprivate func < <T : Comparable>(lhs: T?, rhs: T?) -> Bool {
   switch (lhs, rhs) {
   case let (l?, r?):
@@ -263,7 +264,7 @@ class NFXDetailsController_iOS: NFXDetailsController, MFMailComposeViewControlle
         
         var bodyDetailsController: NFXGenericBodyDetailsController
         
-        if selectedModel.shortType as String == HTTPModelShortType.IMAGE.rawValue {
+        if selectedModel.shortType == .IMAGE {
             bodyDetailsController = NFXImageBodyDetailsController()
         } else {
             bodyDetailsController = NFXRawBodyDetailsController()
@@ -288,16 +289,17 @@ class NFXDetailsController_iOS: NFXDetailsController, MFMailComposeViewControlle
         tempString += "logged via netfox - [https://github.com/kasketis/netfox]\n"
 
         if full {
-            let requestFilePath = selectedModel.getRequestBodyFilepath()
-            if let requestFileData = try? String(contentsOf: URL(fileURLWithPath: requestFilePath as String), encoding: .utf8) {
+            let requestFileURL = selectedModel.getRequestBodyFileURL()
+            if let requestFileData = try? String(contentsOf: requestFileURL, encoding: .utf8) {
                 tempString += requestFileData
             }
 
-            let responseFilePath = selectedModel.getResponseBodyFilepath()
-            if let responseFileData = try? String(contentsOf: URL(fileURLWithPath: responseFilePath as String), encoding: .utf8) {
+            let responseFileURL = selectedModel.getResponseBodyFileURL()
+            if let responseFileData = try? String(contentsOf: responseFileURL, encoding: .utf8) {
                 tempString += responseFileData
             }
         }
+        
         displayShareSheet(shareContent: tempString, sender: sender)
     }
 

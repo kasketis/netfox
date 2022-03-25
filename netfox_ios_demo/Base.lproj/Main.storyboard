@@ -1,12 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14113" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="QMG-Zi-veq">
-    <device id="retina4_7" orientation="portrait">
-        <adaptation id="fullscreen"/>
-    </device>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="19455" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="QMG-Zi-veq">
+    <device id="retina4_7" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14088"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="19454"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="System colors in document resources" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
@@ -19,9 +18,9 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="uaC-es-XyM">
-                                <rect key="frame" x="20" y="40" width="335" height="528"/>
+                                <rect key="frame" x="20" y="20" width="335" height="548"/>
                             </imageView>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="51u-G5-gib">
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="51u-G5-gib">
                                 <rect key="frame" x="0.0" y="568" width="375" height="50"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="50" id="x0L-HH-pdq"/>
@@ -32,7 +31,8 @@
                                 </connections>
                             </button>
                         </subviews>
-                        <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
+                        <color key="backgroundColor" systemColor="tertiarySystemBackgroundColor"/>
                         <constraints>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="bottom" secondItem="51u-G5-gib" secondAttribute="bottom" id="0bb-HS-BLI"/>
                             <constraint firstItem="51u-G5-gib" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="M8o-Hm-OT0"/>
@@ -42,7 +42,6 @@
                             <constraint firstItem="uaC-es-XyM" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="20" id="egs-og-4zk"/>
                             <constraint firstItem="51u-G5-gib" firstAttribute="top" secondItem="uaC-es-XyM" secondAttribute="bottom" id="lVO-L8-Kdz"/>
                         </constraints>
-                        <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                     </view>
                     <tabBarItem key="tabBarItem" title="Image" id="egM-Yu-Ln7"/>
                     <connections>
@@ -62,18 +61,18 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <webView contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="fsS-BG-Gke">
-                                <rect key="frame" x="20" y="40" width="335" height="558"/>
-                                <color key="backgroundColor" red="0.36078431370000003" green="0.38823529410000002" blue="0.4039215686" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <rect key="frame" x="20" y="20" width="335" height="578"/>
+                                <color key="backgroundColor" systemColor="tertiarySystemBackgroundColor"/>
                             </webView>
                         </subviews>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <viewLayoutGuide key="safeArea" id="i9O-34-gHf"/>
+                        <color key="backgroundColor" systemColor="tertiarySystemBackgroundColor"/>
                         <constraints>
                             <constraint firstItem="i9O-34-gHf" firstAttribute="bottom" secondItem="fsS-BG-Gke" secondAttribute="bottom" constant="20" id="9ms-mr-WEF"/>
                             <constraint firstItem="fsS-BG-Gke" firstAttribute="leading" secondItem="i9O-34-gHf" secondAttribute="leading" constant="20" id="C7M-Sa-23i"/>
                             <constraint firstItem="i9O-34-gHf" firstAttribute="trailing" secondItem="fsS-BG-Gke" secondAttribute="trailing" constant="20" id="Cpn-j9-hhc"/>
                             <constraint firstItem="fsS-BG-Gke" firstAttribute="top" secondItem="i9O-34-gHf" secondAttribute="top" constant="20" id="xcH-CD-YUn"/>
                         </constraints>
-                        <viewLayoutGuide key="safeArea" id="i9O-34-gHf"/>
                     </view>
                     <tabBarItem key="tabBarItem" title="Webview" id="D45-5Y-swl"/>
                     <connections>
@@ -92,7 +91,7 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Or2-c7-Xhp">
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Or2-c7-Xhp">
                                 <rect key="frame" x="0.0" y="568" width="375" height="50"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="50" id="mEX-cq-aLL"/>
@@ -103,13 +102,14 @@
                                 </connections>
                             </button>
                             <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" editable="NO" textAlignment="natural" selectable="NO" translatesAutoresizingMaskIntoConstraints="NO" id="0rC-Qf-8Wt">
-                                <rect key="frame" x="20" y="22" width="335" height="546"/>
-                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <rect key="frame" x="20" y="2" width="335" height="566"/>
+                                <color key="backgroundColor" systemColor="tertiarySystemBackgroundColor"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                             </textView>
                         </subviews>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <viewLayoutGuide key="safeArea" id="BFV-iH-ocq"/>
+                        <color key="backgroundColor" systemColor="tertiarySystemBackgroundColor"/>
                         <constraints>
                             <constraint firstItem="Or2-c7-Xhp" firstAttribute="leading" secondItem="BFV-iH-ocq" secondAttribute="leading" id="56a-S0-aFm"/>
                             <constraint firstItem="BFV-iH-ocq" firstAttribute="bottom" secondItem="Or2-c7-Xhp" secondAttribute="bottom" id="Oxp-oH-x00"/>
@@ -119,7 +119,6 @@
                             <constraint firstItem="0rC-Qf-8Wt" firstAttribute="leading" secondItem="BFV-iH-ocq" secondAttribute="leading" constant="20" id="dbd-Pr-Hr9"/>
                             <constraint firstItem="0rC-Qf-8Wt" firstAttribute="top" secondItem="BFV-iH-ocq" secondAttribute="top" constant="2" id="tJC-UC-UHS"/>
                         </constraints>
-                        <viewLayoutGuide key="safeArea" id="BFV-iH-ocq"/>
                     </view>
                     <tabBarItem key="tabBarItem" title="Text" id="oUk-6f-uAb"/>
                     <connections>
@@ -159,7 +158,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <wkWebView contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="zbz-vT-b61">
-                                <rect key="frame" x="20" y="40" width="335" height="558"/>
+                                <rect key="frame" x="20" y="20" width="335" height="578"/>
                                 <color key="backgroundColor" red="0.36078431370000003" green="0.38823529410000002" blue="0.4039215686" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <wkWebViewConfiguration key="configuration">
                                     <audiovisualMediaTypes key="mediaTypesRequiringUserActionForPlayback" none="YES"/>
@@ -167,14 +166,14 @@
                                 </wkWebViewConfiguration>
                             </wkWebView>
                         </subviews>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <viewLayoutGuide key="safeArea" id="r8u-1q-H3p"/>
+                        <color key="backgroundColor" systemColor="tertiarySystemBackgroundColor"/>
                         <constraints>
                             <constraint firstItem="zbz-vT-b61" firstAttribute="leading" secondItem="r8u-1q-H3p" secondAttribute="leading" constant="20" id="CXQ-Bq-zba"/>
                             <constraint firstItem="r8u-1q-H3p" firstAttribute="bottom" secondItem="zbz-vT-b61" secondAttribute="bottom" constant="20" id="OWm-KP-KxN"/>
                             <constraint firstItem="r8u-1q-H3p" firstAttribute="trailing" secondItem="zbz-vT-b61" secondAttribute="trailing" constant="20" id="OwW-Bk-uhn"/>
                             <constraint firstItem="zbz-vT-b61" firstAttribute="top" secondItem="r8u-1q-H3p" secondAttribute="top" constant="20" id="qpc-40-aT7"/>
                         </constraints>
-                        <viewLayoutGuide key="safeArea" id="r8u-1q-H3p"/>
                     </view>
                     <tabBarItem key="tabBarItem" title="WKWebView" id="sL3-4M-5Zd"/>
                     <connections>
@@ -186,4 +185,9 @@
             <point key="canvasLocation" x="-87" y="1800"/>
         </scene>
     </scenes>
+    <resources>
+        <systemColor name="tertiarySystemBackgroundColor">
+            <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+        </systemColor>
+    </resources>
 </document>

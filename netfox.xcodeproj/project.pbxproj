@@ -9,6 +9,8 @@
 /* Begin PBXBuildFile section */
 		026274D9214C6BC400AE1BDF /* WKWebViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 026274D8214C6BC400AE1BDF /* WKWebViewController.swift */; };
 		3708AD5A22D4A9DD0050DB7D /* NFXURLDetailsControllerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3708AD5922D4A9DD0050DB7D /* NFXURLDetailsControllerViewController.swift */; };
+		719756B3279C7EC500402E07 /* netfox_ios.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B3BC020F1C09CDA000C17F3A /* netfox_ios.framework */; };
+		719756B4279C7EC500402E07 /* netfox_ios.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = B3BC020F1C09CDA000C17F3A /* netfox_ios.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		8201A39D204E3E3F00AB2C3D /* NFXAuthenticationChallengeSender.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8201A39C204E3E3F00AB2C3D /* NFXAuthenticationChallengeSender.swift */; };
 		8201A39E204E451900AB2C3D /* NFXAuthenticationChallengeSender.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8201A39C204E3E3F00AB2C3D /* NFXAuthenticationChallengeSender.swift */; };
 		8229AD651F8FB34300A9D613 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8229AD641F8FB34300A9D613 /* AppDelegate.swift */; };
@@ -16,7 +18,6 @@
 		8229AD6A1F8FB34300A9D613 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 8229AD681F8FB34300A9D613 /* Main.storyboard */; };
 		8229AD6C1F8FB34300A9D613 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 8229AD6B1F8FB34300A9D613 /* Assets.xcassets */; };
 		8229AD6F1F8FB34300A9D613 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 8229AD6D1F8FB34300A9D613 /* LaunchScreen.storyboard */; };
-		8229AD771F8FB4B500A9D613 /* netfox_ios.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B3BC020F1C09CDA000C17F3A /* netfox_ios.framework */; };
 		82F6E1031F8FD81C002B31BD /* TextViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 82F6E1021F8FD81C002B31BD /* TextViewController.swift */; };
 		82F6E1051F8FF55D002B31BD /* WebViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 82F6E1041F8FF55D002B31BD /* WebViewController.swift */; };
 		B3F8BA821C833ABC00F9FBEA /* NFX.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3F8BA711C833ABC00F9FBEA /* NFX.swift */; };
@@ -46,7 +47,6 @@
 		B3F8BA9A1C833ABC00F9FBEA /* NFXProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3F8BA7D1C833ABC00F9FBEA /* NFXProtocol.swift */; };
 		B3F8BA9B1C833ABC00F9FBEA /* NFXProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3F8BA7D1C833ABC00F9FBEA /* NFXProtocol.swift */; };
 		B3F8BA9C1C833ABC00F9FBEA /* NFXRawBodyDetailsController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3F8BA7E1C833ABC00F9FBEA /* NFXRawBodyDetailsController.swift */; };
-		B3F8BA9D1C833ABC00F9FBEA /* NFXRawBodyDetailsController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3F8BA7E1C833ABC00F9FBEA /* NFXRawBodyDetailsController.swift */; };
 		B3F8BA9E1C833ABC00F9FBEA /* NFXSettingsController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3F8BA7F1C833ABC00F9FBEA /* NFXSettingsController.swift */; };
 		B3F8BA9F1C833ABC00F9FBEA /* NFXSettingsController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3F8BA7F1C833ABC00F9FBEA /* NFXSettingsController.swift */; };
 		B3F8BAA01C833ABC00F9FBEA /* NFXStatisticsController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3F8BA801C833ABC00F9FBEA /* NFXStatisticsController.swift */; };
@@ -81,6 +81,20 @@
 			remoteInfo = netfox_ios;
 		};
 /* End PBXContainerItemProxy section */
+
+/* Begin PBXCopyFilesBuildPhase section */
+		719756B5279C7EC500402E07 /* Embed Frameworks */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 10;
+			files = (
+				719756B4279C7EC500402E07 /* netfox_ios.framework in Embed Frameworks */,
+			);
+			name = "Embed Frameworks";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
 		026274D8214C6BC400AE1BDF /* WKWebViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WKWebViewController.swift; sourceTree = "<group>"; };
@@ -138,7 +152,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				8229AD771F8FB4B500A9D613 /* netfox_ios.framework in Frameworks */,
+				719756B3279C7EC500402E07 /* netfox_ios.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -219,7 +233,6 @@
 				B3F8BA7B1C833ABC00F9FBEA /* NFXInfoController.swift */,
 				B3F8BA7C1C833ABC00F9FBEA /* NFXListController.swift */,
 				B3F8BA7D1C833ABC00F9FBEA /* NFXProtocol.swift */,
-				B3F8BA7E1C833ABC00F9FBEA /* NFXRawBodyDetailsController.swift */,
 				B3F8BA7F1C833ABC00F9FBEA /* NFXSettingsController.swift */,
 				B3F8BA801C833ABC00F9FBEA /* NFXStatisticsController.swift */,
 				B3F8BA811C833ABC00F9FBEA /* NFXWindowController.swift */,
@@ -231,6 +244,7 @@
 			isa = PBXGroup;
 			children = (
 				3708AD5922D4A9DD0050DB7D /* NFXURLDetailsControllerViewController.swift */,
+				B3F8BA7E1C833ABC00F9FBEA /* NFXRawBodyDetailsController.swift */,
 				B3F8BAA51C833AC700F9FBEA /* NFXDetailsController_iOS.swift */,
 				B3F8BAA61C833AC700F9FBEA /* NFXHelper_iOS.swift */,
 				B3F8BAA71C833AC700F9FBEA /* NFXInfoController_iOS.swift */,
@@ -296,6 +310,7 @@
 				8229AD5E1F8FB34300A9D613 /* Sources */,
 				8229AD5F1F8FB34300A9D613 /* Frameworks */,
 				8229AD601F8FB34300A9D613 /* Resources */,
+				719756B5279C7EC500402E07 /* Embed Frameworks */,
 			);
 			buildRules = (
 			);
@@ -350,7 +365,7 @@
 			isa = PBXProject;
 			attributes = {
 				LastSwiftUpdateCheck = 0720;
-				LastUpgradeCheck = 1020;
+				LastUpgradeCheck = 1310;
 				ORGANIZATIONNAME = kasketis;
 				TargetAttributes = {
 					8229AD611F8FB34300A9D613 = {
@@ -490,7 +505,6 @@
 				B3F8BA931C833ABC00F9FBEA /* NFXHTTPModelManager.swift in Sources */,
 				B3F8BA891C833ABC00F9FBEA /* NFXDetailsController.swift in Sources */,
 				B3F8BA991C833ABC00F9FBEA /* NFXListController.swift in Sources */,
-				B3F8BA9D1C833ABC00F9FBEA /* NFXRawBodyDetailsController.swift in Sources */,
 				B3F8D6801C833B1700F9FBEA /* NFXListController_OSX.swift in Sources */,
 				B3F8BA971C833ABC00F9FBEA /* NFXInfoController.swift in Sources */,
 			);
@@ -606,6 +620,7 @@
 				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
 				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
 				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
 				CLANG_WARN_STRICT_PROTOTYPES = YES;
 				CLANG_WARN_SUSPICIOUS_MOVE = YES;
@@ -665,6 +680,7 @@
 				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
 				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
 				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
 				CLANG_WARN_STRICT_PROTOTYPES = YES;
 				CLANG_WARN_SUSPICIOUS_MOVE = YES;
@@ -708,7 +724,7 @@
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				MARKETING_VERSION = 1.20.0;
+				MARKETING_VERSION = 1.21.0;
 				PRODUCT_BUNDLE_IDENTIFIER = "com.kasketis.netfox-iOS";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
@@ -730,7 +746,7 @@
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				MARKETING_VERSION = 1.20.0;
+				MARKETING_VERSION = 1.21.0;
 				PRODUCT_BUNDLE_IDENTIFIER = "com.kasketis.netfox-iOS";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
@@ -758,7 +774,7 @@
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @loader_path/Frameworks";
 				MACOSX_DEPLOYMENT_TARGET = 10.11;
-				MARKETING_VERSION = 1.20.0;
+				MARKETING_VERSION = 1.21.0;
 				PRODUCT_BUNDLE_IDENTIFIER = "com.kasketis.netfox-OSX";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = macosx;
@@ -784,7 +800,7 @@
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @loader_path/Frameworks";
 				MACOSX_DEPLOYMENT_TARGET = 10.11;
-				MARKETING_VERSION = 1.20.0;
+				MARKETING_VERSION = 1.21.0;
 				PRODUCT_BUNDLE_IDENTIFIER = "com.kasketis.netfox-OSX";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = macosx;

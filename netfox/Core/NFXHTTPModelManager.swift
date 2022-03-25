@@ -7,43 +7,55 @@
 
 import Foundation
 
-private let _sharedInstance = NFXHTTPModelManager()
 
 final class NFXHTTPModelManager: NSObject {
-    static let sharedInstance = NFXHTTPModelManager()
-    fileprivate var models = [NFXHTTPModel]()
-    private let syncQueue = DispatchQueue(label: "NFXSyncQueue")
     
+    static let shared = NFXHTTPModelManager()
+    
+    let publisher = Publisher<[NFXHTTPModel]>()
+       
+    /// Not thread safe. Use only from main thread/queue
+    private(set) var models = [NFXHTTPModel]() {
+        didSet {
+            notifySubscribers()
+        }
+    }
+    
+    /// Not thread safe. Use only from main thread/queue
+    var filters = [Bool](repeating: true, count: HTTPModelShortType.allCases.count) {
+        didSet {
+            notifySubscribers()
+        }
+    }
+    
+    /// Not thread safe. Use only from main thread/queue
+    var filteredModels: [NFXHTTPModel] {
+        let filteredTypes = getCachedFilterTypes()
+        return models.filter { filteredTypes.contains($0.shortType) }
+    }
+    
+    /// Thread safe
     func add(_ obj: NFXHTTPModel) {
-        syncQueue.async {
+        DispatchQueue.main.async {
             self.models.insert(obj, at: 0)
-            NotificationCenter.default.post(name: NSNotification.Name.NFXAddedModel, object: obj)
         }
     }
     
+    /// Not thread safe. Use only from main thread/queue
     func clear() {
-        syncQueue.async {
-            self.models.removeAll()
-            NotificationCenter.default.post(name: NSNotification.Name.NFXClearedModels, object: nil)
+        models.removeAll()
+    }
+    
+    private func getCachedFilterTypes() -> [HTTPModelShortType] {
+        return filters
+            .enumerated()
+            .compactMap { $1 ? HTTPModelShortType.allCases[$0] : nil }
+    }
+    
+    private func notifySubscribers() {
+        if publisher.hasSubscribers {
+            publisher(filteredModels)
         }
     }
     
-    func getModels() -> [NFXHTTPModel] {
-        var predicates = [NSPredicate]()
-        
-        let filterValues = NFX.sharedInstance().getCachedFilters()
-        let filterNames = HTTPModelShortType.allValues
-        
-        for (index, filterValue) in filterValues.enumerated() {
-            if filterValue {
-                let filterName = filterNames[index].rawValue
-                let predicate = NSPredicate(format: "shortType == '\(filterName)'")
-                predicates.append(predicate)
-            }
-        }
-
-        let searchPredicate = NSCompoundPredicate(orPredicateWithSubpredicates: predicates)
-        let array = (models as NSArray).filtered(using: searchPredicate)
-        return array as! [NFXHTTPModel]
-    }
 }

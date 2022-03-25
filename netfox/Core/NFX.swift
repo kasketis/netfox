@@ -20,19 +20,18 @@ private func podPlistVersion() -> String? {
 // TODO: Carthage support
 let nfxVersion = podPlistVersion() ?? "0"
 
-// Notifications posted when NFX opens/closes, for client application that wish to log that information.
-let nfxWillOpenNotification = "NFXWillOpenNotification"
-let nfxWillCloseNotification = "NFXWillCloseNotification"
-
 @objc
 open class NFX: NSObject {
     
     // MARK: - Properties
-    
     #if os(OSX)
         var windowController: NFXWindowController?
         let mainMenu: NSMenu? = NSApp.mainMenu?.items[1].submenu
         var nfxMenuItem: NSMenuItem = NSMenuItem(title: "netfox", action: #selector(NFX.show), keyEquivalent: String.init(describing: (character: NSF9FunctionKey, length: 1)))
+    #endif
+    
+    #if os(iOS)
+        fileprivate var navigationViewController: UINavigationController?
     #endif
     
     fileprivate enum Constants: String {
@@ -40,7 +39,6 @@ open class NFX: NSObject {
         case alreadyStoppedMessage = "Already stopped!"
         case startedMessage = "Started!"
         case stoppedMessage = "Stopped!"
-        case prefixForCheck = "nfx"
         case nibName = "NetfoxWindow"
     }
     
@@ -50,7 +48,6 @@ open class NFX: NSObject {
     fileprivate var selectedGesture: ENFXGesture = .shake
     fileprivate var ignoredURLs = [String]()
     fileprivate var ignoredURLsRegex = [NSRegularExpression]()
-    fileprivate var filters = [Bool]()
     fileprivate var lastVisitDate: Date = Date()
     
     internal var cacheStoragePolicy = URLCache.StoragePolicy.notAllowed
@@ -83,7 +80,7 @@ open class NFX: NSObject {
         URLSessionConfiguration.implementNetfox()
         register()
         enable()
-        clearOldData()
+        fileStorageInit()
         showMessage(Constants.startedMessage.rawValue)
         #if os(OSX)
         addNetfoxToMainMenu()
@@ -159,6 +156,15 @@ open class NFX: NSObject {
         showNFX()
     }
     
+    #if os(iOS)
+    @objc open func show(on rootViewController: UIViewController) {
+        guard started, presented == false else { return }
+
+        showNFX(on: rootViewController)
+        presented = true
+    }
+    #endif
+    
     @objc open func hide() {
         guard started else { return }
         hideNFX()
@@ -172,6 +178,10 @@ open class NFX: NSObject {
     
     @objc open func ignoreURL(_ url: String) {
         ignoredURLs.append(url)
+    }
+    
+    @objc open func getSessionLog() -> Data? {
+        return try? Data(contentsOf: NFXPath.sessionLogURL)
     }
     
     @objc open func ignoreURLs(_ urls: [String]) {
@@ -197,7 +207,6 @@ open class NFX: NSObject {
         
         showNFXFollowingPlatform()
         presented = true
-
     }
     
     fileprivate func hideNFX() {
@@ -205,7 +214,6 @@ open class NFX: NSObject {
             return
         }
         
-        NotificationCenter.default.post(name: Notification.Name.NFXDeactivateSearch, object: nil)
         hideNFXFollowingPlatform { () -> Void in
             self.presented = false
             self.lastVisitDate = Date()
@@ -216,19 +224,17 @@ open class NFX: NSObject {
         presented ? hideNFX() : showNFX()
     }
     
+    private func fileStorageInit() {
+        clearOldData()
+        NFXPath.deleteOldNFXLogs()
+        NFXPath.createNFXDirIfNotExist()
+    }
+    
     internal func clearOldData() {
-        NFXHTTPModelManager.sharedInstance.clear()
-        do {
-            let documentsPath = NSSearchPathForDirectoriesInDomains(FileManager.SearchPathDirectory.documentDirectory, FileManager.SearchPathDomainMask.allDomainsMask, true).first!
-            let filePathsArray = try FileManager.default.subpathsOfDirectory(atPath: documentsPath)
-            for filePath in filePathsArray {
-                if filePath.hasPrefix(Constants.prefixForCheck.rawValue) {
-                    try FileManager.default.removeItem(atPath: (documentsPath as NSString).appendingPathComponent(filePath))
-                }
-            }
-            
-            try FileManager.default.removeItem(atPath: NFXPath.SessionLog)
-        } catch {}
+        NFXHTTPModelManager.shared.clear()
+        
+        NFXPath.deleteNFXDir()
+        NFXPath.createNFXDirIfNotExist()
     }
     
     func getIgnoredURLs() -> [String] {
@@ -243,24 +249,13 @@ open class NFX: NSObject {
         return selectedGesture
     }
     
-    func cacheFilters(_ selectedFilters: [Bool]) {
-        filters = selectedFilters
-    }
-    
-    func getCachedFilters() -> [Bool] {
-        if filters.isEmpty {
-            filters = [Bool](repeating: true, count: HTTPModelShortType.allValues.count)
-        }
-        return filters
-    }
-    
 }
 
 #if os(iOS)
 
 extension NFX {
     fileprivate var presentingViewController: UIViewController? {
-        var rootViewController = UIApplication.shared.keyWindow?.rootViewController
+        var rootViewController = UIWindow.keyWindow?.rootViewController
 		while let controller = rootViewController?.presentedViewController {
 			rootViewController = controller
 		}
@@ -268,6 +263,10 @@ extension NFX {
     }
 
     fileprivate func showNFXFollowingPlatform() {
+        showNFX(on: presentingViewController)
+    }
+    
+    fileprivate func showNFX(on rootViewController: UIViewController?) {
         let navigationController = UINavigationController(rootViewController: NFXListController_iOS())
         navigationController.navigationBar.isTranslucent = false
         navigationController.navigationBar.tintColor = UIColor.NFXOrangeColor()
@@ -275,18 +274,29 @@ extension NFX {
         navigationController.navigationBar.titleTextAttributes = [.foregroundColor: UIColor.NFXOrangeColor()]
 
         if #available(iOS 13.0, *) {
+            let appearence = UINavigationBarAppearance()
+            
+            appearence.configureWithOpaqueBackground()
+            appearence.backgroundColor = UIColor.NFXStarkWhiteColor()
+            appearence.titleTextAttributes = [.foregroundColor: UIColor.black]
+            
+            navigationController.navigationBar.standardAppearance = appearence
+            navigationController.navigationBar.scrollEdgeAppearance = appearence
+            
+            if #available(iOS 15.0, *) {
+                navigationController.navigationBar.compactScrollEdgeAppearance = appearence
+            }
+            
             navigationController.presentationController?.delegate = self
         }
-
-        presentingViewController?.present(navigationController, animated: true, completion: nil)
+        
+        rootViewController?.present(navigationController, animated: true, completion: nil)
+        navigationViewController = navigationController
     }
     
     fileprivate func hideNFXFollowingPlatform(_ completion: (() -> Void)?) {
-        presentingViewController?.dismiss(animated: true, completion: { () -> Void in
-            if let notNilCompletion = completion {
-                notNilCompletion()
-            }
-        })
+        navigationViewController?.presentingViewController?.dismiss(animated: true, completion: completion)
+        navigationViewController = nil
     }
 }
 
@@ -329,11 +339,7 @@ extension NFX {
     
     public func showNFXFollowingPlatform()  {
         if windowController == nil {
-            #if swift(>=4.2)
             let nibName = Constants.nibName.rawValue
-            #else
-            let nibName = NSNib.Name(rawValue: Constants.nibName.rawValue)
-            #endif
 
             windowController = NFXWindowController(windowNibName: nibName)
         }

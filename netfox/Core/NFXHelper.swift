@@ -12,15 +12,32 @@ import Cocoa
 import UIKit
 #endif
 
-public enum HTTPModelShortType: String {
+public enum HTTPModelShortType: String, CaseIterable {
     case JSON = "JSON"
     case XML = "XML"
     case HTML = "HTML"
     case IMAGE = "Image"
     case OTHER = "Other"
-    
-    static let allValues = [JSON, XML, HTML, IMAGE, OTHER]
 }
+
+
+public extension HTTPModelShortType {
+    
+    init(contentType: String) {
+        if NSPredicate(format: "SELF MATCHES %@", "^application/(vnd\\.(.*)\\+)?json$").evaluate(with: contentType) {
+            self = .JSON
+        } else if (contentType == "application/xml") || (contentType == "text/xml")  {
+            self = .XML
+        } else if contentType == "text/html" {
+            self = .HTML
+        } else if contentType.hasPrefix("image/") {
+            self = .IMAGE
+        } else {
+            self = .OTHER
+        }
+    }
+}
+
 
 extension NFXColor {
     convenience init(red: Int, green: Int, blue: Int) {
@@ -155,7 +172,7 @@ extension URLRequest {
     
     func getCurl() -> String {
         guard let url = url else { return "" }
-        let baseCommand = "curl \(url.absoluteString)"
+        let baseCommand = "curl \"\(url.absoluteString)\""
         
         var command = [baseCommand]
         
@@ -317,29 +334,84 @@ class NFXDebugInfo {
 
 
 struct NFXPath {
-    static let Documents = NSSearchPathForDirectoriesInDomains(FileManager.SearchPathDirectory.documentDirectory, FileManager.SearchPathDomainMask.allDomainsMask, true).first! as NSString
     
-    static let SessionLog = NFXPath.Documents.appendingPathComponent("session.log");
+    static let sessionLogName = "session.log"
+    static let tmpDirURL = URL(fileURLWithPath: NSTemporaryDirectory())
+    static let nfxDirURL = tmpDirURL.appendingPathComponent("NFX", isDirectory: true)
+    static let sessionLogURL = nfxDirURL.appendingPathComponent(sessionLogName)
+    
+    static func createNFXDirIfNotExist() {
+        do {
+            try FileManager.default.createDirectory(at: nfxDirURL, withIntermediateDirectories: true, attributes: nil)
+        } catch let error {
+            print("[NFX]: failed to create working dir - \(error.localizedDescription)")
+        }
+    }
+    
+    static func deleteNFXDir() {
+        guard FileManager.default.fileExists(atPath: nfxDirURL.path, isDirectory: nil) else { return }
+        
+        do {
+            try FileManager.default.removeItem(at: nfxDirURL)
+        } catch let error {
+            print("[NFX]: failed to delete working dir - \(error.localizedDescription)")
+        }
+    }
+    
+    static func deleteOldNFXLogs() {
+        let oldSessionLogName = "session.log"
+        let oldRequestPrefixName = "nfx_re"
+        let fileManager = FileManager.default
+        guard let documentsDir = fileManager.urls(for: .documentDirectory, in: .userDomainMask).first,
+              let fileEnumarator = fileManager.enumerator(at: documentsDir, includingPropertiesForKeys: nil, options: [.skipsSubdirectoryDescendants], errorHandler: nil) else { return }
+        
+        for case let fileURL as URL in fileEnumarator {
+            if fileURL.lastPathComponent == oldSessionLogName || fileURL.lastPathComponent.hasPrefix(oldRequestPrefixName) {
+                try? fileManager.removeItem(at: fileURL)
+            }
+        }
+    }
+    
+    static func pathURLToFile(_ fileName: String) -> URL {
+        return nfxDirURL.appendingPathComponent(fileName)
+    }
+     
 }
 
 
 extension String {
-    func appendToFile(filePath: String) {
-        let contentToAppend = self
+    
+    func appendToFileURL(_ fileURL: URL) {
+        guard let fileHandle = try? FileHandle(forWritingTo: fileURL) else {
+            write(to: fileURL)
+            return
+        }
+
+        let data = data(using: .utf8)!
         
-        if let fileHandle = FileHandle(forWritingAtPath: filePath) {
-            /* Append to file */
-            fileHandle.seekToEndOfFile()
-            fileHandle.write(contentToAppend.data(using: String.Encoding.utf8)!)
-        } else {
-            /* Create new file */
+        if #available(iOS 13.4, macOS 10.15.4, *) {
             do {
-                try contentToAppend.write(toFile: filePath, atomically: true, encoding: String.Encoding.utf8)
-            } catch {
-                print("Error creating \(filePath)")
+                try fileHandle.seekToEnd()
+                try fileHandle.write(contentsOf: data)
+            } catch let error {
+                print("[NFX]: Failed to append [\(self.prefix(128))] to \(fileURL), trying to create new file - \(error.localizedDescription)")
+                write(to: fileURL)
             }
+        } else {
+            // TODO: replace FileHandle with more safe way, possible crash on iOS <13.4 https://github.com/kasketis/netfox/issues/221
+            fileHandle.seekToEndOfFile()
+            fileHandle.write(data)
         }
     }
+    
+    private func write(to fileURL: URL) {
+        do {
+            try write(to: fileURL, atomically: true, encoding: .utf8)
+        } catch let error {
+            print("[NFX]: Failed to save [\(self.prefix(128))] to \(fileURL) - \(error.localizedDescription)")
+        }
+    }
+    
 }
 
 @objc extension URLSessionConfiguration {
@@ -441,9 +513,104 @@ extension String {
     }
 }
 
-public extension NSNotification.Name {
-    static let NFXDeactivateSearch = Notification.Name("NFXDeactivateSearch")
-    static let NFXReloadData = Notification.Name("NFXReloadData")
-    static let NFXAddedModel = Notification.Name("NFXAddedModel")
-    static let NFXClearedModels = Notification.Name("NFXClearedModels")
+#if os(iOS)
+extension UIWindow {
+    static var keyWindow: UIWindow? {
+        if #available(iOS 13.0, *) {
+            return UIApplication.shared.connectedScenes
+                .sorted { $0.activationState.sortPriority < $1.activationState.sortPriority }
+                .compactMap { $0 as? UIWindowScene }
+                .compactMap { $0.windows.first { $0.isKeyWindow } }
+                .first
+        } else {
+            return UIApplication.shared.keyWindow
+        }
+    }
+}
+
+@available(iOS 13.0, *)
+private extension UIScene.ActivationState {
+    var sortPriority: Int {
+        switch self {
+        case .foregroundActive: return 1
+        case .foregroundInactive: return 2
+        case .background: return 3
+        case .unattached: return 4
+        @unknown default: return 5
+        }
+    }
+}
+#endif
+
+
+class Publisher<T> {
+    
+    private var subscriptions = Set<Subscription<T>>()
+    
+    var hasSubscribers: Bool { subscriptions.isEmpty == false }
+    
+    init() where T == Void { }
+    
+    init() { }
+    
+    func subscribe(_ subscription: Subscription<T>) {
+        subscriptions.insert(subscription)
+    }
+    
+    @discardableResult func subscribe(_ callback: @escaping (T) -> Void) -> Subscription<T> {
+        let subscription = Subscription(callback)
+        subscriptions.insert(subscription)
+        return subscription
+    }
+    
+    func trigger(_ obj: T) {
+        subscriptions.forEach {
+            if $0.isCancelled {
+                unsubscribe($0)
+            } else {
+                $0.callback(obj)
+            }
+        }
+    }
+    
+    func unsubscribe(_ subscription: Subscription<T>) {
+        subscriptions.remove(subscription)
+    }
+    
+    func unsubscribeAll() {
+        subscriptions.removeAll()
+    }
+    
+    func callAsFunction(_ value: T) {
+        trigger(value)
+    }
+    
+    func callAsFunction() where T == Void {
+        trigger(())
+    }
+    
+}
+
+class Subscription<T>: Equatable, Hashable {
+    
+    let id = UUID()
+    private(set) var isCancelled = false
+    fileprivate let callback: (T) -> Void
+    
+    init(_ callback: @escaping (T) -> Void) {
+        self.callback = callback
+    }
+    
+    func cancel() {
+        isCancelled = true
+    }
+    
+    static func == (lhs: Subscription<T>, rhs: Subscription<T>) -> Bool {
+        lhs.id == rhs.id
+    }
+    
+    func hash(into hasher: inout Hasher) {
+        hasher.combine(id)
+    }
+    
 }
