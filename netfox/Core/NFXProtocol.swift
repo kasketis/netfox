@@ -24,7 +24,7 @@ open class NFXProtocol: URLProtocol {
     }
     
     override open class func canInit(with task: URLSessionTask) -> Bool {
-        if #available(iOS 13.0, *) {
+        if #available(iOS 13.0, macOS 10.15, *) {
             if task is URLSessionWebSocketTask {
                 return false
             }
