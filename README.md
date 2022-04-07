@@ -3,7 +3,7 @@
 </p>
 
 <p align="center">
-<img alt="Version" src="https://img.shields.io/badge/version-1.20.0-green.svg?style=flat-square" />
+<img alt="Version" src="https://img.shields.io/badge/version-1.21.0-green.svg?style=flat-square" />
 <a href="https://travis-ci.org/kasketis/netfox"><img alt="CI Status" src="http://img.shields.io/travis/kasketis/netfox.svg?style=flat-square" /></a>
 <a href="https://cocoapods.org/pods/netfox"><img alt="Cocoapods Compatible" src="https://img.shields.io/cocoapods/v/netfox.svg?style=flat-square" /></a>
 <a href="https://github.com/Carthage/Carthage"><img alt="Carthage Compatible" src="https://img.shields.io/badge/carthage-compatible-4BC51D.svg?style=flat-square" /></a>
