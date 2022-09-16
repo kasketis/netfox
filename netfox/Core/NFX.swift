@@ -17,6 +17,11 @@ private func podPlistVersion() -> String? {
     return path
 }
 
+internal func nfxPrint(_ value: String) {
+    guard NFX.sharedInstance().printLoggingEnabled else { return }
+    print(value)
+}
+
 // TODO: Carthage support
 let nfxVersion = podPlistVersion() ?? "0"
 
@@ -69,6 +74,9 @@ open class NFX: NSObject {
         case shake
         case custom
     }
+
+    /// Change this value to `true` to show internal print logging in the console.
+    public var printLoggingEnabled: Bool = false
 
     @objc open func start() {
         guard !started else {

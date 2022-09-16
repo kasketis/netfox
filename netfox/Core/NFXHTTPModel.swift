@@ -166,7 +166,7 @@ fileprivate func < <T : Comparable>(lhs: T?, rhs: T?) -> Bool {
         do {
             try dataString.write(to: fileURL, atomically: true, encoding: .utf8)
         } catch let error {
-            print("[NFX]: Failed to save data to [\(fileURL)] - \(error.localizedDescription)")
+            nfxPrint("[NFX]: Failed to save data to [\(fileURL)] - \(error.localizedDescription)")
         }
     }
     
@@ -174,7 +174,7 @@ fileprivate func < <T : Comparable>(lhs: T?, rhs: T?) -> Bool {
         do {
             return try Data(contentsOf: fileURL)
         } catch let error {
-            print("[NFX]: Failed to load data from [\(fileURL)] - \(error.localizedDescription)")
+            nfxPrint("[NFX]: Failed to load data from [\(fileURL)] - \(error.localizedDescription)")
             return nil
         }
     }
