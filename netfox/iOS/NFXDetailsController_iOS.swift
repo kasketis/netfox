@@ -319,9 +319,9 @@ extension NFXDetailsController_iOS: UIActivityItemSource {
     }
     
     func activityViewController(_ activityViewController: UIActivityViewController, itemForActivityType activityType: UIActivityType?) -> Any? {
-        guard let sharedContent else { return nil }
+        guard let sharedContent = sharedContent else { return nil }
         let url = NFXPath.pathURLToFile("log.txt")
-        try? sharedContent.write(to: url, atomically: true, encoding: .utf8)
+        try? sharedContent.write(to: url, atomically: true, encoding: String.Encoding.utf8)
         return url
     }
     
