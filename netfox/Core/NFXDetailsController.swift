@@ -46,7 +46,7 @@ class NFXDetailsController: NFXGenericController {
         // Do view setup here.
     }
     
-    func getInfoStringFromObject(_ object: NFXHTTPModel) -> NSAttributedString {
+    func getInfoStringFromObject(_ object: NFXHTTPModel, searchString: String = "") -> NSAttributedString {
         var tempString: String
         tempString = String()
         
@@ -63,10 +63,10 @@ class NFXDetailsController: NFXGenericController {
         tempString += "[Timeout] \n\(object.requestTimeout!)\n\n"
         tempString += "[Cache policy] \n\(object.requestCachePolicy!)\n\n"
         
-        return formatNFXString(tempString)
+        return formatNFXString(tempString, searchString: searchString)
     }
 
-    func getRequestStringFromObject(_ object: NFXHTTPModel) -> NSAttributedString {
+    func getRequestStringFromObject(_ object: NFXHTTPModel, searchString: String = "") -> NSAttributedString {
         var tempString: String
         tempString = String()
         
@@ -83,7 +83,7 @@ class NFXDetailsController: NFXGenericController {
     #if os(iOS)
         tempString += getRequestBodyStringFooter(object)
     #endif
-        return formatNFXString(tempString)
+        return formatNFXString(tempString, searchString: searchString)
     }
 
     func getRequestBodyStringFooter(_ object: NFXHTTPModel) -> String {
@@ -98,7 +98,7 @@ class NFXDetailsController: NFXGenericController {
         return tempString
     }
     
-    func getResponseStringFromObject(_ object: NFXHTTPModel) -> NSAttributedString {
+    func getResponseStringFromObject(_ object: NFXHTTPModel, searchString: String = "") -> NSAttributedString {
         if (object.noResponse) {
             return NSMutableAttributedString(string: "No response")
         }
@@ -120,7 +120,7 @@ class NFXDetailsController: NFXGenericController {
     #if os(iOS)
         tempString += getResponseBodyStringFooter(object)
     #endif
-        return formatNFXString(tempString)
+        return formatNFXString(tempString, searchString: searchString)
     }
     
     func getResponseBodyStringFooter(_ object: NFXHTTPModel) -> String {
@@ -134,5 +134,4 @@ class NFXDetailsController: NFXGenericController {
         }
         return tempString
     }
-
 }

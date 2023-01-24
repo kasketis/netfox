@@ -43,6 +43,20 @@ class NFXDetailsController_iOS: NFXDetailsController, MFMailComposeViewControlle
     var requestView: UIScrollView = UIScrollView()
     var responseView: UIScrollView = UIScrollView()
 
+    private lazy var searchController: UISearchController = {
+        let searchController = UISearchController(searchResultsController: nil)
+        searchController.searchResultsUpdater = self
+        searchController.delegate = self
+        searchController.dimsBackgroundDuringPresentation = false
+        searchController.searchBar.autoresizingMask = [.flexibleWidth]
+        searchController.searchBar.backgroundColor = UIColor.clear
+        searchController.searchBar.barTintColor = UIColor.NFXOrangeColor()
+        searchController.searchBar.tintColor = UIColor.NFXOrangeColor()
+        searchController.searchBar.searchBarStyle = .minimal
+        searchController.view.backgroundColor = UIColor.clear
+        return searchController
+    }()
+
     private lazy var headerButtons: [UIButton] = {
         return [self.infoButton, self.requestButton, self.responseButton]
     }()
@@ -58,8 +72,7 @@ class NFXDetailsController_iOS: NFXDetailsController, MFMailComposeViewControlle
         
         title = "Details"
         view.layer.masksToBounds = true
-        
-        navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .action, target: self, action: #selector(NFXDetailsController_iOS.actionButtonPressed(_:)))
+        configureNavigationBar()
 
         // Header buttons
         infoButton = createHeaderButton("Info", x: 0, selector: #selector(NFXDetailsController_iOS.infoButtonPressed))
@@ -83,6 +96,27 @@ class NFXDetailsController_iOS: NFXDetailsController, MFMailComposeViewControlle
         view.addGestureRecognizer(rswgr)
 
         infoButtonPressed()
+        
+    }
+    
+    private func configureNavigationBar() {
+        navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .action, target: self, action: #selector(NFXDetailsController_iOS.actionButtonPressed(_:)))
+
+        if #available(iOS 11.0, *) {
+            navigationItem.searchController = searchController
+            definesPresentationContext = true
+        } else {
+            let searchView = UIView()
+            searchView.frame = CGRect(x: 0, y: 0, width: view.frame.width - 60, height: 0)
+            searchView.autoresizingMask = [.flexibleWidth]
+            searchView.autoresizesSubviews = true
+            searchView.backgroundColor = UIColor.clear
+            searchView.addSubview(searchController.searchBar)
+            searchController.searchBar.sizeToFit()
+            searchView.frame = searchController.searchBar.frame
+
+            navigationItem.titleView = searchView
+        }
     }
     
     func createHeaderButton(_ title: String, x: CGFloat, selector: Selector) -> UIButton {
@@ -311,6 +345,7 @@ class NFXDetailsController_iOS: NFXDetailsController, MFMailComposeViewControlle
     }
 }
 
+// MARK: - UIActivityItemSource
 extension NFXDetailsController_iOS: UIActivityItemSource {
     public typealias UIActivityType = UIActivity.ActivityType
     
@@ -330,8 +365,8 @@ extension NFXDetailsController_iOS: UIActivityItemSource {
     }
 }
 
+// MARK: - UITextViewDelegate
 extension NFXDetailsController_iOS: UITextViewDelegate {
-    
     func textView(_ textView: UITextView, shouldInteractWith URL: URL, in characterRange: NSRange) -> Bool {
         let decodedURL = URL.absoluteString.removingPercentEncoding
         switch decodedURL {
@@ -347,7 +382,26 @@ extension NFXDetailsController_iOS: UITextViewDelegate {
             return false
         }
     }
-    
+}
+
+// MARK: - UISearchResultsUpdating
+extension NFXDetailsController_iOS: UISearchResultsUpdating {
+    func updateSearchResults(for searchController: UISearchController) {
+        let searchString = searchController.searchBar.text ?? ""
+        
+        let infoextView = infoView.subviews.first(where: { $0 is UITextView }) as? UITextView
+        infoextView?.attributedText = getInfoStringFromObject(selectedModel, searchString: searchString)
+
+        let requestTextView = requestView.subviews.first(where: { $0 is UITextView }) as? UITextView
+        requestTextView?.attributedText = getRequestStringFromObject(selectedModel, searchString: searchString)
+
+        let responseTextView = responseView.subviews.first(where: { $0 is UITextView }) as? UITextView
+        responseTextView?.attributedText = getResponseStringFromObject(selectedModel, searchString: searchString)
+    }
+}
+
+// MARK: - UISearchControllerDelegate
+extension NFXDetailsController_iOS: UISearchControllerDelegate {
 }
 
 #endif

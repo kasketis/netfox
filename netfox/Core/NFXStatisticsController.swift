@@ -91,7 +91,7 @@ class NFXStatisticsController: NFXGenericController {
         }
         tempString += "[Slowest response time] \n\(slowestResponseTime)s\n\n"
 
-        return formatNFXString(tempString)
+        return formatNFXString(tempString, searchString: "")
     }
     
     private func reloadData(with models: [NFXHTTPModel]) {

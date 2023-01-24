@@ -32,7 +32,7 @@ class NFXGenericController: NFXViewController {
         selectedModel = model
     }
     
-    func formatNFXString(_ string: String) -> NSAttributedString {
+    func formatNFXString(_ string: String, searchString: String = "") -> NSAttributedString {
         var tempMutableString = NSMutableAttributedString()
         tempMutableString = NSMutableAttributedString(string: string)
         
@@ -54,6 +54,14 @@ class NFXGenericController: NFXViewController {
             tempMutableString.addAttribute(.link,
                                            value: (string as NSString).substring(with: match.range),
                                            range: match.range)
+        }
+        
+        let searchPattern = searchString.trimmingCharacters(in: .whitespacesAndNewlines)
+        if !searchString.isEmpty, let regex = try? NSRegularExpression(pattern: searchPattern, options: NSRegularExpression.Options.caseInsensitive) {
+            let range = NSRange(location: 0, length: string.utf16.count)
+            for match in regex.matches(in: string, options: NSRegularExpression.MatchingOptions.withoutAnchoringBounds, range: range) {
+                tempMutableString.addAttribute(.backgroundColor, value: NFXColor.NFXOrangeColor().withAlphaComponent(0.5), range: match.range)
+            }
         }
         
         return tempMutableString
