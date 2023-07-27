@@ -168,6 +168,10 @@ Tip: You can use the url of the host (for example "https://www.github.com") to i
 - If you experience any problems with request logging please check [this](https://github.com/kasketis/netfox/blob/master/Workarounds.md). If you don't get your answer please open an [issue](https://github.com/kasketis/netfox/issues)
 - Due to the large size of request/response bodies, the library provides disk storage for low memory overhead
 
+## Sponsors
+
+<a href="https://www.emergetools.com"><img alt="EmergeTools" src="assets/sponsors/emerge-tools-black.svg" width="200" /></a>
+
 ## Thanks
 
 Special thanks to [tbaranes](https://github.com/tbaranes) and [vincedev](https://github.com/vincedev) for their contribution on OSX library!
