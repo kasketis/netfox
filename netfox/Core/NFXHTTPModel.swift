@@ -173,8 +173,7 @@ fileprivate func < <T : Comparable>(lhs: T?, rhs: T?) -> Bool {
     @objc public func readRawData(from fileURL: URL) -> Data? {
         do {
             return try Data(contentsOf: fileURL)
-        } catch let error {
-            print("[NFX]: Failed to load data from [\(fileURL)] - \(error.localizedDescription)")
+        } catch {
             return nil
         }
     }
