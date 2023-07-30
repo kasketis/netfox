@@ -41,11 +41,17 @@ fileprivate func < <T : Comparable>(lhs: T?, rhs: T?) -> Bool {
     
     public var timeInterval: Float?
     
+    private static var debugErrorPrintEnabled: Bool = true
+    
     @objc public lazy var randomHash = UUID().uuidString
     public var shortType = HTTPModelShortType.OTHER
     @objc public var shortTypeString: String { return shortType.rawValue }
     
     @objc public var noResponse = true
+    
+    public static func setDebugErrorPrintEnabled(with enabled: Bool) {
+        debugErrorPrintEnabled = enabled
+    }
     
     func saveRequest(_ request: URLRequest) {
         requestDate = Date()
@@ -166,7 +172,9 @@ fileprivate func < <T : Comparable>(lhs: T?, rhs: T?) -> Bool {
         do {
             try dataString.write(to: fileURL, atomically: true, encoding: .utf8)
         } catch let error {
-            print("[NFX]: Failed to save data to [\(fileURL)] - \(error.localizedDescription)")
+            if NFXHTTPModel.debugErrorPrintEnabled {
+                print("[NFX]: Failed to save data to [\(fileURL)] - \(error.localizedDescription)")
+            }
         }
     }
     
@@ -174,7 +182,9 @@ fileprivate func < <T : Comparable>(lhs: T?, rhs: T?) -> Bool {
         do {
             return try Data(contentsOf: fileURL)
         } catch let error {
-            print("[NFX]: Failed to load data from [\(fileURL)] - \(error.localizedDescription)")
+            if NFXHTTPModel.debugErrorPrintEnabled {
+                print("[NFX]: Failed to load data from [\(fileURL)] - \(error.localizedDescription)")
+            }
             return nil
         }
     }
