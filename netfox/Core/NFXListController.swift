@@ -64,7 +64,9 @@ class NFXListController: NFXGenericController {
         tableData = allModels.filter {
             $0.requestURL?.range(of: filter, options: [.caseInsensitive, .diacriticInsensitive]) != nil ||
             $0.requestMethod?.range(of: filter, options: [.caseInsensitive, .diacriticInsensitive]) != nil ||
-            $0.responseType?.range(of: filter, options: [.caseInsensitive, .diacriticInsensitive]) != nil
+            $0.responseType?.range(of: filter, options: [.caseInsensitive, .diacriticInsensitive]) != nil ||
+            $0.getRequestBody().range(of: filter, options: [.caseInsensitive, .diacriticInsensitive]) != nil ||
+            $0.getResponseBody().range(of: filter, options: [.caseInsensitive, .diacriticInsensitive]) != nil 
         }
     }
     
