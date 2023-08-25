@@ -83,6 +83,7 @@ open class NFX: NSObject {
         enable()
         fileStorageInit()
         showMessage(Constants.startedMessage.rawValue)
+        logger.debugLogs = false
         #if os(OSX)
         addNetfoxToMainMenu()
         #endif
