@@ -6,8 +6,9 @@
 //
 
 import Foundation
-@objc
+
 final class NFXLogger: NSObject {
+    
     static let shared = NFXLogger()
     
     var debugLogs: Bool = true
