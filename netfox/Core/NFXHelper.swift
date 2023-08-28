@@ -339,12 +339,13 @@ struct NFXPath {
     static let tmpDirURL = URL(fileURLWithPath: NSTemporaryDirectory())
     static let nfxDirURL = tmpDirURL.appendingPathComponent("NFX", isDirectory: true)
     static let sessionLogURL = nfxDirURL.appendingPathComponent(sessionLogName)
+    static let logger: NFXLogger = .shared
     
     static func createNFXDirIfNotExist() {
         do {
             try FileManager.default.createDirectory(at: nfxDirURL, withIntermediateDirectories: true, attributes: nil)
         } catch let error {
-            print("[NFX]: failed to create working dir - \(error.localizedDescription)")
+            logger.log("[NFX]: failed to create working dir - \(error.localizedDescription)")
         }
     }
     
@@ -354,7 +355,7 @@ struct NFXPath {
         do {
             try FileManager.default.removeItem(at: nfxDirURL)
         } catch let error {
-            print("[NFX]: failed to delete working dir - \(error.localizedDescription)")
+            logger.log("[NFX]: failed to delete working dir - \(error.localizedDescription)")
         }
     }
     
@@ -394,7 +395,7 @@ extension String {
                 try fileHandle.seekToEnd()
                 try fileHandle.write(contentsOf: data)
             } catch let error {
-                print("[NFX]: Failed to append [\(self.prefix(128))] to \(fileURL), trying to create new file - \(error.localizedDescription)")
+                NFXLogger.shared.log("[NFX]: Failed to append [\(self.prefix(128))] to \(fileURL), trying to create new file - \(error.localizedDescription)")
                 write(to: fileURL)
             }
         } else {
@@ -408,7 +409,7 @@ extension String {
         do {
             try write(to: fileURL, atomically: true, encoding: .utf8)
         } catch let error {
-            print("[NFX]: Failed to save [\(self.prefix(128))] to \(fileURL) - \(error.localizedDescription)")
+            NFXLogger.shared.log("[NFX]: Failed to save [\(self.prefix(128))] to \(fileURL) - \(error.localizedDescription)")
         }
     }
     
