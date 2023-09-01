@@ -12,7 +12,7 @@
 </p>
 
 
-Netfox provides a quick look on all executed network requests performed by your iOS or OSX app.
+Netfox provides a quick look on all executed network requests performed by your iOS or macOS app.
 It grabs all requests - of course yours, requests from 3rd party libraries (such as AFNetworking, Alamofire or else), UIWebViews, and more
 
 Very useful and handy for network related issues and bugs
@@ -68,10 +68,10 @@ If you prefer not to use dependency managers, you can integrate netfox into your
 
 You can do it by copying the "netfox" folder in your project (make sure that "Create groups" option is selected)
 
-The above folder contains 3 subfolders: Core, iOS and OSX. 
+The above folder contains 3 subfolders: Core, iOS and macOS. 
 
-- If you target on iOS keep only Core and iOS folders (remove OSX folder)
-- If you target on OSX keep only Core and OSX folders (remove iOS folder)
+- If you target on iOS keep only Core and iOS folders (remove macOS folder)
+- If you target on macOS keep only Core and macOS folders (remove iOS folder)
 
 ## Start
 
@@ -174,7 +174,7 @@ Tip: You can use the url of the host (for example "https://www.github.com") to i
 
 ## Thanks
 
-Special thanks to [tbaranes](https://github.com/tbaranes) and [vincedev](https://github.com/vincedev) for their contribution on OSX library!
+Special thanks to [tbaranes](https://github.com/tbaranes) and [vincedev](https://github.com/vincedev) for their contribution on macOS library!
 
 ## Licence
 
