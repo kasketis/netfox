@@ -12,7 +12,14 @@ open class NFXProtocol: URLProtocol {
     static let nfxInternalKey = "com.netfox.NFXInternal"
     
     private lazy var session: URLSession = { [unowned self] in
-        return URLSession(configuration: .default, delegate: self, delegateQueue: nil)
+        let config = URLSessionConfiguration.default
+        if let globalCookieStorage = NFX.globalCookieStorage {
+            config.httpCookieStorage = NFX.globalCookieStorage
+        }
+        if let defaultHTTPHeaders = NFX.defaultHTTPHeaders {
+            config.httpAdditionalHeaders = defaultHTTPHeaders
+        }
+        return URLSession(configuration: config, delegate: self, delegateQueue: nil)
     }()
     
     private let model = NFXHTTPModel()
