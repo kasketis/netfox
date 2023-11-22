@@ -71,7 +71,7 @@ open class NFX: NSObject {
     }
     // There are some cases while using Alamofire we needd to store cookies in the default http storage
     @objc public static var globalCookieStorage: HTTPCookieStorage?
-    @objc public static var defaultHTTPHeaders: [AnyHashable: String]?
+    @objc public static var defaultHTTPHeaders: [AnyHashable: Any]?
 
     @objc open func start() {
         guard !started else {
