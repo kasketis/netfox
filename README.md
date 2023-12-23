@@ -12,7 +12,7 @@
 </p>
 
 
-Netfox provides a quick look on all executed network requests performed by your iOS or OSX app.
+Netfox provides a quick look on all executed network requests performed by your iOS or OSX application.
 It grabs all requests - of course yours, requests from 3rd party libraries (such as AFNetworking, Alamofire or else), UIWebViews, and more
 
 Very useful and handy for network related issues and bugs
