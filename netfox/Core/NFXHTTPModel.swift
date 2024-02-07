@@ -138,6 +138,10 @@ fileprivate func < <T : Comparable>(lhs: T?, rhs: T?) -> Bool {
         return prettyOutput(data, contentType: requestType)
     }
     
+    @objc public func getRequestBodyData() -> Data? {
+        readRawData(from: getRequestBodyFileURL())
+    }
+    
     @objc public func getResponseBody() -> String {
         guard let data = readRawData(from: getResponseBodyFileURL()) else {
             return ""
